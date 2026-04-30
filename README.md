@@ -17,7 +17,6 @@ Bảo mật: Mã hóa mật khẩu (Hashing)
 🏗️ Kiến trúc hệ thống
 
 Hệ thống được thiết kế theo mô hình:
-
 3-tier architecture
 Presentation Layer (UI)
 Business Logic
