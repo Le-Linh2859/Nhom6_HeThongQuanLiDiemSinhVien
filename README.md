@@ -14,9 +14,9 @@ Giao diện: WinForms + Guna.UI2 / Krypton Toolkit
 
 Biểu đồ: Live Charts
 
-Cơ sở dữ liệu: SQL Server / MySQL
+Cơ sở dữ liệu: SQL Server
 
-ORM: Entity Framework / Dapper
+ORM: Entity Framework
 
 Bảo mật: Mã hóa mật khẩu (Hashing)
 
@@ -28,6 +28,6 @@ Hệ thống được thiết kế theo mô hình:
 
 Graphical User Interface (GUI)
 
- (BUS)
+(DTO)
 
 Data Access Layer (DAL)
