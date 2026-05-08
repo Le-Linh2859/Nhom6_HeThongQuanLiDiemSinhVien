@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "QLDSV.DAL/1.0.0": {
+        "runtime": {
+          "QLDSV.DAL.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "QLDSV.DAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

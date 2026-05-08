@@ -1,0 +1,15 @@
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\bin\Debug\net8.0\QLDSV.DTO.exe
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\bin\Debug\net8.0\QLDSV.DTO.deps.json
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\bin\Debug\net8.0\QLDSV.DTO.runtimeconfig.json
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\bin\Debug\net8.0\QLDSV.DTO.dll
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\bin\Debug\net8.0\QLDSV.DTO.pdb
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net8.0\QLDSV.DTO.GeneratedMSBuildEditorConfig.editorconfig
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net8.0\QLDSV.DTO.AssemblyInfoInputs.cache
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net8.0\QLDSV.DTO.AssemblyInfo.cs
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net8.0\QLDSV.DTO.csproj.CoreCompileInputs.cache
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net8.0\QLDSV.DTO.sourcelink.json
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net8.0\QLDSV.DTO.dll
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net8.0\refint\QLDSV.DTO.dll
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net8.0\QLDSV.DTO.pdb
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net8.0\QLDSV.DTO.genruntimeconfig.cache
+D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net8.0\ref\QLDSV.DTO.dll
