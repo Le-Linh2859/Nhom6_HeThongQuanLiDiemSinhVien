@@ -16,7 +16,7 @@ namespace QLDSV.GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmBaoCaoThongKe());
+            Application.Run(new frmGiangVien());
         }
     }
 }
