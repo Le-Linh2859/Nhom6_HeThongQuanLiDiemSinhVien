@@ -1,25 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\",
+  "WorkspaceRootPath": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\qldsv.gui\\frmlophocphan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|solutionrelative:qldsv.gui\\frmlophocphan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|d:\\laptrinhnet\\baitaplon\\nhom6_hethongquanlidiemsinhvien\\ht_qldsv\\qldsv.gui\\frmgiangvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|solutionrelative:qldsv.gui\\frmgiangvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|d:\\laptrinhnet\\btl\\nhom6_hethongquanlidiemsinhvien\\ht_qldsv\\qldsv.gui\\frmmonhoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|solutionrelative:qldsv.gui\\frmmonhoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|d:\\laptrinhnet\\baitaplon\\nhom6_hethongquanlidiemsinhvien\\ht_qldsv\\qldsv.gui\\frmgiangvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|solutionrelative:qldsv.gui\\frmgiangvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|d:\\laptrinhnet\\btl\\nhom6_hethongquanlidiemsinhvien\\ht_qldsv\\qldsv.gui\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|d:\\laptrinhnet\\baitaplon\\nhom6_hethongquanlidiemsinhvien\\ht_qldsv\\qldsv.gui\\frmcanhbaohocvu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|solutionrelative:qldsv.gui\\frmcanhbaohocvu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|d:\\laptrinhnet\\baitaplon\\nhom6_hethongquanlidiemsinhvien\\ht_qldsv\\qldsv.gui\\functionqa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|solutionrelative:qldsv.gui\\functionqa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|d:\\laptrinhnet\\baitaplon\\nhom6_hethongquanlidiemsinhvien\\ht_qldsv\\qldsv.gui\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|solutionrelative:qldsv.gui\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|d:\\laptrinhnet\\btl\\nhom6_hethongquanlidiemsinhvien\\ht_qldsv\\qldsv.gui\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|solutionrelative:qldsv.gui\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|d:\\laptrinhnet\\btl\\nhom6_hethongquanlidiemsinhvien\\ht_qldsv\\qldsv.gui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|d:\\laptrinhnet\\baitaplon\\nhom6_hethongquanlidiemsinhvien\\ht_qldsv\\qldsv.gui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{227ACAAB-DDD6-49E3-90FB-71A3AB7D1C89}|QLDSV.GUI\\QLDSV.GUI.csproj|solutionrelative:qldsv.gui\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -34,6 +38,10 @@
           "Children": [
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:0:0:{74946827-37a0-11d2-a273-00c04f8ef4ff}"
             },
             {
@@ -42,11 +50,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Bookmark",
@@ -54,65 +62,78 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\Program.cs",
-              "RelativeDocumentMoniker": "QLDSV.GUI\\Program.cs",
-              "ToolTip": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\Program.cs",
-              "RelativeToolTip": "QLDSV.GUI\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-08T05:57:52.11Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "frmMain.cs",
-              "DocumentMoniker": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmMain.cs",
-              "RelativeDocumentMoniker": "QLDSV.GUI\\frmMain.cs",
-              "ToolTip": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmMain.cs",
-              "RelativeToolTip": "QLDSV.GUI\\frmMain.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAEwCYAAAAAAAAAAAAAAA==",
+              "Title": "FunctionQa.cs",
+              "DocumentMoniker": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\FunctionQa.cs",
+              "RelativeDocumentMoniker": "QLDSV.GUI\\FunctionQa.cs",
+              "ToolTip": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\FunctionQa.cs",
+              "RelativeToolTip": "QLDSV.GUI\\FunctionQa.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFoAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-08T04:26:32.497Z",
+              "WhenOpened": "2026-05-09T16:07:40.613Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "frmMain.cs [Design]",
-              "DocumentMoniker": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmMain.cs",
-              "RelativeDocumentMoniker": "QLDSV.GUI\\frmMain.cs",
-              "ToolTip": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmMain.cs [Design]",
-              "RelativeToolTip": "QLDSV.GUI\\frmMain.cs [Design]",
+              "Title": "frmCanhBaoHocVu.cs [Design]",
+              "DocumentMoniker": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmCanhBaoHocVu.cs",
+              "RelativeDocumentMoniker": "QLDSV.GUI\\frmCanhBaoHocVu.cs",
+              "ToolTip": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmCanhBaoHocVu.cs [Design]",
+              "RelativeToolTip": "QLDSV.GUI\\frmCanhBaoHocVu.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-08T04:16:43.009Z",
+              "WhenOpened": "2026-05-09T16:00:56.843Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "frmMonhoc.cs [Design]",
-              "DocumentMoniker": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmMonhoc.cs",
-              "RelativeDocumentMoniker": "QLDSV.GUI\\frmMonhoc.cs",
-              "ToolTip": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmMonhoc.cs [Design]",
-              "RelativeToolTip": "QLDSV.GUI\\frmMonhoc.cs [Design]",
+              "Title": "frmGiangVien.cs",
+              "DocumentMoniker": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmGiangVien.cs",
+              "RelativeDocumentMoniker": "QLDSV.GUI\\frmGiangVien.cs",
+              "ToolTip": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmGiangVien.cs",
+              "RelativeToolTip": "QLDSV.GUI\\frmGiangVien.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAnwIUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T15:46:08.077Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2026-05-09T15:49:18.214Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "frmLophocphan.cs [Design]",
-              "DocumentMoniker": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmLophocphan.cs",
-              "RelativeDocumentMoniker": "QLDSV.GUI\\frmLophocphan.cs",
-              "ToolTip": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmLophocphan.cs [Design]",
-              "RelativeToolTip": "QLDSV.GUI\\frmLophocphan.cs [Design]",
+              "Title": "frmGiangVien.cs [Design]",
+              "DocumentMoniker": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmGiangVien.cs",
+              "RelativeDocumentMoniker": "QLDSV.GUI\\frmGiangVien.cs",
+              "ToolTip": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmGiangVien.cs [Design]",
+              "RelativeToolTip": "QLDSV.GUI\\frmGiangVien.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-07T14:59:02.055Z",
+              "WhenOpened": "2026-05-09T15:45:36.505Z",
               "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "frmMain.cs [Design]",
+              "DocumentMoniker": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmMain.cs",
+              "RelativeDocumentMoniker": "QLDSV.GUI\\frmMain.cs",
+              "ToolTip": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\frmMain.cs [Design]",
+              "RelativeToolTip": "QLDSV.GUI\\frmMain.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T15:47:58.327Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\Program.cs",
+              "RelativeDocumentMoniker": "QLDSV.GUI\\Program.cs",
+              "ToolTip": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.GUI\\Program.cs",
+              "RelativeToolTip": "QLDSV.GUI\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-09T15:57:48.318Z",
+              "EditorCaption": ""
             }
           ]
         },

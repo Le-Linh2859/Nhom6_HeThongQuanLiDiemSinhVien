@@ -1,32 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\QLDSV.DTO.csproj": {}
+    "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\QLDSV.DTO.csproj": {}
   },
   "projects": {
-    "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\QLDSV.DTO.csproj": {
+    "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\QLDSV.DTO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\QLDSV.DTO.csproj",
+        "projectUniqueName": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\QLDSV.DTO.csproj",
         "projectName": "QLDSV.DTO",
-        "projectPath": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\QLDSV.DTO.csproj",
+        "projectPath": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\QLDSV.DTO.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\obj\\",
+        "outputPath": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net10.0"
+          "net48"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net10.0": {
-            "targetAlias": "net10.0",
+          "net48": {
+            "targetAlias": "net48",
             "projectReferences": {}
           }
         },
@@ -38,30 +38,19 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
-        "net10.0": {
-          "targetAlias": "net10.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
+        "net48": {
+          "targetAlias": "net48",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x86": {
+          "#import": []
         }
       }
     }

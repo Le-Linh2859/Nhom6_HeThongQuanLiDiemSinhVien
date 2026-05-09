@@ -596,7 +596,7 @@
             this.guna2Panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.guna2Panel1.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.guna2Panel1.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-            this.guna2Panel1.BorderThickness = -5;
+            this.guna2Panel1.BorderThickness = 0;
             this.guna2Panel1.Controls.Add(this.guna2Button21);
             this.guna2Panel1.Controls.Add(this.guna2ComboBox5);
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel7);
