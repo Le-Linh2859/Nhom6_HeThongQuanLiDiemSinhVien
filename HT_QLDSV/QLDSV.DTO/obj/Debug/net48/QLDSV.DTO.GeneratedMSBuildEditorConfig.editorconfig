@@ -1,6 +1,6 @@
 is_global = true
 build_property.RootNamespace = QLDSV.DTO
-build_property.ProjectDir = D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\
+build_property.ProjectDir = D:\LaptrinhNet\BTL\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.CsWinRTUseWindowsUIXamlProjections = false

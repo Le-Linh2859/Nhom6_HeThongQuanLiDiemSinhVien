@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\QLDSV.DTO.csproj",
+      "projectUniqueName": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\QLDSV.DTO.csproj",
       "projectName": "QLDSV.DTO",
-      "projectPath": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\QLDSV.DTO.csproj",
+      "projectPath": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\QLDSV.DTO.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\obj\\",
+      "outputPath": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DTO\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
