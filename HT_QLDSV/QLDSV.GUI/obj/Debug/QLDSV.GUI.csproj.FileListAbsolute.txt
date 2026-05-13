@@ -116,3 +116,4 @@ D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GU
 D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.csproj.Up2Date
 D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.exe
 D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.pdb
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.FrmNhapDiemSV.resources

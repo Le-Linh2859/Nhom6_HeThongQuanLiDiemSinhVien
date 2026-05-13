@@ -149,6 +149,12 @@
     <Compile Include="frmMonhoc.Designer.cs">
       <DependentUpon>frmMonhoc.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmNhapDiemSV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmNhapDiemSV.Designer.cs">
+      <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmQuanLiTaiKhoan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMonhoc.resx">
       <DependentUpon>frmMonhoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmNhapDiemSV.resx">
+      <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuanLiTaiKhoan.resx">
       <DependentUpon>frmQuanLiTaiKhoan.cs</DependentUpon>
