@@ -10,3 +10,10 @@ D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QL
 D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.AssemblyInfo.cs
 D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.csproj.CoreCompileInputs.cache
 D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.sourcelink.json
+D:\Desktop\.NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.csproj.AssemblyReference.cache
+D:\Desktop\.NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Desktop\.NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.AssemblyInfoInputs.cache
+D:\Desktop\.NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.AssemblyInfo.cs
+D:\Desktop\.NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.csproj.CoreCompileInputs.cache
+D:\Desktop\.NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.sourcelink.json
+D:\Desktop\.NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.pdb

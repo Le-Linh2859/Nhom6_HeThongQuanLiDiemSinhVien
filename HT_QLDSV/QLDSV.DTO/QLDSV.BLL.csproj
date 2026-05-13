@@ -3,6 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
 	  <TargetFramework>net48</TargetFramework>
+	  <AssemblyName>QLDSV.BLL</AssemblyName>
+	  <RootNamespace>QLDSV.BLL</RootNamespace>
 
   </PropertyGroup>
 

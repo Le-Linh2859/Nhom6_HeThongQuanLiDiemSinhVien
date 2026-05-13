@@ -1,5 +1,5 @@
 <Solution>
   <Project Path="QLDSV.DAL/QLDSV.DAL.csproj" />
-  <Project Path="QLDSV.DTO/QLDSV.DTO.csproj" />
+  <Project Path="QLDSV.DTO/QLDSV.BLL.csproj" />
   <Project Path="QLDSV.GUI/QLDSV.GUI.csproj" Id="227acaab-ddd6-49e3-90fb-71a3ab7d1c89" />
 </Solution>
