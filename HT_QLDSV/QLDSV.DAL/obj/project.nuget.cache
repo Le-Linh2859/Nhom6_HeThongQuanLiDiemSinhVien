@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "svkhOQ0apnw=",
+  "dgSpecHash": "qL4+r7f5VHI=",
   "success": true,
-  "projectFilePath": "D:\\LaptrinhNet\\BTL\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
+  "projectFilePath": "D:\\HaiLinh\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
   "expectedPackageFiles": [],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "message": "Problem reading the cache file D:\\HaiLinh\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\obj\\project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0.",
+      "projectPath": "D:\\HaiLinh\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\HaiLinh\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
+      "targetGraphs": []
+    }
+  ]
 }

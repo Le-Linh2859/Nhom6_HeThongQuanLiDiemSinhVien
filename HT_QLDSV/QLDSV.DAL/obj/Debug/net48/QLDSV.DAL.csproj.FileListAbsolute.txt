@@ -4,3 +4,9 @@ D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\
 D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.AssemblyInfo.cs
 D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.csproj.CoreCompileInputs.cache
 D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.sourcelink.json
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.csproj.AssemblyReference.cache
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.AssemblyInfoInputs.cache
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.AssemblyInfo.cs
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.csproj.CoreCompileInputs.cache
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.sourcelink.json

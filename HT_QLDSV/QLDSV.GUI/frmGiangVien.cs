@@ -29,7 +29,7 @@ namespace QLDSV.GUI
 
         private void frmGiangVien_Load(object sender, EventArgs e)
         {
-            FunctionQa.ketnoi();
+            //FunctionQa.ketnoi();
             txtMagv.Enabled = false;
             btnLuu.Enabled = false;
             btnBoqua.Enabled = false;
