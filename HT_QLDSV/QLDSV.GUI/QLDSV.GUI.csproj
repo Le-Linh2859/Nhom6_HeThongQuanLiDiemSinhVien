@@ -119,6 +119,24 @@
     <Compile Include="frmDangKyHocPhan.Designer.cs">
       <DependentUpon>frmDangKyHocPhan.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDangNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDangNhap.Designer.cs">
+      <DependentUpon>frmDangNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmKhoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKhoa.Designer.cs">
+      <DependentUpon>frmKhoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPhucKhao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPhucKhao.Designer.cs">
+      <DependentUpon>frmPhucKhao.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGiangVien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +192,7 @@
       <DependentUpon>frmTaoTaiKhoanMoi.cs</DependentUpon>
     </Compile>
     <Compile Include="FunctionQa.cs" />
+    <Compile Include="SessionHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmBaoCaoThongKe.resx">
@@ -184,6 +203,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDangKyHocPhan.resx">
       <DependentUpon>frmDangKyHocPhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDangNhap.resx">
+      <DependentUpon>frmDangNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmKhoa.resx">
+      <DependentUpon>frmKhoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPhucKhao.resx">
+      <DependentUpon>frmPhucKhao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGiangVien.resx">
       <DependentUpon>frmGiangVien.cs</DependentUpon>

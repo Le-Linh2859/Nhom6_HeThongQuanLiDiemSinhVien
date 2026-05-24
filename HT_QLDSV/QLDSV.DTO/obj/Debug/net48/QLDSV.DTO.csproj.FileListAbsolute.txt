@@ -1,6 +1,0 @@
-D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net48\QLDSV.DTO.csproj.AssemblyReference.cache
-D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net48\QLDSV.DTO.GeneratedMSBuildEditorConfig.editorconfig
-D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net48\QLDSV.DTO.AssemblyInfoInputs.cache
-D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net48\QLDSV.DTO.AssemblyInfo.cs
-D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net48\QLDSV.DTO.csproj.CoreCompileInputs.cache
-D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DTO\obj\Debug\net48\QLDSV.DTO.sourcelink.json
