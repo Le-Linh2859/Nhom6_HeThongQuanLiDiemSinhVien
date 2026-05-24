@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Desktop\\.NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj": {}
+    "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj": {}
   },
   "projects": {
-    "D:\\Desktop\\.NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj": {
+    "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Desktop\\.NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
+        "projectUniqueName": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
         "projectName": "QLDSV.DAL",
-        "projectPath": "D:\\Desktop\\.NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\Desktop\\.NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\obj\\",
+        "projectPath": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\laptrinhNET\\BaiTapLon\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +26,6 @@
         },
         "frameworks": {
           "net48": {
-            "framework": "net48",
             "targetAlias": "net48",
             "projectReferences": {}
           }
@@ -41,13 +40,12 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.300"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net48": {
-          "framework": "net48",
           "targetAlias": "net48",
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300-preview.0.26177.108\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

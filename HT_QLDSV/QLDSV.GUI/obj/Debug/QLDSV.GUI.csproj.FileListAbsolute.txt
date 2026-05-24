@@ -173,3 +173,8 @@ D:\LẬP TRÌNH .NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\bin\Debu
 D:\LẬP TRÌNH .NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.csproj.Up2Date
 D:\LẬP TRÌNH .NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.exe
 D:\LẬP TRÌNH .NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.pdb
+D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.frmDangNhap.resources
+D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.frmKhoa.resources
+D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.frmPhucKhao.resources
+D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.FrmLopNienChe.resources
+D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.FrmNhapDiemSV.resources
