@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QLDSV.BLL;
+using QLDSV.DAL;
 
 namespace QLDSV.GUI
 {
     public partial class frmGiangVien : Form
     {
+        GiangVienBLL bll = new GiangVienBLL();
         public frmGiangVien()
         {
             InitializeComponent();
@@ -29,17 +32,24 @@ namespace QLDSV.GUI
 
         private void frmGiangVien_Load(object sender, EventArgs e)
         {
-            ////FunctionQa.ketnoi();
-            //txtMagv.Enabled = false;
-            //btnLuu.Enabled = false;
-            //btnBoqua.Enabled = false;
-            //FunctionQa.fillcombo("select MaGV, HoTen, GioiTinh, DiaChi, SoDT, Email, MaKhoa from GiangVien", cboKhoa, "MaKhoa", "TenKhoa");
-            //cboKhoa.SelectedIndex = -1;
-            //load_datagridhh();
+            Connection.KetNoi();
+
+            dgvGiangVien.DataSource = bll.GetGiangVien();
+
+            cboKhoa.DataSource =
+                Connection.GetDataToTable(
+                    "SELECT MaKhoa, TenKhoa FROM Khoa"
+                );
+
+            cboKhoa.ValueMember = "MaKhoa";
+
+            cboKhoa.DisplayMember = "TenKhoa";
+
+            cboKhoa.SelectedIndex = -1;
 
         }
 
-        DataTable tblhh;
+        //DataTable tblhh;
         private void load_datagridhh()
         {
             //string sql;
@@ -130,6 +140,11 @@ namespace QLDSV.GUI
         }
 
         private void cboKhoa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
         {
 
         }

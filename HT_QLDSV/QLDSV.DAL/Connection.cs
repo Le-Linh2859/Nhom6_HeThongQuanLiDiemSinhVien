@@ -10,24 +10,35 @@ namespace QLDSV.DAL
     {
         public class Connection
         {
-            // Chuỗi kết nối đến Server của bạn (Dựa trên ảnh Server Explorer của bạn)
-            private string con = "Data Source=LINEZ;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
+        public static SqlConnection conn;
+        public static string connstring;
+        public static void KetNoi()
+        {
+            connstring = @"Data Source=ADMIN-PC\QUYNHANH;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
 
-            public SqlConnection GetConnect()
-            {
-                return new SqlConnection(con);
-            }
+            conn = new SqlConnection(connstring);
 
-            // Hàm dùng chung để lấy dữ liệu (đổ vào bảng)
-            public DataTable GetDataTable(string sql)
+            if (conn.State != ConnectionState.Open)
             {
-                DataTable dt = new DataTable();
-                using (SqlConnection conn = GetConnect())
-                {
-                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                    da.Fill(dt);
-                }
-                return dt;
+                conn.Open();
             }
         }
+
+        public static DataTable GetDataToTable(string sql)
+        {
+            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+            DataTable table = new DataTable();
+            da.Fill(table);
+            return table;
+        }
+
+        public static void RunSql(string sql)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+            cmd.CommandText = sql;
+            cmd.ExecuteNonQuery();
+            cmd.Dispose();
+        }
     }
+}

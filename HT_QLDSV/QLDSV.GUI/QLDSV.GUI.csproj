@@ -257,5 +257,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QLDSV.BLL\QLDSV.BLL.csproj">
+      <Project>{85a213c2-560b-fdfd-3389-f4670b0ebf33}</Project>
+      <Name>QLDSV.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QLDSV.DAL\QLDSV.DAL.csproj">
+      <Project>{a17a2a45-bc62-4c0d-942d-6335cd169023}</Project>
+      <Name>QLDSV.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
