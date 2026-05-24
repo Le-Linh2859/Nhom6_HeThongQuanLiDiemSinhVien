@@ -15,5 +15,9 @@ namespace QLDSV.BLL
         {
             return dal.LoadGiangVien();
         }
+        public DataTable GetKhoa()
+        {
+            return dal.LoadKhoa();
+        }
     }
 }

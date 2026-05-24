@@ -35,18 +35,24 @@ namespace QLDSV.GUI
             Connection.KetNoi();
 
             dgvGiangVien.DataSource = bll.GetGiangVien();
-
-            cboKhoa.DataSource =
-                Connection.GetDataToTable(
-                    "SELECT MaKhoa, TenKhoa FROM Khoa"
-                );
+            cboKhoa.DataSource = bll.GetKhoa();
+            cboLocKhoa.DataSource = bll.GetKhoa();
 
             cboKhoa.ValueMember = "MaKhoa";
-
             cboKhoa.DisplayMember = "TenKhoa";
+            cboLocKhoa.ValueMember = "MaKhoa";
+            cboLocKhoa.DisplayMember = "TenKhoa";
 
             cboKhoa.SelectedIndex = -1;
+            cboLocKhoa.SelectedIndex = -1;
 
+            dgvGiangVien.Columns["MaGV"].HeaderText = "Mã giảng viên";
+            dgvGiangVien.Columns["HoTen"].HeaderText = "Họ và tên";
+            dgvGiangVien.Columns["GioiTinh"].HeaderText = "Giới tính";
+            dgvGiangVien.Columns["DiaChi"].HeaderText = "Địa chỉ";
+            dgvGiangVien.Columns["SoDT"].HeaderText = "Số điện thoại";
+            dgvGiangVien.Columns["Email"].HeaderText = "Email";
+            dgvGiangVien.Columns["TenKhoa"].HeaderText = "Tên khoa";
         }
 
         //DataTable tblhh;

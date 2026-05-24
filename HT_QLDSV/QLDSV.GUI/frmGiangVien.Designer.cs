@@ -76,7 +76,7 @@
             this.dgvGiangVien = new System.Windows.Forms.DataGridView();
             this.button6 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cboLocKhoa = new System.Windows.Forms.ComboBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -813,13 +813,13 @@
             this.label10.Text = "Khoa:";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
-            // comboBox2
+            // cboLocKhoa
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(686, 14);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(272, 28);
-            this.comboBox2.TabIndex = 20;
+            this.cboLocKhoa.FormattingEnabled = true;
+            this.cboLocKhoa.Location = new System.Drawing.Point(686, 14);
+            this.cboLocKhoa.Name = "cboLocKhoa";
+            this.cboLocKhoa.Size = new System.Drawing.Size(272, 28);
+            this.cboLocKhoa.TabIndex = 20;
             // 
             // textBox4
             // 
@@ -865,7 +865,7 @@
             this.groupBox3.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.groupBox3.Controls.Add(this.button6);
             this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.comboBox2);
+            this.groupBox3.Controls.Add(this.cboLocKhoa);
             this.groupBox3.Controls.Add(this.textBox4);
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.label5);
@@ -1177,7 +1177,7 @@
         private System.Windows.Forms.DataGridView dgvGiangVien;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cboLocKhoa;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label5;

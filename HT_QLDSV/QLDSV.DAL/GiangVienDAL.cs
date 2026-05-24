@@ -12,9 +12,25 @@ namespace QLDSV.DAL
         public DataTable LoadGiangVien()
         {
             string sql =
-                "SELECT MaGV, HoTen, GioiTinh, DiaChi, SoDT, Email, MaKhoa FROM GiangVien";
+                        @"SELECT gv.MaGV,
+                                 gv.HoTen,
+                                 gv.GioiTinh,
+                                 gv.DiaChi,
+                                 gv.SoDT,
+                                 gv.Email,
+                                 k.TenKhoa
+                        FROM GiangVien gv
+                        INNER JOIN Khoa k
+                        ON gv.MaKhoa = k.MaKhoa";
+            return Connection.GetDataToTable(sql);
+        }
+        public DataTable LoadKhoa()
+        {
+            string sql =
+                "SELECT MaKhoa, TenKhoa FROM Khoa";
 
             return Connection.GetDataToTable(sql);
         }
+
     }
 }
