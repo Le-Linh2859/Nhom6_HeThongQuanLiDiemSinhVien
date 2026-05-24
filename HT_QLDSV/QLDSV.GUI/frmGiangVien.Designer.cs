@@ -84,9 +84,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnSua = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.txtEmail = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtSdt = new System.Windows.Forms.TextBox();
             this.txtMagv = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -100,6 +98,8 @@
             this.label15 = new System.Windows.Forms.Label();
             this.rdoNu = new System.Windows.Forms.RadioButton();
             this.rdoNam = new System.Windows.Forms.RadioButton();
+            this.mskSDT = new System.Windows.Forms.MaskedTextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox10)).BeginInit();
@@ -726,6 +726,7 @@
             this.btnDong.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDong.UseMnemonic = false;
             this.btnDong.UseVisualStyleBackColor = false;
+            this.btnDong.Click += new System.EventHandler(this.btnDong_Click);
             // 
             // btnBoqua
             // 
@@ -742,6 +743,7 @@
             this.btnBoqua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBoqua.UseMnemonic = false;
             this.btnBoqua.UseVisualStyleBackColor = false;
+            this.btnBoqua.Click += new System.EventHandler(this.btnBoqua_Click);
             // 
             // btnXoa
             // 
@@ -904,21 +906,13 @@
             this.pictureBox1.TabIndex = 59;
             this.pictureBox1.TabStop = false;
             // 
-            // txtEmail
-            // 
-            this.txtEmail.Location = new System.Drawing.Point(155, 169);
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(298, 27);
-            this.txtEmail.TabIndex = 19;
-            this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
-            // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.groupBox1.Controls.Add(this.mskSDT);
             this.groupBox1.Controls.Add(this.txtEmail);
             this.groupBox1.Controls.Add(this.btnLuu);
             this.groupBox1.Controls.Add(this.btnDong);
-            this.groupBox1.Controls.Add(this.txtSdt);
             this.groupBox1.Controls.Add(this.btnBoqua);
             this.groupBox1.Controls.Add(this.txtMagv);
             this.groupBox1.Controls.Add(this.btnXoa);
@@ -944,14 +938,6 @@
             this.groupBox1.TabIndex = 57;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "THÔNG TIN GIẢNG VIÊN";
-            // 
-            // txtSdt
-            // 
-            this.txtSdt.Location = new System.Drawing.Point(153, 121);
-            this.txtSdt.Name = "txtSdt";
-            this.txtSdt.Size = new System.Drawing.Size(298, 27);
-            this.txtSdt.TabIndex = 18;
-            this.txtSdt.TextChanged += new System.EventHandler(this.txtSdt_TextChanged);
             // 
             // txtMagv
             // 
@@ -1080,6 +1066,22 @@
             this.rdoNam.UseVisualStyleBackColor = true;
             this.rdoNam.CheckedChanged += new System.EventHandler(this.rdoNam_CheckedChanged);
             // 
+            // mskSDT
+            // 
+            this.mskSDT.Location = new System.Drawing.Point(153, 124);
+            this.mskSDT.Mask = "(999) 000-0000";
+            this.mskSDT.Name = "mskSDT";
+            this.mskSDT.Size = new System.Drawing.Size(298, 27);
+            this.mskSDT.TabIndex = 68;
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(155, 169);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(298, 27);
+            this.txtEmail.TabIndex = 19;
+            this.txtEmail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
+            // 
             // frmGiangVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1185,9 +1187,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox txtSdt;
         private System.Windows.Forms.TextBox txtMagv;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label7;
@@ -1201,5 +1201,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.RadioButton rdoNu;
         private System.Windows.Forms.RadioButton rdoNam;
+        private System.Windows.Forms.MaskedTextBox mskSDT;
+        private System.Windows.Forms.TextBox txtEmail;
     }
 }

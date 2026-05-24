@@ -53,6 +53,7 @@ namespace QLDSV.GUI
             dgvGiangVien.Columns["SoDT"].HeaderText = "Số điện thoại";
             dgvGiangVien.Columns["Email"].HeaderText = "Email";
             dgvGiangVien.Columns["TenKhoa"].HeaderText = "Tên khoa";
+            rdoNam.Enabled = false;
         }
 
         //DataTable tblhh;
@@ -152,6 +153,32 @@ namespace QLDSV.GUI
 
         private void label10_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnDong_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnBoqua_Click(object sender, EventArgs e)
+        {
+            btnBoqua.Enabled = false;
+            btnLuu.Enabled = false;
+            btnThem.Enabled = true;
+            btnSua.Enabled = true;
+            btnXoa.Enabled = true;
+            txtMagv.Enabled = false;
+            resetvalue();
+        }
+        private void resetvalue()
+        {
+            txtMagv.Text = "";
+            txtTengv.Text = "";
+            cboKhoa.Text = "";
+            txtDiachi.Text = "";
+            mskSDT.Text = "";
+            txtEmail.Text = "";
 
         }
     }
