@@ -14,7 +14,7 @@ namespace QLDSV.DAL
         public static string connstring;
         public static void KetNoi()
         {
-            connstring = @"Data Source=ADMIN-PC\QUYNHANH;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+            connstring = @"Data Source=DESKTOP-1MI6150;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
 
             conn = new SqlConnection(connstring);
 

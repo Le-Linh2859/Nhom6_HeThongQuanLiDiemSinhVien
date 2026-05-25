@@ -182,3 +182,10 @@ D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\bin\
 D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\bin\Debug\QLDSV.BLL.pdb
 D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\bin\Debug\QLDSV.DAL.pdb
 D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.exe.config
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\bin\Debug\QLDSV.BLL.dll
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\bin\Debug\QLDSV.DAL.dll
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\bin\Debug\QLDSV.BLL.pdb
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\bin\Debug\QLDSV.DAL.pdb
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.frmDangNhap.resources
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.frmKhoa.resources
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.frmPhucKhao.resources

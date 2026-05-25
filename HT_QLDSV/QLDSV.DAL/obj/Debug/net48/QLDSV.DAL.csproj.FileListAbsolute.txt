@@ -21,3 +21,7 @@ D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\
 D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.dll
 D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\bin\Debug\net48\QLDSV.DAL.dll
 D:\laptrinhNET\BaiTapLon\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\bin\Debug\net48\QLDSV.DAL.pdb
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\bin\Debug\net48\QLDSV.DAL.dll
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\bin\Debug\net48\QLDSV.DAL.pdb
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.dll
+D:\HaiLinh\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.DAL\obj\Debug\net48\QLDSV.DAL.pdb
