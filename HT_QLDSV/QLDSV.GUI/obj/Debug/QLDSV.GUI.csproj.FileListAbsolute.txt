@@ -178,3 +178,4 @@ D:\LẬP TRÌNH .NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\bin\Debu
 D:\LẬP TRÌNH .NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\bin\Debug\QLDSV.BLL.pdb
 D:\LẬP TRÌNH .NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\bin\Debug\QLDSV.DAL.pdb
 D:\LẬP TRÌNH .NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.frmKetQuaHocTap.resources
+D:\LẬP TRÌNH .NET\Nhom6_HeThongQuanLiDiemSinhVien\HT_QLDSV\QLDSV.GUI\obj\Debug\QLDSV.GUI.exe.config
