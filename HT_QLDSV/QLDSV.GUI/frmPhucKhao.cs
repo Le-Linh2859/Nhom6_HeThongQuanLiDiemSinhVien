@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -89,6 +89,8 @@ namespace QLDSV.GUI
         public frmPhucKhao()
         {
             InitializeComponent();
+
+            ThemeHelper.ApplyTheme(this);
             BuildSidebarMenu();
 
             // Wire up event handlers programmatically

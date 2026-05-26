@@ -475,7 +475,7 @@ namespace QLDSV.GUI
             this.btnDangky.Name = "btnDangky";
             this.btnDangky.Size = new System.Drawing.Size(111, 20);
             this.btnDangky.TabIndex = 8;
-            this.btnDangky.Text = "Đăng ký lớp";
+            this.btnDangky.Text = "Khoa";
             this.btnDangky.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // btnDiem

@@ -82,6 +82,7 @@ namespace QLDSV.GUI
         public frmQuanLiThongTinSinhVien()
         {
             InitializeComponent();
+            ThemeHelper.ApplyTheme(this);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

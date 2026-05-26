@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "64r+NHPNWm0=",
+  "dgSpecHash": "S8tFkIAVQ60=",
   "success": true,
-  "projectFilePath": "D:\\LẬP TRÌNH .NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
+  "projectFilePath": "d:\\LẬP TRÌNH .NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\MAY TINH PHAT THINH\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512"
   ],

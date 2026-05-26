@@ -27,11 +27,11 @@ namespace QLDSV.GUI
             this.pnlContent = new System.Windows.Forms.Panel();
             
             this.pnlToolbar = new System.Windows.Forms.Panel();
-            this.btnThem = new System.Windows.Forms.Button();
-            this.btnDuyet = new System.Windows.Forms.Button();
-            this.btnTuChoi = new System.Windows.Forms.Button();
-            this.btnXoa = new System.Windows.Forms.Button();
-            this.btnLamMoi = new System.Windows.Forms.Button();
+            this.btnThem = new Guna.UI2.WinForms.Guna2Button();
+            this.btnDuyet = new Guna.UI2.WinForms.Guna2Button();
+            this.btnTuChoi = new Guna.UI2.WinForms.Guna2Button();
+            this.btnXoa = new Guna.UI2.WinForms.Guna2Button();
+            this.btnLamMoi = new Guna.UI2.WinForms.Guna2Button();
             this.lblFilterTrangThai = new System.Windows.Forms.Label();
             this.cboFilterTrangThai = new System.Windows.Forms.ComboBox();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
@@ -77,8 +77,8 @@ namespace QLDSV.GUI
             this.lblLyDoCaption = new System.Windows.Forms.Label();
             this.txtLyDo = new System.Windows.Forms.TextBox();
             
-            this.btnLuuDetail = new System.Windows.Forms.Button();
-            this.btnHuyDetail = new System.Windows.Forms.Button();
+            this.btnLuuDetail = new Guna.UI2.WinForms.Guna2Button();
+            this.btnHuyDetail = new Guna.UI2.WinForms.Guna2Button();
             this.lblDetailStatus = new System.Windows.Forms.Label();
             
             this.pnlFooter = new System.Windows.Forms.Panel();
@@ -176,11 +176,11 @@ namespace QLDSV.GUI
             this.pnlToolbar.Controls.Add(this.cboFilterTrangThai);
             this.pnlToolbar.Controls.Add(this.txtTimKiem);
 
-            StyleButton(this.btnThem, "+ Thêm mới", System.Drawing.Color.FromArgb(21, 101, 192), 10, 12, 100);
-            StyleButton(this.btnDuyet, "☑ Duyệt", System.Drawing.Color.FromArgb(46, 125, 50), 115, 12, 90);
-            StyleButton(this.btnTuChoi, "✕ Từ chối", System.Drawing.Color.FromArgb(198, 40, 40), 210, 12, 90);
-            StyleButton(this.btnXoa, "🗑 Xóa", System.Drawing.Color.FromArgb(128, 0, 0), 305, 12, 90);
-            StyleButton(this.btnLamMoi, "↺ Làm mới", System.Drawing.Color.FromArgb(56, 142, 60), 400, 12, 95);
+            StyleButton(this.btnThem, "+ Thêm mới", System.Drawing.Color.FromArgb(21, 101, 192), 10, 12, 110);
+            StyleButton(this.btnDuyet, "☑ Duyệt", System.Drawing.Color.FromArgb(46, 125, 50), 130, 12, 100);
+            StyleButton(this.btnTuChoi, "✕ Từ chối", System.Drawing.Color.FromArgb(198, 40, 40), 240, 12, 100);
+            StyleButton(this.btnXoa, "🗑 Xóa", System.Drawing.Color.FromArgb(128, 0, 0), 350, 12, 90);
+            StyleButton(this.btnLamMoi, "↺ Làm mới", System.Drawing.Color.FromArgb(56, 142, 60), 450, 12, 110);
 
             this.lblFilterTrangThai.Text = "Trạng thái:";
             this.lblFilterTrangThai.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
@@ -351,10 +351,9 @@ namespace QLDSV.GUI
 
             // Save button
             this.btnLuuDetail.Text = "💾  Lưu";
-            this.btnLuuDetail.BackColor = System.Drawing.Color.FromArgb(21, 101, 192);
+            this.btnLuuDetail.FillColor = System.Drawing.Color.FromArgb(21, 101, 192);
             this.btnLuuDetail.ForeColor = System.Drawing.Color.White;
-            this.btnLuuDetail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLuuDetail.FlatAppearance.BorderSize = 0;
+            this.btnLuuDetail.BorderRadius = 5;
             this.btnLuuDetail.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
             this.btnLuuDetail.Size = new System.Drawing.Size(128, 34);
             this.btnLuuDetail.Location = new System.Drawing.Point(16, 395);
@@ -362,10 +361,9 @@ namespace QLDSV.GUI
 
             // Cancel button
             this.btnHuyDetail.Text = "✕  Hủy";
-            this.btnHuyDetail.BackColor = System.Drawing.Color.FromArgb(180, 180, 180);
+            this.btnHuyDetail.FillColor = System.Drawing.Color.FromArgb(180, 180, 180);
             this.btnHuyDetail.ForeColor = System.Drawing.Color.White;
-            this.btnHuyDetail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHuyDetail.FlatAppearance.BorderSize = 0;
+            this.btnHuyDetail.BorderRadius = 5;
             this.btnHuyDetail.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
             this.btnHuyDetail.Size = new System.Drawing.Size(122, 34);
             this.btnHuyDetail.Location = new System.Drawing.Point(162, 395);
@@ -426,13 +424,12 @@ namespace QLDSV.GUI
         #endregion
 
         // Helper: style toolbar buttons
-        private void StyleButton(System.Windows.Forms.Button btn, string text, System.Drawing.Color color, int x, int y, int width)
+        private void StyleButton(Guna.UI2.WinForms.Guna2Button btn, string text, System.Drawing.Color color, int x, int y, int width)
         {
             btn.Text = text;
-            btn.BackColor = color;
+            btn.FillColor = color;
             btn.ForeColor = System.Drawing.Color.White;
-            btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
+            btn.BorderRadius = 5;
             btn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             btn.Size = new System.Drawing.Size(width, 30);
             btn.Location = new System.Drawing.Point(x, y);
@@ -474,11 +471,11 @@ namespace QLDSV.GUI
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel pnlContent;
         private System.Windows.Forms.Panel pnlToolbar;
-        private System.Windows.Forms.Button btnThem;
-        private System.Windows.Forms.Button btnDuyet;
-        private System.Windows.Forms.Button btnTuChoi;
-        private System.Windows.Forms.Button btnXoa;
-        private System.Windows.Forms.Button btnLamMoi;
+        private Guna.UI2.WinForms.Guna2Button btnThem;
+        private Guna.UI2.WinForms.Guna2Button btnDuyet;
+        private Guna.UI2.WinForms.Guna2Button btnTuChoi;
+        private Guna.UI2.WinForms.Guna2Button btnXoa;
+        private Guna.UI2.WinForms.Guna2Button btnLamMoi;
         private System.Windows.Forms.Label lblFilterTrangThai;
         private System.Windows.Forms.ComboBox cboFilterTrangThai;
         private System.Windows.Forms.TextBox txtTimKiem;
@@ -514,8 +511,8 @@ namespace QLDSV.GUI
         private System.Windows.Forms.TextBox txtTrangThai;
         private System.Windows.Forms.Label lblLyDoCaption;
         private System.Windows.Forms.TextBox txtLyDo;
-        private System.Windows.Forms.Button btnLuuDetail;
-        private System.Windows.Forms.Button btnHuyDetail;
+        private Guna.UI2.WinForms.Guna2Button btnLuuDetail;
+        private Guna.UI2.WinForms.Guna2Button btnHuyDetail;
         private System.Windows.Forms.Label lblDetailStatus;
         private System.Windows.Forms.Panel pnlFooter;
         private System.Windows.Forms.Label lblTongBanGhi;

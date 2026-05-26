@@ -131,6 +131,12 @@
     <Compile Include="frmKhoa.Designer.cs">
       <DependentUpon>frmKhoa.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTongQuan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTongQuan.Designer.cs">
+      <DependentUpon>frmTongQuan.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPhucKhao.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -280,6 +286,7 @@
   <ItemGroup>
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="IShellChildForm.cs" />
+    <Compile Include="ThemeHelper.cs" />
     <Compile Include="frmKetQuaHocTap.cs">
       <SubType>Form</SubType>
     </Compile>

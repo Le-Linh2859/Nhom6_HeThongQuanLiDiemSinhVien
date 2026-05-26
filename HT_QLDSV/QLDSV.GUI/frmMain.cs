@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -15,6 +15,8 @@ namespace QLDSV.GUI
         public frmMain()
         {
             InitializeComponent();
+
+            ThemeHelper.ApplyTheme(this);
             
             // Đăng ký sự kiện đóng ứng dụng để giải phóng kết nối SQL và tiến trình ngầm
             this.FormClosing += (s, e) =>
@@ -37,6 +39,18 @@ namespace QLDSV.GUI
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            // Kiểm tra quyền đăng nhập trước tiên để đảm bảo bảo mật điều hướng
+            if (string.IsNullOrEmpty(SessionHelper.MaTaiKhoan))
+            {
+                MessageBox.Show("Bạn chưa đăng nhập! Hệ thống sẽ tự động chuyển hướng về trang Đăng nhập.",
+                                "Cảnh báo bảo mật", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                isLoggingOut = true;
+                frmDangNhap loginForm = new frmDangNhap();
+                loginForm.Show();
+                this.Close();
+                return;
+            }
+
             try
             {
                 // Khởi tạo kết nối cơ sở dữ liệu toàn cục cho các Form con sử dụng FunctionQa
@@ -95,15 +109,16 @@ namespace QLDSV.GUI
             // Admin (VT001): Hiển thị tất cả
             if (role == "VT001") return;
 
-            // Giảng viên (VT002): Ẩn các mục Tổng quan, Giảng viên, Môn học, Lớp niên chế
+            // Giảng viên (VT002): Ẩn các mục Tổng quan, Giảng viên, Môn học, Lớp niên chế, Khoa
             if (role == "VT002")
             {
                 if (btnTongquan != null) btnTongquan.Visible = false;
                 if (btnGiangvien != null) btnGiangvien.Visible = false;
                 if (btnMon != null) btnMon.Visible = false;
                 if (btnLopnc != null) btnLopnc.Visible = false;
+                if (btnDangky != null) btnDangky.Visible = false; // Ẩn Khoa
             }
-            // Sinh viên (VT003): Chỉ hiện Đăng ký lớp, Kết quả học tập, Phúc khảo
+            // Sinh viên (VT003): Chỉ hiện Kết quả học tập, Phúc khảo (Ẩn Đăng ký lớp đã bị xóa, Ẩn Khoa)
             else if (role == "VT003")
             {
                 if (btnTongquan != null) btnTongquan.Visible = false;
@@ -112,6 +127,7 @@ namespace QLDSV.GUI
                 if (btnMon != null) btnMon.Visible = false;
                 if (btnLopnc != null) btnLopnc.Visible = false;
                 if (btnLophp != null) btnLophp.Visible = false;
+                if (btnDangky != null) btnDangky.Visible = false; // Ẩn Khoa
                 if (btnDiem != null) btnDiem.Visible = false;
                 if (btnCanhbao != null) btnCanhbao.Visible = false;
                 if (btnBaocao != null) btnBaocao.Visible = false;
@@ -120,13 +136,13 @@ namespace QLDSV.GUI
 
         private void WireUpSidebarEvents()
         {
-            if (btnTongquan != null) btnTongquan.Click += (s, e) => OpenChildForm(new frmKhoa(), "Tổng Quan");
+            if (btnTongquan != null) btnTongquan.Click += (s, e) => OpenChildForm(new frmTongQuan(), "Tổng Quan");
             if (btnGiangvien != null) btnGiangvien.Click += (s, e) => OpenChildForm(new frmGiangVien(), "Giảng Viên");
             if (btnSinhvien != null) btnSinhvien.Click += (s, e) => OpenChildForm(new frmQuanLiThongTinSinhVien(), "Sinh Viên");
             if (btnMon != null) btnMon.Click += (s, e) => OpenChildForm(new frmMonhoc(), "Môn Học");
             if (btnLopnc != null) btnLopnc.Click += (s, e) => OpenChildForm(new FrmLopNienChe(), "Lớp Niên Chế");
             if (btnLophp != null) btnLophp.Click += (s, e) => OpenChildForm(new frmLophocphan(), "Lớp Học Phần");
-            if (btnDangky != null) btnDangky.Click += (s, e) => OpenChildForm(new frmDangKyHocPhan(), "Đăng Ký Lớp");
+            if (btnDangky != null) btnDangky.Click += (s, e) => OpenChildForm(new frmKhoa(), "Khoa");
             if (btnDiem != null) btnDiem.Click += (s, e) => OpenChildForm(new FrmNhapDiemSV(), "Nhập Điểm");
             if (btnKetqua != null) btnKetqua.Click += (s, e) => OpenChildForm(new frmKetQuaHocTap(), "Kết Quả Học Tập");
             if (btnCanhbao != null) btnCanhbao.Click += (s, e) => OpenChildForm(new frmCanhBaoHocVu(), "Cảnh Báo Học Vụ");

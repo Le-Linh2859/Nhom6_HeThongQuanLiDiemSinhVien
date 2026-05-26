@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -12,6 +12,8 @@ namespace QLDSV.GUI
         public frmKetQuaHocTap()
         {
             InitializeComponent();
+
+            ThemeHelper.ApplyTheme(this);
         }
 
         public void OnEmbeddedInShell()

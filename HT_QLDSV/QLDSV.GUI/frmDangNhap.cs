@@ -8,6 +8,7 @@ namespace QLDSV.GUI
         public frmDangNhap()
         {
             InitializeComponent();
+            // frmDangNhap KHÔNG áp dụng theme - giữ nguyên thiết kế gốc
         }
 
         private void btnDangnhap_Click(object sender, EventArgs e)

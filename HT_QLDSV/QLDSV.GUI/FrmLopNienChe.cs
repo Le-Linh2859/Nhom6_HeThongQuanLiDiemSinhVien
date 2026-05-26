@@ -90,6 +90,10 @@ namespace QLDSV.GUI
         {
             InitializeComponent();
 
+            this.Load += new System.EventHandler(this.FrmLopNienChe_Load);
+
+            ThemeHelper.ApplyTheme(this);
+
             this.btnThem.Click += btnThem_Click;
             this.btnSua.Click += btnSua_Click;
             this.btnLuu.Click += btnLuu_Click;
@@ -607,17 +611,17 @@ namespace QLDSV.GUI
             btnGiangvien.Click += (s, e) => OpenForm(new frmGiangVien());
             btnCanhbao.Click += (s, e) => OpenForm(new frmCanhBaoHocVu());
             btnLopnc.Click += (s, e) => { /* Đang ở chính form này */ };
+            btnSinhvien.Click += (s, e) => OpenForm(new frmQuanLiThongTinSinhVien());
+            btnMon.Click += (s, e) => OpenForm(new frmMonhoc());
+            btnLophp.Click += (s, e) => OpenForm(new frmLophocphan());
+            btnKetqua.Click += (s, e) => OpenForm(new frmKetQuaHocTap());
+            btnPhuckhao.Click += (s, e) => OpenForm(new frmPhucKhao());
+            btnBaocao.Click += (s, e) => OpenForm(new frmBaoCaoThongKe());
+            btnTongquan.Click += (s, e) => OpenForm(new frmTongQuan());
 
             // Hiển thị thông báo với các Form chưa kích hoạt hoặc đang phát triển
-            btnSinhvien.Click += (s, e) => MessageBox.Show("Tính năng quản lý Sinh viên đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnMon.Click += (s, e) => MessageBox.Show("Tính năng quản lý Môn học đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnLophp.Click += (s, e) => MessageBox.Show("Tính năng quản lý Lớp học phần đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnDangky.Click += (s, e) => MessageBox.Show("Tính năng Đăng ký lớp đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             btnDiem.Click += (s, e) => MessageBox.Show("Tính năng Nhập điểm đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnKetqua.Click += (s, e) => MessageBox.Show("Tính năng Kết quả học tập đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnPhuckhao.Click += (s, e) => MessageBox.Show("Tính năng Phúc khảo học vụ đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnBaocao.Click += (s, e) => MessageBox.Show("Tính năng Báo cáo thống kê đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnTongquan.Click += (s, e) => MessageBox.Show("Tính năng Tổng quan hệ thống đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             // Làm nổi bật nút Lớp niên chế (Trực quan hóa thiết kế)
             btnLopnc.FillColor = Color.FromArgb(224, 224, 224);

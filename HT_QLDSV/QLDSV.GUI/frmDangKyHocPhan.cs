@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -82,6 +82,8 @@ namespace QLDSV.GUI
         public frmDangKyHocPhan()
         {
             InitializeComponent();
+
+            ThemeHelper.ApplyTheme(this);
         }
     }
 }

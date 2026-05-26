@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -20,6 +20,8 @@ namespace QLDSV.GUI
         public frmKhoa()
         {
             InitializeComponent();
+
+            ThemeHelper.ApplyTheme(this);
             BuildSidebarMenu();
 
             // Wire up toolbar buttons programmatically

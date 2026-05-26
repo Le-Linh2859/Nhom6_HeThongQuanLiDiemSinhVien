@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\LẬP TRÌNH .NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj": {}
+    "d:\\LẬP TRÌNH .NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj": {}
   },
   "projects": {
-    "D:\\LẬP TRÌNH .NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj": {
+    "d:\\LẬP TRÌNH .NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\LẬP TRÌNH .NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
+        "projectUniqueName": "d:\\LẬP TRÌNH .NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
         "projectName": "QLDSV.DAL",
-        "projectPath": "D:\\LẬP TRÌNH .NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
+        "projectPath": "d:\\LẬP TRÌNH .NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
         "packagesPath": "C:\\Users\\MAY TINH PHAT THINH\\.nuget\\packages\\",
-        "outputPath": "D:\\LẬP TRÌNH .NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\obj\\",
+        "outputPath": "d:\\LẬP TRÌNH .NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
