@@ -100,155 +100,203 @@
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="frmBaoCaoThongKe.cs">
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  CORE – Hạ tầng dùng chung                     -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <Compile Include="Core\Program.cs" />
+    <Compile Include="Core\FunctionQa.cs" />
+    <Compile Include="Core\SessionHelper.cs" />
+    <Compile Include="Core\ThemeHelper.cs" />
+    <Compile Include="Core\IShellChildForm.cs" />
+    <Compile Include="Core\ServiceLocator.cs" />
+
+    <Compile Include="Core\frmDangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmBaoCaoThongKe.Designer.cs">
-      <DependentUpon>frmBaoCaoThongKe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmCanhBaoHocVu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmCanhBaoHocVu.Designer.cs">
-      <DependentUpon>frmCanhBaoHocVu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmDangKyHocPhan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmDangKyHocPhan.Designer.cs">
-      <DependentUpon>frmDangKyHocPhan.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmDangNhap.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmDangNhap.Designer.cs">
+    <Compile Include="Core\frmDangNhap.Designer.cs">
       <DependentUpon>frmDangNhap.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmKhoa.cs">
+
+    <Compile Include="Core\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmKhoa.Designer.cs">
-      <DependentUpon>frmKhoa.cs</DependentUpon>
+    <Compile Include="Core\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTongQuan.cs">
+
+    <EmbeddedResource Include="Core\frmDangNhap.resx">
+      <DependentUpon>frmDangNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  FORMS / ADMIN – Form dành cho Quản trị viên   -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <Compile Include="Forms\Admin\frmTongQuan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTongQuan.Designer.cs">
+    <Compile Include="Forms\Admin\frmTongQuan.Designer.cs">
       <DependentUpon>frmTongQuan.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmPhucKhao.cs">
+
+    <Compile Include="Forms\Admin\frmQuanLiThongTinSinhVien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPhucKhao.Designer.cs">
-      <DependentUpon>frmPhucKhao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmGiangVien.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmGiangVien.Designer.cs">
-      <DependentUpon>frmGiangVien.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmLophocphan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmLophocphan.Designer.cs">
-      <DependentUpon>frmLophocphan.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmLopNienChe.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmLopNienChe.Designer.cs">
-      <DependentUpon>FrmLopNienChe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmMonhoc.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMonhoc.Designer.cs">
-      <DependentUpon>frmMonhoc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmNhapDiemSV.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmNhapDiemSV.Designer.cs">
-      <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmQuanLiTaiKhoan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmQuanLiTaiKhoan.Designer.cs">
-      <DependentUpon>frmQuanLiTaiKhoan.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmQuanLiThongTinSinhVien.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmQuanLiThongTinSinhVien.Designer.cs">
+    <Compile Include="Forms\Admin\frmQuanLiThongTinSinhVien.Designer.cs">
       <DependentUpon>frmQuanLiThongTinSinhVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTaoTaiKhoanMoi.cs">
+    <EmbeddedResource Include="Forms\Admin\frmQuanLiThongTinSinhVien.resx">
+      <DependentUpon>frmQuanLiThongTinSinhVien.cs</DependentUpon>
+    </EmbeddedResource>
+
+    <Compile Include="Forms\Admin\frmGiangVien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTaoTaiKhoanMoi.Designer.cs">
-      <DependentUpon>frmTaoTaiKhoanMoi.cs</DependentUpon>
+    <Compile Include="Forms\Admin\frmGiangVien.Designer.cs">
+      <DependentUpon>frmGiangVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="FunctionQa.cs" />
-    <Compile Include="SessionHelper.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmBaoCaoThongKe.resx">
-      <DependentUpon>frmBaoCaoThongKe.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Admin\frmGiangVien.resx">
+      <DependentUpon>frmGiangVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCanhBaoHocVu.resx">
-      <DependentUpon>frmCanhBaoHocVu.cs</DependentUpon>
+
+    <Compile Include="Forms\Admin\frmMonhoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\frmMonhoc.Designer.cs">
+      <DependentUpon>frmMonhoc.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Admin\frmMonhoc.resx">
+      <DependentUpon>frmMonhoc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDangKyHocPhan.resx">
-      <DependentUpon>frmDangKyHocPhan.cs</DependentUpon>
+
+    <Compile Include="Forms\Admin\FrmLopNienChe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmLopNienChe.Designer.cs">
+      <DependentUpon>FrmLopNienChe.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Admin\FrmLopNienChe.resx">
+      <DependentUpon>FrmLopNienChe.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDangNhap.resx">
-      <DependentUpon>frmDangNhap.cs</DependentUpon>
+
+    <Compile Include="Forms\Admin\frmLophocphan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\frmLophocphan.Designer.cs">
+      <DependentUpon>frmLophocphan.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Admin\frmLophocphan.resx">
+      <DependentUpon>frmLophocphan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmKhoa.resx">
+
+    <Compile Include="Forms\Admin\frmKhoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\frmKhoa.Designer.cs">
+      <DependentUpon>frmKhoa.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Admin\frmKhoa.resx">
       <DependentUpon>frmKhoa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmPhucKhao.resx">
-      <DependentUpon>frmPhucKhao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmGiangVien.resx">
-      <DependentUpon>frmGiangVien.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmLophocphan.resx">
-      <DependentUpon>frmLophocphan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmLopNienChe.resx">
-      <DependentUpon>FrmLopNienChe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMonhoc.resx">
-      <DependentUpon>frmMonhoc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmNhapDiemSV.resx">
-      <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmQuanLiTaiKhoan.resx">
+
+    <Compile Include="Forms\Admin\frmQuanLiTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\frmQuanLiTaiKhoan.Designer.cs">
+      <DependentUpon>frmQuanLiTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Admin\frmQuanLiTaiKhoan.resx">
       <DependentUpon>frmQuanLiTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmQuanLiThongTinSinhVien.resx">
-      <DependentUpon>frmQuanLiThongTinSinhVien.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmTaoTaiKhoanMoi.resx">
+
+    <Compile Include="Forms\Admin\frmTaoTaiKhoanMoi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\frmTaoTaiKhoanMoi.Designer.cs">
+      <DependentUpon>frmTaoTaiKhoanMoi.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Admin\frmTaoTaiKhoanMoi.resx">
       <DependentUpon>frmTaoTaiKhoanMoi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmKetQuaHocTap.resx">
+
+    <Compile Include="Forms\Admin\frmBaoCaoThongKe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\frmBaoCaoThongKe.Designer.cs">
+      <DependentUpon>frmBaoCaoThongKe.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Admin\frmBaoCaoThongKe.resx">
+      <DependentUpon>frmBaoCaoThongKe.cs</DependentUpon>
+    </EmbeddedResource>
+
+    <Compile Include="Forms\Admin\frmCanhBaoHocVu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\frmCanhBaoHocVu.Designer.cs">
+      <DependentUpon>frmCanhBaoHocVu.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Admin\frmCanhBaoHocVu.resx">
+      <DependentUpon>frmCanhBaoHocVu.cs</DependentUpon>
+    </EmbeddedResource>
+
+    <Compile Include="Forms\Admin\FrmNhapDiemSV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\FrmNhapDiemSV.Designer.cs">
+      <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Admin\FrmNhapDiemSV.resx">
+      <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
+    </EmbeddedResource>
+
+    <Compile Include="Forms\Admin\frmKetQuaHocTap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\frmKetQuaHocTap.Designer.cs">
+      <DependentUpon>frmKetQuaHocTap.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Admin\frmKetQuaHocTap.resx">
       <DependentUpon>frmKetQuaHocTap.cs</DependentUpon>
     </EmbeddedResource>
+
+    <Compile Include="Forms\Admin\frmPhucKhao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\frmPhucKhao.Designer.cs">
+      <DependentUpon>frmPhucKhao.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Admin\frmPhucKhao.resx">
+      <DependentUpon>frmPhucKhao.cs</DependentUpon>
+    </EmbeddedResource>
+
+    <Compile Include="Forms\Admin\frmDangKyHocPhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\frmDangKyHocPhan.Designer.cs">
+      <DependentUpon>frmDangKyHocPhan.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Admin\frmDangKyHocPhan.resx">
+      <DependentUpon>frmDangKyHocPhan.cs</DependentUpon>
+    </EmbeddedResource>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  FORMS / GIANGVIEN – Chờ form mới              -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- Thêm form Giảng viên tại đây khi có            -->
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  FORMS / SINHVIEN – Chờ form mới               -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- Thêm form Sinh viên tại đây khi có             -->
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -270,9 +318,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\QLDSV.BLL\QLDSV.BLL.csproj">
       <Project>{00000000-0000-0000-0000-000000000001}</Project>
@@ -283,16 +333,6 @@
       <Name>QLDSV.DAL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ServiceLocator.cs" />
-    <Compile Include="IShellChildForm.cs" />
-    <Compile Include="ThemeHelper.cs" />
-    <Compile Include="frmKetQuaHocTap.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmKetQuaHocTap.Designer.cs">
-      <DependentUpon>frmKetQuaHocTap.cs</DependentUpon>
-    </Compile>
-  </ItemGroup>
+
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
