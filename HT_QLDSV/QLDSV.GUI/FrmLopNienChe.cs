@@ -23,10 +23,8 @@ namespace QLDSV.GUI
         {
             InitializeComponent();
 
-            // Wire up event handlers programmatically
             this.btnThem.Click += btnThem_Click;
             this.btnSua.Click += btnSua_Click;
-            this.btnXoa.Click += btnXoa_Click;
             this.btnLuu.Click += btnLuu_Click;
             this.btnHuy.Click += btnHuy_Click;
             this.btnReset.Click += btnReset_Click;
@@ -34,10 +32,8 @@ namespace QLDSV.GUI
 
             this.DataGridViewLop.CellClick += DataGridViewLop_CellClick;
 
-            // Wire up search and filter events
             this.txtTimKiem.TextChanged += txtTimKiem_TextChanged;
 
-            // Wire up search text box placeholder behavior
             txtTimKiem.Text = "Tìm kiếm theo mã lớp, tên lớp ...";
             txtTimKiem.ForeColor = Color.Gray;
 
@@ -92,7 +88,7 @@ namespace QLDSV.GUI
                 MessageBox.Show("Lỗi khởi tạo Form: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            DataGridViewLop.ThemeStyle.HeaderStyle.BackColor = Color.Blue;
+            DataGridViewLop.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
             DataGridViewLop.ThemeStyle.HeaderStyle.ForeColor = Color.White;
         }
 
@@ -222,7 +218,6 @@ namespace QLDSV.GUI
             // Thiết lập trạng thái các nút
             btnThem.Enabled = true;
             btnSua.Enabled = true;
-            btnXoa.Enabled = true;
             btnLuu.Enabled = false;
             btnHuy.Enabled = false;
             btnReset.Enabled = false;
@@ -281,10 +276,9 @@ namespace QLDSV.GUI
             cboKhoa2.Enabled = true;
             cboCV.Enabled = true;
 
-            // Trạng thái các nút điều hướng
+            // Trạng thái các nút điều hướng (btnThem_Click)
             btnThem.Enabled = false;
             btnSua.Enabled = false;
-            btnXoa.Enabled = false;
             btnLuu.Enabled = true;
             btnHuy.Enabled = true;
             btnReset.Enabled = true;
@@ -311,44 +305,14 @@ namespace QLDSV.GUI
             cboKhoa2.Enabled = true;
             cboCV.Enabled = true;
 
-            // Trạng thái các nút điều hướng
+            // Trạng thái các nút điều hướng (btnSua_Click)
             btnThem.Enabled = false;
             btnSua.Enabled = false;
-            btnXoa.Enabled = false;
             btnLuu.Enabled = true;
             btnHuy.Enabled = true;
             btnReset.Enabled = true;
 
             cboTenlop.Focus();
-        }
-
-        // 8. Xử lý sự kiện nhấn nút Xóa
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-            if (DataGridViewLop.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Vui lòng chọn lớp niên chế cần xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            string maLop = DataGridViewLop.SelectedRows[0].Cells["MaLopNienChe"].Value?.ToString().Trim();
-            var confirm = MessageBox.Show($"Bạn có chắc chắn muốn xóa lớp niên chế '{maLop}' không?\n\nChú ý: Hành động này không thể hoàn tác!", "Xác nhận xóa lớp", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (confirm == DialogResult.Yes)
-            {
-                try
-                {
-                    bll.DeleteLop(maLop);
-                    MessageBox.Show("Xóa lớp niên chế thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
-                    LoadData();
-                    ClearDetailInputs();
-                    ResetFormState();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi khi xóa lớp niên chế: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
         }
 
         // 9. Xử lý sự kiện nhấn nút Lưu
