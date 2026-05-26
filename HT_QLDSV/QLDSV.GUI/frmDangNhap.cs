@@ -1,5 +1,4 @@
 using System;
-using System.Data;
 using System.Windows.Forms;
 
 namespace QLDSV.GUI
@@ -16,6 +15,8 @@ namespace QLDSV.GUI
             string taikhoan = txtTaikhoan.Text.Trim();
             string matkhau = txtMatkhau.Text.Trim();
 
+            // Validation đã được chuyển vào AuthService,
+            // nhưng vẫn kiểm tra sớm ở GUI để UX tốt hơn
             if (string.IsNullOrEmpty(taikhoan) || string.IsNullOrEmpty(matkhau))
             {
                 MessageBox.Show("Vui lòng nhập tài khoản và mật khẩu.", "Thông báo",
@@ -25,23 +26,23 @@ namespace QLDSV.GUI
 
             try
             {
-                FunctionQa.ketnoi();
-                string sql = $"SELECT MaTaiKhoan, TenDangNhap, MaVaiTro FROM TaiKhoan WHERE TenDangNhap = '{taikhoan}' AND MatKhau = '{matkhau}'";
-                DataTable dt = FunctionQa.getdatatotable(sql);
+                // Gọi AuthService thông qua ServiceLocator (Repository Pattern + Dapper)
+                var authService = ServiceLocator.GetAuthService();
+                var result = authService.DangNhap(taikhoan, matkhau);
 
-                if (dt != null && dt.Rows.Count > 0)
+                if (result.Success)
                 {
-                    SessionHelper.MaTaiKhoan = dt.Rows[0]["MaTaiKhoan"]?.ToString().Trim() ?? "";
-                    SessionHelper.TenDangNhap = dt.Rows[0]["TenDangNhap"]?.ToString().Trim() ?? "";
-                    SessionHelper.MaVaiTro = dt.Rows[0]["MaVaiTro"]?.ToString().Trim() ?? "";
+                    // Lưu thông tin session
+                    SessionHelper.SetCurrentUser(result.TaiKhoan);
 
+                    // Mở form chính
                     frmMain main = new frmMain();
                     main.Show();
                     this.Hide();
                 }
                 else
                 {
-                    MessageBox.Show("Tài khoản hoặc mật khẩu không đúng.", "Đăng nhập thất bại",
+                    MessageBox.Show(result.Message, "Đăng nhập thất bại",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtMatkhau.Text = "";
                     txtMatkhau.Focus();
@@ -66,4 +67,3 @@ namespace QLDSV.GUI
         }
     }
 }
-        

@@ -5,7 +5,10 @@
 	  <TargetFramework>net48</TargetFramework>
 	  <AssemblyName>QLDSV.BLL</AssemblyName>
 	  <RootNamespace>QLDSV.BLL</RootNamespace>
-
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QLDSV.DAL\QLDSV.DAL.csproj" />
+  </ItemGroup>
 
 </Project>

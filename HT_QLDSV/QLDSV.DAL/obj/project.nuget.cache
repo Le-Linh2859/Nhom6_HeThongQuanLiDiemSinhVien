@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "m/LyojJKnmA=",
+  "dgSpecHash": "64r+NHPNWm0=",
   "success": true,
-  "projectFilePath": "D:\\Desktop\\.NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\LẬP TRÌNH .NET\\Nhom6_HeThongQuanLiDiemSinhVien\\HT_QLDSV\\QLDSV.DAL\\QLDSV.DAL.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MAY TINH PHAT THINH\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512"
+  ],
   "logs": []
 }

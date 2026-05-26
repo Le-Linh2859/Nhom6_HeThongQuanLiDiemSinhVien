@@ -1,4 +1,4 @@
-﻿namespace QLDSV.GUI
+namespace QLDSV.GUI
 {
     partial class frmMain
     {
@@ -494,7 +494,6 @@
             this.btnDiem.TabIndex = 9;
             this.btnDiem.Text = "Nhập điểm";
             this.btnDiem.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnDiem.Click += new System.EventHandler(this.guna2Button14_Click);
             // 
             // btnKetqua
             // 
@@ -580,7 +579,6 @@
             this.btnLopnc.TabIndex = 6;
             this.btnLopnc.Text = "Lớp niên chế";
             this.btnLopnc.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnLopnc.Click += new System.EventHandler(this.guna2Button11_Click);
             // 
             // guna2ImageButton3
             // 

@@ -5,11 +5,17 @@ using System.Windows.Forms;
 
 namespace QLDSV.GUI
 {
-    public partial class frmKhoa : Form
+    public partial class frmKhoa : Form, IShellChildForm
     {
         private bool detailPanelVisible = false;
         private bool isEditMode = false;        // false = View, true = Add/Edit
         private bool isAddingNew = false;       // true = Thêm mới, false = Sửa
+
+        public void OnEmbeddedInShell()
+        {
+            if (pnlSidebar != null) pnlSidebar.Visible = false;
+            if (pnlHeader != null) pnlHeader.Visible = false;
+        }
 
         public frmKhoa()
         {

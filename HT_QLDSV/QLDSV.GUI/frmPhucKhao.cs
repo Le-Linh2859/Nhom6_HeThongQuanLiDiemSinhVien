@@ -5,13 +5,86 @@ using System.Windows.Forms;
 
 namespace QLDSV.GUI
 {
-    public partial class frmPhucKhao : Form
+    public partial class frmPhucKhao : Form, IShellChildForm
     {
         private bool detailPanelVisible = false;
         private bool isEditMode = false;        // false = View, true = Add/Edit
         private bool isAddingNew = false;       // true = Thêm mới, false = Xem/Sửa
         private string currentMaPK = "";
         private DataTable tblPhucKhao;
+
+        public void OnEmbeddedInShell()
+        {
+            // Bước 1: Ẩn các control Sidebar & Header trùng lặp bằng tìm kiếm động an toàn
+            string[] controlNames = { 
+                "pnlSidebar", "pnlHeader", "guna2ImageButton1", "label3", "label4", 
+                "guna2ImageButton2", "guna2CirclePictureBox1", "guna2HtmlLabel13", 
+                "guna2HtmlLabel14", "guna2ImageButton3" 
+            };
+            foreach (var name in controlNames)
+            {
+                var ct = this.Controls.Find(name, true);
+                foreach (var c in ct)
+                {
+                    c.Visible = false;
+                }
+            }
+
+            // Bước 2: Tự động xác định khoảng dịch chuyển (shiftX) từ sidebar thực tế
+            int shiftX = 0;
+            var sidebarControls = this.Controls.Find("pnlSidebar", true);
+            if (sidebarControls.Length > 0)
+            {
+                shiftX = sidebarControls[0].Width;
+            }
+
+            // Fallback an toàn: Nếu không tìm thấy sidebar, giữ nguyên giao diện hiện tại
+            if (shiftX == 0) return;
+
+            // Bước 3: Dịch chuyển các control cấp cao nhất (Top-Level Controls) sang trái
+            foreach (Control ctrl in this.Controls)
+            {
+                bool isHiddenControl = false;
+                foreach (var name in controlNames)
+                {
+                    if (ctrl.Name == name)
+                    {
+                        isHiddenControl = true;
+                        break;
+                    }
+                }
+
+                // Thực hiện dịch chuyển có Guard bảo vệ: Chỉ dịch các control có Left > 0 và không cho âm
+                if (!isHiddenControl && ctrl.Left > 0)
+                {
+                    ctrl.Left = Math.Max(0, ctrl.Left - shiftX);
+                }
+            }
+
+            // Bước 4: Đệ quy tìm kiếm mọi DataGridView bất kể tên gọi để cấu hình Anchor bốn chiều
+            SetAnchorAllGrids(this.Controls);
+        }
+
+        private void SetAnchorAllGrids(Control.ControlCollection controls)
+        {
+            foreach (Control c in controls)
+            {
+                if (c is DataGridView dgv)
+                {
+                    dgv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+                }
+                if (c.Controls.Count > 0)
+                {
+                    SetAnchorAllGrids(c.Controls); // Đệ quy sâu vào các Panel/GroupBox con
+                }
+            }
+        }
+
+        // MaSV của sinh viên đang đăng nhập (dùng khi MaVaiTro = VT003)
+        private string maSVHienTai = "";
+
+        // MaGV của giảng viên đang đăng nhập (dùng khi MaVaiTro = VT002)
+        private string maGVHienTai = "";
 
         public frmPhucKhao()
         {
@@ -74,7 +147,7 @@ namespace QLDSV.GUI
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    LoadData();
+                    TaiDuLieuTheoQuyen();
                     e.Handled = true;
                     e.SuppressKeyPress = true;
                 }
@@ -185,7 +258,7 @@ namespace QLDSV.GUI
                         {
                             this.Show();
                             // Refresh this form state on return
-                            this.LoadData();
+                            this.TaiDuLieuTheoQuyen();
                         };
                         targetForm.Show();
                         this.Hide();
@@ -210,9 +283,9 @@ namespace QLDSV.GUI
                 cboFilterTrangThai.Items.Add("Từ chối");
                 cboFilterTrangThai.SelectedIndex = 0;
 
+                BoPhanQuyen();      // ← MỚI: phân quyền giao diện trước khi tải dữ liệu
                 LoadComboBoxes();
-                LoadData();
-                UpdateStatistics();
+                TaiDuLieuTheoQuyen();
             }
             catch (Exception ex)
             {
@@ -328,6 +401,9 @@ namespace QLDSV.GUI
             string lyDo = row.Cells[7].Value?.ToString();
 
             currentMaPK = maPK;
+
+            // Cập nhật trạng thái nút Duyệt/Từ chối theo dòng được chọn
+            CapNhatTrangThaiNut(trangThai, maLHP);
 
             // If request is still pending ("Chờ duyệt"), show in editable mode. Otherwise, read-only.
             if (trangThai == "Chờ duyệt")
@@ -542,7 +618,7 @@ namespace QLDSV.GUI
                     MessageBox.Show("Duyệt yêu cầu phúc khảo thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     CloseSidebar();
-                    LoadData();
+                    TaiDuLieuTheoQuyen();
                 }
                 catch (Exception ex)
                 {
@@ -584,7 +660,7 @@ namespace QLDSV.GUI
                     MessageBox.Show("Từ chối yêu cầu phúc khảo thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     CloseSidebar();
-                    LoadData();
+                    TaiDuLieuTheoQuyen();
                 }
                 catch (Exception ex)
                 {
@@ -616,7 +692,7 @@ namespace QLDSV.GUI
                     string sql = $"DELETE FROM PhucKhao WHERE MaPhucKhao = '{maPK}'";
                     FunctionQa.RunSqlDel(sql);
                     CloseSidebar();
-                    LoadData();
+                    TaiDuLieuTheoQuyen();
                 }
                 catch (Exception ex)
                 {
@@ -632,7 +708,7 @@ namespace QLDSV.GUI
             txtTimKiem.ForeColor = Color.Gray;
             cboFilterTrangThai.SelectedIndex = 0;
             CloseSidebar();
-            LoadData();
+            TaiDuLieuTheoQuyen();
         }
 
         private void btnLuuDetail_Click(object sender, EventArgs e)
@@ -680,7 +756,7 @@ namespace QLDSV.GUI
                     MessageBox.Show("Thêm yêu cầu phúc khảo mới thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    LoadData();
+                    TaiDuLieuTheoQuyen();
                     ShowViewMode(maPK, maSV, maLHP, ngayYC, trangThai, lyDo);
                 }
                 else
@@ -693,7 +769,7 @@ namespace QLDSV.GUI
                     MessageBox.Show("Cập nhật yêu cầu phúc khảo thành công!", "Thành công",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    LoadData();
+                    TaiDuLieuTheoQuyen();
                     ShowViewMode(currentMaPK, maSV, maLHP, ngayYC, trangThai, lyDo);
                 }
             }
@@ -733,7 +809,7 @@ namespace QLDSV.GUI
 
         private void cboFilterTrangThai_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadData();
+            TaiDuLieuTheoQuyen();
         }
 
         private void txtTimKiem_TextChanged(object sender, EventArgs e)
@@ -742,7 +818,278 @@ namespace QLDSV.GUI
             string kw = txtTimKiem.Text.Trim();
             if (kw != "Tìm tên SV / lớp học phần...")
             {
-                LoadData();
+                TaiDuLieuTheoQuyen();
+            }
+        }
+
+        // =====================================================================
+        // Phương thức hỗ trợ (private helpers)
+        // =====================================================================
+
+        // Cấu hình giao diện và lấy định danh người dùng theo vai trò
+        private void BoPhanQuyen()
+        {
+            string role = SessionHelper.MaVaiTro;
+
+            if (string.IsNullOrEmpty(role) || (role != "VT001" && role != "VT002" && role != "VT003"))
+            {
+                MessageBox.Show("Không xác định được vai trò người dùng.", "Lỗi phân quyền",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
+            }
+
+            if (role == "VT001") // Admin — toàn quyền
+            {
+                btnThem.Visible = true;
+                btnDuyet.Visible = true;
+                btnTuChoi.Visible = true;
+                btnXoa.Visible = true;
+                btnLamMoi.Visible = true;
+            }
+            else if (role == "VT002") // Giảng viên
+            {
+                btnThem.Visible = false;
+                btnXoa.Visible = false;
+                btnDuyet.Visible = true;
+                btnTuChoi.Visible = true;
+                btnLamMoi.Visible = true;
+
+                // Lấy MaGV từ DB
+                maGVHienTai = FunctionQa.getfieldvalue(
+                    $"SELECT MaGV FROM GiangVien WHERE MaTaiKhoan = '{SessionHelper.MaTaiKhoan}'");
+                if (string.IsNullOrEmpty(maGVHienTai))
+                {
+                    MessageBox.Show("Không tìm thấy thông tin giảng viên liên kết với tài khoản này.",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else if (role == "VT003") // Sinh viên
+            {
+                btnDuyet.Visible = false;
+                btnTuChoi.Visible = false;
+                btnXoa.Visible = false;
+                btnThem.Visible = true;
+                btnLamMoi.Visible = true;
+
+                // Lấy MaSV từ DB
+                maSVHienTai = FunctionQa.getfieldvalue(
+                    $"SELECT MaSV FROM SinhVien WHERE MaTaiKhoan = '{SessionHelper.MaTaiKhoan}'");
+                if (string.IsNullOrEmpty(maSVHienTai))
+                {
+                    MessageBox.Show("Không tìm thấy thông tin sinh viên liên kết với tài khoản này.",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        // Tải dữ liệu phúc khảo vào dataGridView theo phạm vi quyền của người dùng
+        private void TaiDuLieuTheoQuyen()
+        {
+            try
+            {
+                string role = SessionHelper.MaVaiTro;
+                string scopeWhere = "";
+
+                if (role == "VT001")
+                {
+                    scopeWhere = "";
+                }
+                else if (role == "VT002")
+                {
+                    if (string.IsNullOrEmpty(maGVHienTai))
+                    {
+                        dataGridView.DataSource = null;
+                        CapNhatThongKeTheoQuyen();
+                        return;
+                    }
+                    scopeWhere = $" AND pk.MaLHP IN (SELECT MaLHP FROM LopHocPhan WHERE MaGV = '{maGVHienTai}')";
+                }
+                else if (role == "VT003")
+                {
+                    if (string.IsNullOrEmpty(maSVHienTai))
+                    {
+                        dataGridView.DataSource = null;
+                        CapNhatThongKeTheoQuyen();
+                        return;
+                    }
+                    scopeWhere = $" AND pk.MaSV = '{maSVHienTai}'";
+                }
+                else
+                {
+                    dataGridView.DataSource = null;
+                    CapNhatThongKeTheoQuyen();
+                    return;
+                }
+
+                string sql = "SELECT pk.MaPhucKhao, sv.HoTen, lhp.TenLopHocPhan, pk.NgayYeuCau, pk.TrangThai, pk.MaSV, pk.MaLHP, pk.LyDo " +
+                             "FROM PhucKhao pk " +
+                             "JOIN SinhVien sv ON pk.MaSV = sv.MaSV " +
+                             "JOIN LopHocPhan lhp ON pk.MaLHP = lhp.MaLHP WHERE 1=1";
+
+                sql += scopeWhere;
+
+                string keyword = txtTimKiem.Text.Trim();
+                if (!string.IsNullOrEmpty(keyword) && keyword != "Tìm tên SV / lớp học phần...")
+                {
+                    sql += $" AND (sv.HoTen LIKE N'%{keyword}%' OR lhp.TenLopHocPhan LIKE N'%{keyword}%' OR pk.MaPhucKhao LIKE '%{keyword}%')";
+                }
+
+                if (cboFilterTrangThai.SelectedIndex > 0)
+                {
+                    string filterStatus = cboFilterTrangThai.SelectedItem.ToString();
+                    sql += $" AND pk.TrangThai = N'{filterStatus}'";
+                }
+
+                sql += " ORDER BY pk.MaPhucKhao DESC";
+
+                tblPhucKhao = FunctionQa.getdatatotable(sql);
+                dataGridView.DataSource = tblPhucKhao;
+
+                if (dataGridView.Columns.Count >= 8)
+                {
+                    dataGridView.Columns[0].HeaderText = "Mã PK";
+                    dataGridView.Columns[1].HeaderText = "Họ Tên SV";
+                    dataGridView.Columns[2].HeaderText = "Lớp Học Phần";
+                    dataGridView.Columns[3].HeaderText = "Ngày Yêu Cầu";
+                    dataGridView.Columns[4].HeaderText = "Trạng Thái";
+                    dataGridView.Columns[5].Visible = false;
+                    dataGridView.Columns[6].Visible = false;
+                    dataGridView.Columns[7].Visible = false;
+                }
+
+                dataGridView.AllowUserToAddRows = false;
+                dataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
+                dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+                lblTongBanGhi.Text = $"Tổng: {tblPhucKhao.Rows.Count} bản ghi";
+                CapNhatThongKeTheoQuyen();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message, "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Cập nhật thống kê phúc khảo bằng cách đếm trực tiếp từ DataTable đã tải
+        private void CapNhatThongKeTheoQuyen()
+        {
+            string role = SessionHelper.MaVaiTro;
+
+            if (string.IsNullOrEmpty(role) || (role != "VT001" && role != "VT002" && role != "VT003") || tblPhucKhao == null)
+            {
+                lblStatTongVal.Text = "0";
+                lblStatChoDuyetVal.Text = "0";
+                lblStatDaDuyetVal.Text = "0";
+                lblStatTuChoiVal.Text = "0";
+                return;
+            }
+
+            // Đếm từ DataTable đã load — không thêm query SQL riêng
+            int choDuyet = tblPhucKhao.Select("TrangThai = 'Chờ duyệt'").Length;
+            int daDuyet  = tblPhucKhao.Select("TrangThai = 'Đã duyệt'").Length;
+            int tuChoi   = tblPhucKhao.Select("TrangThai = 'Từ chối'").Length;
+            int tong     = choDuyet + daDuyet + tuChoi;
+
+            lblStatTongVal.Text     = tong.ToString();
+            lblStatChoDuyetVal.Text = choDuyet.ToString();
+            lblStatDaDuyetVal.Text  = daDuyet.ToString();
+            lblStatTuChoiVal.Text   = tuChoi.ToString();
+        }
+
+        // Kiểm tra quyền thực hiện thao tác ghi dựa trên vai trò hiện tại của người dùng
+        private bool KiemTraQuyenGhi(string thaoTac)
+        {
+            string role = SessionHelper.MaVaiTro;
+
+            if (string.IsNullOrEmpty(role))
+            {
+                MessageBox.Show("Phiên đăng nhập không hợp lệ. Vui lòng đăng nhập lại.",
+                    "Lỗi phiên", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            switch (thaoTac)
+            {
+                case "THEM":
+                    if (role == "VT001" || role == "VT003") return true;
+                    MessageBox.Show("Bạn không có quyền thêm yêu cầu phúc khảo.",
+                        "Không có quyền", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+
+                case "DUYET":
+                case "TUCHOI":
+                    if (role == "VT001" || role == "VT002") return true;
+                    MessageBox.Show("Bạn không có quyền thực hiện thao tác này.",
+                        "Không có quyền", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+
+                case "XOA":
+                    if (role == "VT001") return true;
+                    MessageBox.Show("Chỉ Admin mới có quyền xóa yêu cầu phúc khảo.",
+                        "Không có quyền", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+
+                default:
+                    return false;
+            }
+        }
+
+        // Truy vấn lại trạng thái hiện tại của yêu cầu phúc khảo từ DB
+        private string KiemTraTrangThaiHienTai(string maPK)
+        {
+            string sql = $"SELECT TrangThai FROM PhucKhao WHERE MaPhucKhao = '{maPK}'";
+            return FunctionQa.getfieldvalue(sql);
+        }
+
+        // Cập nhật Enabled của btnDuyet và btnTuChoi khi người dùng chọn dòng trong dataGridView
+        private void CapNhatTrangThaiNut(string trangThai, string maLHP)
+        {
+            string role = SessionHelper.MaVaiTro;
+
+            // Mặc định: disable cả hai
+            btnDuyet.Enabled = false;
+            btnTuChoi.Enabled = false;
+
+            // Chỉ Admin và GV mới có nút này (SV không thấy)
+            if (role != "VT001" && role != "VT002") return;
+
+            // Bản ghi phải ở trạng thái "Chờ duyệt" mới được duyệt/từ chối
+            if (trangThai != "Chờ duyệt") return;
+
+            if (role == "VT001")
+            {
+                // Admin: enable với mọi bản ghi Chờ duyệt
+                btnDuyet.Enabled = true;
+                btnTuChoi.Enabled = true;
+            }
+            else if (role == "VT002")
+            {
+                // GV: chỉ enable nếu MaLHP thuộc lớp phụ trách
+                string sqlCheck = $"SELECT COUNT(*) FROM LopHocPhan WHERE MaLHP = '{maLHP}' AND MaGV = '{maGVHienTai}'";
+                string result = FunctionQa.getfieldvalue(sqlCheck);
+                if (result != "0" && !string.IsNullOrEmpty(result))
+                {
+                    btnDuyet.Enabled = true;
+                    btnTuChoi.Enabled = true;
+                }
+                // Nếu không thuộc lớp phụ trách: giữ nguyên disabled
+            }
+        }
+
+        // Ghi lịch sử thao tác vào bảng LichSuPhucKhao (bỏ qua nếu bảng không tồn tại)
+        private void GhiLichSu(string maPK, string thaoTac)
+        {
+            try
+            {
+                string sql = $"INSERT INTO LichSuPhucKhao (MaPhucKhao, MaTaiKhoan, ThaoTac, ThoiGian) " +
+                             $"VALUES ('{maPK}', '{SessionHelper.MaTaiKhoan}', N'{thaoTac}', GETDATE())";
+                FunctionQa.runsql(sql);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("GhiLichSu bỏ qua: " + ex.Message);
             }
         }
     }
