@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
-using Dapper;
+using System.Data;
+using System.Data.SqlClient;
 using QLDSV.DAL.Models;
 
 namespace QLDSV.DAL.Repositories
 {
     /// <summary>
-    /// Triển khai Repository Pattern cho bảng TaiKhoan sử dụng Dapper.
+    /// Triển khai Repository Pattern cho bảng TaiKhoan sử dụng SqlCommand thuần.
     /// Tất cả truy vấn đều dùng parameterized queries để chống SQL Injection.
     /// </summary>
     public class TaiKhoanRepository : ITaiKhoanRepository
@@ -25,9 +25,19 @@ namespace QLDSV.DAL.Repositories
                                  FROM TaiKhoan 
                                  WHERE TenDangNhap = @TenDangNhap";
 
-            using (var conn = _factory.CreateConnection())
+            using (var conn = (SqlConnection)_factory.CreateConnection())
             {
-                return conn.QueryFirstOrDefault<TaiKhoan>(sql, new { TenDangNhap = tenDangNhap });
+                conn.Open();
+                using (var cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhap);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                            return MapTaiKhoan(reader);
+                        return null;
+                    }
+                }
             }
         }
 
@@ -37,10 +47,18 @@ namespace QLDSV.DAL.Repositories
             const string sql = @"SELECT MaTaiKhoan, TenDangNhap, MatKhau, MaVaiTro 
                                  FROM TaiKhoan";
 
-            using (var conn = _factory.CreateConnection())
+            var list = new List<TaiKhoan>();
+            using (var conn = (SqlConnection)_factory.CreateConnection())
             {
-                return conn.Query<TaiKhoan>(sql).ToList();
+                conn.Open();
+                using (var cmd = new SqlCommand(sql, conn))
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                        list.Add(MapTaiKhoan(reader));
+                }
             }
+            return list;
         }
 
         /// <inheritdoc />
@@ -49,9 +67,17 @@ namespace QLDSV.DAL.Repositories
             const string sql = @"INSERT INTO TaiKhoan (MaTaiKhoan, TenDangNhap, MatKhau, MaVaiTro) 
                                  VALUES (@MaTaiKhoan, @TenDangNhap, @MatKhau, @MaVaiTro)";
 
-            using (var conn = _factory.CreateConnection())
+            using (var conn = (SqlConnection)_factory.CreateConnection())
             {
-                conn.Execute(sql, taiKhoan);
+                conn.Open();
+                using (var cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@MaTaiKhoan", taiKhoan.MaTaiKhoan);
+                    cmd.Parameters.AddWithValue("@TenDangNhap", taiKhoan.TenDangNhap);
+                    cmd.Parameters.AddWithValue("@MatKhau", taiKhoan.MatKhau);
+                    cmd.Parameters.AddWithValue("@MaVaiTro", taiKhoan.MaVaiTro);
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 
@@ -64,9 +90,17 @@ namespace QLDSV.DAL.Repositories
                                      MaVaiTro = @MaVaiTro 
                                  WHERE MaTaiKhoan = @MaTaiKhoan";
 
-            using (var conn = _factory.CreateConnection())
+            using (var conn = (SqlConnection)_factory.CreateConnection())
             {
-                conn.Execute(sql, taiKhoan);
+                conn.Open();
+                using (var cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@TenDangNhap", taiKhoan.TenDangNhap);
+                    cmd.Parameters.AddWithValue("@MatKhau", taiKhoan.MatKhau);
+                    cmd.Parameters.AddWithValue("@MaVaiTro", taiKhoan.MaVaiTro);
+                    cmd.Parameters.AddWithValue("@MaTaiKhoan", taiKhoan.MaTaiKhoan);
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 
@@ -75,10 +109,26 @@ namespace QLDSV.DAL.Repositories
         {
             const string sql = "DELETE FROM TaiKhoan WHERE MaTaiKhoan = @MaTaiKhoan";
 
-            using (var conn = _factory.CreateConnection())
+            using (var conn = (SqlConnection)_factory.CreateConnection())
             {
-                conn.Execute(sql, new { MaTaiKhoan = maTaiKhoan });
+                conn.Open();
+                using (var cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@MaTaiKhoan", maTaiKhoan);
+                    cmd.ExecuteNonQuery();
+                }
             }
+        }
+
+        private static TaiKhoan MapTaiKhoan(IDataReader reader)
+        {
+            return new TaiKhoan
+            {
+                MaTaiKhoan  = reader["MaTaiKhoan"].ToString(),
+                TenDangNhap = reader["TenDangNhap"].ToString(),
+                MatKhau     = reader["MatKhau"].ToString(),
+                MaVaiTro    = reader["MaVaiTro"].ToString()
+            };
         }
     }
 }

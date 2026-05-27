@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.label3 = new System.Windows.Forms.Label();
             this.pnlSidebar = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnSignout = new Guna.UI2.WinForms.Guna2Button();
@@ -64,13 +63,6 @@
             this.btnPhuckhao = new Guna.UI2.WinForms.Guna2Button();
             this.btnBaocao = new Guna.UI2.WinForms.Guna2Button();
             this.btnLopnc = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2ImageButton3 = new Guna.UI2.WinForms.Guna2ImageButton();
-            this.guna2HtmlLabel14 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel13 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.guna2ImageButton4 = new Guna.UI2.WinForms.Guna2ImageButton();
-            this.label5 = new System.Windows.Forms.Label();
-            this.guna2ImageButton5 = new Guna.UI2.WinForms.Guna2ImageButton();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.DataGridViewLop = new Guna.UI2.WinForms.Guna2DataGridView();
             this.btnLammoi = new Guna.UI2.WinForms.Guna2Button();
@@ -110,23 +102,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLop)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(7)))), ((int)(((byte)(76)))));
-            this.label3.Location = new System.Drawing.Point(214, 12);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(180, 20);
-            this.label3.TabIndex = 46;
-            this.label3.Text = "QUẢN LÝ LỚP NIÊN CHẾ";
             // 
             // pnlSidebar
             // 
@@ -625,95 +604,6 @@
             this.btnLopnc.Text = "Lớp niên chế";
             this.btnLopnc.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
-            // guna2ImageButton3
-            // 
-            this.guna2ImageButton3.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.guna2ImageButton3.HoverState.ImageSize = new System.Drawing.Size(64, 64);
-            this.guna2ImageButton3.Image = ((System.Drawing.Image)(resources.GetObject("guna2ImageButton3.Image")));
-            this.guna2ImageButton3.ImageOffset = new System.Drawing.Point(0, 0);
-            this.guna2ImageButton3.ImageRotate = 0F;
-            this.guna2ImageButton3.ImageSize = new System.Drawing.Size(10, 10);
-            this.guna2ImageButton3.Location = new System.Drawing.Point(929, 26);
-            this.guna2ImageButton3.Name = "guna2ImageButton3";
-            this.guna2ImageButton3.PressedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.guna2ImageButton3.Size = new System.Drawing.Size(17, 18);
-            this.guna2ImageButton3.TabIndex = 53;
-            // 
-            // guna2HtmlLabel14
-            // 
-            this.guna2HtmlLabel14.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel14.Font = new System.Drawing.Font("Segoe UI Light", 8.5F);
-            this.guna2HtmlLabel14.Location = new System.Drawing.Point(868, 36);
-            this.guna2HtmlLabel14.Name = "guna2HtmlLabel14";
-            this.guna2HtmlLabel14.Size = new System.Drawing.Size(62, 15);
-            this.guna2HtmlLabel14.TabIndex = 52;
-            this.guna2HtmlLabel14.Text = "Quản trị viên";
-            // 
-            // guna2HtmlLabel13
-            // 
-            this.guna2HtmlLabel13.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel13.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.guna2HtmlLabel13.Location = new System.Drawing.Point(868, 15);
-            this.guna2HtmlLabel13.Name = "guna2HtmlLabel13";
-            this.guna2HtmlLabel13.Size = new System.Drawing.Size(39, 17);
-            this.guna2HtmlLabel13.TabIndex = 51;
-            this.guna2HtmlLabel13.Text = "Admin";
-            // 
-            // guna2CirclePictureBox1
-            // 
-            this.guna2CirclePictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.DimGray;
-            this.guna2CirclePictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox1.Image")));
-            this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(824, 19);
-            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(38, 25);
-            this.guna2CirclePictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.guna2CirclePictureBox1.TabIndex = 50;
-            this.guna2CirclePictureBox1.TabStop = false;
-            // 
-            // guna2ImageButton4
-            // 
-            this.guna2ImageButton4.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.guna2ImageButton4.HoverState.ImageSize = new System.Drawing.Size(64, 64);
-            this.guna2ImageButton4.Image = ((System.Drawing.Image)(resources.GetObject("guna2ImageButton4.Image")));
-            this.guna2ImageButton4.ImageOffset = new System.Drawing.Point(0, 0);
-            this.guna2ImageButton4.ImageRotate = 0F;
-            this.guna2ImageButton4.ImageSize = new System.Drawing.Size(20, 20);
-            this.guna2ImageButton4.Location = new System.Drawing.Point(782, 18);
-            this.guna2ImageButton4.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.guna2ImageButton4.Name = "guna2ImageButton4";
-            this.guna2ImageButton4.PressedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.guna2ImageButton4.Size = new System.Drawing.Size(37, 33);
-            this.guna2ImageButton4.TabIndex = 49;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(213, 31);
-            this.label5.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(216, 17);
-            this.label5.TabIndex = 58;
-            this.label5.Text = "Danh sách và thông tin lớp niên chế";
-            // 
-            // guna2ImageButton5
-            // 
-            this.guna2ImageButton5.CheckedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.guna2ImageButton5.HoverState.ImageSize = new System.Drawing.Size(64, 64);
-            this.guna2ImageButton5.Image = ((System.Drawing.Image)(resources.GetObject("guna2ImageButton5.Image")));
-            this.guna2ImageButton5.ImageOffset = new System.Drawing.Point(0, 0);
-            this.guna2ImageButton5.ImageRotate = 0F;
-            this.guna2ImageButton5.ImageSize = new System.Drawing.Size(30, 30);
-            this.guna2ImageButton5.Location = new System.Drawing.Point(167, 18);
-            this.guna2ImageButton5.Margin = new System.Windows.Forms.Padding(1);
-            this.guna2ImageButton5.Name = "guna2ImageButton5";
-            this.guna2ImageButton5.PressedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.guna2ImageButton5.Size = new System.Drawing.Size(44, 29);
-            this.guna2ImageButton5.TabIndex = 57;
-            // 
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.SystemColors.Menu;
@@ -1193,16 +1083,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(972, 580);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.guna2ImageButton5);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.guna2HtmlLabel15);
-            this.Controls.Add(this.guna2ImageButton3);
-            this.Controls.Add(this.guna2HtmlLabel14);
-            this.Controls.Add(this.guna2HtmlLabel13);
-            this.Controls.Add(this.guna2CirclePictureBox1);
-            this.Controls.Add(this.guna2ImageButton4);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.pnlSidebar);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmLopNienChe";
@@ -1223,7 +1105,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLop)).EndInit();
@@ -1235,7 +1116,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label label3;
         private Guna.UI2.WinForms.Guna2Panel pnlSidebar;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2Button btnSignout;
@@ -1267,13 +1147,6 @@
         private Guna.UI2.WinForms.Guna2Button btnPhuckhao;
         private Guna.UI2.WinForms.Guna2Button btnBaocao;
         private Guna.UI2.WinForms.Guna2Button btnLopnc;
-        private Guna.UI2.WinForms.Guna2ImageButton guna2ImageButton3;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel14;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel13;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
-        private Guna.UI2.WinForms.Guna2ImageButton guna2ImageButton4;
-        private System.Windows.Forms.Label label5;
-        private Guna.UI2.WinForms.Guna2ImageButton guna2ImageButton5;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel15;
         private Guna.UI2.WinForms.Guna2Button btnLammoi;

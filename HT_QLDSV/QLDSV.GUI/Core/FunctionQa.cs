@@ -16,7 +16,7 @@ namespace QLDSV.GUI
 
         public static void ketnoi()
         {
-            connstring = @"Data Source=DESKTOP-58Q7HI9\SQLEXPRESS01;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+            connstring = @"Data Source=DESKTOP-1MI6150;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
 
             conn = new SqlConnection();
             conn.ConnectionString = connstring;

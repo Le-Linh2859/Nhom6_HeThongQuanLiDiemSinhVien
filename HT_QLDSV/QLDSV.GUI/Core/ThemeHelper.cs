@@ -105,29 +105,7 @@ namespace QLDSV.GUI
                 {
                     ApplyButtonTheme(btnStd);
                 }
-                else if (control is Guna2TextBox txtGuna)
-                {
-                    // CRITICAL: Guna2TextBox collapse khi set Font - phải lưu Size trước
-                    Size txtOrigSize = txtGuna.Size;
-
-                    txtGuna.BorderRadius = 5;
-                    txtGuna.BorderColor = Color.FromArgb(180, 200, 223); // #B4C8DF
-                    txtGuna.BorderThickness = 1;
-                    float txtOrigFontSize = txtGuna.Font.Size;
-                    txtGuna.Font = new Font("Segoe UI", txtOrigFontSize <= 10.5f ? txtOrigFontSize : 10.5f);
-                    txtGuna.ForeColor = Color.Black;
-                    txtGuna.FocusedState.BorderColor = Color.FromArgb(100, 88, 255);
-
-                    // Khôi phục kích thước gốc SAU khi thay đổi thuộc tính
-                    txtGuna.Size = txtOrigSize;
-                }
-                else if (control is TextBox txtStd)
-                {
-                    txtStd.BorderStyle = BorderStyle.FixedSingle;
-                    float origSize = txtStd.Font.Size;
-                    txtStd.Font = new Font("Segoe UI", origSize <= 10.5f ? origSize : 10.5f);
-                    txtStd.ForeColor = Color.Black;
-                }
+                
                 else if (control is Guna2ComboBox cboGuna)
                 {
                     // CRITICAL: Guna2ComboBox cũng có thể collapse khi set Font

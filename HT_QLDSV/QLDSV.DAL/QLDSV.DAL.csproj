@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.35" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="System.Configuration" />
   </ItemGroup>
 
