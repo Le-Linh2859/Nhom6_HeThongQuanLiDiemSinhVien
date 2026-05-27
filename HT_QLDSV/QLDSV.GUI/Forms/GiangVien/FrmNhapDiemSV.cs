@@ -11,6 +11,7 @@ namespace QLDSV.GUI.Forms.GiangVien
     {
         private string maGV = "";
         private bool isInitializing = true;
+        private bool _isEditMode = false;
 
 
 
@@ -30,6 +31,10 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.lstSinhVien.SelectedIndexChanged += LstSinhVien_SelectedIndexChanged;
 
             this.btnThem.Click += BtnThem_Click;
+            this.btnSua.Click   += BtnSua_Click;
+            this.btnHuy.Click   += BtnHuy_Click;
+            this.Lưu.Click      += Luu_Click;
+            this.btnReset.Click += BtnReset_Click;
         }
 
         private void FrmNhapDiemSV_Load(object sender, EventArgs e)
@@ -55,6 +60,7 @@ namespace QLDSV.GUI.Forms.GiangVien
                 isInitializing = false;
 
                 PopulateClasses();
+                SetFormState(false);
             }
             catch (Exception ex)
             {
@@ -322,6 +328,13 @@ namespace QLDSV.GUI.Forms.GiangVien
             if (!ValidateGrade(txtDiemKT2, "kiểm tra 2", out kt2, out hasKT2)) return;
             if (!ValidateGrade(txtDiemCK, "thi cuối kỳ", out ck, out hasCK)) return;
 
+            if (!hasCC && !hasKT1 && !hasKT2 && !hasCK)
+            {
+                MessageBox.Show("Vui lòng nhập ít nhất một điểm trước khi lưu!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
                 // Save process grades if they are filled and NOT currently read-only
@@ -421,6 +434,113 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
+        private void SetFormState(bool isEditMode)
+        {
+            _isEditMode = isEditMode;
+            if (isEditMode)
+            {
+                // Chế độ Sửa
+                btnThem.Enabled  = false;
+                btnSua.Enabled   = false;
+                btnReset.Enabled = false;
+                Lưu.Enabled      = true;
+                btnHuy.Enabled   = true;
+
+                // CC, KT1, KT2 readonly xám
+                txtDiemCC.ReadOnly  = true;
+                txtDiemCC.BackColor = Color.FromArgb(230, 230, 230);
+                txtDiemKT1.ReadOnly  = true;
+                txtDiemKT1.BackColor = Color.FromArgb(230, 230, 230);
+                txtDiemKT2.ReadOnly  = true;
+                txtDiemKT2.BackColor = Color.FromArgb(230, 230, 230);
+
+                // CK editable trắng
+                txtDiemCK.ReadOnly  = false;
+                txtDiemCK.BackColor = Color.White;
+            }
+            else
+            {
+                // Chế độ Rảnh/Thêm
+                btnThem.Enabled  = true;
+                btnSua.Enabled   = true;
+                btnReset.Enabled = true;
+                Lưu.Enabled      = false;
+                btnHuy.Enabled   = true;
+            }
+        }
+
+        private void BtnSua_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMaSV.Text.Trim()))
+            {
+                MessageBox.Show("Vui lòng chọn sinh viên từ danh sách trước khi sửa điểm!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            SetFormState(true);
+        }
+
+        private void BtnHuy_Click(object sender, EventArgs e)
+        {
+            ClearInputs();
+            lstSinhVien.SelectedIndexChanged -= LstSinhVien_SelectedIndexChanged;
+            lstSinhVien.SelectedIndex = -1;
+            lstSinhVien.SelectedIndexChanged += LstSinhVien_SelectedIndexChanged;
+            SetFormState(false);
+        }
+
+        private void Luu_Click(object sender, EventArgs e)
+        {
+            if (!_isEditMode) return;
+
+            string maSV = txtMaSV.Text.Trim();
+            if (string.IsNullOrEmpty(maSV) || cboLopHocPhan.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn sinh viên và lớp học phần!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string lopHPVal = cboLopHocPhan.SelectedValue.ToString();
+
+            if (string.IsNullOrEmpty(txtDiemCK.Text.Trim()))
+            {
+                MessageBox.Show("Vui lòng nhập điểm thi cuối kỳ!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDiemCK.Focus();
+                return;
+            }
+
+            decimal ck;
+            bool hasCK;
+            if (!ValidateGrade(txtDiemCK, "thi cuối kỳ", out ck, out hasCK)) return;
+
+            try
+            {
+                SaveOrUpdateGrade(maSV, lopHPVal, "CK", ck);
+                MessageBox.Show("Lưu điểm cuối kỳ thành công!", "Thành công",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoadClassData();
+                SetFormState(false);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi lưu điểm cuối kỳ: " + ex.Message, "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BtnReset_Click(object sender, EventArgs e)
+        {
+            if (_isEditMode) return;
+
+            if (!txtDiemCC.ReadOnly)  txtDiemCC.Text  = "";
+            if (!txtDiemKT1.ReadOnly) txtDiemKT1.Text = "";
+            if (!txtDiemKT2.ReadOnly) txtDiemKT2.Text = "";
+            if (!txtDiemCK.ReadOnly)  txtDiemCK.Text  = "";
+            // txtMaSV và txtHoTen giữ nguyên
+        }
+
         private void BtnLamMoi_Click(object sender, EventArgs e)
         {
             ClearInputs();
@@ -467,9 +587,5 @@ namespace QLDSV.GUI.Forms.GiangVien
             LoadClassData();
         }
 
-        private void pnlHeader_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
