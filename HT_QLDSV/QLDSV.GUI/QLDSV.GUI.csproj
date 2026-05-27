@@ -273,11 +273,11 @@
     <!-- Thêm form Sinh viên tại đây khi có             -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\GiangVien\NhapDiemSV.cs">
+    <Compile Include="Forms\GiangVien\FrmNhapDiemSV.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\GiangVien\NhapDiemSV.Designer.cs">
-      <DependentUpon>NhapDiemSV.cs</DependentUpon>
+    <Compile Include="Forms\GiangVien\FrmNhapDiemSV.Designer.cs">
+      <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SinhVien\KetQuaHocTap.cs">
       <SubType>Form</SubType>
@@ -286,8 +286,8 @@
       <DependentUpon>KetQuaHocTap.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\GiangVien\NhapDiemSV.resx">
-      <DependentUpon>NhapDiemSV.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\GiangVien\FrmNhapDiemSV.resx">
+      <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
