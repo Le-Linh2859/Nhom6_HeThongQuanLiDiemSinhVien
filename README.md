@@ -16,7 +16,7 @@ Biểu đồ: Live Charts
 
 Cơ sở dữ liệu: SQL Server
 
-ORM: Entity Framework
+Truy cập dữ liệu: Kết nối DB bằng chuỗi lệnh SQL trực tiếp (ADO.NET)
 
 Bảo mật: Mã hóa mật khẩu (Hashing)
 
