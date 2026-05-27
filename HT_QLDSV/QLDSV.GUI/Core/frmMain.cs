@@ -143,7 +143,14 @@ namespace QLDSV.GUI
             if (btnLopnc != null) btnLopnc.Click += (s, e) => OpenChildForm(new FrmLopNienChe(), "Lớp Niên Chế");
             if (btnLophp != null) btnLophp.Click += (s, e) => OpenChildForm(new frmLophocphan(), "Lớp Học Phần");
             if (btnDangky != null) btnDangky.Click += (s, e) => OpenChildForm(new frmKhoa(), "Khoa");
-            if (btnDiem != null) btnDiem.Click += (s, e) => OpenChildForm(new FrmNhapDiemSV(), "Nhập Điểm");
+            if (btnDiem != null) btnDiem.Click += (s, e) =>
+            {
+                // Giảng viên dùng form nhập điểm riêng; Admin dùng form quản lý chung
+                if (SessionHelper.MaVaiTro == "VT002")
+                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.FrmNhapDiemSV(), "Nhập Điểm");
+                else
+                    OpenChildForm(new FrmNhapDiemSV(), "Nhập Điểm");
+            };
             if (btnKetqua != null) btnKetqua.Click += (s, e) => OpenChildForm(new frmKetQuaHocTap(), "Kết Quả Học Tập");
             if (btnCanhbao != null) btnCanhbao.Click += (s, e) => OpenChildForm(new frmCanhBaoHocVu(), "Cảnh Báo Học Vụ");
             if (btnPhuckhao != null) btnPhuckhao.Click += (s, e) => OpenChildForm(new frmPhucKhao(), "Phúc Khảo");
