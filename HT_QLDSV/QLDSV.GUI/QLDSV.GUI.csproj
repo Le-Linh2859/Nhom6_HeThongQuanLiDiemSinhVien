@@ -263,6 +263,12 @@
     <Compile Include="Forms\GiangVien\frmPhucKhao_GV.Designer.cs">
       <DependentUpon>frmPhucKhao_GV.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\GiangVien\FrmTraCuuDiem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GiangVien\FrmTraCuuDiem.Designer.cs">
+      <DependentUpon>FrmTraCuuDiem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SinhVien\frmPhucKhao_SV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -306,23 +312,11 @@
     <Compile Include="Forms\GiangVien\FrmNhapDiemSV.Designer.cs">
       <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\GiangVien\FrmTraCuuDiem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\GiangVien\FrmTraCuuDiem.Designer.cs">
-      <DependentUpon>FrmTraCuuDiem.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\GiangVien\frmThongTinCaNhan_GV.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\GiangVien\frmThongTinCaNhan_GV.Designer.cs">
       <DependentUpon>frmThongTinCaNhan_GV.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\GiangVien\FrmTraCuuDiem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\GiangVien\FrmTraCuuDiem.Designer.cs">
-      <DependentUpon>FrmTraCuuDiem.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SinhVien\frmLophocphan_SV.cs">
       <SubType>Form</SubType>

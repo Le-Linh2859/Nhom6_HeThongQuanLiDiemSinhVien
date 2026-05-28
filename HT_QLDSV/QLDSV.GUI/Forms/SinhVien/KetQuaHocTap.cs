@@ -22,8 +22,6 @@ namespace QLDSV.GUI.Forms.SinhVien
         public KetQuaHocTap()
         {
             InitializeComponent();
-            // Đảm bảo kết nối DAL layer được mở trước khi truy vấn
-            QLDSV.DAL.Connection.KetNoi();
             this.Load += KetQuaHocTap_Load;
             cboNamHoc.SelectedIndexChanged += CboNamHoc_SelectedIndexChanged;
             cboHocKy.SelectedIndexChanged  += CboHocKy_SelectedIndexChanged;

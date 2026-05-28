@@ -349,9 +349,9 @@ namespace QLDSV.GUI.Forms.SinhVien
                 return;
             }
 
-            int choDuyet = tblPhucKhao.Select("TrangThai = 'Chờ duyệt'").Length;
-            int daDuyet  = tblPhucKhao.Select("TrangThai = 'Đã duyệt'").Length;
-            int tuChoi   = tblPhucKhao.Select("TrangThai = 'Từ chối'").Length;
+            int choDuyet = tblPhucKhao.Select("[Trạng Thái] = 'Chờ duyệt'").Length;
+            int daDuyet  = tblPhucKhao.Select("[Trạng Thái] = 'Đã duyệt'").Length;
+            int tuChoi   = tblPhucKhao.Select("[Trạng Thái] = 'Từ chối'").Length;
             int tong     = choDuyet + daDuyet + tuChoi;
 
             lblStatTongVal.Text     = tong.ToString();

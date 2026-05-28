@@ -66,6 +66,11 @@ namespace QLDSV.GUI
                     return;
                 }
 
+                // Đồng bộ Connection.conn (DAL layer) với FunctionQa.conn (GUI layer)
+                // để các form dùng DAL layer không cần mở kết nối riêng
+                QLDSV.DAL.Connection.conn       = FunctionQa.conn;
+                QLDSV.DAL.Connection.connstring = FunctionQa.connstring;
+
                 // 1. Khởi tạo pnlContent động bên phải Sidebar (x=147) và dưới Header (y=40)
                 pnlContent = new Panel();
                 pnlContent.Location = new Point(147, 40);

@@ -16,5 +16,10 @@ namespace QLDSV.GUI.Forms.GiangVien
         {
             InitializeComponent();
         }
+
+        private void FrmTraCuuDiem_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -16,12 +17,13 @@ namespace QLDSV.GUI
 
         public static void ketnoi()
         {
-            connstring = @"Data Source=DESKTOP-58Q7HI9;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+            // Đọc connection string từ App.config (key "QLDSV")
+            // Fallback về hardcode nếu không tìm thấy
+            connstring = ConfigurationManager.ConnectionStrings["QLDSV"]?.ConnectionString
+                ?? @"Data Source=DESKTOP-1MI6150;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
 
-            conn = new SqlConnection();
-            conn.ConnectionString = connstring;
+            conn = new SqlConnection(connstring);
             conn.Open();
-            //MessageBox.Show("Ket noi thanh cong");
         }
         public static DataTable getdatatotable(string sql)
         {

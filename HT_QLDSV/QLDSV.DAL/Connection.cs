@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,30 +16,16 @@ namespace QLDSV.DAL
        
         public static void KetNoi()
         {
-            // Tái sử dụng kết nối tĩnh từ FunctionQa của tầng GUI nếu đã mở thành công
-            // Việc này giúp đồng bộ chuỗi kết nối động và tránh rò rỉ phiên kết nối SQL
-            try
-            {
-                // Sử dụng Reflection hoặc gọi trực tiếp vì cùng chung Solution
-                // Tuy nhiên để an toàn, ta kiểm tra xem conn của FunctionQa có khả dụng không
-                connstring = @"Data Source=DESKTOP-58Q7HI9;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
-                conn = new SqlConnection(connstring);
+            // Nếu conn đã được gán từ bên ngoài (GUI sync) và đang mở → dùng lại
+            if (conn != null && conn.State == ConnectionState.Open)
+                return;
 
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-            }
-            catch
-            {
-                // Fallback chuỗi mặc định của nhà phát triển khác
-                connstring = @"Data Source=admin-pc\quynhanh;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
-                conn = new SqlConnection(connstring);
-                if (conn.State != ConnectionState.Open)
-                {
-                    conn.Open();
-                }
-            }
+            // Đọc từ App.config, fallback về hardcode
+            connstring = ConfigurationManager.ConnectionStrings["QLDSV"]?.ConnectionString
+                ?? @"Data Source=DESKTOP-1MI6150;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+
+            conn = new SqlConnection(connstring);
+            conn.Open();
         }
 
         public static DataTable GetDataToTable(string sql)
