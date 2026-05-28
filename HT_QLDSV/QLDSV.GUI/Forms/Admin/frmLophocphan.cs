@@ -273,10 +273,9 @@ namespace QLDSV.GUI
         {
             try
             {
-                string ma = txtEditMaLHP.Text.Trim();
-                string ten = txtEditTenLHP.Text.Trim();
+                string ma    = txtEditMaLHP.Text.Trim();
+                string ten   = txtEditTenLHP.Text.Trim();
                 string phong = txtEditPhongHoc.Text.Trim();
-                string thoiGian = txtEditThoiGianHoc.Text.Trim();
 
                 if (string.IsNullOrEmpty(ma) || string.IsNullOrEmpty(ten) || string.IsNullOrEmpty(phong))
                 {
@@ -284,47 +283,33 @@ namespace QLDSV.GUI
                     return;
                 }
 
-                if (cboEditMon.SelectedValue == null || cboEditGiangVien.SelectedValue == null || cboEditKhoa.SelectedValue == null)
+                if (cboEditThu.SelectedIndex < 0 || cboEditCaHoc.SelectedIndex < 0)
+                {
+                    MessageBox.Show("Vui lòng chọn thứ và ca học.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (cboEditKhoa.SelectedValue == null || cboEditMon.SelectedValue == null || cboEditGiangVien.SelectedValue == null)
                 {
                     MessageBox.Show("Vui lòng chọn đầy đủ Khoa, Môn học và Giảng viên.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                string maMon = cboEditMon.SelectedValue.ToString();
-                string maGV = cboEditGiangVien.SelectedValue.ToString();
-                string maKhoa = cboEditKhoa.SelectedValue.ToString();
-                string maHKNH = "HK007";
+                string thu       = cboEditThu.SelectedItem.ToString();
+                int    caHoc     = int.Parse(cboEditCaHoc.SelectedItem.ToString());
+                string maMon     = cboEditMon.SelectedValue.ToString();
+                string maGV      = cboEditGiangVien.SelectedValue.ToString();
+                string maKhoa    = cboEditKhoa.SelectedValue.ToString();
                 string trangThai = chkEditActive.Checked ? "DangMo" : "DaDong";
+                string thoiGian  = $"{thu} (Ca {caHoc})";
 
-                string thu = "Thứ 2";
-                int caHoc = 1;
-
-                if (thoiGian.Contains("3"))
-                    thu = "Thứ 3";
-                else if (thoiGian.Contains("4"))
-                    thu = "Thứ 4";
-                else if (thoiGian.Contains("5"))
-                    thu = "Thứ 5";
-                else if (thoiGian.Contains("6"))
-                    thu = "Thứ 6";
-                else if (thoiGian.Contains("7"))
-                    thu = "Thứ 7";
-
-                var match = System.Text.RegularExpressions.Regex.Match(thoiGian, @"\d+");
-                if (match.Success)
-                    int.TryParse(match.Value, out caHoc);
-
-                string message;
                 bool result;
+                string message;
 
                 if (isAddingNew)
-                {
-                    result = bll.Them(ma, ten, caHoc, thu, phong, trangThai, maMon, maGV, maHKNH, out message);
-                }
+                    result = bll.Them(ma, ten, thu, caHoc, phong, trangThai, maMon, maGV, out message);
                 else
-                {
-                    result = bll.Sua(ma, ten, caHoc, thu, phong, trangThai, maMon, maGV, out message);
-                }
+                    result = bll.Sua(ma, ten, thu, caHoc, phong, trangThai, maMon, maGV, out message);
 
                 MessageBox.Show(message);
 
@@ -333,10 +318,9 @@ namespace QLDSV.GUI
                     LoadData();
                     detailPanelVisible = false;
 
-                    // Show view mode of the saved entry
                     string tenKhoa = cboEditKhoa.Text;
-                    string tenMon = cboEditMon.Text;
-                    string tenGV = cboEditGiangVien.Text;
+                    string tenMon  = cboEditMon.Text;
+                    string tenGV   = cboEditGiangVien.Text;
                     ShowViewMode(ma, ten, thoiGian, phong, tenKhoa, tenMon, tenGV, maKhoa, maMon, maGV, trangThai);
                 }
             }
@@ -423,7 +407,8 @@ namespace QLDSV.GUI
 
             txtEditMaLHP.Visible = false;
             txtEditTenLHP.Visible = false;
-            txtEditThoiGianHoc.Visible = false;
+            cboEditThu.Visible = false;
+            cboEditCaHoc.Visible = false;
             txtEditPhongHoc.Visible = false;
             cboEditKhoa.Visible = false;
             cboEditMon.Visible = false;
@@ -466,7 +451,8 @@ namespace QLDSV.GUI
 
             txtEditMaLHP.Visible = true;
             txtEditTenLHP.Visible = true;
-            txtEditThoiGianHoc.Visible = true;
+            cboEditThu.Visible = true;
+            cboEditCaHoc.Visible = true;
             txtEditPhongHoc.Visible = true;
             cboEditKhoa.Visible = true;
             cboEditMon.Visible = true;
@@ -479,9 +465,31 @@ namespace QLDSV.GUI
             // Load values to inputs
             txtEditMaLHP.Text = maLHP;
             txtEditTenLHP.Text = tenLHP;
-            txtEditThoiGianHoc.Text = thoiGian;
             txtEditPhongHoc.Text = phong;
             chkEditActive.Checked = isActive;
+
+            // Parse thoiGian thành thứ và ca để chọn đúng combobox
+            // Định dạng từ DB: "Thứ 2 (Ca 3)"
+            cboEditThu.SelectedIndex = 0; // mặc định Thứ 2
+            cboEditCaHoc.SelectedIndex = 0; // mặc định Ca 1
+            if (!string.IsNullOrEmpty(thoiGian))
+            {
+                for (int i = 0; i < cboEditThu.Items.Count; i++)
+                {
+                    if (thoiGian.StartsWith(cboEditThu.Items[i].ToString()))
+                    {
+                        cboEditThu.SelectedIndex = i;
+                        break;
+                    }
+                }
+                var caMatch = System.Text.RegularExpressions.Regex.Match(thoiGian, @"Ca\s+(\d+)");
+                if (caMatch.Success)
+                {
+                    string caStr = caMatch.Groups[1].Value;
+                    int idx = cboEditCaHoc.Items.IndexOf(caStr);
+                    if (idx >= 0) cboEditCaHoc.SelectedIndex = idx;
+                }
+            }
 
             if (!string.IsNullOrEmpty(maKhoa))
             {

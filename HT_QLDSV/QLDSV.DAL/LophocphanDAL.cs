@@ -10,15 +10,15 @@ namespace QLDSV.DAL
 {
     public class LopHocPhanDAL
     {
-        private string connectionString =
-            @"Data Source=localhost\SQL2022DEV;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+        //private string connectionString =
+        //    @"Data Source=localhost\SQL2022DEV;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
 
-        private SqlConnection conn;
+        //private SqlConnection conn;
 
-        public LopHocPhanDAL()
-        {
-            conn = new SqlConnection(connectionString);
-        }
+        //public LopHocPhanDAL()
+        //{
+        //    conn = new SqlConnection(connectionString);
+        //}
 
         public DataTable GetDanhSach(string keyword, string maKhoa, string maMon)
         {
@@ -52,10 +52,7 @@ namespace QLDSV.DAL
                 sql += $" AND lhp.MaMon = '{maMon}'";
             }
 
-            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-            da.Fill(dt);
-
-            return dt;
+            return Connection.GetDataToTable(sql);
         }
 
         public DataTable GetKhoa()
@@ -63,11 +60,8 @@ namespace QLDSV.DAL
             DataTable dt = new DataTable();
 
             string sql = "SELECT MaKhoa, TenKhoa FROM Khoa";
-
-            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-            da.Fill(dt);
-
-            return dt;
+            return Connection.GetDataToTable(sql);
+            
         }
 
         public DataTable GetMonHocTheoKhoa(string maKhoa)
@@ -76,11 +70,8 @@ namespace QLDSV.DAL
 
             string sql =
                 $"SELECT MaMon, TenMon FROM MonHoc WHERE MaKhoa = '{maKhoa}'";
-
-            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-            da.Fill(dt);
-
-            return dt;
+            return Connection.GetDataToTable(sql);
+            
         }
 
         public DataTable GetGiangVienTheoKhoa(string maKhoa)
@@ -89,25 +80,20 @@ namespace QLDSV.DAL
 
             string sql =
                 $"SELECT MaGV, HoTen FROM GiangVien WHERE MaKhoa = '{maKhoa}'";
+            return Connection.GetDataToTable(sql);
 
-            SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-            da.Fill(dt);
-
-            return dt;
         }
 
         public bool CheckMaExists(string ma)
-        {
-            conn.Open();
-
-            string sql =
+        {            string sql =
                 $"SELECT COUNT(*) FROM LopHocPhan WHERE MaLHP = '{ma}'";
+            DataTable table = Connection.GetDataToTable(sql);
+            if (table == null || table.Rows.Count == 0)
+                return false;
 
-            SqlCommand cmd = new SqlCommand(sql, conn);
-
-            int count = (int)cmd.ExecuteScalar();
-
-            conn.Close();
+            int count;
+            if (!int.TryParse(table.Rows[0][0].ToString(), out count))
+                return false;
 
             return count > 0;
         }
@@ -123,7 +109,7 @@ namespace QLDSV.DAL
             string maGV,
             string maHKNH)
         {
-            conn.Open();
+            //conn.Open();
 
             string sql =
                 "INSERT INTO LopHocPhan " +
@@ -134,12 +120,12 @@ namespace QLDSV.DAL
                 $"('{ma}', N'{ten}', {caHoc}, N'{thu}', N'{phong}', " +
                 "'2026-08-15', '2026-12-15', 50, " +
                 $"N'{trangThai}', '{maMon}', '{maGV}', '{maHKNH}')";
+            Connection.RunSql(sql);
+            //SqlCommand cmd = new SqlCommand(sql, conn);
 
-            SqlCommand cmd = new SqlCommand(sql, conn);
+            //cmd.ExecuteNonQuery();
 
-            cmd.ExecuteNonQuery();
-
-            conn.Close();
+            //conn.Close();
         }
 
         public void Update(
@@ -152,7 +138,7 @@ namespace QLDSV.DAL
             string maMon,
             string maGV)
         {
-            conn.Open();
+            //conn.Open();
 
             string sql =
                 "UPDATE LopHocPhan SET " +
@@ -164,26 +150,20 @@ namespace QLDSV.DAL
                 $"MaMon = '{maMon}', " +
                 $"MaGV = '{maGV}' " +
                 $"WHERE MaLHP = '{ma}'";
+            Connection.RunSql(sql);
+            //SqlCommand cmd = new SqlCommand(sql, conn);
 
-            SqlCommand cmd = new SqlCommand(sql, conn);
+            //cmd.ExecuteNonQuery();
 
-            cmd.ExecuteNonQuery();
-
-            conn.Close();
+            //conn.Close();
         }
 
         public void Delete(string ma)
         {
-            conn.Open();
-
             string sql =
                 $"DELETE FROM LopHocPhan WHERE MaLHP = '{ma}'";
-
-            SqlCommand cmd = new SqlCommand(sql, conn);
-
-            cmd.ExecuteNonQuery();
-
-            conn.Close();
+            Connection.RunSql(sql);
+            
         }
     }
 }

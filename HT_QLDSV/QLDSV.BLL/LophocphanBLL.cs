@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
 using QLDSV.DAL;
 
@@ -11,6 +7,11 @@ namespace QLDSV.BLL
     public class LopHocPhanBLL
     {
         private LopHocPhanDAL dal = new LopHocPhanDAL();
+
+        /// <summary>
+        /// Mã học kỳ - năm học mặc định dùng khi tạo lớp học phần mới.
+        /// </summary>
+        private const string MaHKNH_Default = "HK007";
 
         public DataTable GetDanhSachLopHocPhan(
             string keyword,
@@ -35,16 +36,18 @@ namespace QLDSV.BLL
             return dal.GetGiangVienTheoKhoa(maKhoa);
         }
 
+        /// <summary>
+        /// Thêm lớp học phần mới. Nhận thu và caHoc trực tiếp từ UI.
+        /// </summary>
         public bool Them(
             string ma,
             string ten,
-            int caHoc,
             string thu,
+            int caHoc,
             string phong,
             string trangThai,
             string maMon,
             string maGV,
-            string maHKNH,
             out string message)
         {
             if (dal.CheckMaExists(ma))
@@ -53,45 +56,29 @@ namespace QLDSV.BLL
                 return false;
             }
 
-            dal.Insert(
-                ma,
-                ten,
-                caHoc,
-                thu,
-                phong,
-                trangThai,
-                maMon,
-                maGV,
-                maHKNH);
+            dal.Insert(ma, ten, caHoc, thu, phong, trangThai, maMon, maGV, MaHKNH_Default);
 
             message = "Thêm lớp học phần thành công";
-
             return true;
         }
 
+        /// <summary>
+        /// Cập nhật lớp học phần. Nhận thu và caHoc trực tiếp từ UI.
+        /// </summary>
         public bool Sua(
             string ma,
             string ten,
-            int caHoc,
             string thu,
+            int caHoc,
             string phong,
             string trangThai,
             string maMon,
             string maGV,
             out string message)
         {
-            dal.Update(
-                ma,
-                ten,
-                caHoc,
-                thu,
-                phong,
-                trangThai,
-                maMon,
-                maGV);
+            dal.Update(ma, ten, caHoc, thu, phong, trangThai, maMon, maGV);
 
             message = "Cập nhật lớp học phần thành công";
-
             return true;
         }
 

@@ -273,6 +273,18 @@
     <!-- Thêm form Sinh viên tại đây khi có             -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\GiangVien\frmLophocphan_GV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GiangVien\frmLophocphan_GV.Designer.cs">
+      <DependentUpon>frmLophocphan_GV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\GiangVien\frmMonhoc_GV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GiangVien\frmMonhoc_GV.Designer.cs">
+      <DependentUpon>frmMonhoc_GV.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\GiangVien\FrmNhapDiemSV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -284,6 +296,18 @@
     </Compile>
     <Compile Include="Forms\GiangVien\frmThongTinCaNhan_GV.Designer.cs">
       <DependentUpon>frmThongTinCaNhan_GV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SinhVien\frmLophocphan_SV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SinhVien\frmLophocphan_SV.Designer.cs">
+      <DependentUpon>frmLophocphan_SV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SinhVien\frmMonhoc_SV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SinhVien\frmMonhoc_SV.Designer.cs">
+      <DependentUpon>frmMonhoc_SV.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SinhVien\frmThongTinCaNhan_SV.cs">
       <SubType>Form</SubType>
@@ -298,11 +322,17 @@
       <DependentUpon>KetQuaHocTap.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\GiangVien\frmLophocphan_GV.resx">
+      <DependentUpon>frmLophocphan_GV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GiangVien\FrmNhapDiemSV.resx">
       <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GiangVien\frmThongTinCaNhan_GV.resx">
       <DependentUpon>frmThongTinCaNhan_GV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SinhVien\frmMonhoc_SV.resx">
+      <DependentUpon>frmMonhoc_SV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SinhVien\frmThongTinCaNhan_SV.resx">
       <DependentUpon>frmThongTinCaNhan_SV.cs</DependentUpon>

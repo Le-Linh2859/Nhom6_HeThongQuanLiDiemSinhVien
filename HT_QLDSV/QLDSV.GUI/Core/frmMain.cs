@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -102,35 +102,77 @@ namespace QLDSV.GUI
             }
         }
 
+        private void SetMenuRowVisibility(int rowIndex, Control button, Control pictureBox, bool visible)
+        {
+            if (button != null) button.Visible = visible;
+            if (pictureBox != null) pictureBox.Visible = visible;
+            
+            if (tableLayoutPanel1 != null && rowIndex >= 0 && rowIndex < tableLayoutPanel1.RowStyles.Count)
+            {
+                if (visible)
+                {
+                    tableLayoutPanel1.RowStyles[rowIndex] = new RowStyle(SizeType.Percent, 8.333335F);
+                }
+                else
+                {
+                    tableLayoutPanel1.RowStyles[rowIndex] = new RowStyle(SizeType.Absolute, 0F);
+                }
+            }
+        }
+
         private void PhanQuyenSidebar()
         {
             string role = SessionHelper.MaVaiTro;
 
-            // Admin (VT001): Hiển thị tất cả
-            if (role == "VT001") return;
+            // Admin (VT001): Hiển thị tất cả, khôi phục hàng về mặc định
+            if (role == "VT001")
+            {
+                SetMenuRowVisibility(0, btnTongquan, guna2PictureBox1, true);
+                SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, true);
+                SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, true);
+                SetMenuRowVisibility(3, btnMon, guna2PictureBox4, true);
+                SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, true);
+                SetMenuRowVisibility(5, btnLophp, guna2PictureBox6, true);
+                SetMenuRowVisibility(6, btnDangky, guna2PictureBox7, true);
+                SetMenuRowVisibility(7, btnDiem, guna2PictureBox8, true);
+                SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, true);
+                SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, true);
+                SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
+                SetMenuRowVisibility(11, btnBaocao, guna2PictureBox12, true);
+                return;
+            }
 
-            // Giảng viên (VT002): Ẩn các mục Tổng quan, Giảng viên, Môn học, Lớp niên chế, Khoa
+            // Giảng viên (VT002): Môn học, Giảng viên, Lớp học phần, Sinh viên, Nhập điểm, Tra cứu điểm, Phúc khảo
             if (role == "VT002")
             {
-                if (btnTongquan != null) btnTongquan.Visible = false;
-                if (btnGiangvien != null) btnGiangvien.Visible = false;
-                if (btnMon != null) btnMon.Visible = false;
-                if (btnLopnc != null) btnLopnc.Visible = false;
-                if (btnDangky != null) btnDangky.Visible = false; // Ẩn Khoa
+                SetMenuRowVisibility(0, btnTongquan, guna2PictureBox1, false);
+                SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, true);
+                SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, true);
+                SetMenuRowVisibility(3, btnMon, guna2PictureBox4, true);
+                SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, false);
+                SetMenuRowVisibility(5, btnLophp, guna2PictureBox6, true);
+                SetMenuRowVisibility(6, btnDangky, guna2PictureBox7, false);
+                SetMenuRowVisibility(7, btnDiem, guna2PictureBox8, true);
+                SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, false);
+                SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, false);
+                SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
+                SetMenuRowVisibility(11, btnBaocao, guna2PictureBox12, true); // Tra cứu điểm / Báo cáo
             }
-            // Sinh viên (VT003): Chỉ hiện Kết quả học tập, Phúc khảo (Ẩn Đăng ký lớp đã bị xóa, Ẩn Khoa)
+            // Sinh viên (VT003): Môn học, Giảng viên, Lớp học phần, Kết quả học tập, Phúc khảo, Cảnh báo học vụ, Tra cứu điểm
             else if (role == "VT003")
             {
-                if (btnTongquan != null) btnTongquan.Visible = false;
-                if (btnGiangvien != null) btnGiangvien.Visible = false;
-                if (btnSinhvien != null) btnSinhvien.Visible = false;
-                if (btnMon != null) btnMon.Visible = false;
-                if (btnLopnc != null) btnLopnc.Visible = false;
-                if (btnLophp != null) btnLophp.Visible = false;
-                if (btnDangky != null) btnDangky.Visible = false; // Ẩn Khoa
-                if (btnDiem != null) btnDiem.Visible = false;
-                if (btnCanhbao != null) btnCanhbao.Visible = false;
-                if (btnBaocao != null) btnBaocao.Visible = false;
+                SetMenuRowVisibility(0, btnTongquan, guna2PictureBox1, false);
+                SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, true);
+                SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, false);
+                SetMenuRowVisibility(3, btnMon, guna2PictureBox4, true);
+                SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, false);
+                SetMenuRowVisibility(5, btnLophp, guna2PictureBox6, true);
+                SetMenuRowVisibility(6, btnDangky, guna2PictureBox7, false);
+                SetMenuRowVisibility(7, btnDiem, guna2PictureBox8, false);
+                SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, true);
+                SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, true);
+                SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
+                SetMenuRowVisibility(11, btnBaocao, guna2PictureBox12, true); // Tra cứu điểm / Báo cáo
             }
         }
 
@@ -139,9 +181,25 @@ namespace QLDSV.GUI
             if (btnTongquan != null) btnTongquan.Click += (s, e) => OpenChildForm(new frmTongQuan(), "Tổng Quan");
             if (btnGiangvien != null) btnGiangvien.Click += (s, e) => OpenChildForm(new frmGiangvien(), "Giảng Viên");
             if (btnSinhvien != null) btnSinhvien.Click += (s, e) => OpenChildForm(new frmQuanLiThongTinSinhVien(), "Sinh Viên");
-            if (btnMon != null) btnMon.Click += (s, e) => OpenChildForm(new frmMonhoc(), "Môn Học");
+            if (btnMon != null) btnMon.Click += (s, e) =>
+            {
+                if (SessionHelper.MaVaiTro == "VT002")
+                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmMonhoc_GV(), "Môn Học");
+                else if (SessionHelper.MaVaiTro == "VT003")
+                    OpenChildForm(new QLDSV.GUI.frmMonhoc_SV(), "Môn Học");
+                else
+                    OpenChildForm(new frmMonhoc(), "Môn Học");
+            };
             if (btnLopnc != null) btnLopnc.Click += (s, e) => OpenChildForm(new FrmLopNienChe(), "Lớp Niên Chế");
-            if (btnLophp != null) btnLophp.Click += (s, e) => OpenChildForm(new frmLophocphan(), "Lớp Học Phần");
+            if (btnLophp != null) btnLophp.Click += (s, e) =>
+            {
+                if (SessionHelper.MaVaiTro == "VT002")
+                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmLophocphan_GV(), "Lớp Học Phần");
+                else if (SessionHelper.MaVaiTro == "VT003")
+                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmLophocphan_SV(), "Lớp Học Phần");
+                else
+                    OpenChildForm(new frmLophocphan(), "Lớp Học Phần");
+            };
             if (btnDangky != null) btnDangky.Click += (s, e) => OpenChildForm(new frmKhoa(), "Khoa");
             if (btnDiem != null) btnDiem.Click += (s, e) =>
             {
@@ -151,12 +209,13 @@ namespace QLDSV.GUI
                 else
                     OpenChildForm(new FrmNhapDiemSV(), "Nhập Điểm");
             };
-            if (btnKetqua != null) btnKetqua.Click += (s, e) => {
+            if (btnKetqua != null) btnKetqua.Click += (s, e) =>
+            {
                 if (SessionHelper.MaVaiTro == "VT003")
                     OpenChildForm(new QLDSV.GUI.Forms.SinhVien.KetQuaHocTap(), "Kết Quả Học Tập");
-                else OpenChildForm(new frmKetQuaHocTap(), "Kết Quả Học Tập");
-            }; 
-            
+                else
+                    OpenChildForm(new frmKetQuaHocTap(), "Kết Quả Học Tập");
+            };
             if (btnCanhbao != null) btnCanhbao.Click += (s, e) => OpenChildForm(new frmCanhBaoHocVu(), "Cảnh Báo Học Vụ");
             if (btnPhuckhao != null) btnPhuckhao.Click += (s, e) => OpenChildForm(new frmPhucKhao(), "Phúc Khảo");
             if (btnBaocao != null) btnBaocao.Click += (s, e) => OpenChildForm(new frmBaoCaoThongKe(), "Báo Cáo Thống Kê");
