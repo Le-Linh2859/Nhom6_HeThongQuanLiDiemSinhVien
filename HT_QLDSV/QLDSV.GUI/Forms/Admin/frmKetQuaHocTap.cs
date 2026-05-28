@@ -161,16 +161,6 @@ namespace QLDSV.GUI
                     }
                 }
 
-                dataGridView.DataSource = dt;
-                
-                // Căn chỉnh giao diện cột
-                if (dataGridView.Columns.Count > 0)
-                {
-                    dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                    dataGridView.AllowUserToAddRows = false;
-                    dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                    dataGridView.ReadOnly = true;
-                }
             }
             catch (Exception ex)
             {

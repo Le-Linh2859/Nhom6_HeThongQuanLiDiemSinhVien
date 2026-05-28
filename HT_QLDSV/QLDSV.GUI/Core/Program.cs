@@ -1,3 +1,4 @@
+using QLDSV.GUI.Forms.GiangVien;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace QLDSV.GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmGiangvien());
+            Application.Run(new frmThongTinCaNhan_GV());
         }
     }
 }
