@@ -31,9 +31,9 @@ namespace QLDSV.GUI.Forms.GiangVien
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new Guna.UI2.WinForms.Guna2Panel();
             this.cboLopHocPhan = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lblFilterLHP = new System.Windows.Forms.Label();
@@ -46,7 +46,6 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.lstSinhVien = new System.Windows.Forms.ListBox();
             this.grpDetails = new System.Windows.Forms.GroupBox();
             this.btnReset = new Guna.UI2.WinForms.Guna2Button();
-            this.Lưu = new Guna.UI2.WinForms.Guna2Button();
             this.btnHuy = new Guna.UI2.WinForms.Guna2Button();
             this.btnSua = new Guna.UI2.WinForms.Guna2Button();
             this.btnNhap = new Guna.UI2.WinForms.Guna2Button();
@@ -217,7 +216,6 @@ namespace QLDSV.GUI.Forms.GiangVien
             // 
             this.grpDetails.BackColor = System.Drawing.Color.White;
             this.grpDetails.Controls.Add(this.btnReset);
-            this.grpDetails.Controls.Add(this.Lưu);
             this.grpDetails.Controls.Add(this.btnHuy);
             this.grpDetails.Controls.Add(this.btnSua);
             this.grpDetails.Controls.Add(this.btnNhap);
@@ -261,24 +259,6 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.btnReset.TabIndex = 17;
             this.btnReset.Text = "Reset";
             // 
-            // Lưu
-            // 
-            this.Lưu.BorderRadius = 5;
-            this.Lưu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Lưu.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.Lưu.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.Lưu.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.Lưu.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.Lưu.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(93)))), ((int)(((byte)(117)))));
-            this.Lưu.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.Lưu.ForeColor = System.Drawing.Color.White;
-            this.Lưu.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(78)))), ((int)(((byte)(104)))));
-            this.Lưu.Location = new System.Drawing.Point(403, 172);
-            this.Lưu.Name = "Lưu";
-            this.Lưu.Size = new System.Drawing.Size(95, 35);
-            this.Lưu.TabIndex = 16;
-            this.Lưu.Text = "Lưu";
-            // 
             // btnHuy
             // 
             this.btnHuy.BorderRadius = 5;
@@ -291,11 +271,12 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.btnHuy.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.btnHuy.ForeColor = System.Drawing.Color.White;
             this.btnHuy.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(78)))), ((int)(((byte)(104)))));
-            this.btnHuy.Location = new System.Drawing.Point(280, 172);
+            this.btnHuy.Location = new System.Drawing.Point(354, 172);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(95, 35);
             this.btnHuy.TabIndex = 15;
             this.btnHuy.Text = "Hủy";
+            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
             // btnSua
             // 
@@ -309,7 +290,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.btnSua.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.btnSua.ForeColor = System.Drawing.Color.White;
             this.btnSua.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(62)))), ((int)(((byte)(78)))), ((int)(((byte)(104)))));
-            this.btnSua.Location = new System.Drawing.Point(146, 172);
+            this.btnSua.Location = new System.Drawing.Point(182, 172);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(95, 35);
             this.btnSua.TabIndex = 14;
@@ -540,29 +521,29 @@ namespace QLDSV.GUI.Forms.GiangVien
             // 
             this.dgvDiem.AllowUserToAddRows = false;
             this.dgvDiem.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvDiem.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            this.dgvDiem.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvDiem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDiem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDiem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvDiem.ColumnHeadersHeight = 40;
             this.dgvDiem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(216)))), ((int)(((byte)(242)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDiem.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(216)))), ((int)(((byte)(242)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDiem.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvDiem.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvDiem.Location = new System.Drawing.Point(12, 319);
             this.dgvDiem.MultiSelect = false;
@@ -658,7 +639,6 @@ namespace QLDSV.GUI.Forms.GiangVien
         private Guna.UI2.WinForms.Guna2Button btnNhap;
         private Guna.UI2.WinForms.Guna2DataGridView dgvDiem;
         private System.Windows.Forms.Label lblTongSV;
-        private Guna.UI2.WinForms.Guna2Button Lưu;
         private Guna.UI2.WinForms.Guna2Button btnHuy;
         private Guna.UI2.WinForms.Guna2Button btnSua;
         private Guna.UI2.WinForms.Guna2Button btnReset;

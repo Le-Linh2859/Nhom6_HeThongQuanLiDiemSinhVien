@@ -30,10 +30,9 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.cboLopHocPhan.SelectedIndexChanged += CboLopHocPhan_SelectedIndexChanged;
             this.lstSinhVien.SelectedIndexChanged += LstSinhVien_SelectedIndexChanged;
 
-            this.btnNhap.Click += BtnThem_Click;
+            this.btnNhap.Click += btnNhap_Click;
             this.btnSua.Click   += BtnSua_Click;
-            this.btnHuy.Click   += BtnHuy_Click;
-            this.Lưu.Click      += Luu_Click;
+
             this.btnReset.Click += BtnReset_Click;
         }
 
@@ -318,7 +317,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        private void BtnThem_Click(object sender, EventArgs e)
+        private void btnNhap_Click(object sender, EventArgs e)
         {
             // 1. Kiểm tra đã chọn sinh viên chưa
             string maSV = txtMaSV.Text.Trim();
@@ -484,7 +483,6 @@ namespace QLDSV.GUI.Forms.GiangVien
                 btnNhap.Enabled  = false;
                 btnSua.Enabled   = false;
                 btnReset.Enabled = false;
-                Lưu.Enabled      = true;
                 btnHuy.Enabled   = true;
 
                 // CC, KT1, KT2 readonly xám
@@ -506,80 +504,135 @@ namespace QLDSV.GUI.Forms.GiangVien
                 btnNhap.Enabled  = true;
                 btnSua.Enabled   = false;  // chưa chọn SV, Sửa chưa có nghĩa
                 btnReset.Enabled = true;
-                Lưu.Enabled      = false;
                 btnHuy.Enabled   = true;
             }
         }
 
         private void BtnSua_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaSV.Text.Trim()))
-            {
-                MessageBox.Show("Vui lòng chọn sinh viên từ danh sách trước khi sửa điểm!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            SetFormState(true);
-        }
-
-        private void BtnHuy_Click(object sender, EventArgs e)
-        {
-            ClearInputs();
-            lstSinhVien.SelectedIndexChanged -= LstSinhVien_SelectedIndexChanged;
-            lstSinhVien.SelectedIndex = -1;
-            lstSinhVien.SelectedIndexChanged += LstSinhVien_SelectedIndexChanged;
-            SetFormState(false);
-        }
-
-        private void Luu_Click(object sender, EventArgs e)
-        {
-            if (!_isEditMode) return;
-
+            // 1. Kiểm tra đã chọn sinh viên chưa
             string maSV = txtMaSV.Text.Trim();
-            if (string.IsNullOrEmpty(maSV) || cboLopHocPhan.SelectedValue == null)
+
+if (string.IsNullOrEmpty(maSV) || cboLopHocPhan.SelectedValue == null)
             {
-                MessageBox.Show("Vui lòng chọn sinh viên và lớp học phần!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Vui lòng chọn sinh viên cần sửa điểm!",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
                 return;
             }
 
-            string lopHPVal = cboLopHocPhan.SelectedValue.ToString();
+            string maLHP = cboLopHocPhan.SelectedValue.ToString();
 
+            // 2. Kiểm tra sinh viên đã có điểm thành phần chưa
+            bool daCoCC = txtDiemCC.ReadOnly && !string.IsNullOrEmpty(txtDiemCC.Text.Trim());
+            bool daCoKT1 = txtDiemKT1.ReadOnly && !string.IsNullOrEmpty(txtDiemKT1.Text.Trim());
+            bool daCoKT2 = txtDiemKT2.ReadOnly && !string.IsNullOrEmpty(txtDiemKT2.Text.Trim());
+
+            if (!(daCoCC && daCoKT1 && daCoKT2))
+            {
+                MessageBox.Show(
+                    "Sinh viên chưa có đủ điểm thành phần để sửa điểm thi!",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
+            // 3. Bắt buộc nhập điểm thi
             if (string.IsNullOrEmpty(txtDiemCK.Text.Trim()))
             {
-                MessageBox.Show("Vui lòng nhập điểm thi cuối kỳ!", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Vui lòng nhập điểm thi cuối kỳ!",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
                 txtDiemCK.Focus();
                 return;
             }
 
+            // 4. Validate điểm thi
             decimal ck;
             bool hasCK;
-            if (!ValidateGrade(txtDiemCK, "thi cuối kỳ", out ck, out hasCK)) return;
+
+            if (!ValidateGrade(txtDiemCK, "thi cuối kỳ", out ck, out hasCK))
+            {
+                return;
+            }
 
             try
             {
-                SaveOrUpdateGrade(maSV, lopHPVal, "CK", ck);
-                MessageBox.Show("Lưu điểm cuối kỳ thành công!", "Thành công",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // 5. Chỉ lưu/update điểm CK
+                SaveOrUpdateGrade(maSV, maLHP, "CK", ck);
+
+                MessageBox.Show(
+                    "Cập nhật điểm thi thành công!",
+                    "Thành công",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
+                // 6. Reload dữ liệu
+                int selectedIndex = lstSinhVien.SelectedIndex;
+
                 LoadClassData();
-                SetFormState(false);
+
+                if (selectedIndex >= 0 && selectedIndex < lstSinhVien.Items.Count)
+                {
+                    lstSinhVien.SelectedIndex = selectedIndex;
+                }
+
+                // 7. Giữ trạng thái khóa các điểm thành phần
+                txtDiemCC.ReadOnly = true;
+                txtDiemKT1.ReadOnly = true;
+                txtDiemKT2.ReadOnly = true;
+
+                txtDiemCC.BackColor = Color.FromArgb(230, 230, 230);
+                txtDiemKT1.BackColor = Color.FromArgb(230, 230, 230);
+                txtDiemKT2.BackColor = Color.FromArgb(230, 230, 230);
+
+                // CK vẫn editable
+                txtDiemCK.ReadOnly = false;
+                txtDiemCK.BackColor = Color.White;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi lưu điểm cuối kỳ: " + ex.Message, "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "Lỗi cập nhật điểm thi: " + ex.Message,
+                    "Lỗi",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
+        }
+
+        private void btnHuy_Click(object sender, EventArgs e)
+        {
+            txtMaSV.Text = "";
+            txtHoTen.Text = "";
+
+            txtDiemCC.Text = "";
+            txtDiemKT1.Text = "";
+            txtDiemKT2.Text = "";
+            txtDiemCK.Text = "";
+
+            btnNhap.Enabled = true;
+            btnSua.Enabled = false;
         }
 
         private void BtnReset_Click(object sender, EventArgs e)
         {
-            if (_isEditMode) return;
-
-            if (!txtDiemCC.ReadOnly)  txtDiemCC.Text  = "";
-            if (!txtDiemKT1.ReadOnly) txtDiemKT1.Text = "";
-            if (!txtDiemKT2.ReadOnly) txtDiemKT2.Text = "";
-            if (!txtDiemCK.ReadOnly)  txtDiemCK.Text  = "";
+            // Reset chỉ các ô điểm, giữ nguyên MaSV và HoTen
+            // Không reset ô đang readonly (điểm đã lưu vào DB)
+            if (!txtDiemCC.ReadOnly)  { txtDiemCC.Text  = ""; }
+            if (!txtDiemKT1.ReadOnly) { txtDiemKT1.Text = ""; }
+            if (!txtDiemKT2.ReadOnly) { txtDiemKT2.Text = ""; }
+            if (!txtDiemCK.ReadOnly)  { txtDiemCK.Text  = ""; }
+            // txtMaSV và txtHoTen giữ nguyên
         }
 
         private void BtnLamMoi_Click(object sender, EventArgs e)
