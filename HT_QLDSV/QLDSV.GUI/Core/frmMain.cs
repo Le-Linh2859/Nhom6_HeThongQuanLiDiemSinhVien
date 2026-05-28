@@ -205,7 +205,7 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(5, btnLophp, guna2PictureBox6, true);
                 SetMenuRowVisibility(6, btnDangky, guna2PictureBox7, false);
                 SetMenuRowVisibility(7, btnDiem, guna2PictureBox8, true);
-                SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, true);
+                SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, false);
                 SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, false);
                 SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
                 SetMenuRowVisibility(11, btnBaocao, guna2PictureBox12, true); // Tra cứu điểm / Báo cáo
@@ -263,8 +263,6 @@ namespace QLDSV.GUI
             {
                 if (SessionHelper.MaVaiTro == "VT003")
                     OpenChildForm(new QLDSV.GUI.Forms.SinhVien.KetQuaHocTap(), "Kết Quả Học Tập");
-                else if (SessionHelper.MaVaiTro == "VT002")
-                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.FrmTraCuuDiem(), "Tra Cứu Điểm Sinh Viên");
                 else OpenChildForm(new QLDSV.GUI.Forms.Admin.frmTheoDoiDiem(), "Theo Dõi Điểm");
             };
             if (btnCanhbao != null) btnCanhbao.Click += (s, e) => OpenChildForm(new frmCanhBaoHocVu(), "Cảnh Báo Học Vụ");
@@ -331,7 +329,7 @@ namespace QLDSV.GUI
 
                 // [GLOBAL UX SAFETY NET] Tự động ẩn các control Header và Sidebar trùng lặp của Form con
                 string[] duplicateControls = { 
-                    "pnlSidebar", "pnlHeader", "guna2ImageButton1", "label3", "label4", 
+                    "pnlSidebar", "pnlHeader", "guna2ImageButton1", 
                     "guna2ImageButton2", "guna2CirclePictureBox1", "guna2HtmlLabel13", 
                     "guna2HtmlLabel14", "guna2ImageButton3" 
                 };
