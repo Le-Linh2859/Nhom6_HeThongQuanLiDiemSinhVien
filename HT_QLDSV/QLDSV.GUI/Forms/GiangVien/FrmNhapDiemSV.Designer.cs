@@ -276,7 +276,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.btnHuy.Size = new System.Drawing.Size(95, 35);
             this.btnHuy.TabIndex = 15;
             this.btnHuy.Text = "Hủy";
-            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
+            this.btnHuy.Click += new System.EventHandler(this.BtnHuy_Click);
             // 
             // btnSua
             // 
