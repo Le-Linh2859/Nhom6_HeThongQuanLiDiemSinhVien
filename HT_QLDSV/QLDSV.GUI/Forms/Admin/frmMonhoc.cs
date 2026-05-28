@@ -2,11 +2,14 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using QLDSV.BLL;
+using QLDSV.DAL;
 
 namespace QLDSV.GUI
 {
     public partial class frmMonhoc : Form, IShellChildForm
     {
+        private MonHocBLL bll = new MonHocBLL();
         private bool detailPanelVisible = false;
         private bool isEditMode = false;        // false = View, true = Add/Edit
         private bool isAddingNew = false;       // true = Thêm mới, false = Sửa
@@ -27,8 +30,8 @@ namespace QLDSV.GUI
             // Wire up toolbar events
             this.btnThem.Click += btnThem_Click;
             this.btnSua.Click += btnSua_Click;
-            this.btnXoa.Click += btnXoa_Click;
-            this.btnLamMoi.Click += btnLamMoi_Click;
+            this.btnLamMoi.Click += btnXoa_Click;
+            this.btnXoa.Click += btnLamMoi_Click;
             this.btnTim.Click += btnTim_Click;
             this.cboFilterKhoa.SelectedIndexChanged += cboFilterKhoa_SelectedIndexChanged;
 
@@ -68,14 +71,14 @@ namespace QLDSV.GUI
                 bool isVisible = true;
                 if (role == "VT002") // Giảng viên
                 {
-                    if (menuItems[i] == "Tổng quan" || menuItems[i] == "Giảng viên" || menuItems[i] == "Môn học" || menuItems[i] == "Lớp niên chế")
+                    if (menuItems[i] == "Tổng quan" || menuItems[i] == "Giảng viên" || menuItems[i] == "Lớp niên chế")
                     {
                         isVisible = false;
                     }
                 }
                 else if (role == "VT003") // Sinh viên
                 {
-                    if (menuItems[i] != "Đăng ký lớp" && menuItems[i] != "Kết quả học tập" && menuItems[i] != "Phúc khảo")
+                    if (menuItems[i] != "Đăng ký lớp" && menuItems[i] != "Kết quả học tập" && menuItems[i] != "Phúc khảo" && menuItems[i] != "Môn học")
                     {
                         isVisible = false;
                     }
@@ -169,7 +172,7 @@ namespace QLDSV.GUI
         {
             try
             {
-                FunctionQa.ketnoi();
+                Connection.KetNoi();
                 LoadComboBoxes();
                 LoadData();
             }
@@ -189,8 +192,8 @@ namespace QLDSV.GUI
             try
             {
                 // Nạp combo Khoa ở toolbar bộ lọc
-                string sqlKhoaFilter = "SELECT MaKhoa, TenKhoa FROM Khoa";
-                DataTable dtFilter = FunctionQa.getdatatotable(sqlKhoaFilter);
+                DataTable dtKhoa = bll.GetKhoa();
+                DataTable dtFilter = dtKhoa.Copy();
                 DataRow rAll = dtFilter.NewRow();
                 rAll["MaKhoa"] = "ALL";
                 rAll["TenKhoa"] = "--- Tất cả ---";
@@ -202,8 +205,10 @@ namespace QLDSV.GUI
                 cboFilterKhoa.SelectedIndex = 0;
 
                 // Nạp combo Khoa ở detail panel nhập liệu
-                string sqlKhoaEdit = "SELECT MaKhoa, TenKhoa FROM Khoa";
-                FunctionQa.fillcombo(sqlKhoaEdit, cboEditKhoa, "MaKhoa", "TenKhoa");
+                DataTable dtEdit = dtKhoa.Copy();
+                cboEditKhoa.DataSource = dtEdit;
+                cboEditKhoa.ValueMember = "MaKhoa";
+                cboEditKhoa.DisplayMember = "TenKhoa";
                 cboEditKhoa.SelectedIndex = -1;
             }
             catch (Exception ex)
@@ -216,21 +221,14 @@ namespace QLDSV.GUI
         {
             try
             {
-                string sql = "SELECT mh.MaMon, mh.TenMon, mh.SoTC, k.TenKhoa, mh.MoTa, mh.MaKhoa " +
-                             "FROM MonHoc mh LEFT JOIN Khoa k ON mh.MaKhoa = k.MaKhoa WHERE 1=1";
-
                 string keyword = txtTimKiem.Text.Trim();
-                if (!string.IsNullOrEmpty(keyword))
+                string maKhoa = "ALL";
+                if (cboFilterKhoa.SelectedValue != null)
                 {
-                    sql += $" AND (mh.MaMon LIKE '%{keyword}%' OR mh.TenMon LIKE N'%{keyword}%')";
+                    maKhoa = cboFilterKhoa.SelectedValue.ToString();
                 }
 
-                if (cboFilterKhoa.SelectedValue != null && cboFilterKhoa.SelectedValue.ToString() != "ALL")
-                {
-                    sql += $" AND mh.MaKhoa = '{cboFilterKhoa.SelectedValue}'";
-                }
-
-                tblMonhoc = FunctionQa.getdatatotable(sql);
+                tblMonhoc = bll.GetMonHocList(keyword, maKhoa);
                 dataGridView.DataSource = tblMonhoc;
 
                 if (dataGridView.Columns.Contains("MaMon")) dataGridView.Columns["MaMon"].HeaderText = "Mã Môn";
@@ -264,13 +262,13 @@ namespace QLDSV.GUI
             string soTC = row.Cells["SoTC"].Value?.ToString();
             string tenKhoa = row.Cells["TenKhoa"].Value?.ToString();
             string moTa = row.Cells["MoTa"].Value?.ToString();
-            string activeStr = "Hoạt động"; // Default value since column doesn't exist
+           // string activeStr = "Hoạt động"; // Default value since column doesn't exist
             string maKhoa = row.Cells["MaKhoa"].Value?.ToString();
 
-            ShowViewMode(maMon, tenMon, soTC, tenKhoa, moTa, activeStr, maKhoa);
+            ShowViewMode(maMon, tenMon, soTC, tenKhoa, moTa, maKhoa);
         }
 
-        private void ShowViewMode(string maMon, string tenMon, string soTC, string tenKhoa, string moTa, string activeStr, string maKhoa)
+        private void ShowViewMode(string maMon, string tenMon, string soTC, string tenKhoa, string moTa, string maKhoa)
         {
             isEditMode = false;
             isAddingNew = false;
@@ -284,14 +282,14 @@ namespace QLDSV.GUI
             lblDetailSoTC.Visible = true;
             lblDetailKhoa.Visible = true;
             lblDetailMoTa.Visible = true;
-            lblDetailTrangThai.Visible = true;
+            //lblDetailTrangThai.Visible = true;
 
             txtEditMaMon.Visible = false;
             txtEditTenMon.Visible = false;
             txtEditSoTC.Visible = false;
             cboEditKhoa.Visible = false;
             txtEditMoTa.Visible = false;
-            chkEditActive.Visible = false;
+            //chkEditActive.Visible = false;
             btnLuuDetail.Visible = false;
             btnHuyDetail.Visible = false;
             btnCloseDetail.Visible = true;
@@ -302,7 +300,7 @@ namespace QLDSV.GUI
             lblDetailSoTC.Text = soTC ?? "0";
             lblDetailKhoa.Text = tenKhoa ?? "";
             lblDetailMoTa.Text = moTa ?? "";
-            lblDetailTrangThai.Text = activeStr ?? "Hoạt động";
+            //lblDetailTrangThai.Text = activeStr ?? "Hoạt động";
 
             OpenSidebar();
         }
@@ -327,7 +325,7 @@ namespace QLDSV.GUI
             txtEditSoTC.Visible = true;
             cboEditKhoa.Visible = true;
             txtEditMoTa.Visible = true;
-            chkEditActive.Visible = true;
+            chkEditActive.Visible = false;
             btnLuuDetail.Visible = true;
             btnHuyDetail.Visible = true;
             btnCloseDetail.Visible = false;
@@ -337,7 +335,7 @@ namespace QLDSV.GUI
             txtEditTenMon.Text = tenMon;
             txtEditSoTC.Text = soTC;
             txtEditMoTa.Text = moTa;
-            chkEditActive.Checked = isActive;
+            //chkEditActive.Checked = isActive;
 
             if (!string.IsNullOrEmpty(maKhoa))
                 cboEditKhoa.SelectedValue = maKhoa;
@@ -423,8 +421,7 @@ namespace QLDSV.GUI
             string soTC = row.Cells["SoTC"].Value?.ToString();
             string maKhoa = row.Cells["MaKhoa"].Value?.ToString();
             string moTa = row.Cells["MoTa"].Value?.ToString();
-            string activeStr = row.Cells["TrangThai"].Value?.ToString();
-            bool isActive = (activeStr == "Hoạt động");
+            bool isActive = true; // Giá trị mặc định do cột TrangThai không tồn tại trong DB
 
             ShowEditMode(maMon, tenMon, soTC, maKhoa, moTa, isActive);
         }
@@ -442,9 +439,16 @@ namespace QLDSV.GUI
 
             if (confirm == DialogResult.Yes)
             {
-                FunctionQa.RunSqlDel($"DELETE FROM MonHoc WHERE MaMon = '{maMon}'");
-                CloseSidebar();
-                LoadData();
+                try
+                {
+                    bll.DeleteMonHoc(maMon);
+                    CloseSidebar();
+                    LoadData();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi xóa môn học: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -477,7 +481,7 @@ namespace QLDSV.GUI
             string ten = txtEditTenMon.Text.Trim();
             string tcStr = txtEditSoTC.Text.Trim();
             string moTa = txtEditMoTa.Text.Trim();
-            int active = chkEditActive.Checked ? 1 : 0;
+            //int active = chkEditActive.Checked ? 1 : 0;
 
             if (string.IsNullOrEmpty(ma) || string.IsNullOrEmpty(ten) || string.IsNullOrEmpty(tcStr))
             {
@@ -506,34 +510,30 @@ namespace QLDSV.GUI
                 if (isAddingNew)
                 {
                     // Check duplicate
-                    if (FunctionQa.checkkey($"SELECT 1 FROM MonHoc WHERE MaMon = '{ma}'"))
+                    if (bll.CheckKeyExist(ma))
                     {
                         MessageBox.Show($"Mã môn học '{ma}' đã tồn tại trong hệ thống. Vui lòng chọn mã khác.", "Trùng mã", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         txtEditMaMon.Focus();
                         return;
                     }
 
-                    string sql = $"INSERT INTO MonHoc (MaMon, TenMon, SoTC, MaKhoa, MoTa) " +
-                                 $"VALUES ('{ma}', N'{ten}', {soTC}, '{maKhoa}', N'{moTa}')";
-                    FunctionQa.runsql(sql);
+                    bll.InsertMonHoc(ma, ten, soTC, maKhoa, moTa);
                     MessageBox.Show("Thêm môn học mới thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    string sql = $"UPDATE MonHoc SET TenMon = N'{ten}', SoTC = {soTC}, MaKhoa = '{maKhoa}', " +
-                                 $"MoTa = N'{moTa}' " +
-                                 $"WHERE MaMon = '{ma}'";
-                    FunctionQa.runsql(sql);
+                    bll.UpdateMonHoc(ma, ten, soTC, maKhoa, moTa);
                     MessageBox.Show("Cập nhật thông tin môn học thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 LoadData();
                 detailPanelVisible = false;
-                
+
                 // Show view mode of the saved entry
-                string activeStr = (active == 1) ? "Hoạt động" : "Khóa";
+                //string activeStr = (active == 1) ? "Hoạt động" : "Khóa";
                 string tenKhoa = cboEditKhoa.Text;
-                ShowViewMode(ma, ten, soTC.ToString(), tenKhoa, moTa, activeStr, maKhoa);
+                // ShowViewMode(ma, ten, soTC.ToString(), tenKhoa, moTa, activeStr, maKhoa);
+                ShowViewMode(ma, ten, soTC.ToString(), tenKhoa, moTa, maKhoa);
             }
             catch (Exception ex)
             {
@@ -559,10 +559,10 @@ namespace QLDSV.GUI
                     string soTC = row.Cells["SoTC"].Value?.ToString();
                     string tenKhoa = row.Cells["TenKhoa"].Value?.ToString();
                     string moTa = row.Cells["MoTa"].Value?.ToString();
-                    string activeStr = row.Cells["TrangThai"].Value?.ToString();
+                    //string activeStr = row.Cells["TrangThai"].Value?.ToString();
                     string maKhoa = row.Cells["MaKhoa"].Value?.ToString();
 
-                    ShowViewMode(maMon, tenMon, soTC, tenKhoa, moTa, activeStr, maKhoa);
+                    ShowViewMode(maMon, tenMon, soTC, tenKhoa, moTa, maKhoa);
                 }
                 else
                 {
