@@ -521,40 +521,5 @@ namespace QLDSV.GUI
                 this.Hide();
             }
         }
-<<<<<<< HEAD
-
-        private void WireSidebarEvents()
-        {
-            // Đăng ký điều hướng cho các Form có sẵn và đã được kích hoạt biên dịch
-            btnGiangvien.Click += (s, e) => OpenForm(new frmGiangvien());
-            btnCanhbao.Click += (s, e) => OpenForm(new frmCanhBaoHocVu());
-            btnLopnc.Click += (s, e) => { /* Đang ở chính form này */ };
-            btnSinhvien.Click += (s, e) => OpenForm(new frmQuanLiThongTinSinhVien());
-            btnMon.Click += (s, e) => OpenForm(new frmMonhoc());
-            btnLophp.Click += (s, e) => OpenForm(new frmLophocphan());
-            btnKetqua.Click += (s, e) => OpenForm(new frmKetQuaHocTap());
-            btnPhuckhao.Click += (s, e) =>
-            {
-                if (SessionHelper.MaVaiTro == "VT001")
-                    OpenForm(new QLDSV.GUI.Forms.Admin.frmPhucKhao_Admin());
-                else if (SessionHelper.MaVaiTro == "VT002")
-                    OpenForm(new QLDSV.GUI.Forms.GiangVien.frmPhucKhao_GV());
-                else if (SessionHelper.MaVaiTro == "VT003")
-                    OpenForm(new QLDSV.GUI.Forms.SinhVien.frmPhucKhao_SV());
-            };
-            btnBaocao.Click += (s, e) => OpenForm(new frmBaoCaoThongKe());
-            btnTongquan.Click += (s, e) => OpenForm(new frmTongQuan());
-
-            // Hiển thị thông báo với các Form chưa kích hoạt hoặc đang phát triển
-            btnDangky.Click += (s, e) => MessageBox.Show("Tính năng Đăng ký lớp đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnDiem.Click += (s, e) => MessageBox.Show("Tính năng Nhập điểm đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            // Làm nổi bật nút Lớp niên chế (Trực quan hóa thiết kế)
-            btnLopnc.FillColor = Color.FromArgb(224, 224, 224);
-            btnLopnc.ForeColor = Color.Black;
-            btnLopnc.Font = new Font(btnLopnc.Font, FontStyle.Bold);
-        }
-=======
->>>>>>> db4428ec62895fa5581eeaa3f69767735ca37c59
     }
 }
