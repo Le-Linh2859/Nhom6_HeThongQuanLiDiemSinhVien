@@ -270,7 +270,8 @@ namespace QLDSV.DAL
                 "FROM SinhVien sv " +
                 "INNER JOIN LopNienChe lnc ON sv.MaLopNienChe = lnc.MaLopNienChe " +
                 "INNER JOIN DiemMon dm ON dm.MaSV = sv.MaSV " +
-                "WHERE 1=1" + wLop + wKey +
+                // Chỉ tính trung bình trên các môn đã có đủ điểm tổng kết
+                "WHERE dm.DaDuDiem = 1" + wLop + wKey +
                 " GROUP BY sv.MaSV, sv.HoTen, lnc.TenLop" +
                 " ORDER BY sv.MaSV";
             return Connection.GetDataToTable(sql);
@@ -299,6 +300,12 @@ namespace QLDSV.DAL
                 "LEFT  JOIN KetQua kq ON kq.MaSV = dklh.MaSV AND kq.MaLHP = dklh.MaLHP " +
                 $"WHERE dklh.MaSV = '{maSV}'" + wNam + wHK +
                 " GROUP BY lhp.MaLHP, mh.TenMon, mh.SoTC" +
+                // Chỉ lấy môn đã có đủ 4 điểm thành phần (có điểm tổng kết)
+                " HAVING " +
+                "  MAX(CASE WHEN kq.MaLoaiDiem='CC'  THEN kq.Diem END) IS NOT NULL AND " +
+                "  MAX(CASE WHEN kq.MaLoaiDiem='KT1' THEN kq.Diem END) IS NOT NULL AND " +
+                "  MAX(CASE WHEN kq.MaLoaiDiem='KT2' THEN kq.Diem END) IS NOT NULL AND " +
+                "  MAX(CASE WHEN kq.MaLoaiDiem='CK'  THEN kq.Diem END) IS NOT NULL " +
                 " ORDER BY mh.TenMon";
             return Connection.GetDataToTable(sql);
         }

@@ -318,11 +318,14 @@ namespace QLDSV.GUI.Forms.Admin
                 }
             }
 
-            string gpaText = countGPA > 0
-                ? (totalGPA / countGPA).ToString("F2")
-                : "N/A";
+            // Card Điểm TB Lớp chỉ có ý nghĩa khi đang lọc theo một lớp cụ thể
+            bool locTheoLop = cboLop.SelectedValue?.ToString() != "ALL"
+                           && !string.IsNullOrEmpty(cboLop.SelectedValue?.ToString());
 
-            // Cập nhật labels trong các GroupBox card
+            string gpaText = (locTheoLop && countGPA > 0)
+                ? (totalGPA / countGPA).ToString("F2")
+                : "—";
+
             SetCardLabel(lblTong,    tongSV.ToString(),    Color.FromArgb(21, 101, 192));
             SetCardLabel(lblXuatsac, xuatSac.ToString(),   Color.FromArgb(27, 94, 32));
             SetCardLabel(lblGioi,    gioi.ToString(),      Color.FromArgb(51, 105, 30));
@@ -376,7 +379,7 @@ namespace QLDSV.GUI.Forms.Admin
                 if (string.IsNullOrEmpty(maNamHoc)) maNamHoc = "ALL";
                 if (string.IsNullOrEmpty(maLoaiHK)) maLoaiHK = "ALL";
 
-                // Gọi BLL → DAL
+                // DAL đã lọc sẵn: chỉ trả về môn có đủ 4 điểm thành phần
                 DataTable dt = _bll.GetChiTietDiemSinhVien(maSV, maNamHoc, maLoaiHK);
 
                 // Thêm cột tính toán
@@ -386,31 +389,24 @@ namespace QLDSV.GUI.Forms.Admin
                     dt.Columns.Add("DiemChu", typeof(string));
                 if (!dt.Columns.Contains("DiemHe4"))
                     dt.Columns.Add("DiemHe4", typeof(double));
+                if (!dt.Columns.Contains("XepLoai"))
+                    dt.Columns.Add("XepLoai", typeof(string));
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    double cc  = row["DiemCC"]  != DBNull.Value ? Convert.ToDouble(row["DiemCC"])  : 0;
-                    double kt1 = row["DiemKT1"] != DBNull.Value ? Convert.ToDouble(row["DiemKT1"]) : 0;
-                    double kt2 = row["DiemKT2"] != DBNull.Value ? Convert.ToDouble(row["DiemKT2"]) : 0;
-                    double ck  = row["DiemThi"] != DBNull.Value ? Convert.ToDouble(row["DiemThi"]) : 0;
+                    // DAL đã đảm bảo tất cả 4 cột đều NOT NULL
+                    double cc  = Convert.ToDouble(row["DiemCC"]);
+                    double kt1 = Convert.ToDouble(row["DiemKT1"]);
+                    double kt2 = Convert.ToDouble(row["DiemKT2"]);
+                    double ck  = Convert.ToDouble(row["DiemThi"]);
 
-                    bool hasGrade = row["DiemCC"]  != DBNull.Value || row["DiemKT1"] != DBNull.Value
-                                 || row["DiemKT2"] != DBNull.Value || row["DiemThi"] != DBNull.Value;
+                    double tk   = KetQuaBLL.TinhDiemTongKet(cc, kt1, kt2, ck);
+                    double gpa4 = KetQuaBLL.QuyDoiHe4(tk);
 
-                    if (hasGrade)
-                    {
-                        double tk   = KetQuaBLL.TinhDiemTongKet(cc, kt1, kt2, ck);
-                        double gpa4 = KetQuaBLL.QuyDoiHe4(tk);
-                        row["DiemTongKet"] = tk;
-                        row["DiemChu"]     = KetQuaBLL.QuyDoiDiemChu(tk);
-                        row["DiemHe4"]     = gpa4;
-                    }
-                    else
-                    {
-                        row["DiemTongKet"] = DBNull.Value;
-                        row["DiemChu"]     = "—";
-                        row["DiemHe4"]     = DBNull.Value;
-                    }
+                    row["DiemTongKet"] = tk;
+                    row["DiemChu"]     = KetQuaBLL.QuyDoiDiemChu(tk);
+                    row["DiemHe4"]     = gpa4;
+                    row["XepLoai"]     = KetQuaBLL.XepLoaiHocLuc(gpa4);
                 }
 
                 dataGridView2.DataSource = dt;
@@ -430,10 +426,12 @@ namespace QLDSV.GUI.Forms.Admin
             foreach (DataGridViewColumn col in dataGridView2.Columns)
                 col.Visible = false;
 
-            string[] colNames = { "MaLHP",    "TenMon",       "DiemCC",       "DiemKT1",
-                                   "DiemKT2",  "DiemThi",      "DiemTongKet",  "DiemChu",  "DiemHe4" };
-            string[] headers  = { "Mã LHP",   "Tên Môn Học",  "Chuyên Cần",   "KT1",
-                                   "KT2",      "Cuối Kỳ",      "Tổng Kết (Hệ 10)", "Điểm Chữ", "Hệ 4" };
+            string[] colNames = { "MaLHP",   "TenMon",      "DiemCC",    "DiemKT1",
+                                   "DiemKT2", "DiemThi",     "DiemTongKet","DiemChu",
+                                   "DiemHe4", "XepLoai" };
+            string[] headers  = { "Mã LHP",  "Tên Môn Học", "Chuyên Cần","KT1",
+                                   "KT2",     "Cuối Kỳ",     "Tổng Kết (Hệ 10)","Điểm Chữ",
+                                   "Hệ 4",    "Xếp Loại" };
 
             for (int i = 0; i < colNames.Length; i++)
             {
@@ -445,7 +443,7 @@ namespace QLDSV.GUI.Forms.Admin
             }
 
             foreach (string c in new[] { "DiemCC","DiemKT1","DiemKT2","DiemThi",
-                                          "DiemTongKet","DiemChu","DiemHe4" })
+                                          "DiemTongKet","DiemChu","DiemHe4","XepLoai" })
             {
                 if (dataGridView2.Columns.Contains(c))
                     dataGridView2.Columns[c].DefaultCellStyle.Alignment =
