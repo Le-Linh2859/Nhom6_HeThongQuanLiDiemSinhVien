@@ -16,5 +16,10 @@ namespace QLDSV.GUI.Forms.SinhVien
         {
             InitializeComponent();
         }
+
+        private void dgvKetQua_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
