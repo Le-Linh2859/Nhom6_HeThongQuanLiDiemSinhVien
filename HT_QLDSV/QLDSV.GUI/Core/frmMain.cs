@@ -137,7 +137,7 @@ namespace QLDSV.GUI
         private void WireUpSidebarEvents()
         {
             if (btnTongquan != null) btnTongquan.Click += (s, e) => OpenChildForm(new frmTongQuan(), "Tổng Quan");
-            if (btnGiangvien != null) btnGiangvien.Click += (s, e) => OpenChildForm(new frmGiangVien(), "Giảng Viên");
+            if (btnGiangvien != null) btnGiangvien.Click += (s, e) => OpenChildForm(new frmGiangvien(), "Giảng Viên");
             if (btnSinhvien != null) btnSinhvien.Click += (s, e) => OpenChildForm(new frmQuanLiThongTinSinhVien(), "Sinh Viên");
             if (btnMon != null) btnMon.Click += (s, e) => OpenChildForm(new frmMonhoc(), "Môn Học");
             if (btnLopnc != null) btnLopnc.Click += (s, e) => OpenChildForm(new FrmLopNienChe(), "Lớp Niên Chế");

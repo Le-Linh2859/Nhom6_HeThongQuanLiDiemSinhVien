@@ -12,7 +12,7 @@ namespace QLDSV.DAL
     {
         public static SqlConnection conn;
         public static string connstring;
-
+       
         public static void KetNoi()
         {
             // Tái sử dụng kết nối tĩnh từ FunctionQa của tầng GUI nếu đã mở thành công
@@ -21,7 +21,7 @@ namespace QLDSV.DAL
             {
                 // Sử dụng Reflection hoặc gọi trực tiếp vì cùng chung Solution
                 // Tuy nhiên để an toàn, ta kiểm tra xem conn của FunctionQa có khả dụng không
-                connstring = @"Data Source=DESKTOP-1MI6150;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+                connstring = @"Data Source=admin-pc\quynhanh;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
                 conn = new SqlConnection(connstring);
 
                 if (conn.State != ConnectionState.Open)
@@ -32,7 +32,7 @@ namespace QLDSV.DAL
             catch
             {
                 // Fallback chuỗi mặc định của nhà phát triển khác
-                connstring = @"Data Source=DESKTOP-1MI6150;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+                connstring = @"Data Source=admin-pc\quynhanh;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
                 conn = new SqlConnection(connstring);
                 if (conn.State != ConnectionState.Open)
                 {

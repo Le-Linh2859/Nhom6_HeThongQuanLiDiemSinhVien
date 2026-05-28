@@ -557,7 +557,7 @@ namespace QLDSV.GUI
         private void WireSidebarEvents()
         {
             // Đăng ký điều hướng cho các Form có sẵn và đã được kích hoạt biên dịch
-            btnGiangvien.Click += (s, e) => OpenForm(new frmGiangVien());
+            btnGiangvien.Click += (s, e) => OpenForm(new frmGiangvien());
             btnCanhbao.Click += (s, e) => OpenForm(new frmCanhBaoHocVu());
             btnLopnc.Click += (s, e) => { /* Đang ở chính form này */ };
             btnSinhvien.Click += (s, e) => OpenForm(new frmQuanLiThongTinSinhVien());

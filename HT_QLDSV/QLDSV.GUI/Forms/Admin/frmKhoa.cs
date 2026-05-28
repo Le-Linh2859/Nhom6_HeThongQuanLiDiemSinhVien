@@ -115,7 +115,7 @@ namespace QLDSV.GUI
                     Form targetForm = null;
                     if (itemText == "Giảng viên")
                     {
-                        targetForm = new frmGiangVien();
+                        targetForm = new frmGiangvien();
                     }
                     else if (itemText == "Môn học")
                     {
