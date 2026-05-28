@@ -12,28 +12,12 @@ using System.Windows.Forms;
 
 namespace QLDSV.GUI
 {
-    public partial class FrmLopNienChe : Form, IShellChildForm
+    public partial class FrmLopNienChe : Form
     {
         private LopNienCheBLL bll = new LopNienCheBLL();
         private bool isAdding = false;
         private bool isEditing = false;
         private DataTable dtLop;
-
-        public void OnEmbeddedInShell()
-        {
-            // Ẩn sidebar và dịch chuyển các control sang trái
-            if (pnlSidebar != null)
-                pnlSidebar.Visible = false;
-
-            int shiftX = pnlSidebar?.Width ?? 0;
-            if (shiftX == 0) return;
-
-            foreach (Control ctrl in this.Controls)
-            {
-                if (ctrl != pnlSidebar && ctrl.Left > 0)
-                    ctrl.Left = Math.Max(0, ctrl.Left - shiftX);
-            }
-        }
 
         public FrmLopNienChe()
         {
@@ -74,21 +58,6 @@ namespace QLDSV.GUI
                     txtTimKiem.ForeColor = Color.Gray;
                 }
             };
-
-            // Wire up Logout / Close button if it exists
-            if (this.btnSignout != null)
-            {
-                this.btnSignout.Click += (s, e) =>
-                {
-                    var confirm = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận đăng xuất",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (confirm == DialogResult.Yes)
-                    {
-                        MessageBox.Show("Đăng xuất thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Close();
-                    }
-                };
-            }
         }
 
         private void FrmLopNienChe_Load(object sender, EventArgs e)
@@ -101,7 +70,6 @@ namespace QLDSV.GUI
                 LoadComboboxDetails();
                 LoadData();
                 ResetFormState();
-                WireSidebarEvents();
             }
             catch (Exception ex)
             {
@@ -553,6 +521,7 @@ namespace QLDSV.GUI
                 this.Hide();
             }
         }
+<<<<<<< HEAD
 
         private void WireSidebarEvents()
         {
@@ -585,5 +554,7 @@ namespace QLDSV.GUI
             btnLopnc.ForeColor = Color.Black;
             btnLopnc.Font = new Font(btnLopnc.Font, FontStyle.Bold);
         }
+=======
+>>>>>>> db4428ec62895fa5581eeaa3f69767735ca37c59
     }
 }

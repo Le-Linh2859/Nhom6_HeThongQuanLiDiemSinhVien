@@ -1,5 +1,6 @@
 using QLDSV.BLL;
 using QLDSV.DAL;
+using QLDSV.GUI.Forms.Admin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -821,7 +822,7 @@ using System.Windows.Media.Animation;
                 (s, e) => OpenForm(new frmLophocphan());
 
             btnKetqua.Click +=
-                (s, e) => OpenForm(new frmKetQuaHocTap());
+                (s, e) => OpenForm(new frmTheoDoiDiem());
 
             btnPhuckhao.Click += (s, e) =>
             {
