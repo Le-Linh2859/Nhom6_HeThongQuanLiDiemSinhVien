@@ -1,4 +1,4 @@
-﻿using QLDSV.BLL;
+using QLDSV.BLL;
 using QLDSV.DAL;
 using System;
 using System.Collections.Generic;
@@ -23,17 +23,45 @@ using System.Windows.Media.Animation;
 
         public void OnEmbeddedInShell()
         {
-            // Ẩn sidebar và dịch chuyển các control sang trái
-            if (pnlSidebar != null)
-                pnlSidebar.Visible = false;
+            // Ẩn tất cả các control Sidebar & Header trùng lặp bằng tìm kiếm động an toàn
+            string[] controlNames = { 
+                "pnlSidebar", "pnlHeader", "guna2ImageButton1", "label3", "label4", 
+                "guna2ImageButton2", "guna2CirclePictureBox1", "guna2HtmlLabel13", 
+                "guna2HtmlLabel14", "guna2ImageButton3" 
+            };
+            foreach (var name in controlNames)
+            {
+                var ct = this.Controls.Find(name, true);
+                foreach (var c in ct)
+                {
+                    c.Visible = false;
+                }
+            }
 
-            int shiftX = pnlSidebar?.Width ?? 0;
+            int shiftX = 0;
+            if (pnlSidebar != null)
+            {
+                shiftX = pnlSidebar.Width;
+            }
+
             if (shiftX == 0) return;
 
             foreach (Control ctrl in this.Controls)
             {
-                if (ctrl != pnlSidebar && ctrl.Left > 0)
+                bool isHiddenControl = false;
+                foreach (var name in controlNames)
+                {
+                    if (ctrl.Name == name)
+                    {
+                        isHiddenControl = true;
+                        break;
+                    }
+                }
+
+                if (!isHiddenControl && ctrl.Left > 0)
+                {
                     ctrl.Left = Math.Max(0, ctrl.Left - shiftX);
+                }
             }
         }
         public frmGiangvien()
@@ -795,8 +823,15 @@ using System.Windows.Media.Animation;
             btnKetqua.Click +=
                 (s, e) => OpenForm(new frmKetQuaHocTap());
 
-            btnPhuckhao.Click +=
-                (s, e) => OpenForm(new frmPhucKhao());
+            btnPhuckhao.Click += (s, e) =>
+            {
+                if (SessionHelper.MaVaiTro == "VT001")
+                    OpenForm(new QLDSV.GUI.Forms.Admin.frmPhucKhao_Admin());
+                else if (SessionHelper.MaVaiTro == "VT002")
+                    OpenForm(new QLDSV.GUI.Forms.GiangVien.frmPhucKhao_GV());
+                else if (SessionHelper.MaVaiTro == "VT003")
+                    OpenForm(new QLDSV.GUI.Forms.SinhVien.frmPhucKhao_SV());
+            };
 
             btnBaocao.Click +=
                 (s, e) => OpenForm(new frmBaoCaoThongKe());

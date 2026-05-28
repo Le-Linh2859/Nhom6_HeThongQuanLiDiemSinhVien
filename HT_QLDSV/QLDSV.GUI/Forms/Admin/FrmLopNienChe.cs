@@ -564,7 +564,15 @@ namespace QLDSV.GUI
             btnMon.Click += (s, e) => OpenForm(new frmMonhoc());
             btnLophp.Click += (s, e) => OpenForm(new frmLophocphan());
             btnKetqua.Click += (s, e) => OpenForm(new frmKetQuaHocTap());
-            btnPhuckhao.Click += (s, e) => OpenForm(new frmPhucKhao());
+            btnPhuckhao.Click += (s, e) =>
+            {
+                if (SessionHelper.MaVaiTro == "VT001")
+                    OpenForm(new QLDSV.GUI.Forms.Admin.frmPhucKhao_Admin());
+                else if (SessionHelper.MaVaiTro == "VT002")
+                    OpenForm(new QLDSV.GUI.Forms.GiangVien.frmPhucKhao_GV());
+                else if (SessionHelper.MaVaiTro == "VT003")
+                    OpenForm(new QLDSV.GUI.Forms.SinhVien.frmPhucKhao_SV());
+            };
             btnBaocao.Click += (s, e) => OpenForm(new frmBaoCaoThongKe());
             btnTongquan.Click += (s, e) => OpenForm(new frmTongQuan());
 

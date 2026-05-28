@@ -93,6 +93,52 @@ namespace QLDSV.GUI
 
                 // 4. Đăng ký sự kiện Click cho tất cả các nút Sidebar
                 WireUpSidebarEvents();
+
+                // 5. Mở mặc định trang Phúc Khảo cho Sinh viên / Giảng viên / Admin để test nhanh
+                if (SessionHelper.MaVaiTro == "VT003")
+                {
+                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmPhucKhao_SV(), "Phúc Khảo");
+                }
+                else if (SessionHelper.MaVaiTro == "VT002")
+                {
+                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmPhucKhao_GV(), "Phúc Khảo");
+                }
+                else if (SessionHelper.MaVaiTro == "VT001")
+                {
+                    OpenChildForm(new QLDSV.GUI.Forms.Admin.frmPhucKhao_Admin(), "Phúc Khảo");
+                }
+
+                // 6. Nhấp vào ảnh đại diện hoặc Tên tài khoản để mở trang Thông tin cá nhân
+                if (guna2CirclePictureBox1 != null)
+                {
+                    guna2CirclePictureBox1.Cursor = Cursors.Hand;
+                    guna2CirclePictureBox1.Click += (s, ev) =>
+                    {
+                        if (SessionHelper.MaVaiTro == "VT003")
+                        {
+                            OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmThongTinCaNhan_SV(), "Thông Tin Cá Nhân");
+                        }
+                        else if (SessionHelper.MaVaiTro == "VT002")
+                        {
+                            OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmThongTinCaNhan_GV(), "Thông Tin Cá Nhân");
+                        }
+                    };
+                }
+                if (guna2HtmlLabel13 != null)
+                {
+                    guna2HtmlLabel13.Cursor = Cursors.Hand;
+                    guna2HtmlLabel13.Click += (s, ev) =>
+                    {
+                        if (SessionHelper.MaVaiTro == "VT003")
+                        {
+                            OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmThongTinCaNhan_SV(), "Thông Tin Cá Nhân");
+                        }
+                        else if (SessionHelper.MaVaiTro == "VT002")
+                        {
+                            OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmThongTinCaNhan_GV(), "Thông Tin Cá Nhân");
+                        }
+                    };
+                }
             }
             catch (Exception ex)
             {
@@ -217,7 +263,15 @@ namespace QLDSV.GUI
                     OpenChildForm(new frmKetQuaHocTap(), "Kết Quả Học Tập");
             };
             if (btnCanhbao != null) btnCanhbao.Click += (s, e) => OpenChildForm(new frmCanhBaoHocVu(), "Cảnh Báo Học Vụ");
-            if (btnPhuckhao != null) btnPhuckhao.Click += (s, e) => OpenChildForm(new frmPhucKhao(), "Phúc Khảo");
+            if (btnPhuckhao != null) btnPhuckhao.Click += (s, e) =>
+            {
+                if (SessionHelper.MaVaiTro == "VT001")
+                    OpenChildForm(new QLDSV.GUI.Forms.Admin.frmPhucKhao_Admin(), "Phúc Khảo");
+                else if (SessionHelper.MaVaiTro == "VT002")
+                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmPhucKhao_GV(), "Phúc Khảo");
+                else if (SessionHelper.MaVaiTro == "VT003")
+                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmPhucKhao_SV(), "Phúc Khảo");
+            };
             if (btnBaocao != null) btnBaocao.Click += (s, e) => OpenChildForm(new frmBaoCaoThongKe(), "Báo Cáo Thống Kê");
 
             if (guna2Button7 != null)
@@ -268,6 +322,21 @@ namespace QLDSV.GUI
                 if (childForm is IShellChildForm child)
                 {
                     child.OnEmbeddedInShell();
+                }
+
+                // [GLOBAL UX SAFETY NET] Tự động ẩn các control Header và Sidebar trùng lặp của Form con
+                string[] duplicateControls = { 
+                    "pnlSidebar", "pnlHeader", "guna2ImageButton1", "label3", "label4", 
+                    "guna2ImageButton2", "guna2CirclePictureBox1", "guna2HtmlLabel13", 
+                    "guna2HtmlLabel14", "guna2ImageButton3" 
+                };
+                foreach (var name in duplicateControls)
+                {
+                    var found = childForm.Controls.Find(name, true);
+                    foreach (var c in found)
+                    {
+                        c.Visible = false;
+                    }
                 }
 
                 // 6. Đưa Form con vào Panel và hiển thị

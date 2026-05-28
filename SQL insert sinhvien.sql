@@ -1,6 +1,53 @@
 ﻿USE DB_QLDiemSinhVien;
 GO
 
+-- 1. Xóa các ràng buộc và bảng cũ để tránh xung đột
+IF EXISTS (SELECT * FROM sys.foreign_keys WHERE name = 'FK_TaiKhoan_VaiTro')
+    ALTER TABLE TaiKhoan DROP CONSTRAINT FK_TaiKhoan_VaiTro;
+GO
+
+DROP TABLE IF EXISTS TaiKhoan;
+DROP TABLE IF EXISTS VaiTro;
+DROP TABLE IF EXISTS DbMigrationHistory;
+GO
+
+-- 2. Tạo cấu trúc bảng chuẩn theo Migration V001
+CREATE TABLE VaiTro (
+    MaVaiTro NVARCHAR(10) PRIMARY KEY,
+    TenVaiTro NVARCHAR(50) NOT NULL
+);
+
+CREATE TABLE TaiKhoan (
+    MaTaiKhoan NVARCHAR(20) PRIMARY KEY,
+    TenDangNhap NVARCHAR(50) NOT NULL UNIQUE,
+    MatKhau NVARCHAR(255) NOT NULL,
+    MaVaiTro NVARCHAR(10) NOT NULL,
+    CONSTRAINT FK_TaiKhoan_VaiTro FOREIGN KEY (MaVaiTro) REFERENCES VaiTro(MaVaiTro)
+);
+GO
+
+-- 3. Tạo bảng theo dõi Migration V002
+CREATE TABLE DbMigrationHistory (
+    MigrationId NVARCHAR(100) PRIMARY KEY,
+    AppliedOn DATETIME NOT NULL DEFAULT GETDATE(),
+    Description NVARCHAR(500)
+);
+
+INSERT INTO DbMigrationHistory (MigrationId, Description) 
+VALUES ('V001__InitialSchema', N'Tạo bảng VaiTro và TaiKhoan'),
+       ('V002__AddMigrationTracking', N'Tạo bảng DbMigrationHistory');
+GO
+
+
+
+
+
+
+
+
+USE DB_QLDiemSinhVien;
+GO
+
 Select * from VaiTro
 INSERT INTO VaiTro (MaVaiTro, TenVaiTro)
 VALUES 

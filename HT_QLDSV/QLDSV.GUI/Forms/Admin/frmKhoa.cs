@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -139,7 +139,12 @@ namespace QLDSV.GUI
                     }
                     else if (itemText == "Phúc khảo")
                     {
-                        targetForm = new frmPhucKhao();
+                        if (SessionHelper.MaVaiTro == "VT001")
+                            targetForm = new QLDSV.GUI.Forms.Admin.frmPhucKhao_Admin();
+                        else if (SessionHelper.MaVaiTro == "VT002")
+                            targetForm = new QLDSV.GUI.Forms.GiangVien.frmPhucKhao_GV();
+                        else if (SessionHelper.MaVaiTro == "VT003")
+                            targetForm = new QLDSV.GUI.Forms.SinhVien.frmPhucKhao_SV();
                     }
                     else if (itemText == "Báo cáo")
                     {

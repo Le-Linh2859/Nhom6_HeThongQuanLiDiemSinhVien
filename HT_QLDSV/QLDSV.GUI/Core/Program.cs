@@ -17,7 +17,13 @@ namespace QLDSV.GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmThongTinCaNhan_GV());
+
+            // Bỏ qua đăng nhập, vào thẳng giao diện Admin để test nhanh
+            SessionHelper.MaTaiKhoan = "TK006";
+            SessionHelper.TenDangNhap = "Admin2025";
+            SessionHelper.MaVaiTro = "VT001";
+
+            Application.Run(new frmMain());
         }
     }
 }

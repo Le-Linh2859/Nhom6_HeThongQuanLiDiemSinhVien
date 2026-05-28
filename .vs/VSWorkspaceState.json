@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\HT_QLDSV",
-    "\\HT_QLDSV\\QLDSV.GUI"
+    "\\HT_QLDSV\\QLDSV.GUI",
+    "\\HT_QLDSV\\QLDSV.GUI\\Forms",
+    "\\HT_QLDSV\\QLDSV.GUI\\Forms\\SinhVien"
   ],
-  "SelectedNode": "\\HT_QLDSV\\QLDSV.GUI\\FunctionQa.cs",
   "PreviewInSolutionExplorer": false
 }
