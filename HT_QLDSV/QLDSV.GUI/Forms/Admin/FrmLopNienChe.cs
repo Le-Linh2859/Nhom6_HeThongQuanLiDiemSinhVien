@@ -12,28 +12,12 @@ using System.Windows.Forms;
 
 namespace QLDSV.GUI
 {
-    public partial class FrmLopNienChe : Form, IShellChildForm
+    public partial class FrmLopNienChe : Form
     {
         private LopNienCheBLL bll = new LopNienCheBLL();
         private bool isAdding = false;
         private bool isEditing = false;
         private DataTable dtLop;
-
-        public void OnEmbeddedInShell()
-        {
-            // Ẩn sidebar và dịch chuyển các control sang trái
-            if (pnlSidebar != null)
-                pnlSidebar.Visible = false;
-
-            int shiftX = pnlSidebar?.Width ?? 0;
-            if (shiftX == 0) return;
-
-            foreach (Control ctrl in this.Controls)
-            {
-                if (ctrl != pnlSidebar && ctrl.Left > 0)
-                    ctrl.Left = Math.Max(0, ctrl.Left - shiftX);
-            }
-        }
 
         public FrmLopNienChe()
         {
@@ -74,21 +58,6 @@ namespace QLDSV.GUI
                     txtTimKiem.ForeColor = Color.Gray;
                 }
             };
-
-            // Wire up Logout / Close button if it exists
-            if (this.btnSignout != null)
-            {
-                this.btnSignout.Click += (s, e) =>
-                {
-                    var confirm = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận đăng xuất",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (confirm == DialogResult.Yes)
-                    {
-                        MessageBox.Show("Đăng xuất thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Close();
-                    }
-                };
-            }
         }
 
         private void FrmLopNienChe_Load(object sender, EventArgs e)
@@ -101,7 +70,6 @@ namespace QLDSV.GUI
                 LoadComboboxDetails();
                 LoadData();
                 ResetFormState();
-                WireSidebarEvents();
             }
             catch (Exception ex)
             {
@@ -552,30 +520,6 @@ namespace QLDSV.GUI
                 targetForm.Show();
                 this.Hide();
             }
-        }
-
-        private void WireSidebarEvents()
-        {
-            // Đăng ký điều hướng cho các Form có sẵn và đã được kích hoạt biên dịch
-            btnGiangvien.Click += (s, e) => OpenForm(new frmGiangvien());
-            btnCanhbao.Click += (s, e) => OpenForm(new frmCanhBaoHocVu());
-            btnLopnc.Click += (s, e) => { /* Đang ở chính form này */ };
-            btnSinhvien.Click += (s, e) => OpenForm(new frmQuanLiThongTinSinhVien());
-            btnMon.Click += (s, e) => OpenForm(new frmMonhoc());
-            btnLophp.Click += (s, e) => OpenForm(new frmLophocphan());
-            btnKetqua.Click += (s, e) => OpenForm(new frmKetQuaHocTap());
-            btnPhuckhao.Click += (s, e) => OpenForm(new frmPhucKhao());
-            btnBaocao.Click += (s, e) => OpenForm(new frmBaoCaoThongKe());
-            btnTongquan.Click += (s, e) => OpenForm(new frmTongQuan());
-
-            // Hiển thị thông báo với các Form chưa kích hoạt hoặc đang phát triển
-            btnDangky.Click += (s, e) => MessageBox.Show("Tính năng Đăng ký lớp đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnDiem.Click += (s, e) => MessageBox.Show("Tính năng Nhập điểm đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            // Làm nổi bật nút Lớp niên chế (Trực quan hóa thiết kế)
-            btnLopnc.FillColor = Color.FromArgb(224, 224, 224);
-            btnLopnc.ForeColor = Color.Black;
-            btnLopnc.Font = new Font(btnLopnc.Font, FontStyle.Bold);
         }
     }
 }

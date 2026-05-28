@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using QLDSV.BLL;
 using QLDSV.DAL;
+using QLDSV.GUI.Forms.Admin;
 
 namespace QLDSV.GUI
 {
@@ -86,7 +87,7 @@ namespace QLDSV.GUI
                     if (itemText == "Đăng ký lớp")
                         targetForm = new frmDangKyHocPhan();
                     else if (itemText == "Kết quả học tập")
-                        targetForm = new frmKetQuaHocTap();
+                        targetForm = new frmTheoDoiDiem();
                     else if (itemText == "Phúc khảo")
                         targetForm = new frmPhucKhao();
 
