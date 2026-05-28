@@ -87,6 +87,64 @@ namespace QLDSV.DAL
             return GetSingleValue(sql);
         }
 
+        // ═══════════════════════════════════════════════════════════════════════════
+        // SINH VIÊN – Kết quả học tập
+        // ═══════════════════════════════════════════════════════════════════════════
+
+        // ─── Lấy MaSV và HoTen theo MaTaiKhoan ───────────────────────────────────
+        public DataTable GetThongTinSinhVienByTaiKhoan(string maTaiKhoan)
+        {
+            string sql =
+                "SELECT sv.MaSV, sv.HoTen " +
+                "FROM SinhVien sv " +
+                $"WHERE sv.MaTaiKhoan = '{maTaiKhoan}'";
+            return Connection.GetDataToTable(sql);
+        }
+
+        // ─── Lấy danh sách NamHoc mà sinh viên có đăng ký lớp học phần ──────────
+        public DataTable GetNamHocBySinhVien(string maSV)
+        {
+            string sql =
+                "SELECT DISTINCT nh.MaNamHoc, nh.TenNamHoc " +
+                "FROM DangKyLopHoc dklh " +
+                "INNER JOIN LopHocPhan lhp ON dklh.MaLHP = lhp.MaLHP " +
+                "INNER JOIN HocKy_NamHoc hknh ON lhp.MaHKNH = hknh.MaHKNH " +
+                "INNER JOIN NamHoc nh ON hknh.MaNamHoc = nh.MaNamHoc " +
+                $"WHERE dklh.MaSV = '{maSV}' " +
+                "ORDER BY nh.MaNamHoc DESC";
+            return Connection.GetDataToTable(sql);
+        }
+
+        // ─── Lấy bảng điểm của sinh viên theo năm học và học kỳ ─────────────────
+        // Trả về: MaMon, TenMon, SoTC, DiemCC, DiemKT1, DiemKT2, DiemThi
+        public DataTable GetBangDiemSinhVien(string maSV, string maNamHoc, string maLoaiHK)
+        {
+            // Xây dựng điều kiện lọc linh hoạt
+            string whereNamHoc  = (maNamHoc  == "ALL") ? "" : $"  AND hknh.MaNamHoc = '{maNamHoc}' ";
+            string whereLoaiHK  = (maLoaiHK  == "ALL") ? "" : $"  AND hknh.MaLoaiHK = '{maLoaiHK}' ";
+
+            string sql =
+                "SELECT " +
+                "  mh.MaMon, " +
+                "  mh.TenMon, " +
+                "  mh.SoTC, " +
+                "  MAX(CASE WHEN kq.MaLoaiDiem = 'CC'  THEN kq.Diem END) AS DiemCC, " +
+                "  MAX(CASE WHEN kq.MaLoaiDiem = 'KT1' THEN kq.Diem END) AS DiemKT1, " +
+                "  MAX(CASE WHEN kq.MaLoaiDiem = 'KT2' THEN kq.Diem END) AS DiemKT2, " +
+                "  MAX(CASE WHEN kq.MaLoaiDiem = 'CK'  THEN kq.Diem END) AS DiemThi " +
+                "FROM DangKyLopHoc dklh " +
+                "INNER JOIN LopHocPhan lhp ON dklh.MaLHP = lhp.MaLHP " +
+                "INNER JOIN HocKy_NamHoc hknh ON lhp.MaHKNH = hknh.MaHKNH " +
+                "INNER JOIN MonHoc mh ON lhp.MaMon = mh.MaMon " +
+                "LEFT  JOIN KetQua kq ON kq.MaSV = dklh.MaSV AND kq.MaLHP = dklh.MaLHP " +
+                $"WHERE dklh.MaSV = '{maSV}' " +
+                whereNamHoc +
+                whereLoaiHK +
+                "GROUP BY mh.MaMon, mh.TenMon, mh.SoTC " +
+                "ORDER BY mh.MaMon";
+            return Connection.GetDataToTable(sql);
+        }
+
         // ─── Kiểm tra bản ghi điểm đã tồn tại chưa ───────────────────────────────
         public bool KiemTraDiemTonTai(string maSV, string maLHP, string maLoaiDiem)
         {

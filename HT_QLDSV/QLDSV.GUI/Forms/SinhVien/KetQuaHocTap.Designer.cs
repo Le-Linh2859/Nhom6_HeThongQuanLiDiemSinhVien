@@ -10,9 +10,7 @@ namespace QLDSV.GUI.Forms.SinhVien
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
-            {
                 components.Dispose();
-            }
             base.Dispose(disposing);
         }
 
@@ -23,263 +21,341 @@ namespace QLDSV.GUI.Forms.SinhVien
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.pnlFilter = new Guna.UI2.WinForms.Guna2Panel();
+            this.pnlFilter = new System.Windows.Forms.Panel();
             this.lblNamHoc = new System.Windows.Forms.Label();
-            this.cboNamHoc = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.cboNamHoc = new System.Windows.Forms.ComboBox();
             this.lblHocKy = new System.Windows.Forms.Label();
-            this.cboHocKy = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.pnlChuY = new System.Windows.Forms.Panel();
-            this.lblChuY = new System.Windows.Forms.Label();
-            this.dgvKetQua = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.pnlSummary = new System.Windows.Forms.Panel();
-            this.lblSummaryLeft = new System.Windows.Forms.Label();
-            this.lblSummaryRight = new System.Windows.Forms.Label();
+            this.cboHocKy = new System.Windows.Forms.ComboBox();
+            this.lblMaSV = new System.Windows.Forms.Label();
+            this.lblTenSV = new System.Windows.Forms.Label();
+            this.lblMa = new System.Windows.Forms.Label();
+            this.lblTen = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblTC = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblTK10 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblTK4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblPhanloai = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.DataGridViewKQDiem = new Guna.UI2.WinForms.Guna2DataGridView();
             this.pnlFilter.SuspendLayout();
-            this.pnlChuY.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvKetQua)).BeginInit();
-            this.pnlSummary.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewKQDiem)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlFilter
             // 
             this.pnlFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlFilter.BorderRadius = 5;
+            this.pnlFilter.Controls.Add(this.lblTen);
+            this.pnlFilter.Controls.Add(this.lblMa);
+            this.pnlFilter.Controls.Add(this.lblTenSV);
+            this.pnlFilter.Controls.Add(this.lblMaSV);
             this.pnlFilter.Controls.Add(this.lblNamHoc);
             this.pnlFilter.Controls.Add(this.cboNamHoc);
             this.pnlFilter.Controls.Add(this.lblHocKy);
             this.pnlFilter.Controls.Add(this.cboHocKy);
-            this.pnlFilter.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(200)))), ((int)(((byte)(223)))));
             this.pnlFilter.Location = new System.Drawing.Point(12, 12);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1132, 52);
+            this.pnlFilter.Size = new System.Drawing.Size(1200, 120);
             this.pnlFilter.TabIndex = 0;
             // 
             // lblNamHoc
             // 
             this.lblNamHoc.AutoSize = true;
-            this.lblNamHoc.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblNamHoc.ForeColor = System.Drawing.Color.Black;
-            this.lblNamHoc.Location = new System.Drawing.Point(56, 15);
+            this.lblNamHoc.Location = new System.Drawing.Point(104, 82);
             this.lblNamHoc.Name = "lblNamHoc";
-            this.lblNamHoc.Size = new System.Drawing.Size(69, 20);
+            this.lblNamHoc.Size = new System.Drawing.Size(50, 13);
             this.lblNamHoc.TabIndex = 0;
             this.lblNamHoc.Text = "Năm học";
             // 
             // cboNamHoc
             // 
-            this.cboNamHoc.BackColor = System.Drawing.Color.Transparent;
-            this.cboNamHoc.BorderRadius = 5;
-            this.cboNamHoc.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cboNamHoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboNamHoc.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboNamHoc.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboNamHoc.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cboNamHoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.cboNamHoc.ItemHeight = 28;
-            this.cboNamHoc.Location = new System.Drawing.Point(152, 12);
+            this.cboNamHoc.Location = new System.Drawing.Point(183, 78);
             this.cboNamHoc.Name = "cboNamHoc";
-            this.cboNamHoc.Size = new System.Drawing.Size(241, 34);
+            this.cboNamHoc.Size = new System.Drawing.Size(222, 21);
             this.cboNamHoc.TabIndex = 0;
             // 
             // lblHocKy
             // 
             this.lblHocKy.AutoSize = true;
-            this.lblHocKy.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblHocKy.ForeColor = System.Drawing.Color.Black;
-            this.lblHocKy.Location = new System.Drawing.Point(580, 15);
+            this.lblHocKy.Location = new System.Drawing.Point(581, 82);
             this.lblHocKy.Name = "lblHocKy";
-            this.lblHocKy.Size = new System.Drawing.Size(54, 20);
+            this.lblHocKy.Size = new System.Drawing.Size(41, 13);
             this.lblHocKy.TabIndex = 1;
             this.lblHocKy.Text = "Học kỳ";
             // 
             // cboHocKy
             // 
-            this.cboHocKy.BackColor = System.Drawing.Color.Transparent;
-            this.cboHocKy.BorderRadius = 5;
-            this.cboHocKy.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cboHocKy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboHocKy.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboHocKy.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboHocKy.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cboHocKy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.cboHocKy.ItemHeight = 28;
-            this.cboHocKy.Location = new System.Drawing.Point(667, 12);
+            this.cboHocKy.Location = new System.Drawing.Point(677, 78);
             this.cboHocKy.Name = "cboHocKy";
-            this.cboHocKy.Size = new System.Drawing.Size(212, 34);
+            this.cboHocKy.Size = new System.Drawing.Size(205, 21);
             this.cboHocKy.TabIndex = 1;
             // 
-            // pnlChuY
+            // lblMaSV
             // 
-            this.pnlChuY.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlChuY.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(204)))));
-            this.pnlChuY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlChuY.Controls.Add(this.lblChuY);
-            this.pnlChuY.Location = new System.Drawing.Point(12, 72);
-            this.pnlChuY.Name = "pnlChuY";
-            this.pnlChuY.Size = new System.Drawing.Size(1132, 46);
-            this.pnlChuY.TabIndex = 1;
+            this.lblMaSV.AutoSize = true;
+            this.lblMaSV.Location = new System.Drawing.Point(104, 35);
+            this.lblMaSV.Name = "lblMaSV";
+            this.lblMaSV.Size = new System.Drawing.Size(70, 13);
+            this.lblMaSV.TabIndex = 2;
+            this.lblMaSV.Text = "Mã sinh viên:";
             // 
-            // lblChuY
+            // lblTenSV
             // 
-            this.lblChuY.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblChuY.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.lblChuY.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.lblChuY.Location = new System.Drawing.Point(0, 0);
-            this.lblChuY.Name = "lblChuY";
-            this.lblChuY.Padding = new System.Windows.Forms.Padding(6, 4, 6, 4);
-            this.lblChuY.Size = new System.Drawing.Size(1130, 44);
-            this.lblChuY.TabIndex = 0;
-            this.lblChuY.Text = "Chú ý:\r\n- Những môn có dấu (*) sẽ không tính điểm trung bình mà chỉ là môn điều k" +
-    "iện.";
+            this.lblTenSV.AutoSize = true;
+            this.lblTenSV.Location = new System.Drawing.Point(581, 35);
+            this.lblTenSV.Name = "lblTenSV";
+            this.lblTenSV.Size = new System.Drawing.Size(87, 13);
+            this.lblTenSV.TabIndex = 3;
+            this.lblTenSV.Text = "Họ tên sinh viên:";
             // 
-            // dgvKetQua
+            // lblMa
             // 
-            this.dgvKetQua.AllowUserToAddRows = false;
-            this.dgvKetQua.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.dgvKetQua.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvKetQua.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.lblMa.AutoSize = true;
+            this.lblMa.Location = new System.Drawing.Point(180, 35);
+            this.lblMa.Name = "lblMa";
+            this.lblMa.Size = new System.Drawing.Size(46, 13);
+            this.lblMa.TabIndex = 4;
+            this.lblMa.Text = "lblMaSV";
+            // 
+            // lblTen
+            // 
+            this.lblTen.AutoSize = true;
+            this.lblTen.Location = new System.Drawing.Point(674, 35);
+            this.lblTen.Name = "lblTen";
+            this.lblTen.Size = new System.Drawing.Size(36, 13);
+            this.lblTen.TabIndex = 5;
+            this.lblTen.Text = "lblTen";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lblPhanloai);
+            this.groupBox1.Controls.Add(this.lblTK4);
+            this.groupBox1.Controls.Add(this.lblTK10);
+            this.groupBox1.Controls.Add(this.lblTC);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(12, 497);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1200, 127);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Thông tin điểm tổng kết";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(46, 57);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Tổng số tín chỉ:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(293, 57);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(112, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Điểm tổng kết (hệ 10):";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(633, 57);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "GPA (hệ 4):";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(917, 57);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(97, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Phân loại điểm TB:";
+            // 
+            // lblTC
+            // 
+            this.lblTC.BackColor = System.Drawing.Color.Transparent;
+            this.lblTC.Location = new System.Drawing.Point(134, 55);
+            this.lblTC.Name = "lblTC";
+            this.lblTC.Size = new System.Drawing.Size(86, 15);
+            this.lblTC.TabIndex = 4;
+            this.lblTC.Text = "guna2HtmlLabel1";
+            // 
+            // lblTK10
+            // 
+            this.lblTK10.BackColor = System.Drawing.Color.Transparent;
+            this.lblTK10.Location = new System.Drawing.Point(411, 57);
+            this.lblTK10.Name = "lblTK10";
+            this.lblTK10.Size = new System.Drawing.Size(86, 15);
+            this.lblTK10.TabIndex = 5;
+            this.lblTK10.Text = "guna2HtmlLabel1";
+            // 
+            // lblTK4
+            // 
+            this.lblTK4.BackColor = System.Drawing.Color.Transparent;
+            this.lblTK4.Location = new System.Drawing.Point(701, 55);
+            this.lblTK4.Name = "lblTK4";
+            this.lblTK4.Size = new System.Drawing.Size(86, 15);
+            this.lblTK4.TabIndex = 6;
+            this.lblTK4.Text = "guna2HtmlLabel1";
+            // 
+            // lblPhanloai
+            // 
+            this.lblPhanloai.BackColor = System.Drawing.Color.Transparent;
+            this.lblPhanloai.Location = new System.Drawing.Point(1020, 57);
+            this.lblPhanloai.Name = "lblPhanloai";
+            this.lblPhanloai.Size = new System.Drawing.Size(86, 15);
+            this.lblPhanloai.TabIndex = 7;
+            this.lblPhanloai.Text = "guna2HtmlLabel1";
+            // 
+            // DataGridViewKQDiem
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.DataGridViewKQDiem.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvKetQua.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvKetQua.ColumnHeadersHeight = 44;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DataGridViewKQDiem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.DataGridViewKQDiem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(216)))), ((int)(((byte)(242)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvKetQua.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvKetQua.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(240)))));
-            this.dgvKetQua.Location = new System.Drawing.Point(12, 126);
-            this.dgvKetQua.MultiSelect = false;
-            this.dgvKetQua.Name = "dgvKetQua";
-            this.dgvKetQua.ReadOnly = true;
-            this.dgvKetQua.RowHeadersVisible = false;
-            this.dgvKetQua.RowTemplate.Height = 26;
-            this.dgvKetQua.Size = new System.Drawing.Size(1132, 300);
-            this.dgvKetQua.TabIndex = 2;
-            this.dgvKetQua.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.dgvKetQua.ThemeStyle.AlternatingRowsStyle.Font = null;
-            this.dgvKetQua.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-            this.dgvKetQua.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.dgvKetQua.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.dgvKetQua.ThemeStyle.BackColor = System.Drawing.Color.White;
-            this.dgvKetQua.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(240)))));
-            this.dgvKetQua.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.dgvKetQua.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.dgvKetQua.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.dgvKetQua.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.dgvKetQua.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvKetQua.ThemeStyle.HeaderStyle.Height = 44;
-            this.dgvKetQua.ThemeStyle.ReadOnly = true;
-            this.dgvKetQua.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.dgvKetQua.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.dgvKetQua.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dgvKetQua.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.Black;
-            this.dgvKetQua.ThemeStyle.RowsStyle.Height = 26;
-            this.dgvKetQua.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(216)))), ((int)(((byte)(242)))));
-            this.dgvKetQua.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvKetQua.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKetQua_CellContentClick);
-            // 
-            // pnlSummary
-            // 
-            this.pnlSummary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlSummary.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
-            this.pnlSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSummary.Controls.Add(this.lblSummaryLeft);
-            this.pnlSummary.Controls.Add(this.lblSummaryRight);
-            this.pnlSummary.Location = new System.Drawing.Point(12, 434);
-            this.pnlSummary.Name = "pnlSummary";
-            this.pnlSummary.Size = new System.Drawing.Size(1132, 100);
-            this.pnlSummary.TabIndex = 3;
-            // 
-            // lblSummaryLeft
-            // 
-            this.lblSummaryLeft.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.lblSummaryLeft.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(41)))), ((int)(((byte)(55)))));
-            this.lblSummaryLeft.Location = new System.Drawing.Point(8, 6);
-            this.lblSummaryLeft.Name = "lblSummaryLeft";
-            this.lblSummaryLeft.Size = new System.Drawing.Size(560, 88);
-            this.lblSummaryLeft.TabIndex = 0;
-            this.lblSummaryLeft.Text = "- Điểm trung bình học kỳ 10/100: --\r\n- Điểm trung bình học kỳ 4: --\r\n- Điểm trung" +
-    " bình tích lũy: --\r\n- Điểm trung bình tích lũy (hệ 4): --";
-            // 
-            // lblSummaryRight
-            // 
-            this.lblSummaryRight.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.lblSummaryRight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(41)))), ((int)(((byte)(55)))));
-            this.lblSummaryRight.Location = new System.Drawing.Point(580, 6);
-            this.lblSummaryRight.Name = "lblSummaryRight";
-            this.lblSummaryRight.Size = new System.Drawing.Size(610, 88);
-            this.lblSummaryRight.TabIndex = 1;
-            this.lblSummaryRight.Text = "- Số tín chỉ đăng ký: --\r\n- Số tín chỉ tích lũy: --\r\n- Phân loại ĐTB HK: --\r\n- Đi" +
-    "ểm trung bình rèn luyện HK: --\r\n- Phân loại ĐTBRL HK: --";
+            this.DataGridViewKQDiem.DefaultCellStyle = dataGridViewCellStyle3;
+            this.DataGridViewKQDiem.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.DataGridViewKQDiem.Location = new System.Drawing.Point(13, 139);
+            this.DataGridViewKQDiem.Name = "DataGridViewKQDiem";
+            this.DataGridViewKQDiem.RowHeadersVisible = false;
+            this.DataGridViewKQDiem.Size = new System.Drawing.Size(1199, 352);
+            this.DataGridViewKQDiem.TabIndex = 22;
+            this.DataGridViewKQDiem.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.DataGridViewKQDiem.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.DataGridViewKQDiem.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.DataGridViewKQDiem.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.DataGridViewKQDiem.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.DataGridViewKQDiem.ThemeStyle.BackColor = System.Drawing.Color.White;
+            this.DataGridViewKQDiem.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.DataGridViewKQDiem.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.DataGridViewKQDiem.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.DataGridViewKQDiem.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DataGridViewKQDiem.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+            this.DataGridViewKQDiem.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewKQDiem.ThemeStyle.HeaderStyle.Height = 22;
+            this.DataGridViewKQDiem.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.DataGridViewKQDiem.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.DataGridViewKQDiem.AllowUserToAddRows = false;
+            this.DataGridViewKQDiem.AllowUserToDeleteRows = false;
+            this.DataGridViewKQDiem.ReadOnly = true;
+            this.DataGridViewKQDiem.MultiSelect = false;
+            this.DataGridViewKQDiem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DataGridViewKQDiem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.DataGridViewKQDiem.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+                MakeCol("colSTT",     "STT",           50),
+                MakeCol("colMaMon",   "Mã môn",        90),
+                MakeCol("colTenMon",  "Tên môn học",   220),
+                MakeCol("colSoTC",    "Số TC",         55),
+                MakeCol("colDiemCC",  "Chuyên cần",    85),
+                MakeCol("colDiemKT1", "Kiểm tra 1",    85),
+                MakeCol("colDiemKT2", "Kiểm tra 2",    85),
+                MakeCol("colDiemThi", "Điểm thi",      80),
+                MakeCol("colDiemTK",  "Điểm TK",       75),
+                MakeCol("colXepLoai", "Xếp loại",      70),
+            });
             // 
             // KetQuaHocTap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
-            this.ClientSize = new System.Drawing.Size(1156, 546);
+            this.ClientSize = new System.Drawing.Size(1224, 685);
+            this.Controls.Add(this.DataGridViewKQDiem);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pnlFilter);
-            this.Controls.Add(this.pnlChuY);
-            this.Controls.Add(this.dgvKetQua);
-            this.Controls.Add(this.pnlSummary);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "KetQuaHocTap";
             this.Text = "Kết Quả Học Tập";
             this.pnlFilter.ResumeLayout(false);
             this.pnlFilter.PerformLayout();
-            this.pnlChuY.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvKetQua)).EndInit();
-            this.pnlSummary.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewKQDiem)).EndInit();
             this.ResumeLayout(false);
 
         }
 
-        // Helper: tạo DataGridViewTextBoxColumn nhanh
-        private static System.Windows.Forms.DataGridViewTextBoxColumn MakeCol(
-            string name, string header, int width, bool autoFill)
+        // Helper tạo cột nhanh
+        private static DataGridViewTextBoxColumn MakeCol(string name, string header, int width)
         {
-            var col = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            col.Name            = name;
-            col.HeaderText      = header;
-            col.Width           = width;
-            col.MinimumWidth    = 30;
-            col.ReadOnly        = true;
-            col.SortMode        = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            col.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            if (autoFill)
+            return new DataGridViewTextBoxColumn
             {
-                col.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-                col.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            }
-            return col;
+                Name         = name,
+                HeaderText   = header,
+                Width        = width,
+                MinimumWidth = 30,
+                ReadOnly     = true,
+                SortMode     = DataGridViewColumnSortMode.NotSortable
+            };
+        }
+
+        // Helper tạo một hàng caption + value nằm ngang
+        private static void SetupStatRow(
+            Label caption, Label value,
+            string captionText, string valueText,
+            Font fontCaption, Font fontValue, Color valueColor,
+            int x, int y)
+        {
+            caption.AutoSize  = true;
+            caption.Font      = fontCaption;
+            caption.ForeColor = Color.FromArgb(60, 60, 60);
+            caption.Location  = new Point(x, y);
+            caption.Text      = captionText;
+
+            value.AutoSize  = true;
+            value.Font      = fontValue;
+            value.ForeColor = valueColor;
+            value.Location  = new Point(x + 160, y);
+            value.Text      = valueText;
         }
 
         #endregion
 
-        // ── Field declarations ────────────────────────────────────────────────────
-        private Guna.UI2.WinForms.Guna2Panel          pnlFilter;
-        private System.Windows.Forms.Label            lblNamHoc;
-        private Guna.UI2.WinForms.Guna2ComboBox       cboNamHoc;
-        private System.Windows.Forms.Label            lblHocKy;
-        private Guna.UI2.WinForms.Guna2ComboBox       cboHocKy;
-        private System.Windows.Forms.Panel            pnlChuY;
-        private System.Windows.Forms.Label            lblChuY;
-        private Guna.UI2.WinForms.Guna2DataGridView   dgvKetQua;
-        private System.Windows.Forms.Panel            pnlSummary;
-        private System.Windows.Forms.Label            lblSummaryLeft;
-        private System.Windows.Forms.Label            lblSummaryRight;
+        private System.Windows.Forms.Panel              pnlFilter;
+        private System.Windows.Forms.Label              lblNamHoc;
+        private System.Windows.Forms.ComboBox           cboNamHoc;
+        private System.Windows.Forms.Label              lblHocKy;
+        private System.Windows.Forms.ComboBox           cboHocKy;
+        private Label lblTenSV;
+        private Label lblMaSV;
+        private Label lblMa;
+        private Label lblTen;
+        private GroupBox groupBox1;
+        private Label label4;
+        private Label label3;
+        private Label label2;
+        private Label label1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblPhanloai;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTK4;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTK10;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTC;
+        private Guna.UI2.WinForms.Guna2DataGridView DataGridViewKQDiem;
     }
 }

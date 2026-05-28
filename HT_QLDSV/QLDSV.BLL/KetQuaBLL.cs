@@ -37,6 +37,25 @@ namespace QLDSV.BLL
             return maGV;
         }
 
+        // ═══════════════════════════════════════════════════════════════════════════
+        // SINH VIÊN – Kết quả học tập
+        // ═══════════════════════════════════════════════════════════════════════════
+
+        /// <summary>Lấy MaSV và HoTen từ MaTaiKhoan của sinh viên đang đăng nhập.</summary>
+        public DataTable GetThongTinSinhVien(string maTaiKhoan)
+            => _dal.GetThongTinSinhVienByTaiKhoan(maTaiKhoan);
+
+        /// <summary>Lấy danh sách năm học mà sinh viên có đăng ký lớp học phần.</summary>
+        public DataTable GetNamHocBySinhVien(string maSV)
+            => _dal.GetNamHocBySinhVien(maSV);
+
+        /// <summary>
+        /// Lấy bảng điểm thô (CC, KT1, KT2, CK) của sinh viên theo năm học + học kỳ.
+        /// Trả về: MaMon, TenMon, SoTC, DiemCC, DiemKT1, DiemKT2, DiemThi.
+        /// </summary>
+        public DataTable GetBangDiemSinhVien(string maSV, string maNamHoc, string maLoaiHK)
+            => _dal.GetBangDiemSinhVien(maSV, maNamHoc, maLoaiHK);
+
         // ─── Lưu điểm (thêm mới hoặc cập nhật) ───────────────────────────────────
         /// <summary>
         /// Lưu một loại điểm cho sinh viên. Nếu đã tồn tại thì UPDATE, chưa có thì INSERT.

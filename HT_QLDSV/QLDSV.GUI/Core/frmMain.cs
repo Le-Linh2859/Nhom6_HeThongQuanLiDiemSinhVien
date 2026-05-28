@@ -153,7 +153,7 @@ namespace QLDSV.GUI
             };
             if (btnKetqua != null) btnKetqua.Click += (s, e) => {
                 if (SessionHelper.MaVaiTro == "VT003")
-                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.KetQuaHocTap(), "Nhập Điểm");
+                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.KetQuaHocTap(), "Kết Quả Học Tập");
                 else OpenChildForm(new frmKetQuaHocTap(), "Kết Quả Học Tập");
             }; 
             
