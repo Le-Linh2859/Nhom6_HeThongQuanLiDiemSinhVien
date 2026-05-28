@@ -131,6 +131,12 @@
     <!-- ═══════════════════════════════════════════════ -->
     <!--  FORMS / ADMIN – Form dành cho Quản trị viên   -->
     <!-- ═══════════════════════════════════════════════ -->
+    <Compile Include="Forms\Admin\frmTheoDoiDiem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\frmTheoDoiDiem.Designer.cs">
+      <DependentUpon>frmTheoDoiDiem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Admin\frmTongQuan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,6 +242,7 @@
     <EmbeddedResource Include="Forms\Admin\FrmNhapDiemSV.resx">
       <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <Compile Include="Forms\Admin\frmKetQuaHocTap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +253,9 @@
       <DependentUpon>frmKetQuaHocTap.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Forms\Admin\frmPhucKhao_Admin.cs">
+=======
+    <Compile Include="Forms\Admin\frmPhucKhao.cs">
+>>>>>>> db4428ec62895fa5581eeaa3f69767735ca37c59
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Admin\frmPhucKhao_Admin.Designer.cs">
@@ -312,6 +322,12 @@
     <Compile Include="Forms\GiangVien\frmThongTinCaNhan_GV.Designer.cs">
       <DependentUpon>frmThongTinCaNhan_GV.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\GiangVien\FrmTraCuuDiem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GiangVien\FrmTraCuuDiem.Designer.cs">
+      <DependentUpon>FrmTraCuuDiem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SinhVien\frmLophocphan_SV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -337,6 +353,9 @@
       <DependentUpon>KetQuaHocTap.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Admin\frmTheoDoiDiem.resx">
+      <DependentUpon>frmTheoDoiDiem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GiangVien\frmLophocphan_GV.resx">
       <DependentUpon>frmLophocphan_GV.cs</DependentUpon>
     </EmbeddedResource>
