@@ -265,7 +265,7 @@ namespace QLDSV.GUI
                     OpenChildForm(new QLDSV.GUI.Forms.SinhVien.KetQuaHocTap(), "Kết Quả Học Tập");
                 else if (SessionHelper.MaVaiTro == "VT002")
                     OpenChildForm(new QLDSV.GUI.Forms.GiangVien.FrmTraCuuDiem(), "Tra Cứu Điểm Sinh Viên");
-                else OpenChildForm(new frmTheoDoiDiem(), "Theo Dõi Điểm");
+                else OpenChildForm(new QLDSV.GUI.Forms.Admin.frmTheoDoiDiem(), "Theo Dõi Điểm");
             };
             if (btnCanhbao != null) btnCanhbao.Click += (s, e) => OpenChildForm(new frmCanhBaoHocVu(), "Cảnh Báo Học Vụ");
             if (btnPhuckhao != null) btnPhuckhao.Click += (s, e) =>

@@ -195,5 +195,112 @@ namespace QLDSV.DAL
             cmd.Dispose();
             return result;
         }
+
+        // ═══════════════════════════════════════════════════════════════════════════
+        // ADMIN – Theo dõi kết quả học tập
+        // ═══════════════════════════════════════════════════════════════════════════
+
+        // ─── Danh mục cho ComboBox Admin ─────────────────────────────────────────
+
+        /// <summary>Lấy danh sách năm học (MaNamHoc, TenNamHoc) cho ComboBox.</summary>
+        public DataTable GetDanhSachNamHoc()
+        {
+            string sql = "SELECT MaNamHoc, TenNamHoc FROM NamHoc ORDER BY MaNamHoc DESC";
+            return Connection.GetDataToTable(sql);
+        }
+
+        /// <summary>Lấy danh sách loại học kỳ (MaLoaiHK, TenLoaiHK) cho ComboBox.</summary>
+        public DataTable GetDanhSachLoaiHocKy()
+        {
+            string sql = "SELECT MaLoaiHK, TenLoaiHK FROM LoaiHocKy ORDER BY MaLoaiHK";
+            return Connection.GetDataToTable(sql);
+        }
+
+        /// <summary>Lấy danh sách lớp niên chế (MaLopNienChe, TenLop) cho ComboBox.</summary>
+        public DataTable GetDanhSachLopNienChe()
+        {
+            string sql = "SELECT MaLopNienChe, TenLop FROM LopNienChe ORDER BY MaLopNienChe";
+            return Connection.GetDataToTable(sql);
+        }
+
+        /// <summary>
+        /// Lấy danh sách tổng hợp kết quả học tập của sinh viên theo bộ lọc.
+        /// Truyền "ALL" để bỏ qua điều kiện tương ứng.
+        /// Trả về: MaSV, HoTen, TenLop, DTB10
+        /// </summary>
+        public DataTable GetKetQuaHocTapAdmin(
+            string maNamHoc, string maLoaiHK, string maLopNienChe, string keyword)
+        {
+            string wNam  = maNamHoc     == "ALL" ? "" : $" AND hknh.MaNamHoc = '{maNamHoc}'";
+            string wHK   = maLoaiHK     == "ALL" ? "" : $" AND hknh.MaLoaiHK = '{maLoaiHK}'";
+            string wLop  = maLopNienChe == "ALL" ? "" : $" AND sv.MaLopNienChe = '{maLopNienChe}'";
+            string wKey  = string.IsNullOrWhiteSpace(keyword) ? ""
+                : $" AND (sv.MaSV LIKE N'%{keyword.Replace("'","''")}%'" +
+                  $" OR sv.HoTen LIKE N'%{keyword.Replace("'","''")}%')";
+
+            // CTE bước 1: tính điểm tổng kết từng môn (hệ 10) cho từng SV-LHP
+            // CTE bước 2: tính DTB10 có trọng số tín chỉ theo từng sinh viên
+            // Tránh nested aggregate (SUM(SoTC * MAX(...))) không hợp lệ trong SQL Server
+            string sql =
+                "WITH DiemMon AS ( " +
+                "  SELECT dklh.MaSV, lhp.MaMon, mh.SoTC, " +
+                "    ROUND( " +
+                "      ISNULL(MAX(CASE WHEN kq.MaLoaiDiem='CC'  THEN kq.Diem END), 0) * 0.1  + " +
+                "      ISNULL(MAX(CASE WHEN kq.MaLoaiDiem='KT1' THEN kq.Diem END), 0) * 0.15 + " +
+                "      ISNULL(MAX(CASE WHEN kq.MaLoaiDiem='KT2' THEN kq.Diem END), 0) * 0.15 + " +
+                "      ISNULL(MAX(CASE WHEN kq.MaLoaiDiem='CK'  THEN kq.Diem END), 0) * 0.6, 2) AS DiemTK, " +
+                "    CASE WHEN " +
+                "      MAX(CASE WHEN kq.MaLoaiDiem='CC'  THEN kq.Diem END) IS NOT NULL AND " +
+                "      MAX(CASE WHEN kq.MaLoaiDiem='KT1' THEN kq.Diem END) IS NOT NULL AND " +
+                "      MAX(CASE WHEN kq.MaLoaiDiem='KT2' THEN kq.Diem END) IS NOT NULL AND " +
+                "      MAX(CASE WHEN kq.MaLoaiDiem='CK'  THEN kq.Diem END) IS NOT NULL " +
+                "    THEN 1 ELSE 0 END AS DaDuDiem " +
+                "  FROM DangKyLopHoc dklh " +
+                "  INNER JOIN LopHocPhan lhp ON dklh.MaLHP = lhp.MaLHP " +
+                "  INNER JOIN HocKy_NamHoc hknh ON lhp.MaHKNH = hknh.MaHKNH " +
+                "  INNER JOIN MonHoc mh ON lhp.MaMon = mh.MaMon " +
+                "  LEFT  JOIN KetQua kq ON kq.MaSV = dklh.MaSV AND kq.MaLHP = dklh.MaLHP " +
+                "  WHERE 1=1" + wNam + wHK +
+                "  GROUP BY dklh.MaSV, lhp.MaMon, mh.SoTC " +
+                ") " +
+                "SELECT sv.MaSV, sv.HoTen, lnc.TenLop, " +
+                "  ROUND( " +
+                "    SUM(dm.DiemTK * dm.SoTC) / NULLIF(SUM(dm.SoTC), 0) " +
+                "  , 2) AS DTB10 " +
+                "FROM SinhVien sv " +
+                "INNER JOIN LopNienChe lnc ON sv.MaLopNienChe = lnc.MaLopNienChe " +
+                "INNER JOIN DiemMon dm ON dm.MaSV = sv.MaSV " +
+                "WHERE 1=1" + wLop + wKey +
+                " GROUP BY sv.MaSV, sv.HoTen, lnc.TenLop" +
+                " ORDER BY sv.MaSV";
+            return Connection.GetDataToTable(sql);
+        }
+
+        /// <summary>
+        /// Lấy chi tiết điểm từng môn của một sinh viên theo bộ lọc.
+        /// Trả về: MaLHP, TenMon, SoTC, DiemCC, DiemKT1, DiemKT2, DiemThi
+        /// </summary>
+        public DataTable GetChiTietDiemSinhVien(
+            string maSV, string maNamHoc, string maLoaiHK)
+        {
+            string wNam = maNamHoc == "ALL" ? "" : $" AND hknh.MaNamHoc = '{maNamHoc}'";
+            string wHK  = maLoaiHK == "ALL" ? "" : $" AND hknh.MaLoaiHK = '{maLoaiHK}'";
+
+            string sql =
+                "SELECT lhp.MaLHP, mh.TenMon, mh.SoTC, " +
+                "  MAX(CASE WHEN kq.MaLoaiDiem='CC'  THEN kq.Diem END) AS DiemCC, " +
+                "  MAX(CASE WHEN kq.MaLoaiDiem='KT1' THEN kq.Diem END) AS DiemKT1, " +
+                "  MAX(CASE WHEN kq.MaLoaiDiem='KT2' THEN kq.Diem END) AS DiemKT2, " +
+                "  MAX(CASE WHEN kq.MaLoaiDiem='CK'  THEN kq.Diem END) AS DiemThi " +
+                "FROM DangKyLopHoc dklh " +
+                "INNER JOIN LopHocPhan lhp ON dklh.MaLHP = lhp.MaLHP " +
+                "INNER JOIN HocKy_NamHoc hknh ON lhp.MaHKNH = hknh.MaHKNH " +
+                "INNER JOIN MonHoc mh ON lhp.MaMon = mh.MaMon " +
+                "LEFT  JOIN KetQua kq ON kq.MaSV = dklh.MaSV AND kq.MaLHP = dklh.MaLHP " +
+                $"WHERE dklh.MaSV = '{maSV}'" + wNam + wHK +
+                " GROUP BY lhp.MaLHP, mh.TenMon, mh.SoTC" +
+                " ORDER BY mh.TenMon";
+            return Connection.GetDataToTable(sql);
+        }
     }
 }
