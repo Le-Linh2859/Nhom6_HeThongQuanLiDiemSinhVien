@@ -231,7 +231,7 @@ namespace QLDSV.GUI
         private void WireUpSidebarEvents()
         {
             if (btnTongquan != null) btnTongquan.Click += (s, e) => OpenChildForm(new frmTongQuan(), "Tổng Quan");
-            if (btnGiangvien != null) btnGiangvien.Click += (s, e) => OpenChildForm(new frmGiangvien(), "Giảng Viên");
+            //if (btnGiangvien != null) btnGiangvien.Click += (s, e) => OpenChildForm(new frmGiangvien(), "Giảng Viên");
             if (btnSinhvien != null) btnSinhvien.Click += (s, e) => OpenChildForm(new frmQuanLiThongTinSinhVien(), "Sinh Viên");
             if (btnMon != null) btnMon.Click += (s, e) =>
             {
@@ -265,6 +265,16 @@ namespace QLDSV.GUI
                     OpenChildForm(new QLDSV.GUI.Forms.SinhVien.KetQuaHocTap(), "Kết Quả Học Tập");
                 else OpenChildForm(new QLDSV.GUI.Forms.Admin.frmTheoDoiDiem(), "Theo Dõi Điểm");
             };
+
+
+            if (btnGiangvien != null) btnGiangvien.Click += (s, e) =>
+            {
+                if (SessionHelper.MaVaiTro == "VT001")
+                    OpenChildForm(new QLDSV.GUI.frmGiangvien(), "Quản lý giảng viên");
+                else OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmThongTinCaNhan_GV(), "Thông tin giảng viên");
+            };
+
+
             if (btnCanhbao != null) btnCanhbao.Click += (s, e) => OpenChildForm(new frmCanhBaoHocVu(), "Cảnh Báo Học Vụ");
             if (btnPhuckhao != null) btnPhuckhao.Click += (s, e) =>
             {

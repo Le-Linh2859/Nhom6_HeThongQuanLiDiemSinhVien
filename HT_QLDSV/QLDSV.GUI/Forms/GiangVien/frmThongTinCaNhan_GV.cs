@@ -29,6 +29,11 @@ namespace QLDSV.GUI.Forms.GiangVien
         private void frmThongTinCaNhan_GV_Load(object sender, EventArgs e)
         {
             LoadThongTinGiangVien();
+            txtMatk.Enabled = false;
+            txtMagv.Enabled = false;
+            txtGioitinh.Enabled = false;
+            txtTenkhoa.Enabled = false;
+            txtMatk.Enabled = false;
 
         }
         private void LoadThongTinGiangVien()

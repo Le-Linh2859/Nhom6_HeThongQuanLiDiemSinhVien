@@ -15,11 +15,7 @@ namespace QLDSV.GUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            SessionHelper.MaTaiKhoan = "TK007"; // tài khoản có thật trong DB
-            SessionHelper.TenDangNhap = "GV20260001";
-            SessionHelper.MaVaiTro = "VT002";
-
-            Application.Run(new frmThongTinCaNhan_GV());
+            Application.Run(new frmDangNhap());
         }
     }
 }
