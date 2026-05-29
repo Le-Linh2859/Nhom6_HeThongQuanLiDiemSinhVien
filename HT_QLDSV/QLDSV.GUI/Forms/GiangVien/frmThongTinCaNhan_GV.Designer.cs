@@ -123,7 +123,7 @@
             this.txtDiachi.Name = "txtDiachi";
             this.txtDiachi.PlaceholderText = "";
             this.txtDiachi.SelectedText = "";
-            this.txtDiachi.Size = new System.Drawing.Size(996, 31);
+            this.txtDiachi.Size = new System.Drawing.Size(996, 56);
             this.txtDiachi.TabIndex = 19;
             // 
             // label12
@@ -172,7 +172,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.PlaceholderText = "";
             this.txtEmail.SelectedText = "";
-            this.txtEmail.Size = new System.Drawing.Size(414, 28);
+            this.txtEmail.Size = new System.Drawing.Size(414, 56);
             this.txtEmail.TabIndex = 17;
             // 
             // label11
@@ -218,7 +218,7 @@
             this.txtSdt.Name = "txtSdt";
             this.txtSdt.PlaceholderText = "";
             this.txtSdt.SelectedText = "";
-            this.txtSdt.Size = new System.Drawing.Size(414, 28);
+            this.txtSdt.Size = new System.Drawing.Size(414, 56);
             this.txtSdt.TabIndex = 18;
             // 
             // btnHuy
@@ -332,7 +332,6 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
             this.tableLayoutPanel1.Controls.Add(this.txtTenkhoa, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtGioitinh, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtTengv, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label7, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
@@ -341,6 +340,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label8, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.txtMagv, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtMatk, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.txtGioitinh, 3, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 40);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
@@ -372,7 +372,7 @@
             this.txtMatk.Name = "txtMatk";
             this.txtMatk.PlaceholderText = "";
             this.txtMatk.SelectedText = "";
-            this.txtMatk.Size = new System.Drawing.Size(414, 34);
+            this.txtMatk.Size = new System.Drawing.Size(414, 62);
             this.txtMatk.TabIndex = 24;
             // 
             // txtMagv
@@ -393,7 +393,7 @@
             this.txtMagv.Name = "txtMagv";
             this.txtMagv.PlaceholderText = "";
             this.txtMagv.SelectedText = "";
-            this.txtMagv.Size = new System.Drawing.Size(414, 33);
+            this.txtMagv.Size = new System.Drawing.Size(414, 57);
             this.txtMagv.TabIndex = 16;
             // 
             // label8
@@ -485,7 +485,7 @@
             this.txtTengv.Name = "txtTengv";
             this.txtTengv.PlaceholderText = "";
             this.txtTengv.SelectedText = "";
-            this.txtTengv.Size = new System.Drawing.Size(414, 33);
+            this.txtTengv.Size = new System.Drawing.Size(414, 57);
             this.txtTengv.TabIndex = 17;
             // 
             // txtGioitinh
@@ -506,7 +506,7 @@
             this.txtGioitinh.Name = "txtGioitinh";
             this.txtGioitinh.PlaceholderText = "";
             this.txtGioitinh.SelectedText = "";
-            this.txtGioitinh.Size = new System.Drawing.Size(414, 33);
+            this.txtGioitinh.Size = new System.Drawing.Size(414, 59);
             this.txtGioitinh.TabIndex = 20;
             // 
             // txtTenkhoa
@@ -527,7 +527,7 @@
             this.txtTenkhoa.Name = "txtTenkhoa";
             this.txtTenkhoa.PlaceholderText = "";
             this.txtTenkhoa.SelectedText = "";
-            this.txtTenkhoa.Size = new System.Drawing.Size(414, 33);
+            this.txtTenkhoa.Size = new System.Drawing.Size(414, 63);
             this.txtTenkhoa.TabIndex = 23;
             // 
             // frmThongTinCaNhan_GV

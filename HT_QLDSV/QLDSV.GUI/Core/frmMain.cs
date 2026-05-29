@@ -1,4 +1,5 @@
 using QLDSV.GUI.Forms.Admin;
+using QLDSV.GUI.Forms.SinhVien;
 using System;
 using System.Data;
 using System.Drawing;
@@ -242,6 +243,20 @@ namespace QLDSV.GUI
                 else
                     OpenChildForm(new frmMonhoc(), "Môn Học");
             };
+            if (btnCanhbao != null)
+            {
+                btnCanhbao.Click += (s, e) =>
+                {
+                    if (SessionHelper.MaVaiTro == "VT003")
+                        OpenChildForm(
+                            new frmCanhBaoHocVu_SV(),
+                            "Cảnh Báo Học Vụ");
+                    else
+                        OpenChildForm(
+                            new frmCanhBaoHocVu(),
+                            "Cảnh Báo Học Vụ");
+                };
+            }
             if (btnLopnc != null) btnLopnc.Click += (s, e) => OpenChildForm(new FrmLopNienChe(), "Lớp Niên Chế");
             if (btnLophp != null) btnLophp.Click += (s, e) =>
             {
@@ -275,7 +290,7 @@ namespace QLDSV.GUI
             };
 
 
-            if (btnCanhbao != null) btnCanhbao.Click += (s, e) => OpenChildForm(new frmCanhBaoHocVu(), "Cảnh Báo Học Vụ");
+            //if (btnCanhbao != null) btnCanhbao.Click += (s, e) => OpenChildForm(new frmCanhBaoHocVu(), "Cảnh Báo Học Vụ");
             if (btnPhuckhao != null) btnPhuckhao.Click += (s, e) =>
             {
                 if (SessionHelper.MaVaiTro == "VT001")

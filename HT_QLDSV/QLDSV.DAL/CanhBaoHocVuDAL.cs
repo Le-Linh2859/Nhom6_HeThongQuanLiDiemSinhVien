@@ -163,21 +163,33 @@ namespace QLDSV.DAL
             try
             {
                 string sql = $@"
-                    SELECT
-                        sv.MaSV,
-                        sv.HoTen,
-                        sv.MaLopNienChe,
-                        '{maHKNH}' AS MaHKNH
-                    FROM SinhVien sv
-                    WHERE sv.MaSV NOT IN (
-                        SELECT DISTINCT dkl.MaSV
-                        FROM DangKyLop dkl
-                        INNER JOIN LopHocPhan lhp
-                            ON dkl.MaLHP = lhp.MaLHP
-                        WHERE lhp.MaHKNH   = '{maHKNH}'
-                          AND dkl.TrangThai = 1
-                    )
-                ";
+SELECT
+    sv.MaSV,
+    sv.HoTen,
+    sv.MaLopNienChe,
+    '{maHKNH}' AS MaHKNH
+FROM SinhVien sv
+INNER JOIN HocKy_NamHoc hknh
+    ON hknh.MaHKNH = '{maHKNH}'
+INNER JOIN NamHoc nh
+    ON hknh.MaNamHoc = nh.MaNamHoc
+WHERE
+    CAST(LEFT(sv.NienKhoa,4) AS INT)
+        <= CAST(SUBSTRING(nh.TenNamHoc,9,4) AS INT)
+
+AND CAST(RIGHT(sv.NienKhoa,4) AS INT)
+        >= CAST(SUBSTRING(nh.TenNamHoc,14,4) AS INT)
+
+AND sv.MaSV NOT IN
+(
+    SELECT DISTINCT dkl.MaSV
+    FROM DangKyLop dkl
+    INNER JOIN LopHocPhan lhp
+        ON dkl.MaLHP = lhp.MaLHP
+    WHERE lhp.MaHKNH = '{maHKNH}'
+      AND dkl.TrangThai = 1
+)
+";
                 return Connection.GetDataToTable(sql);
             }
             catch (Exception ex)
@@ -229,9 +241,23 @@ namespace QLDSV.DAL
                         tbc.MaHKNH,
                         ROUND(tbc.TBCHocKy, 2) AS TBCHocKy,
                         tbc.SoMon
-                    FROM TBCHocKy tbc
-                    INNER JOIN SinhVien sv ON sv.MaSV = tbc.MaSV
-                    WHERE tbc.TBCHocKy < 1.5
+FROM TBCHocKy tbc
+INNER JOIN SinhVien sv
+    ON sv.MaSV = tbc.MaSV
+
+INNER JOIN HocKy_NamHoc hknh
+    ON hknh.MaHKNH = tbc.MaHKNH
+
+INNER JOIN NamHoc nh
+    ON nh.MaNamHoc = hknh.MaNamHoc
+
+WHERE tbc.TBCHocKy < 1.5
+
+AND CAST(LEFT(sv.NienKhoa,4) AS INT)
+        <= CAST(SUBSTRING(nh.TenNamHoc,9,4) AS INT)
+
+AND CAST(RIGHT(sv.NienKhoa,4) AS INT)
+        >= CAST(SUBSTRING(nh.TenNamHoc,14,4) AS INT)
                 ";
                 return Connection.GetDataToTable(sql);
             }
@@ -368,6 +394,82 @@ namespace QLDSV.DAL
                 throw new Exception(
                     "Lỗi DAL - GetHocKyDangHoatDong: " + ex.Message);
             }
+
+        }
+        public DataTable GetCanhBaoBySinhVien(string maSV)
+        {
+            try
+            {
+                string sql = $@"
+        SELECT
+            cbsv.MaCanhBao,
+            hk.TenLoaiHK,
+            nh.TenNamHoc,
+            cbhv.Noidung,
+            cbhv.LoaiCanhBao,
+            cbsv.ThoiDiem,
+            cbsv.LanThu
+        FROM CanhBao_SinhVien cbsv
+        INNER JOIN CanhBaoHocVu cbhv
+            ON cbsv.MaCanhBao = cbhv.MaCanhBao
+        INNER JOIN HocKy_NamHoc hknh
+            ON cbsv.MaHKNH = hknh.MaHKNH
+        INNER JOIN LoaiHocKy hk
+            ON hknh.MaLoaiHK = hk.MaLoaiHK
+        INNER JOIN NamHoc nh
+            ON hknh.MaNamHoc = nh.MaNamHoc
+        WHERE cbsv.MaSV = '{maSV}'
+        ORDER BY cbsv.ThoiDiem DESC
+        ";
+
+                return Connection.GetDataToTable(sql);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Lỗi DAL - GetCanhBaoBySinhVien: "
+                    + ex.Message);
+            }
+        }
+        public DataTable GetNamHocTheoSinhVien(string maSV)
+        {
+            string sql = $@"
+    DECLARE @NienKhoa NVARCHAR(20)
+
+    SELECT @NienKhoa = NienKhoa
+    FROM SinhVien
+    WHERE MaSV = '{maSV}'
+
+    DECLARE @NamBatDau INT =
+        CAST(LEFT(@NienKhoa,4) AS INT)
+
+    DECLARE @NamKetThuc INT =
+        CAST(RIGHT(@NienKhoa,4) AS INT)
+
+    SELECT
+        MaNamHoc,
+        TenNamHoc
+    FROM NamHoc
+    WHERE
+        CAST(SUBSTRING(TenNamHoc,9,4) AS INT)
+            BETWEEN @NamBatDau
+                AND (@NamKetThuc - 1)
+    ORDER BY TenNamHoc
+    ";
+
+            return Connection.GetDataToTable(sql);
+        }
+        public string GetMaSVByTaiKhoan(string maTaiKhoan)
+        {
+            string sql = $@"
+        SELECT MaSV
+        FROM SinhVien
+        WHERE MaTaiKhoan = '{maTaiKhoan}'
+    ";
+
+            object result = Connection.ExecuteScalar(sql);
+
+            return result?.ToString();
         }
     }
 }

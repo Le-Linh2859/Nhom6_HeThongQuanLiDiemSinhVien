@@ -96,6 +96,10 @@ namespace QLDSV.BLL
                 return false;
             }
         }
+        public string GetMaSVByTaiKhoan(string maTaiKhoan)
+        {
+            return dal.GetMaSVByTaiKhoan(maTaiKhoan);
+        }
         // =====================================================
         // PHÁT HIỆN CẢNH BÁO TỰ ĐỘNG
         // =====================================================
@@ -224,6 +228,14 @@ namespace QLDSV.BLL
             }
 
             return (soMoi, soCapNhat);
+        }
+        public DataTable GetCanhBaoBySinhVien(string maSV)
+        {
+            return dal.GetCanhBaoBySinhVien(maSV);
+        }
+        public DataTable GetNamHocTheoSinhVien(string maSV)
+        {
+            return dal.GetNamHocTheoSinhVien(maSV);
         }
     }
 }
