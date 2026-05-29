@@ -290,8 +290,6 @@ namespace QLDSV.GUI.Forms.Admin
                     dt.Columns.Add("DiemChu", typeof(string));
                 if (!dt.Columns.Contains("DiemHe4"))
                     dt.Columns.Add("DiemHe4", typeof(double));
-                if (!dt.Columns.Contains("XepLoai"))
-                    dt.Columns.Add("XepLoai", typeof(string));
 
                 foreach (DataRow row in dt.Rows)
                 {
@@ -306,7 +304,6 @@ namespace QLDSV.GUI.Forms.Admin
                     row["DiemTongKet"] = tk;
                     row["DiemChu"]     = KetQuaBLL.QuyDoiDiemChu(tk);
                     row["DiemHe4"]     = gpa4;
-                    row["XepLoai"]     = KetQuaBLL.XepLoaiHocLuc(gpa4);
                 }
 
                 dataGridView2.DataSource = dt;
@@ -328,10 +325,10 @@ namespace QLDSV.GUI.Forms.Admin
 
             string[] colNames = { "MaLHP",   "TenMon",      "DiemCC",    "DiemKT1",
                                    "DiemKT2", "DiemThi",     "DiemTongKet","DiemChu",
-                                   "DiemHe4", "XepLoai" };
+                                   "DiemHe4" };
             string[] headers  = { "Mã LHP",  "Tên Môn Học", "Chuyên Cần","KT1",
                                    "KT2",     "Cuối Kỳ",     "Tổng Kết (Hệ 10)","Điểm Chữ",
-                                   "Hệ 4",    "Xếp Loại" };
+                                   "Hệ 4" };
 
             for (int i = 0; i < colNames.Length; i++)
             {
