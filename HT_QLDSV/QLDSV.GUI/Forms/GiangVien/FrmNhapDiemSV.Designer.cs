@@ -31,9 +31,9 @@ namespace QLDSV.GUI.Forms.GiangVien
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlFilter = new Guna.UI2.WinForms.Guna2Panel();
             this.cboLopHocPhan = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lblFilterLHP = new System.Windows.Forms.Label();
@@ -41,7 +41,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.lblFilterHK = new System.Windows.Forms.Label();
             this.cboNamHoc = new Guna.UI2.WinForms.Guna2ComboBox();
             this.lblFilterNH = new System.Windows.Forms.Label();
-            this.pnlMiddle = new System.Windows.Forms.TableLayoutPanel();
+            this.splitMiddle = new System.Windows.Forms.SplitContainer();
             this.grpStudents = new System.Windows.Forms.GroupBox();
             this.lstSinhVien = new System.Windows.Forms.ListBox();
             this.grpDetails = new System.Windows.Forms.GroupBox();
@@ -63,17 +63,20 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.lblMaSV = new System.Windows.Forms.Label();
             this.dgvDiem = new Guna.UI2.WinForms.Guna2DataGridView();
             this.lblTongSV = new System.Windows.Forms.Label();
+            this.tblMain = new System.Windows.Forms.TableLayoutPanel();
             this.pnlFilter.SuspendLayout();
-            this.pnlMiddle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitMiddle)).BeginInit();
+            this.splitMiddle.Panel1.SuspendLayout();
+            this.splitMiddle.Panel2.SuspendLayout();
+            this.splitMiddle.SuspendLayout();
             this.grpStudents.SuspendLayout();
             this.grpDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiem)).BeginInit();
+            this.tblMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlFilter
             // 
-            this.pnlFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlFilter.BorderRadius = 5;
             this.pnlFilter.Controls.Add(this.cboLopHocPhan);
             this.pnlFilter.Controls.Add(this.lblFilterLHP);
@@ -81,10 +84,11 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.pnlFilter.Controls.Add(this.lblFilterHK);
             this.pnlFilter.Controls.Add(this.cboNamHoc);
             this.pnlFilter.Controls.Add(this.lblFilterNH);
+            this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFilter.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(200)))), ((int)(((byte)(223)))));
-            this.pnlFilter.Location = new System.Drawing.Point(12, 12);
+            this.pnlFilter.Location = new System.Drawing.Point(11, 11);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(941, 66);
+            this.pnlFilter.Size = new System.Drawing.Size(943, 66);
             this.pnlFilter.TabIndex = 1;
             // 
             // cboLopHocPhan
@@ -102,6 +106,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.cboLopHocPhan.Name = "cboLopHocPhan";
             this.cboLopHocPhan.Size = new System.Drawing.Size(325, 36);
             this.cboLopHocPhan.TabIndex = 5;
+            this.cboLopHocPhan.SelectedIndexChanged += new System.EventHandler(this.CboLopHocPhan_SelectedIndexChanged);
             // 
             // lblFilterLHP
             // 
@@ -130,6 +135,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.cboHocKy.Name = "cboHocKy";
             this.cboHocKy.Size = new System.Drawing.Size(140, 36);
             this.cboHocKy.TabIndex = 3;
+            this.cboHocKy.SelectedIndexChanged += new System.EventHandler(this.CboHocKy_SelectedIndexChanged);
             // 
             // lblFilterHK
             // 
@@ -158,6 +164,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.cboNamHoc.Name = "cboNamHoc";
             this.cboNamHoc.Size = new System.Drawing.Size(155, 36);
             this.cboNamHoc.TabIndex = 1;
+            this.cboNamHoc.SelectedIndexChanged += new System.EventHandler(this.CboNamHoc_SelectedIndexChanged);
             // 
             // lblFilterNH
             // 
@@ -171,21 +178,24 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.lblFilterNH.TabIndex = 0;
             this.lblFilterNH.Text = "Năm học:";
             // 
-            // pnlMiddle
+            // splitMiddle
             // 
-            this.pnlMiddle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlMiddle.ColumnCount = 2;
-            this.pnlMiddle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32F));
-            this.pnlMiddle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68F));
-            this.pnlMiddle.Controls.Add(this.grpStudents, 0, 0);
-            this.pnlMiddle.Controls.Add(this.grpDetails, 1, 0);
-            this.pnlMiddle.Location = new System.Drawing.Point(12, 84);
-            this.pnlMiddle.Name = "pnlMiddle";
-            this.pnlMiddle.RowCount = 1;
-            this.pnlMiddle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.pnlMiddle.Size = new System.Drawing.Size(941, 229);
-            this.pnlMiddle.TabIndex = 2;
+            this.splitMiddle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitMiddle.Location = new System.Drawing.Point(11, 83);
+            this.splitMiddle.Name = "splitMiddle";
+            // 
+            // splitMiddle.Panel1
+            // 
+            this.splitMiddle.Panel1.Controls.Add(this.grpStudents);
+            this.splitMiddle.Panel1MinSize = 220;
+            // 
+            // splitMiddle.Panel2
+            // 
+            this.splitMiddle.Panel2.Controls.Add(this.grpDetails);
+            this.splitMiddle.Panel2MinSize = 320;
+            this.splitMiddle.Size = new System.Drawing.Size(943, 234);
+            this.splitMiddle.SplitterDistance = 300;
+            this.splitMiddle.TabIndex = 2;
             // 
             // grpStudents
             // 
@@ -193,9 +203,9 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.grpStudents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpStudents.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpStudents.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(41)))), ((int)(((byte)(55)))));
-            this.grpStudents.Location = new System.Drawing.Point(3, 3);
+            this.grpStudents.Location = new System.Drawing.Point(0, 0);
             this.grpStudents.Name = "grpStudents";
-            this.grpStudents.Size = new System.Drawing.Size(295, 223);
+            this.grpStudents.Size = new System.Drawing.Size(300, 234);
             this.grpStudents.TabIndex = 0;
             this.grpStudents.TabStop = false;
             this.grpStudents.Text = "Danh sách sinh viên";
@@ -209,8 +219,9 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.lstSinhVien.ItemHeight = 20;
             this.lstSinhVien.Location = new System.Drawing.Point(3, 25);
             this.lstSinhVien.Name = "lstSinhVien";
-            this.lstSinhVien.Size = new System.Drawing.Size(289, 195);
+            this.lstSinhVien.Size = new System.Drawing.Size(294, 206);
             this.lstSinhVien.TabIndex = 0;
+            this.lstSinhVien.SelectedIndexChanged += new System.EventHandler(this.LstSinhVien_SelectedIndexChanged);
             // 
             // grpDetails
             // 
@@ -234,9 +245,9 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.grpDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpDetails.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpDetails.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(41)))), ((int)(((byte)(55)))));
-            this.grpDetails.Location = new System.Drawing.Point(304, 3);
+            this.grpDetails.Location = new System.Drawing.Point(0, 0);
             this.grpDetails.Name = "grpDetails";
-            this.grpDetails.Size = new System.Drawing.Size(634, 223);
+            this.grpDetails.Size = new System.Drawing.Size(639, 234);
             this.grpDetails.TabIndex = 1;
             this.grpDetails.TabStop = false;
             this.grpDetails.Text = "Thông tin nhập điểm";
@@ -258,6 +269,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.btnReset.Size = new System.Drawing.Size(95, 35);
             this.btnReset.TabIndex = 17;
             this.btnReset.Text = "Reset";
+            this.btnReset.Click += new System.EventHandler(this.BtnReset_Click);
             // 
             // btnHuy
             // 
@@ -314,6 +326,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.btnNhap.Size = new System.Drawing.Size(95, 35);
             this.btnNhap.TabIndex = 12;
             this.btnNhap.Text = "Nhập";
+            this.btnNhap.Click += new System.EventHandler(this.BtnNhap_Click);
             // 
             // txtDiemCK
             // 
@@ -521,37 +534,35 @@ namespace QLDSV.GUI.Forms.GiangVien
             // 
             this.dgvDiem.AllowUserToAddRows = false;
             this.dgvDiem.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            this.dgvDiem.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
-            this.dgvDiem.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDiem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dgvDiem.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDiem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDiem.ColumnHeadersHeight = 40;
             this.dgvDiem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(216)))), ((int)(((byte)(242)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDiem.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(174)))), ((int)(((byte)(216)))), ((int)(((byte)(242)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDiem.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvDiem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDiem.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvDiem.Location = new System.Drawing.Point(12, 319);
+            this.dgvDiem.Location = new System.Drawing.Point(11, 323);
             this.dgvDiem.MultiSelect = false;
             this.dgvDiem.Name = "dgvDiem";
             this.dgvDiem.ReadOnly = true;
             this.dgvDiem.RowHeadersVisible = false;
             this.dgvDiem.RowTemplate.Height = 28;
-            this.dgvDiem.Size = new System.Drawing.Size(941, 297);
+            this.dgvDiem.Size = new System.Drawing.Size(943, 298);
             this.dgvDiem.TabIndex = 3;
             this.dgvDiem.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvDiem.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -577,15 +588,36 @@ namespace QLDSV.GUI.Forms.GiangVien
             // 
             // lblTongSV
             // 
-            this.lblTongSV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTongSV.AutoSize = true;
+            this.lblTongSV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTongSV.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTongSV.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(41)))), ((int)(((byte)(55)))));
-            this.lblTongSV.Location = new System.Drawing.Point(12, 630);
+            this.lblTongSV.Location = new System.Drawing.Point(11, 624);
             this.lblTongSV.Name = "lblTongSV";
-            this.lblTongSV.Size = new System.Drawing.Size(226, 20);
+            this.lblTongSV.Size = new System.Drawing.Size(943, 28);
             this.lblTongSV.TabIndex = 4;
             this.lblTongSV.Text = "Tổng số sinh viên nhập điểm: 0";
+            this.lblTongSV.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tblMain
+            // 
+            this.tblMain.ColumnCount = 1;
+            this.tblMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblMain.Controls.Add(this.pnlFilter, 0, 0);
+            this.tblMain.Controls.Add(this.splitMiddle, 0, 1);
+            this.tblMain.Controls.Add(this.dgvDiem, 0, 2);
+            this.tblMain.Controls.Add(this.lblTongSV, 0, 3);
+            this.tblMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblMain.Location = new System.Drawing.Point(0, 0);
+            this.tblMain.Name = "tblMain";
+            this.tblMain.Padding = new System.Windows.Forms.Padding(8);
+            this.tblMain.RowCount = 4;
+            this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 72F));
+            this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 240F));
+            this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.tblMain.Size = new System.Drawing.Size(965, 660);
+            this.tblMain.TabIndex = 0;
             // 
             // FrmNhapDiemSV
             // 
@@ -593,22 +625,24 @@ namespace QLDSV.GUI.Forms.GiangVien
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(242)))), ((int)(((byte)(245)))));
             this.ClientSize = new System.Drawing.Size(965, 660);
-            this.Controls.Add(this.lblTongSV);
-            this.Controls.Add(this.dgvDiem);
-            this.Controls.Add(this.pnlMiddle);
-            this.Controls.Add(this.pnlFilter);
+            this.Controls.Add(this.tblMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmNhapDiemSV";
             this.Text = "Nhập Điểm Sinh Viên";
+            this.Load += new System.EventHandler(this.FrmNhapDiemSV_Load);
             this.pnlFilter.ResumeLayout(false);
             this.pnlFilter.PerformLayout();
-            this.pnlMiddle.ResumeLayout(false);
+            this.splitMiddle.Panel1.ResumeLayout(false);
+            this.splitMiddle.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitMiddle)).EndInit();
+            this.splitMiddle.ResumeLayout(false);
             this.grpStudents.ResumeLayout(false);
             this.grpDetails.ResumeLayout(false);
             this.grpDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiem)).EndInit();
+            this.tblMain.ResumeLayout(false);
+            this.tblMain.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -620,7 +654,7 @@ namespace QLDSV.GUI.Forms.GiangVien
         private System.Windows.Forms.Label lblFilterHK;
         private Guna.UI2.WinForms.Guna2ComboBox cboNamHoc;
         private System.Windows.Forms.Label lblFilterNH;
-        private System.Windows.Forms.TableLayoutPanel pnlMiddle;
+        private System.Windows.Forms.SplitContainer splitMiddle;
         private System.Windows.Forms.GroupBox grpStudents;
         private System.Windows.Forms.ListBox lstSinhVien;
         private System.Windows.Forms.GroupBox grpDetails;
@@ -642,5 +676,6 @@ namespace QLDSV.GUI.Forms.GiangVien
         private Guna.UI2.WinForms.Guna2Button btnHuy;
         private Guna.UI2.WinForms.Guna2Button btnSua;
         private Guna.UI2.WinForms.Guna2Button btnReset;
+        private System.Windows.Forms.TableLayoutPanel tblMain;
     }
 }

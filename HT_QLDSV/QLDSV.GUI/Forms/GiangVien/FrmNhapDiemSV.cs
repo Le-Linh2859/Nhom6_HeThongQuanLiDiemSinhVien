@@ -21,19 +21,6 @@ namespace QLDSV.GUI.Forms.GiangVien
         {
             InitializeComponent();
             ThemeHelper.ApplyTheme(this);
-
-            this.Load += FrmNhapDiemSV_Load;
-
-            this.cboNamHoc.SelectedIndexChanged    += CboNamHoc_SelectedIndexChanged;
-            this.cboHocKy.SelectedIndexChanged     += CboHocKy_SelectedIndexChanged;
-            this.cboLopHocPhan.SelectedIndexChanged += CboLopHocPhan_SelectedIndexChanged;
-            this.lstSinhVien.SelectedIndexChanged  += LstSinhVien_SelectedIndexChanged;
-
-            this.btnNhap.Click  += BtnNhap_Click;
-            this.btnSua.Click   += BtnSua_Click;
-            this.btnHuy.Click   += BtnHuy_Click;
-
-            this.btnReset.Click += BtnReset_Click;
         }
 
         // ─── Load ─────────────────────────────────────────────────────────────────
@@ -159,8 +146,19 @@ namespace QLDSV.GUI.Forms.GiangVien
 
                 // Bảng điểm tổng hợp bên dưới
                 DataTable dtDiem = _bll.GetBangDiem(maLHP);
-                dgvDiem.DataSource = dtDiem;
-                lblTongSV.Text = $"Tổng số sinh viên nhập điểm: {dtDiem.Rows.Count}";
+                if (dtDiem != null)
+                {
+                    // Chỉ hiển thị sinh viên đã có ít nhất 1 điểm
+                    dtDiem.DefaultView.RowFilter =
+                        "([Điểm CC] IS NOT NULL) OR ([Điểm KT1] IS NOT NULL) OR ([Điểm KT2] IS NOT NULL) OR ([Điểm CK] IS NOT NULL)";
+                    dgvDiem.DataSource = dtDiem.DefaultView;
+                    lblTongSV.Text = $"Tổng số sinh viên nhập điểm: {dtDiem.DefaultView.Count}";
+                }
+                else
+                {
+                    dgvDiem.DataSource = null;
+                    lblTongSV.Text = "Tổng số sinh viên nhập điểm: 0";
+                }
 
                 ClearInputs();
             }

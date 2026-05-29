@@ -105,6 +105,13 @@
             this.guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2ImageButton6 = new Guna.UI2.WinForms.Guna2ImageButton();
+            this.pnlContent = new System.Windows.Forms.Panel();
+            this.splitContent = new System.Windows.Forms.SplitContainer();
+            this.pnlContent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContent)).BeginInit();
+            this.splitContent.Panel1.SuspendLayout();
+            this.splitContent.Panel2.SuspendLayout();
+            this.splitContent.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -185,7 +192,7 @@
             this.guna2Panel1.CustomBorderColor = System.Drawing.Color.White;
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(200)))), ((int)(((byte)(223)))));
             this.guna2Panel1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.guna2Panel1.Location = new System.Drawing.Point(168, 51);
+            this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(1);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(781, 250);
@@ -214,14 +221,13 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.guna2DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2DataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.guna2DataGridView1.Location = new System.Drawing.Point(17, 78);
             this.guna2DataGridView1.Margin = new System.Windows.Forms.Padding(1);
             this.guna2DataGridView1.Name = "guna2DataGridView1";
             this.guna2DataGridView1.RowHeadersVisible = false;
             this.guna2DataGridView1.RowHeadersWidth = 62;
             this.guna2DataGridView1.RowTemplate.Height = 28;
-            this.guna2DataGridView1.Size = new System.Drawing.Size(749, 155);
             this.guna2DataGridView1.TabIndex = 32;
             this.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -370,11 +376,10 @@
             this.groupBox1.Controls.Add(this.guna2ComboBox3);
             this.groupBox1.Controls.Add(this.guna2ComboBox4);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(168, 325);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(781, 243);
             this.groupBox1.TabIndex = 71;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin lớp niên chế";
@@ -1317,11 +1322,42 @@
             this.guna2ImageButton6.Size = new System.Drawing.Size(37, 33);
             this.guna2ImageButton6.TabIndex = 75;
             // 
+            // pnlContent
+            // 
+            this.pnlContent.Controls.Add(this.splitContent);
+            this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContent.Location = new System.Drawing.Point(147, 0);
+            this.pnlContent.Name = "pnlContent";
+            this.pnlContent.Padding = new System.Windows.Forms.Padding(8);
+            this.pnlContent.Size = new System.Drawing.Size(823, 575);
+            this.pnlContent.TabIndex = 77;
+            // 
+            // splitContent
+            // 
+            this.splitContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContent.Location = new System.Drawing.Point(8, 8);
+            this.splitContent.Name = "splitContent";
+            this.splitContent.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContent.Panel1
+            // 
+            this.splitContent.Panel1.Controls.Add(this.guna2Panel1);
+            this.splitContent.Panel1MinSize = 180;
+            // 
+            // splitContent.Panel2
+            // 
+            this.splitContent.Panel2.Controls.Add(this.groupBox1);
+            this.splitContent.Panel2MinSize = 160;
+            this.splitContent.Size = new System.Drawing.Size(807, 559);
+            this.splitContent.SplitterDistance = 260;
+            this.splitContent.TabIndex = 78;
+            // 
             // FrmNhapDiemSV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(970, 575);
+            this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.guna2ImageButton2);
             this.Controls.Add(this.guna2HtmlLabel1);
             this.Controls.Add(this.guna2HtmlLabel6);
@@ -1332,8 +1368,6 @@
             this.Controls.Add(this.guna2ImageButton5);
             this.Controls.Add(this.guna2ImageButton1);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.guna2Panel1);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.guna2HtmlLabel15);
             this.Controls.Add(this.guna2ImageButton3);
             this.Controls.Add(this.label3);
@@ -1344,6 +1378,11 @@
             this.Controls.Add(this.guna2ImageButton4);
             this.Name = "FrmNhapDiemSV";
             this.Text = "FrmNhapDiemSV";
+            this.pnlContent.ResumeLayout(false);
+            this.splitContent.Panel1.ResumeLayout(false);
+            this.splitContent.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContent)).EndInit();
+            this.splitContent.ResumeLayout(false);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).EndInit();
@@ -1446,5 +1485,7 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox2;
         private Guna.UI2.WinForms.Guna2ImageButton guna2ImageButton6;
+        private System.Windows.Forms.Panel pnlContent;
+        private System.Windows.Forms.SplitContainer splitContent;
     }
 }
