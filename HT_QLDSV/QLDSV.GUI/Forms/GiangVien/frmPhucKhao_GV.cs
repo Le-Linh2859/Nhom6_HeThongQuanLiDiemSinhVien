@@ -145,9 +145,9 @@ namespace QLDSV.GUI.Forms.GiangVien
             string[] menuItems = {
                 "Sinh viên", "Lớp học phần", "Đăng ký lớp",
                 "Nhập điểm", "Kết quả học tập", "Cảnh báo học vụ",
-                "Phúc khảo", "Báo cáo"
+                "Phúc khảo"
             };
-            string[] icons = { "🎓", "📋", "📝", "✏️", "📈", "⚠️", "🔄", "📑" };
+            string[] icons = { "🎓", "📋", "📝", "✏️", "📈", "⚠️", "🔄" };
 
             int startY = 55;
             for (int i = 0; i < menuItems.Length; i++)

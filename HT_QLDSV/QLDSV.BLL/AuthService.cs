@@ -46,8 +46,8 @@ namespace QLDSV.BLL
                 };
             }
 
-            // So khớp mật khẩu (plaintext)
-            if (taiKhoan.MatKhau == null || taiKhoan.MatKhau.Trim() != matKhau.Trim())
+            // So khớp mật khẩu sử dụng BCrypt (an toàn, chống dò ngược)
+            if (taiKhoan.MatKhau == null || !PasswordHelper.VerifyPassword(matKhau, taiKhoan.MatKhau))
             {
                 return new LoginResult
                 {

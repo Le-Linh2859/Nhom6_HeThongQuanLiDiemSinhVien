@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using QLDSV.BLL;
 
 namespace QLDSV.GUI.Forms
 {
@@ -480,9 +481,16 @@ namespace QLDSV.GUI.Forms
                     return;
                 }
 
-                // 2. Kiểm tra mật khẩu cũ trùng khớp trong Database
+                // 2. Kiểm tra mật khẩu cũ sử dụng BCrypt.Verify (an toàn)
                 DataTable dtCurrent = FunctionQa.getdatatotable($"SELECT MatKhau FROM TaiKhoan WHERE MaTaiKhoan = '{maTaiKhoan}'");
-                if (dtCurrent.Rows.Count == 0 || dtCurrent.Rows[0]["MatKhau"].ToString().Trim() != txtMatKhauCu.Text.Trim())
+                if (dtCurrent.Rows.Count == 0)
+                {
+                    MessageBox.Show("Không tìm thấy tài khoản!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string storedHash = dtCurrent.Rows[0]["MatKhau"].ToString();
+                if (!PasswordHelper.VerifyPassword(txtMatKhauCu.Text.Trim(), storedHash))
                 {
                     MessageBox.Show("Mật khẩu hiện tại không chính xác! Vui lòng kiểm tra lại.", "Xác thực thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtMatKhauCu.Focus();
@@ -542,7 +550,12 @@ namespace QLDSV.GUI.Forms
                             using (var cmd = new SqlCommand(sqlTaiKhoan, conn, trans))
                             {
                                 cmd.Parameters.AddWithValue("@TenDangNhap", tenDangNhapMoi);
-                                cmd.Parameters.AddWithValue("@MatKhau", !string.IsNullOrEmpty(matKhauMoi) ? matKhauMoi : txtMatKhauCu.Text.Trim());
+
+                                // Hash mật khẩu mới hoặc giữ nguyên hash cũ nếu không đổi mật khẩu
+                                string matKhauLuu = !string.IsNullOrEmpty(matKhauMoi)
+                                    ? PasswordHelper.HashPassword(matKhauMoi)
+                                    : storedHash;
+                                cmd.Parameters.AddWithValue("@MatKhau", matKhauLuu);
                                 cmd.Parameters.AddWithValue("@MaTaiKhoan", maTaiKhoan);
                                 cmd.ExecuteNonQuery();
                             }

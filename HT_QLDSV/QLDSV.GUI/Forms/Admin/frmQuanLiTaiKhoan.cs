@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using Guna.UI2.WinForms;
+using QLDSV.BLL;
 
 namespace QLDSV.GUI
 {
@@ -499,16 +500,19 @@ namespace QLDSV.GUI
                     return;
                 }
 
+                // Hash mật khẩu bằng BCrypt trước khi lưu vào cơ sở dữ liệu
+                string hashedMk = PasswordHelper.HashPassword(mk);
+
                 if (isAddingNew)
                 {
                     string insertSql = $"INSERT INTO TaiKhoan (MaTaiKhoan, TenDangNhap, MatKhau, TrangThai, MaVaiTro) " +
-                                       $"VALUES ('{maTK}', '{tenDN}', '{mk}', {statusVal}, '{roleCode}')";
+                                       $"VALUES ('{maTK}', '{tenDN}', '{hashedMk}', {statusVal}, '{roleCode}')";
                     FunctionQa.runsql(insertSql);
                     MessageBox.Show("Thêm mới tài khoản thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    string updateSql = $"UPDATE TaiKhoan SET TenDangNhap = '{tenDN}', MatKhau = '{mk}', " +
+                    string updateSql = $"UPDATE TaiKhoan SET TenDangNhap = '{tenDN}', MatKhau = '{hashedMk}', " +
                                        $"TrangThai = {statusVal}, MaVaiTro = '{roleCode}' WHERE MaTaiKhoan = '{maTK}'";
                     FunctionQa.runsql(updateSql);
                     MessageBox.Show("Cập nhật thông tin tài khoản thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);

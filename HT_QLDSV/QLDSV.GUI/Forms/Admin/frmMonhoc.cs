@@ -71,7 +71,7 @@ namespace QLDSV.GUI
                 bool isVisible = true;
                 if (role == "VT002") // Giảng viên
                 {
-                    if (menuItems[i] == "Tổng quan" || menuItems[i] == "Giảng viên" || menuItems[i] == "Lớp niên chế")
+                    if (menuItems[i] == "Tổng quan" || menuItems[i] == "Giảng viên" || menuItems[i] == "Lớp niên chế" || menuItems[i] == "Báo cáo")
                     {
                         isVisible = false;
                     }

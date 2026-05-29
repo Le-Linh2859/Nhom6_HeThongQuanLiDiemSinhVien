@@ -602,11 +602,14 @@ using System.Windows.Media.Animation;
                     // Insert bảng TaiKhoan
                     // ==========================
 
+                    // Hash mật khẩu trước khi lưu vào Database
+                    string hashedMatKhau = PasswordHelper.HashPassword(matKhau);
+
                     bll.InsertTaiKhoan(
                         maTK,
                         "VT002",
                         maGV,
-                        matKhau,
+                        hashedMatKhau,
                         1
                     );
 
