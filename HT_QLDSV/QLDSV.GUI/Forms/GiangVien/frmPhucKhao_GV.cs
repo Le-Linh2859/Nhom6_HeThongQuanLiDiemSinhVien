@@ -193,10 +193,6 @@ namespace QLDSV.GUI.Forms.GiangVien
                     {
                         targetForm = new QLDSV.GUI.Forms.GiangVien.FrmNhapDiemSV();
                     }
-                    else if (itemText == "Kết quả học tập")
-                    {
-                        targetForm = new QLDSV.GUI.Forms.GiangVien.FrmTraCuuDiem();
-                    }
                     else if (itemText == "Báo cáo")
                     {
                         targetForm = new frmBaoCaoThongKe();
