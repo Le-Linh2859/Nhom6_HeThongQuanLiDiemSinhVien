@@ -302,6 +302,18 @@ namespace QLDSV.GUI
             };
 
 
+            if (btnPhuckhao != null) btnPhuckhao.Click += (s, e) =>
+            {
+                SetActiveButton(btnPhuckhao);
+                if (SessionHelper.MaVaiTro == "VT001")
+                    OpenChildForm(new QLDSV.GUI.Forms.Admin.frmPhucKhao_Admin(), "Phúc Khảo");
+                else if (SessionHelper.MaVaiTro == "VT002")
+                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmPhucKhao_GV(), "Phúc Khảo");
+                else if (SessionHelper.MaVaiTro == "VT003")
+                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmPhucKhao_SV(), "Phúc Khảo");
+            };
+
+
             if (btnBaocao != null) btnBaocao.Click += (s, e) =>
             {
                 SetActiveButton(btnBaocao);
