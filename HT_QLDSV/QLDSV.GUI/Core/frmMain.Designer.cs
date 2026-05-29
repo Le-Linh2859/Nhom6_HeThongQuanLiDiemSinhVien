@@ -98,19 +98,19 @@ namespace QLDSV.GUI
             this.pnlSidebar.Controls.Add(this.tableLayoutPanel1);
             this.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlSidebar.Location = new System.Drawing.Point(0, 0);
-            this.pnlSidebar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlSidebar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSidebar.Name = "pnlSidebar";
-            this.pnlSidebar.Size = new System.Drawing.Size(147, 413);
+            this.pnlSidebar.Size = new System.Drawing.Size(196, 508);
             this.pnlSidebar.TabIndex = 32;
             // 
             // guna2HtmlLabel3
             // 
             this.guna2HtmlLabel3.AutoSize = false;
             this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel3.Location = new System.Drawing.Point(8, 363);
-            this.guna2HtmlLabel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2HtmlLabel3.Location = new System.Drawing.Point(11, 447);
+            this.guna2HtmlLabel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(131, 14);
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(175, 17);
             this.guna2HtmlLabel3.TabIndex = 19;
             this.guna2HtmlLabel3.Text = "---------------------------------------------------------------";
             // 
@@ -124,10 +124,10 @@ namespace QLDSV.GUI
             this.guna2Button7.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button7.ForeColor = System.Drawing.Color.White;
             this.guna2Button7.Image = ((System.Drawing.Image)(resources.GetObject("guna2Button7.Image")));
-            this.guna2Button7.Location = new System.Drawing.Point(5, 373);
-            this.guna2Button7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2Button7.Location = new System.Drawing.Point(7, 459);
+            this.guna2Button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Button7.Name = "guna2Button7";
-            this.guna2Button7.Size = new System.Drawing.Size(120, 29);
+            this.guna2Button7.Size = new System.Drawing.Size(160, 36);
             this.guna2Button7.TabIndex = 18;
             this.guna2Button7.Text = "Đăng xuất";
             this.guna2Button7.TextOffset = new System.Drawing.Point(5, 0);
@@ -136,10 +136,10 @@ namespace QLDSV.GUI
             // 
             this.guna2HtmlLabel2.AutoSize = false;
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(7, 28);
-            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(9, 34);
+            this.guna2HtmlLabel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(131, 14);
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(175, 17);
             this.guna2HtmlLabel2.TabIndex = 14;
             this.guna2HtmlLabel2.Text = "---------------------------------------------------------------";
             // 
@@ -149,10 +149,9 @@ namespace QLDSV.GUI
             this.label2.Enabled = false;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(41, 53);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(55, 65);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 15);
+            this.label2.Size = new System.Drawing.Size(0, 17);
             this.label2.TabIndex = 1;
             // 
             // label1
@@ -160,17 +159,16 @@ namespace QLDSV.GUI
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(21, 14);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(28, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(115, 13);
+            this.label1.Size = new System.Drawing.Size(138, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "QUẢN LÝ ĐÀO TẠO";
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.btnSinhvien, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.guna2PictureBox12, 0, 11);
@@ -197,24 +195,23 @@ namespace QLDSV.GUI
             this.tableLayoutPanel1.Controls.Add(this.btnBaocao, 1, 11);
             this.tableLayoutPanel1.Controls.Add(this.btnLopnc, 1, 4);
             this.tableLayoutPanel1.ForeColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 42);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 52);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 12;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333335F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333335F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333335F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333335F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333335F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333335F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333335F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333335F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333335F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333335F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333335F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333335F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(137, 306);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(183, 354);
             this.tableLayoutPanel1.TabIndex = 34;
             // 
             // btnSinhvien
@@ -226,10 +223,10 @@ namespace QLDSV.GUI
             this.btnSinhvien.FillColor = System.Drawing.Color.Transparent;
             this.btnSinhvien.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnSinhvien.ForeColor = System.Drawing.Color.White;
-            this.btnSinhvien.Location = new System.Drawing.Point(24, 52);
-            this.btnSinhvien.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSinhvien.Location = new System.Drawing.Point(32, 60);
+            this.btnSinhvien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSinhvien.Name = "btnSinhvien";
-            this.btnSinhvien.Size = new System.Drawing.Size(111, 20);
+            this.btnSinhvien.Size = new System.Drawing.Size(148, 25);
             this.btnSinhvien.TabIndex = 48;
             this.btnSinhvien.Text = "Sinh viên";
             this.btnSinhvien.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -239,10 +236,10 @@ namespace QLDSV.GUI
             this.guna2PictureBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox12.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox12.Image")));
             this.guna2PictureBox12.ImageRotate = 0F;
-            this.guna2PictureBox12.Location = new System.Drawing.Point(2, 277);
-            this.guna2PictureBox12.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2PictureBox12.Location = new System.Drawing.Point(3, 321);
+            this.guna2PictureBox12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox12.Name = "guna2PictureBox12";
-            this.guna2PictureBox12.Size = new System.Drawing.Size(18, 27);
+            this.guna2PictureBox12.Size = new System.Drawing.Size(23, 31);
             this.guna2PictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox12.TabIndex = 23;
             this.guna2PictureBox12.TabStop = false;
@@ -252,10 +249,10 @@ namespace QLDSV.GUI
             this.guna2PictureBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox11.Image")));
             this.guna2PictureBox11.ImageRotate = 0F;
-            this.guna2PictureBox11.Location = new System.Drawing.Point(2, 252);
-            this.guna2PictureBox11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2PictureBox11.Location = new System.Drawing.Point(3, 292);
+            this.guna2PictureBox11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox11.Name = "guna2PictureBox11";
-            this.guna2PictureBox11.Size = new System.Drawing.Size(18, 21);
+            this.guna2PictureBox11.Size = new System.Drawing.Size(23, 25);
             this.guna2PictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox11.TabIndex = 22;
             this.guna2PictureBox11.TabStop = false;
@@ -265,10 +262,10 @@ namespace QLDSV.GUI
             this.guna2PictureBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox10.Image")));
             this.guna2PictureBox10.ImageRotate = 0F;
-            this.guna2PictureBox10.Location = new System.Drawing.Point(2, 227);
-            this.guna2PictureBox10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2PictureBox10.Location = new System.Drawing.Point(3, 263);
+            this.guna2PictureBox10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox10.Name = "guna2PictureBox10";
-            this.guna2PictureBox10.Size = new System.Drawing.Size(18, 21);
+            this.guna2PictureBox10.Size = new System.Drawing.Size(23, 25);
             this.guna2PictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox10.TabIndex = 21;
             this.guna2PictureBox10.TabStop = false;
@@ -278,10 +275,10 @@ namespace QLDSV.GUI
             this.guna2PictureBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox9.Image")));
             this.guna2PictureBox9.ImageRotate = 0F;
-            this.guna2PictureBox9.Location = new System.Drawing.Point(2, 202);
-            this.guna2PictureBox9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2PictureBox9.Location = new System.Drawing.Point(3, 234);
+            this.guna2PictureBox9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox9.Name = "guna2PictureBox9";
-            this.guna2PictureBox9.Size = new System.Drawing.Size(18, 21);
+            this.guna2PictureBox9.Size = new System.Drawing.Size(23, 25);
             this.guna2PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox9.TabIndex = 20;
             this.guna2PictureBox9.TabStop = false;
@@ -291,10 +288,10 @@ namespace QLDSV.GUI
             this.guna2PictureBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox8.Image")));
             this.guna2PictureBox8.ImageRotate = 0F;
-            this.guna2PictureBox8.Location = new System.Drawing.Point(2, 177);
-            this.guna2PictureBox8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2PictureBox8.Location = new System.Drawing.Point(3, 205);
+            this.guna2PictureBox8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox8.Name = "guna2PictureBox8";
-            this.guna2PictureBox8.Size = new System.Drawing.Size(18, 21);
+            this.guna2PictureBox8.Size = new System.Drawing.Size(23, 25);
             this.guna2PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox8.TabIndex = 19;
             this.guna2PictureBox8.TabStop = false;
@@ -304,10 +301,10 @@ namespace QLDSV.GUI
             this.guna2PictureBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox7.Image")));
             this.guna2PictureBox7.ImageRotate = 0F;
-            this.guna2PictureBox7.Location = new System.Drawing.Point(2, 152);
-            this.guna2PictureBox7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2PictureBox7.Location = new System.Drawing.Point(3, 176);
+            this.guna2PictureBox7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox7.Name = "guna2PictureBox7";
-            this.guna2PictureBox7.Size = new System.Drawing.Size(18, 21);
+            this.guna2PictureBox7.Size = new System.Drawing.Size(23, 25);
             this.guna2PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox7.TabIndex = 18;
             this.guna2PictureBox7.TabStop = false;
@@ -317,10 +314,10 @@ namespace QLDSV.GUI
             this.guna2PictureBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox6.Image")));
             this.guna2PictureBox6.ImageRotate = 0F;
-            this.guna2PictureBox6.Location = new System.Drawing.Point(2, 127);
-            this.guna2PictureBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2PictureBox6.Location = new System.Drawing.Point(3, 147);
+            this.guna2PictureBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox6.Name = "guna2PictureBox6";
-            this.guna2PictureBox6.Size = new System.Drawing.Size(18, 21);
+            this.guna2PictureBox6.Size = new System.Drawing.Size(23, 25);
             this.guna2PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox6.TabIndex = 17;
             this.guna2PictureBox6.TabStop = false;
@@ -330,10 +327,10 @@ namespace QLDSV.GUI
             this.guna2PictureBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox5.Image")));
             this.guna2PictureBox5.ImageRotate = 0F;
-            this.guna2PictureBox5.Location = new System.Drawing.Point(2, 102);
-            this.guna2PictureBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2PictureBox5.Location = new System.Drawing.Point(3, 118);
+            this.guna2PictureBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox5.Name = "guna2PictureBox5";
-            this.guna2PictureBox5.Size = new System.Drawing.Size(18, 21);
+            this.guna2PictureBox5.Size = new System.Drawing.Size(23, 25);
             this.guna2PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox5.TabIndex = 16;
             this.guna2PictureBox5.TabStop = false;
@@ -343,10 +340,10 @@ namespace QLDSV.GUI
             this.guna2PictureBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox4.Image")));
             this.guna2PictureBox4.ImageRotate = 0F;
-            this.guna2PictureBox4.Location = new System.Drawing.Point(2, 77);
-            this.guna2PictureBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2PictureBox4.Location = new System.Drawing.Point(3, 89);
+            this.guna2PictureBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox4.Name = "guna2PictureBox4";
-            this.guna2PictureBox4.Size = new System.Drawing.Size(18, 21);
+            this.guna2PictureBox4.Size = new System.Drawing.Size(23, 25);
             this.guna2PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox4.TabIndex = 15;
             this.guna2PictureBox4.TabStop = false;
@@ -356,10 +353,10 @@ namespace QLDSV.GUI
             this.guna2PictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox3.Image")));
             this.guna2PictureBox3.ImageRotate = 0F;
-            this.guna2PictureBox3.Location = new System.Drawing.Point(2, 52);
-            this.guna2PictureBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2PictureBox3.Location = new System.Drawing.Point(3, 60);
+            this.guna2PictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox3.Name = "guna2PictureBox3";
-            this.guna2PictureBox3.Size = new System.Drawing.Size(18, 21);
+            this.guna2PictureBox3.Size = new System.Drawing.Size(23, 25);
             this.guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox3.TabIndex = 14;
             this.guna2PictureBox3.TabStop = false;
@@ -373,10 +370,10 @@ namespace QLDSV.GUI
             this.btnGiangvien.FillColor = System.Drawing.Color.Transparent;
             this.btnGiangvien.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnGiangvien.ForeColor = System.Drawing.Color.White;
-            this.btnGiangvien.Location = new System.Drawing.Point(24, 27);
-            this.btnGiangvien.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnGiangvien.Location = new System.Drawing.Point(32, 31);
+            this.btnGiangvien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnGiangvien.Name = "btnGiangvien";
-            this.btnGiangvien.Size = new System.Drawing.Size(111, 20);
+            this.btnGiangvien.Size = new System.Drawing.Size(148, 25);
             this.btnGiangvien.TabIndex = 3;
             this.btnGiangvien.Text = "Giảng viên";
             this.btnGiangvien.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -386,10 +383,10 @@ namespace QLDSV.GUI
             this.guna2PictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox2.Image")));
             this.guna2PictureBox2.ImageRotate = 0F;
-            this.guna2PictureBox2.Location = new System.Drawing.Point(2, 27);
-            this.guna2PictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2PictureBox2.Location = new System.Drawing.Point(3, 31);
+            this.guna2PictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox2.Name = "guna2PictureBox2";
-            this.guna2PictureBox2.Size = new System.Drawing.Size(18, 21);
+            this.guna2PictureBox2.Size = new System.Drawing.Size(23, 25);
             this.guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox2.TabIndex = 2;
             this.guna2PictureBox2.TabStop = false;
@@ -404,10 +401,10 @@ namespace QLDSV.GUI
             this.btnTongquan.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnTongquan.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTongquan.ForeColor = System.Drawing.Color.Black;
-            this.btnTongquan.Location = new System.Drawing.Point(24, 2);
-            this.btnTongquan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTongquan.Location = new System.Drawing.Point(32, 2);
+            this.btnTongquan.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTongquan.Name = "btnTongquan";
-            this.btnTongquan.Size = new System.Drawing.Size(111, 20);
+            this.btnTongquan.Size = new System.Drawing.Size(148, 25);
             this.btnTongquan.TabIndex = 0;
             this.btnTongquan.Text = "Tổng quan";
             this.btnTongquan.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -419,10 +416,10 @@ namespace QLDSV.GUI
             this.guna2PictureBox1.FillColor = System.Drawing.Color.Transparent;
             this.guna2PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox1.Image")));
             this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(2, 2);
-            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2PictureBox1.Location = new System.Drawing.Point(3, 2);
+            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(18, 21);
+            this.guna2PictureBox1.Size = new System.Drawing.Size(23, 25);
             this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox1.TabIndex = 1;
             this.guna2PictureBox1.TabStop = false;
@@ -436,10 +433,10 @@ namespace QLDSV.GUI
             this.btnMon.FillColor = System.Drawing.Color.Transparent;
             this.btnMon.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnMon.ForeColor = System.Drawing.Color.White;
-            this.btnMon.Location = new System.Drawing.Point(24, 77);
-            this.btnMon.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnMon.Location = new System.Drawing.Point(32, 89);
+            this.btnMon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnMon.Name = "btnMon";
-            this.btnMon.Size = new System.Drawing.Size(111, 20);
+            this.btnMon.Size = new System.Drawing.Size(148, 25);
             this.btnMon.TabIndex = 5;
             this.btnMon.Text = "Môn học";
             this.btnMon.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -453,10 +450,10 @@ namespace QLDSV.GUI
             this.btnLophp.FillColor = System.Drawing.Color.Transparent;
             this.btnLophp.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnLophp.ForeColor = System.Drawing.Color.White;
-            this.btnLophp.Location = new System.Drawing.Point(24, 127);
-            this.btnLophp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLophp.Location = new System.Drawing.Point(32, 147);
+            this.btnLophp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLophp.Name = "btnLophp";
-            this.btnLophp.Size = new System.Drawing.Size(111, 20);
+            this.btnLophp.Size = new System.Drawing.Size(148, 25);
             this.btnLophp.TabIndex = 7;
             this.btnLophp.Text = "Lớp học phần";
             this.btnLophp.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -470,10 +467,10 @@ namespace QLDSV.GUI
             this.btnDangky.FillColor = System.Drawing.Color.Transparent;
             this.btnDangky.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnDangky.ForeColor = System.Drawing.Color.White;
-            this.btnDangky.Location = new System.Drawing.Point(24, 152);
-            this.btnDangky.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDangky.Location = new System.Drawing.Point(32, 176);
+            this.btnDangky.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDangky.Name = "btnDangky";
-            this.btnDangky.Size = new System.Drawing.Size(111, 20);
+            this.btnDangky.Size = new System.Drawing.Size(148, 25);
             this.btnDangky.TabIndex = 8;
             this.btnDangky.Text = "Khoa";
             this.btnDangky.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -487,10 +484,10 @@ namespace QLDSV.GUI
             this.btnDiem.FillColor = System.Drawing.Color.Transparent;
             this.btnDiem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnDiem.ForeColor = System.Drawing.Color.White;
-            this.btnDiem.Location = new System.Drawing.Point(24, 177);
-            this.btnDiem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDiem.Location = new System.Drawing.Point(32, 205);
+            this.btnDiem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDiem.Name = "btnDiem";
-            this.btnDiem.Size = new System.Drawing.Size(111, 20);
+            this.btnDiem.Size = new System.Drawing.Size(148, 25);
             this.btnDiem.TabIndex = 9;
             this.btnDiem.Text = "Nhập điểm";
             this.btnDiem.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -504,10 +501,10 @@ namespace QLDSV.GUI
             this.btnKetqua.FillColor = System.Drawing.Color.Transparent;
             this.btnKetqua.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnKetqua.ForeColor = System.Drawing.Color.White;
-            this.btnKetqua.Location = new System.Drawing.Point(24, 202);
-            this.btnKetqua.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnKetqua.Location = new System.Drawing.Point(32, 234);
+            this.btnKetqua.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnKetqua.Name = "btnKetqua";
-            this.btnKetqua.Size = new System.Drawing.Size(111, 20);
+            this.btnKetqua.Size = new System.Drawing.Size(148, 25);
             this.btnKetqua.TabIndex = 10;
             this.btnKetqua.Text = "Theo dõi điểm";
             this.btnKetqua.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -521,10 +518,10 @@ namespace QLDSV.GUI
             this.btnCanhbao.FillColor = System.Drawing.Color.Transparent;
             this.btnCanhbao.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnCanhbao.ForeColor = System.Drawing.Color.White;
-            this.btnCanhbao.Location = new System.Drawing.Point(24, 227);
-            this.btnCanhbao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCanhbao.Location = new System.Drawing.Point(32, 263);
+            this.btnCanhbao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCanhbao.Name = "btnCanhbao";
-            this.btnCanhbao.Size = new System.Drawing.Size(111, 20);
+            this.btnCanhbao.Size = new System.Drawing.Size(148, 25);
             this.btnCanhbao.TabIndex = 11;
             this.btnCanhbao.Text = "Cảnh báo học vụ";
             this.btnCanhbao.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -538,10 +535,10 @@ namespace QLDSV.GUI
             this.btnPhuckhao.FillColor = System.Drawing.Color.Transparent;
             this.btnPhuckhao.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnPhuckhao.ForeColor = System.Drawing.Color.White;
-            this.btnPhuckhao.Location = new System.Drawing.Point(24, 252);
-            this.btnPhuckhao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPhuckhao.Location = new System.Drawing.Point(32, 292);
+            this.btnPhuckhao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPhuckhao.Name = "btnPhuckhao";
-            this.btnPhuckhao.Size = new System.Drawing.Size(111, 20);
+            this.btnPhuckhao.Size = new System.Drawing.Size(148, 25);
             this.btnPhuckhao.TabIndex = 12;
             this.btnPhuckhao.Text = "Phúc khảo";
             this.btnPhuckhao.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -555,10 +552,10 @@ namespace QLDSV.GUI
             this.btnBaocao.FillColor = System.Drawing.Color.Transparent;
             this.btnBaocao.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnBaocao.ForeColor = System.Drawing.Color.White;
-            this.btnBaocao.Location = new System.Drawing.Point(24, 277);
-            this.btnBaocao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBaocao.Location = new System.Drawing.Point(32, 321);
+            this.btnBaocao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBaocao.Name = "btnBaocao";
-            this.btnBaocao.Size = new System.Drawing.Size(111, 24);
+            this.btnBaocao.Size = new System.Drawing.Size(148, 30);
             this.btnBaocao.TabIndex = 13;
             this.btnBaocao.Text = "Báo cáo";
             this.btnBaocao.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -572,10 +569,10 @@ namespace QLDSV.GUI
             this.btnLopnc.FillColor = System.Drawing.Color.Transparent;
             this.btnLopnc.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnLopnc.ForeColor = System.Drawing.Color.White;
-            this.btnLopnc.Location = new System.Drawing.Point(24, 102);
-            this.btnLopnc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLopnc.Location = new System.Drawing.Point(32, 118);
+            this.btnLopnc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLopnc.Name = "btnLopnc";
-            this.btnLopnc.Size = new System.Drawing.Size(111, 20);
+            this.btnLopnc.Size = new System.Drawing.Size(148, 25);
             this.btnLopnc.TabIndex = 6;
             this.btnLopnc.Text = "Lớp niên chế";
             this.btnLopnc.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -588,19 +585,21 @@ namespace QLDSV.GUI
             this.guna2ImageButton3.ImageOffset = new System.Drawing.Point(0, 0);
             this.guna2ImageButton3.ImageRotate = 0F;
             this.guna2ImageButton3.ImageSize = new System.Drawing.Size(10, 10);
-            this.guna2ImageButton3.Location = new System.Drawing.Point(721, 8);
+            this.guna2ImageButton3.Location = new System.Drawing.Point(961, 10);
+            this.guna2ImageButton3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2ImageButton3.Name = "guna2ImageButton3";
             this.guna2ImageButton3.PressedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.guna2ImageButton3.Size = new System.Drawing.Size(17, 18);
+            this.guna2ImageButton3.Size = new System.Drawing.Size(23, 22);
             this.guna2ImageButton3.TabIndex = 47;
             // 
             // guna2HtmlLabel14
             // 
             this.guna2HtmlLabel14.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel14.Font = new System.Drawing.Font("Segoe UI Light", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel14.Location = new System.Drawing.Point(656, 19);
+            this.guna2HtmlLabel14.Location = new System.Drawing.Point(875, 23);
+            this.guna2HtmlLabel14.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2HtmlLabel14.Name = "guna2HtmlLabel14";
-            this.guna2HtmlLabel14.Size = new System.Drawing.Size(62, 15);
+            this.guna2HtmlLabel14.Size = new System.Drawing.Size(78, 21);
             this.guna2HtmlLabel14.TabIndex = 46;
             this.guna2HtmlLabel14.Text = "Quản trị viên";
             // 
@@ -608,9 +607,10 @@ namespace QLDSV.GUI
             // 
             this.guna2HtmlLabel13.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel13.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel13.Location = new System.Drawing.Point(656, 3);
+            this.guna2HtmlLabel13.Location = new System.Drawing.Point(875, 4);
+            this.guna2HtmlLabel13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2HtmlLabel13.Name = "guna2HtmlLabel13";
-            this.guna2HtmlLabel13.Size = new System.Drawing.Size(38, 15);
+            this.guna2HtmlLabel13.Size = new System.Drawing.Size(47, 21);
             this.guna2HtmlLabel13.TabIndex = 45;
             this.guna2HtmlLabel13.Text = "Admin";
             // 
@@ -620,10 +620,11 @@ namespace QLDSV.GUI
             this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.DimGray;
             this.guna2CirclePictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("guna2CirclePictureBox1.Image")));
             this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(628, 11);
+            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(837, 14);
+            this.guna2CirclePictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
             this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(22, 15);
+            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(29, 18);
             this.guna2CirclePictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.guna2CirclePictureBox1.TabIndex = 44;
             this.guna2CirclePictureBox1.TabStop = false;
@@ -636,21 +637,20 @@ namespace QLDSV.GUI
             this.guna2ImageButton2.ImageOffset = new System.Drawing.Point(0, 0);
             this.guna2ImageButton2.ImageRotate = 0F;
             this.guna2ImageButton2.ImageSize = new System.Drawing.Size(20, 20);
-            this.guna2ImageButton2.Location = new System.Drawing.Point(588, 1);
-            this.guna2ImageButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2ImageButton2.Location = new System.Drawing.Point(784, 1);
+            this.guna2ImageButton2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2ImageButton2.Name = "guna2ImageButton2";
             this.guna2ImageButton2.PressedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.guna2ImageButton2.Size = new System.Drawing.Size(37, 33);
+            this.guna2ImageButton2.Size = new System.Drawing.Size(49, 41);
             this.guna2ImageButton2.TabIndex = 43;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(206, 19);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(275, 23);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 13);
+            this.label4.Size = new System.Drawing.Size(78, 19);
             this.label4.TabIndex = 42;
             this.label4.Text = "Tổng Quan";
             // 
@@ -659,10 +659,9 @@ namespace QLDSV.GUI
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(7)))), ((int)(((byte)(76)))));
-            this.label3.Location = new System.Drawing.Point(205, 2);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(273, 2);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(154, 15);
+            this.label3.Size = new System.Drawing.Size(197, 20);
             this.label3.TabIndex = 41;
             this.label3.Text = "HỆ THỐNG QUẢN LÝ ĐIỂM";
             // 
@@ -674,18 +673,18 @@ namespace QLDSV.GUI
             this.guna2ImageButton1.ImageOffset = new System.Drawing.Point(0, 0);
             this.guna2ImageButton1.ImageRotate = 0F;
             this.guna2ImageButton1.ImageSize = new System.Drawing.Size(30, 30);
-            this.guna2ImageButton1.Location = new System.Drawing.Point(154, -2);
-            this.guna2ImageButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.guna2ImageButton1.Location = new System.Drawing.Point(205, -2);
+            this.guna2ImageButton1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2ImageButton1.Name = "guna2ImageButton1";
             this.guna2ImageButton1.PressedState.ImageSize = new System.Drawing.Size(64, 64);
-            this.guna2ImageButton1.Size = new System.Drawing.Size(53, 36);
+            this.guna2ImageButton1.Size = new System.Drawing.Size(71, 44);
             this.guna2ImageButton1.TabIndex = 40;
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(740, 413);
+            this.ClientSize = new System.Drawing.Size(987, 508);
             this.Controls.Add(this.guna2ImageButton3);
             this.Controls.Add(this.guna2HtmlLabel14);
             this.Controls.Add(this.guna2HtmlLabel13);
@@ -695,7 +694,7 @@ namespace QLDSV.GUI
             this.Controls.Add(this.label3);
             this.Controls.Add(this.guna2ImageButton1);
             this.Controls.Add(this.pnlSidebar);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frmMain";
             this.Text = "Trang chủ";
             this.Load += new System.EventHandler(this.frmMain_Load);

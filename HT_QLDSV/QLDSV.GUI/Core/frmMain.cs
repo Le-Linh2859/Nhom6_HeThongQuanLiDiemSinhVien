@@ -140,20 +140,46 @@ namespace QLDSV.GUI
             }
         }
 
+        //private void SetMenuRowVisibility(int rowIndex, Control button, Control pictureBox, bool visible)
+        //{
+        //    if (button != null) button.Visible = visible;
+        //    if (pictureBox != null) pictureBox.Visible = visible;
+
+        //    if (tableLayoutPanel1 != null && rowIndex >= 0 && rowIndex < tableLayoutPanel1.RowStyles.Count)
+        //    {
+        //        if (visible)
+        //        {
+        //            tableLayoutPanel1.RowStyles[rowIndex] = new RowStyle(SizeType.Percent, 8.333335F);
+        //        }
+        //        else
+        //        {
+        //            tableLayoutPanel1.RowStyles[rowIndex] = new RowStyle(SizeType.Absolute, 0F);
+        //        }
+        //    }
+        //}
+        private const int MENU_ROW_HEIGHT = 29;
+
         private void SetMenuRowVisibility(int rowIndex, Control button, Control pictureBox, bool visible)
         {
-            if (button != null) button.Visible = visible;
-            if (pictureBox != null) pictureBox.Visible = visible;
-            
-            if (tableLayoutPanel1 != null && rowIndex >= 0 && rowIndex < tableLayoutPanel1.RowStyles.Count)
+            if (button != null)
+                button.Visible = visible;
+
+            if (pictureBox != null)
+                pictureBox.Visible = visible;
+
+            if (tableLayoutPanel1 != null &&
+                rowIndex >= 0 &&
+                rowIndex < tableLayoutPanel1.RowStyles.Count)
             {
                 if (visible)
                 {
-                    tableLayoutPanel1.RowStyles[rowIndex] = new RowStyle(SizeType.Percent, 8.333335F);
+                    tableLayoutPanel1.RowStyles[rowIndex] =
+                        new RowStyle(SizeType.Absolute, MENU_ROW_HEIGHT);
                 }
                 else
                 {
-                    tableLayoutPanel1.RowStyles[rowIndex] = new RowStyle(SizeType.Absolute, 0F);
+                    tableLayoutPanel1.RowStyles[rowIndex] =
+                        new RowStyle(SizeType.Absolute, 0F);
                 }
             }
         }
@@ -202,13 +228,13 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, false);
                 SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, false);
                 SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
-                SetMenuRowVisibility(11, btnBaocao, guna2PictureBox12, false); // Tra cứu điểm / Báo cáo
+                SetMenuRowVisibility(11, btnBaocao, guna2PictureBox12, true); // Tra cứu điểm / Báo cáo
             }
             // Sinh viên (VT003): Môn học, Giảng viên, Lớp học phần, Kết quả học tập, Phúc khảo, Cảnh báo học vụ, Tra cứu điểm
             else if (role == "VT003")
             {
                 SetMenuRowVisibility(0, btnTongquan, guna2PictureBox1, false);
-                SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, true);
+                SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, false);
                 SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, true);
                 SetMenuRowVisibility(3, btnMon, guna2PictureBox4, true);
                 SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, false);
@@ -224,110 +250,203 @@ namespace QLDSV.GUI
 
         private void WireUpSidebarEvents()
         {
-            //if (btnTongquan != null) btnTongquan.Click += (s, e) => OpenChildForm(new frmTongQuan(), "Tổng Quan");
-            //if (btnGiangvien != null) btnGiangvien.Click += (s, e) => OpenChildForm(new frmGiangvien(), "Giảng Viên");
-            //if (btnSinhvien != null) btnSinhvien.Click += (s, e) => OpenChildForm(new frmQuanLiThongTinSinhVien(), "Sinh Viên");
+            string role = SessionHelper.MaVaiTro;
 
-            if (btnTongquan != null) btnTongquan.Click += (s, e) => { SetActiveButton(btnTongquan); OpenChildForm(new frmTongQuan(), "Tổng Quan"); };
-            if (btnGiangvien != null) btnGiangvien.Click += (s, e) =>
+            // =========================
+            // ADMIN (VT001)
+            // =========================
+            if (role == "VT001")
             {
-                SetActiveButton(btnGiangvien);
-                if (SessionHelper.MaVaiTro == "VT002")
-                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmThongTinCaNhan_GV(), "Thông Tin Cá Nhân");
-                else
-                    OpenChildForm(new frmGiangvien(), "Giảng Viên");
-            };
-            if (btnSinhvien != null) btnSinhvien.Click += (s, e) =>
-            {
-                SetActiveButton(btnSinhvien);
-                if (SessionHelper.MaVaiTro == "VT003")
-                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmThongTinCaNhan_SV(), "Thông Tin Cá Nhân");
-                else
-                    OpenChildForm(new frmQuanLiThongTinSinhVien(), "Sinh Viên");
-            };
+                if (btnTongquan != null)
+                    btnTongquan.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnTongquan);
+                        OpenChildForm(new frmTongQuan(), "Tổng Quan");
+                    };
 
-            if (btnMon != null) btnMon.Click += (s, e) =>
-            {
-                SetActiveButton(btnMon);
-                if (SessionHelper.MaVaiTro == "VT002")
-                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmMonhoc_GV(), "Môn Học");
-                else if (SessionHelper.MaVaiTro == "VT003")
-                    OpenChildForm(new QLDSV.GUI.frmMonhoc_SV(), "Môn Học");
-                else
-                    OpenChildForm(new frmMonhoc(), "Môn Học");
-            };
+                if (btnGiangvien != null)
+                    btnGiangvien.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnGiangvien);
+                        OpenChildForm(new frmGiangvien(), "Giảng Viên");
+                    };
 
-            if (btnCanhbao != null)
-            {
-                btnCanhbao.Click += (s, e) =>
-                {
-                    if (SessionHelper.MaVaiTro == "VT003")
-                        OpenChildForm(
-                            new frmCanhBaoHocVu_SV(),
-                            "Cảnh Báo Học Vụ");
-                    else
-                        OpenChildForm(
-                            new frmCanhBaoHocVu(),
-                            "Cảnh Báo Học Vụ");
-                };
+                if (btnSinhvien != null)
+                    btnSinhvien.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnSinhvien);
+                        OpenChildForm(new frmQuanLiThongTinSinhVien(), "Sinh Viên");
+                    };
+
+                if (btnMon != null)
+                    btnMon.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnMon);
+                        OpenChildForm(new frmMonhoc(), "Môn Học");
+                    };
+
+                if (btnLopnc != null)
+                    btnLopnc.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnLopnc);
+                        OpenChildForm(new FrmLopNienChe(), "Lớp Niên Chế");
+                    };
+
+                if (btnLophp != null)
+                    btnLophp.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnLophp);
+                        OpenChildForm(new frmLophocphan(), "Lớp Học Phần");
+                    };
+
+                if (btnDangky != null)
+                    btnDangky.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnDangky);
+                        OpenChildForm(new frmKhoa(), "Khoa");
+                    };
+
+                if (btnDiem != null)
+                    btnDiem.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnDiem);
+                        OpenChildForm(new frmQuanLiTaiKhoan(), "Quản Lý Tài Khoản");
+                    };
+
+                if (btnKetqua != null)
+                    btnKetqua.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnKetqua);
+                        OpenChildForm(new frmTheoDoiDiem(), "Theo Dõi Điểm");
+                    };
+
+                if (btnCanhbao != null)
+                    btnCanhbao.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnCanhbao);
+                        OpenChildForm(new frmCanhBaoHocVu(), "Cảnh Báo Học Vụ");
+                    };
+
+                if (btnBaocao != null)
+                    btnBaocao.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnBaocao);
+                        OpenChildForm(new frmBaoCaoThongKe(), "Báo Cáo Thống Kê");
+                    };
             }
-            //if (btnLopnc != null) btnLopnc.Click += (s, e) => OpenChildForm(new FrmLopNienChe(), "Lớp Niên Chế");
-            if (btnLopnc != null) btnLopnc.Click += (s, e) => { SetActiveButton(btnLopnc); OpenChildForm(new FrmLopNienChe(), "Lớp Niên Chế"); };
-            if (btnLophp != null) btnLophp.Click += (s, e) =>
+
+            // =========================
+            // GIẢNG VIÊN (VT002)
+            // =========================
+            else if (role == "VT002")
             {
-                SetActiveButton(btnLophp);
-                if (SessionHelper.MaVaiTro == "VT002")
-                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmLophocphan_GV(), "Lớp Học Phần");
-                else if (SessionHelper.MaVaiTro == "VT003")
-                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmLophocphan_SV(), "Lớp Học Phần");
-                else
-                    OpenChildForm(new frmLophocphan(), "Lớp Học Phần");
-            };
-            if (btnDangky != null) btnDangky.Click += (s, e) => { SetActiveButton(btnDangky); OpenChildForm(new frmKhoa(), "Khoa"); };
-            if (btnDiem != null) btnDiem.Click += (s, e) =>
+                if (btnGiangvien != null)
+                    btnGiangvien.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnGiangvien);
+                        OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmThongTinCaNhan_GV(),
+                            "Thông Tin Cá Nhân");
+                    };
+
+                if (btnSinhvien != null)
+                    btnSinhvien.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnSinhvien);
+                        OpenChildForm(new frmQuanLiThongTinSinhVien(),
+                            "Sinh Viên");
+                    };
+
+                if (btnMon != null)
+                    btnMon.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnMon);
+                        OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmMonhoc_GV(),
+                            "Môn Học");
+                    };
+
+                if (btnLophp != null)
+                    btnLophp.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnLophp);
+                        OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmLophocphan_GV(),
+                            "Lớp Học Phần");
+                    };
+
+                if (btnDiem != null)
+                    btnDiem.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnDiem);
+                        OpenChildForm(new QLDSV.GUI.Forms.GiangVien.FrmNhapDiemSV(),
+                            "Nhập Điểm");
+                    };
+
+                if (btnBaocao != null)
+                    btnBaocao.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnBaocao);
+                        //OpenChildForm(new QLDSV.GUI.Forms.GiangVien.FrmTraCuuDiem(),"Tra Cứu Điểm");
+                    };
+            }
+
+            // =========================
+            // SINH VIÊN (VT003)
+            // =========================
+            else if (role == "VT003")
             {
-                SetActiveButton(btnDiem);
-                // Điều hướng động theo vai trò
-                if (SessionHelper.MaVaiTro == "VT001")
-                    OpenChildForm(new QLDSV.GUI.frmQuanLiTaiKhoan(), "Quản Lý Tài Khoản");
-                else if (SessionHelper.MaVaiTro == "VT002")
-                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.FrmNhapDiemSV(), "Nhập Điểm");
-            };
-            if (btnKetqua != null) btnKetqua.Click += (s, e) =>
-            {
-                SetActiveButton(btnKetqua);
-                if (SessionHelper.MaVaiTro == "VT003")
-                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.KetQuaHocTap(), "Kết Quả Học Tập");
-                else OpenChildForm(new QLDSV.GUI.Forms.Admin.frmTheoDoiDiem(), "Theo Dõi Điểm");
-            };
+                if (btnSinhvien != null)
+                    btnSinhvien.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnSinhvien);
+                        OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmThongTinCaNhan_SV(),
+                            "Thông Tin Cá Nhân");
+                    };
 
+                if (btnMon != null)
+                    btnMon.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnMon);
+                        OpenChildForm(new QLDSV.GUI.frmMonhoc_SV(),
+                            "Môn Học");
+                    };
 
-            if (btnPhuckhao != null) btnPhuckhao.Click += (s, e) =>
-            {
-                SetActiveButton(btnPhuckhao);
-                if (SessionHelper.MaVaiTro == "VT001")
-                    OpenChildForm(new QLDSV.GUI.Forms.Admin.frmPhucKhao_Admin(), "Phúc Khảo");
-                else if (SessionHelper.MaVaiTro == "VT002")
-                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmPhucKhao_GV(), "Phúc Khảo");
-                else if (SessionHelper.MaVaiTro == "VT003")
-                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmPhucKhao_SV(), "Phúc Khảo");
-            };
+                if (btnLophp != null)
+                    btnLophp.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnLophp);
+                        OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmLophocphan_SV(),
+                            "Lớp Học Phần");
+                    };
 
+                if (btnKetqua != null)
+                    btnKetqua.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnKetqua);
+                        OpenChildForm(new QLDSV.GUI.Forms.SinhVien.KetQuaHocTap(),
+                            "Kết Quả Học Tập");
+                    };
 
-            if (btnBaocao != null) btnBaocao.Click += (s, e) =>
-            {
-                SetActiveButton(btnBaocao);
-                if (SessionHelper.MaVaiTro == "VT001")
-                    OpenChildForm(new frmBaoCaoThongKe(), "Báo Cáo Thống Kê");
-            };
+                if (btnCanhbao != null)
+                    btnCanhbao.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnCanhbao);
+                        OpenChildForm(new frmCanhBaoHocVu_SV(),
+                            "Cảnh Báo Học Vụ");
+                    };
+            }
 
-
+            // =========================
+            // ĐĂNG XUẤT
+            // =========================
             if (guna2Button7 != null)
             {
                 guna2Button7.Click += (s, e) =>
                 {
-                    var confirm = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    var confirm = MessageBox.Show(
+                        "Bạn có chắc chắn muốn đăng xuất?",
+                        "Xác nhận",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
                     if (confirm == DialogResult.Yes)
                     {
                         Logout();
