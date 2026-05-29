@@ -305,9 +305,7 @@ namespace QLDSV.GUI
             if (btnBaocao != null) btnBaocao.Click += (s, e) =>
             {
                 SetActiveButton(btnBaocao);
-                if (SessionHelper.MaVaiTro == "VT002" || SessionHelper.MaVaiTro == "VT003")
-                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.FrmTraCuuDiem(), "Tra Cứu Điểm");
-                else
+                if (SessionHelper.MaVaiTro == "VT001")
                     OpenChildForm(new frmBaoCaoThongKe(), "Báo Cáo Thống Kê");
             };
 
