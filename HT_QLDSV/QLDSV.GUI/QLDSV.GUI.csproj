@@ -261,15 +261,6 @@
     <EmbeddedResource Include="Forms\Admin\frmCanhBaoHocVu.resx">
       <DependentUpon>frmCanhBaoHocVu.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Forms\Admin\FrmNhapDiemSV.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Admin\FrmNhapDiemSV.Designer.cs">
-      <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Forms\Admin\FrmNhapDiemSV.resx">
-      <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
-    </EmbeddedResource>
     <Compile Include="Forms\Admin\frmKetQuaHocTap.cs">
       <SubType>Form</SubType>
     </Compile>

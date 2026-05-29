@@ -23,23 +23,11 @@ namespace QLDSV.GUI
         {
             InitializeComponent();
 
-            this.Load += new System.EventHandler(this.FrmLopNienChe_Load);
+            SetupResponsiveLayout();
 
             ThemeHelper.ApplyTheme(this);
 
-            this.btnThem.Click += btnThem_Click;
-            this.btnSua.Click += btnSua_Click;
-            this.btnLuu.Click += btnLuu_Click;
-            this.btnHuy.Click += btnHuy_Click;
-            this.btnReset.Click += btnReset_Click;
-            this.btnLammoi.Click += btnLammoi_Click;
-
-            this.DataGridViewLop.CellClick += DataGridViewLop_CellClick;
-
-            this.txtTimKiem.TextChanged += txtTimKiem_TextChanged;
-
             txtTimKiem.Text = "Tìm kiếm theo mã lớp, tên lớp ...";
-            txtTimKiem.ForeColor = Color.Gray;
 
             txtTimKiem.Enter += (s, e) =>
             {
@@ -78,9 +66,25 @@ namespace QLDSV.GUI
 
             DataGridViewLop.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
             DataGridViewLop.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            DataGridViewLop.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-        // 1. Tải danh sách lớp niên chế lên GridView
+        private void SetupResponsiveLayout()
+        {
+            AutoSize = false;
+            MinimumSize = new Size(700, 500);
+            Padding = new Padding(8);
+
+            guna2HtmlLabel15.Visible = false;
+
+            groupBox1.Dock = DockStyle.Bottom;
+            groupBox1.Height = 250;
+
+            guna2Panel1.Dock = DockStyle.Fill;
+
+            DataGridViewLop.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+        }
+
         private void LoadData()
         {
             try
@@ -124,7 +128,6 @@ namespace QLDSV.GUI
             }
         }
 
-        // 2. Nạp dữ liệu các bộ lọc Khoa và Giảng viên cố vấn ở trên
         private void LoadComboboxFilters()
         {
             try
@@ -165,7 +168,6 @@ namespace QLDSV.GUI
             }
         }
 
-        // 3. Nạp dữ liệu các Combobox nhập liệu chi tiết
         private void LoadComboboxDetails()
         {
             try
@@ -190,7 +192,6 @@ namespace QLDSV.GUI
             }
         }
 
-        // 4. Khôi phục trạng thái xem ban đầu của Form
         private void ResetFormState()
         {
             isAdding = false;
@@ -217,10 +218,16 @@ namespace QLDSV.GUI
             }
         }
 
-        // 5. Sự kiện khi click chọn một dòng trên bảng danh sách
         private void DataGridViewLop_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (isAdding || isEditing) return; // Đang thêm/sửa thì không đổi chi tiết từ click grid
+            if (isAdding)
+            {
+                DataGridViewLop.ClearSelection();
+                ShowAddingBlockedMessage();
+                return;
+            }
+
+            if (isEditing) return;
 
             if (DataGridViewLop.SelectedRows.Count > 0)
             {
@@ -244,18 +251,12 @@ namespace QLDSV.GUI
             }
         }
 
-        // 6. Xử lý sự kiện nhấn nút Thêm
         private void btnThem_Click(object sender, EventArgs e)
         {
             isAdding = true;
             isEditing = false;
 
-            // Xóa trắng dữ liệu nhập
-            cboMaLopNC.Text = "";
-            cboTenlop.Text = "";
-            cboNienkhoa.Text = "";
-            cboKhoa2.SelectedIndex = -1;
-            cboCV.SelectedIndex = -1;
+            ClearDetailInputs(selectFirstCombo: true);
 
             // Mở khóa nhập liệu
             cboMaLopNC.Enabled = true;
@@ -264,17 +265,27 @@ namespace QLDSV.GUI
             cboKhoa2.Enabled = true;
             cboCV.Enabled = true;
 
-            // Trạng thái các nút điều hướng (btnThem_Click)
+           
             btnThem.Enabled = false;
             btnSua.Enabled = false;
             btnLuu.Enabled = true;
             btnHuy.Enabled = true;
             btnReset.Enabled = true;
 
+            DataGridViewLop.ClearSelection();
+
             cboMaLopNC.Focus();
         }
 
-        // 7. Xử lý sự kiện nhấn nút Sửa
+        private void ShowAddingBlockedMessage()
+        {
+            MessageBox.Show(
+                "Đang ở trạng thái thêm mới.\r\nVui lòng nhấn Lưu hoặc Hủy trước khi chọn dòng trên danh sách.",
+                "Không thể chọn danh sách",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
         private void btnSua_Click(object sender, EventArgs e)
         {
             if (DataGridViewLop.SelectedRows.Count == 0)
@@ -298,12 +309,11 @@ namespace QLDSV.GUI
             btnSua.Enabled = false;
             btnLuu.Enabled = true;
             btnHuy.Enabled = true;
-            btnReset.Enabled = true;
+            btnReset.Enabled = false;
 
             cboTenlop.Focus();
         }
 
-        // 9. Xử lý sự kiện nhấn nút Lưu
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string maLop = cboMaLopNC.Text.Trim();
@@ -369,7 +379,6 @@ namespace QLDSV.GUI
                 LoadData();
                 ResetFormState();
 
-                // Chọn lại dòng vừa được Lưu
                 foreach (DataGridViewRow row in DataGridViewLop.Rows)
                 {
                     if (row.Cells["MaLopNienChe"].Value?.ToString().Trim() == maLop)
@@ -386,45 +395,19 @@ namespace QLDSV.GUI
             }
         }
 
-        // 10. Xử lý sự kiện nhấn nút Hủy
         private void btnHuy_Click(object sender, EventArgs e)
         {
-            ClearDetailInputs();
             ResetFormState();
         }
 
-        // 11. Xử lý sự kiện nhấn nút Reset
         private void btnReset_Click(object sender, EventArgs e)
         {
-            if (isAdding)
-            {
-                ClearDetailInputs();
-            }
-            else if (isEditing)
-            {
-                if (DataGridViewLop.SelectedRows.Count > 0)
-                {
-                    DataGridViewRow row = DataGridViewLop.SelectedRows[0];
-                    cboTenlop.Text = row.Cells["TenLop"].Value?.ToString() ?? "";
-                    cboNienkhoa.Text = row.Cells["NienKhoa"].Value?.ToString() ?? "";
-                    
-                    string maKhoa = row.Cells["MaKhoa"].Value?.ToString().Trim() ?? "";
-                    string maGV = row.Cells["MaGV"].Value?.ToString().Trim() ?? "";
+            if (!isAdding) return;
 
-                    if (!string.IsNullOrEmpty(maKhoa))
-                        cboKhoa2.SelectedValue = maKhoa;
-                    else
-                        cboKhoa2.SelectedIndex = -1;
-
-                    if (!string.IsNullOrEmpty(maGV))
-                        cboCV.SelectedValue = maGV;
-                    else
-                        cboCV.SelectedIndex = -1;
-                }
-            }
+            ClearDetailInputs(selectFirstCombo: true);
+            cboMaLopNC.Focus();
         }
 
-        // 12. Xử lý sự kiện nhấn nút Làm mới dữ liệu bảng và xóa bộ lọc
         private void btnLammoi_Click(object sender, EventArgs e)
         {
             cboKhoa.SelectedIndexChanged -= cboFilter_SelectedIndexChanged;
@@ -444,26 +427,22 @@ namespace QLDSV.GUI
             ResetFormState();
         }
 
-        // 13. Áp dụng bộ lọc và tìm kiếm kết hợp
         private void ApplyFilter()
         {
             if (dtLop == null) return;
 
             string filter = "1=1";
 
-            // Lọc theo Khoa
             if (cboKhoa.SelectedValue != null && cboKhoa.SelectedValue.ToString() != "ALL")
             {
                 filter += $" AND MaKhoa = '{cboKhoa.SelectedValue}'";
             }
 
-            // Lọc theo Cố vấn học tập (Giảng viên)
             if (cboGiangVien.SelectedValue != null && cboGiangVien.SelectedValue.ToString() != "ALL")
             {
                 filter += $" AND MaGV = '{cboGiangVien.SelectedValue}'";
             }
 
-            // Tìm kiếm theo từ khóa (Mã hoặc Tên lớp)
             string kw = txtTimKiem.Text.Trim();
             if (!string.IsNullOrEmpty(kw) && kw != "Tìm kiếm theo mã lớp, tên lớp ...")
             {
@@ -473,7 +452,6 @@ namespace QLDSV.GUI
 
             dtLop.DefaultView.RowFilter = filter;
 
-            // Nếu danh sách lọc trống, xóa trắng các trường thông tin chi tiết
             if (DataGridViewLop.Rows.Count == 0)
             {
                 ClearDetailInputs();
@@ -497,28 +475,21 @@ namespace QLDSV.GUI
             ApplyFilter();
         }
 
-        // Dọn dẹp nội dung các trường nhập liệu
-        private void ClearDetailInputs()
+        private void ClearDetailInputs(bool selectFirstCombo = false)
         {
             cboMaLopNC.Text = "";
             cboTenlop.Text = "";
             cboNienkhoa.Text = "";
-            cboKhoa2.SelectedIndex = -1;
-            cboCV.SelectedIndex = -1;
-        }
 
-        // 14. Thiết lập sự kiện điều hướng thanh Sidebar
-        private void OpenForm(Form targetForm)
-        {
-            if (targetForm != null)
+            if (selectFirstCombo)
             {
-                targetForm.FormClosed += (s, ev) =>
-                {
-                    this.Show();
-                    LoadData(); // Nạp lại dữ liệu lớp khi quay lại form
-                };
-                targetForm.Show();
-                this.Hide();
+                if (cboKhoa2.Items.Count > 0) cboKhoa2.SelectedIndex = 0;
+                if (cboCV.Items.Count > 0) cboCV.SelectedIndex = 0;
+            }
+            else
+            {
+                cboKhoa2.SelectedIndex = -1;
+                cboCV.SelectedIndex = -1;
             }
         }
     }

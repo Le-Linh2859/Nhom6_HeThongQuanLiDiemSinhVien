@@ -10,33 +10,20 @@ namespace QLDSV.GUI.Forms.GiangVien
 {
     public partial class FrmNhapDiemSV : Form
     {
-        // ─── Fields ───────────────────────────────────────────────────────────────
+        
         private readonly KetQuaBLL _bll = new KetQuaBLL();
         private string maGV = "";
         private bool isInitializing = true;
         private bool _isEditMode = false;
 
-        // ─── Constructor ──────────────────────────────────────────────────────────
+        
         public FrmNhapDiemSV()
         {
             InitializeComponent();
             ThemeHelper.ApplyTheme(this);
-
-            this.Load += FrmNhapDiemSV_Load;
-
-            this.cboNamHoc.SelectedIndexChanged    += CboNamHoc_SelectedIndexChanged;
-            this.cboHocKy.SelectedIndexChanged     += CboHocKy_SelectedIndexChanged;
-            this.cboLopHocPhan.SelectedIndexChanged += CboLopHocPhan_SelectedIndexChanged;
-            this.lstSinhVien.SelectedIndexChanged  += LstSinhVien_SelectedIndexChanged;
-
-            this.btnNhap.Click  += BtnNhap_Click;
-            this.btnSua.Click   += BtnSua_Click;
-            this.btnHuy.Click   += BtnHuy_Click;
-
-            this.btnReset.Click += BtnReset_Click;
         }
 
-        // ─── Load ─────────────────────────────────────────────────────────────────
+        
         private void FrmNhapDiemSV_Load(object sender, EventArgs e)
         {
             try
@@ -67,7 +54,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        // ─── Load danh mục ────────────────────────────────────────────────────────
+        
         private void LoadNamHoc()
         {
             try
@@ -100,7 +87,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        // ─── Load lớp học phần ────────────────────────────────────────────────────
+        
         private void PopulateClasses()
         {
             if (isInitializing) return;
@@ -131,7 +118,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        // ─── Load dữ liệu lớp học phần ───────────────────────────────────────────
+        
         private void LoadClassData()
         {
             try
@@ -148,7 +135,7 @@ namespace QLDSV.GUI.Forms.GiangVien
 
                 string maLHP = cboLopHocPhan.SelectedValue.ToString();
 
-                // Danh sách sinh viên bên trái
+                
                 DataTable dtSV = _bll.GetSinhVien(maLHP);
                 lstSinhVien.SelectedIndexChanged -= LstSinhVien_SelectedIndexChanged;
                 lstSinhVien.DataSource    = dtSV;
@@ -157,10 +144,21 @@ namespace QLDSV.GUI.Forms.GiangVien
                 lstSinhVien.SelectedIndex = -1;
                 lstSinhVien.SelectedIndexChanged += LstSinhVien_SelectedIndexChanged;
 
-                // Bảng điểm tổng hợp bên dưới
+                
                 DataTable dtDiem = _bll.GetBangDiem(maLHP);
-                dgvDiem.DataSource = dtDiem;
-                lblTongSV.Text = $"Tổng số sinh viên nhập điểm: {dtDiem.Rows.Count}";
+                if (dtDiem != null)
+                {
+                    
+                    dtDiem.DefaultView.RowFilter =
+                        "([Điểm CC] IS NOT NULL) OR ([Điểm KT1] IS NOT NULL) OR ([Điểm KT2] IS NOT NULL) OR ([Điểm CK] IS NOT NULL)";
+                    dgvDiem.DataSource = dtDiem.DefaultView;
+                    lblTongSV.Text = $"Tổng số sinh viên nhập điểm: {dtDiem.DefaultView.Count}";
+                }
+                else
+                {
+                    dgvDiem.DataSource = null;
+                    lblTongSV.Text = "Tổng số sinh viên nhập điểm: 0";
+                }
 
                 ClearInputs();
             }
@@ -171,7 +169,6 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        // ─── Chọn sinh viên ───────────────────────────────────────────────────────
         private void LstSinhVien_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lstSinhVien.SelectedValue == null || lstSinhVien.SelectedIndex < 0) return;
@@ -186,7 +183,7 @@ namespace QLDSV.GUI.Forms.GiangVien
                 string[] parts = lstSinhVien.Text.Split(new[] { " - " }, StringSplitOptions.None);
                 txtHoTen.Text = parts.Length > 1 ? parts[1] : "";
 
-                // Lấy điểm hiện có từ BLL
+                
                 DataTable dt = _bll.GetDiemSinhVien(maSV, maLHP);
 
                 decimal? cc = null, kt1 = null, kt2 = null, ck = null;
@@ -205,12 +202,12 @@ namespace QLDSV.GUI.Forms.GiangVien
                 ConfigureGradeInput(txtDiemKT1, kt1);
                 ConfigureGradeInput(txtDiemKT2, kt2);
 
-                // CK: luôn editable
+               
                 txtDiemCK.Text      = ck.HasValue ? ck.Value.ToString("0.#") : "";
                 txtDiemCK.ReadOnly  = false;
                 txtDiemCK.BackColor = Color.White;
 
-                // Cập nhật trạng thái btnNhap / btnSua theo điểm thành phần
+                
                 bool daDu = cc.HasValue && kt1.HasValue && kt2.HasValue;
                 btnNhap.Enabled = !daDu;
                 btnSua.Enabled  = daDu;
@@ -238,7 +235,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        // ─── Button Nhập ──────────────────────────────────────────────────────────
+        
         private void BtnNhap_Click(object sender, EventArgs e)
         {
             string maSV = txtMaSV.Text.Trim();
@@ -251,7 +248,6 @@ namespace QLDSV.GUI.Forms.GiangVien
 
             string maLHP = cboLopHocPhan.SelectedValue.ToString();
 
-            // Kiểm tra đã có đủ điểm thành phần chưa (qua BLL)
             if (_bll.DaDuDiemThanhPhan(maSV, maLHP))
             {
                 MessageBox.Show("Sinh viên đã có điểm thành phần.",
@@ -267,7 +263,6 @@ namespace QLDSV.GUI.Forms.GiangVien
             if (!txtDiemKT2.ReadOnly && string.IsNullOrEmpty(txtDiemKT2.Text.Trim()))
             { MessageBox.Show("Vui lòng nhập điểm kiểm tra 2!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning); txtDiemKT2.Focus(); return; }
 
-            // Validate giá trị
             decimal cc = 0, kt1 = 0, kt2 = 0, ck = 0;
             bool hasCC, hasKT1, hasKT2, hasCK;
             if (!ValidateGrade(txtDiemCC,  "chuyên cần",  out cc,  out hasCC))  return;
@@ -277,7 +272,6 @@ namespace QLDSV.GUI.Forms.GiangVien
 
             try
             {
-                // Lưu qua BLL
                 if (!txtDiemCC.ReadOnly  && hasCC)  _bll.LuuDiem(maSV, maLHP, "CC",  cc);
                 if (!txtDiemKT1.ReadOnly && hasKT1) _bll.LuuDiem(maSV, maLHP, "KT1", kt1);
                 if (!txtDiemKT2.ReadOnly && hasKT2) _bll.LuuDiem(maSV, maLHP, "KT2", kt2);
@@ -301,11 +295,10 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        // ─── Button Sửa ───────────────────────────────────────────────────────────
-        // ─── Button Sửa ───────────────────────────────────────────────────────────
+        
         private void BtnSua_Click(object sender, EventArgs e)
         {
-            // 1. Kiểm tra đã chọn sinh viên chưa
+            
             string maSV = txtMaSV.Text.Trim();
 
             if (string.IsNullOrEmpty(maSV) || cboLopHocPhan.SelectedValue == null)
@@ -321,7 +314,7 @@ namespace QLDSV.GUI.Forms.GiangVien
 
             string maLHP = cboLopHocPhan.SelectedValue.ToString();
 
-            // 2. Chỉ cho sửa khi đã có đủ điểm thành phần
+            
             bool daDuDiemThanhPhan = _bll.DaDuDiemThanhPhan(maSV, maLHP);
 
             if (!daDuDiemThanhPhan)
@@ -335,7 +328,7 @@ namespace QLDSV.GUI.Forms.GiangVien
                 return;
             }
 
-            // 3. Bắt buộc nhập điểm CK
+            
             if (string.IsNullOrEmpty(txtDiemCK.Text.Trim()))
             {
                 MessageBox.Show(
@@ -349,7 +342,7 @@ namespace QLDSV.GUI.Forms.GiangVien
                 return;
             }
 
-            // 4. Validate điểm CK
+            
             decimal diemCK;
             bool hasCK;
 
@@ -364,7 +357,7 @@ namespace QLDSV.GUI.Forms.GiangVien
 
             try
             {
-                // 5. Chỉ update điểm CK
+                
                 _bll.LuuDiem(maSV, maLHP, "CK", diemCK);
 
                 MessageBox.Show(
@@ -374,7 +367,7 @@ namespace QLDSV.GUI.Forms.GiangVien
                     MessageBoxIcon.Information
                 );
 
-                // 6. Reload dữ liệu
+                
                 int selectedIndex = lstSinhVien.SelectedIndex;
 
                 LoadClassData();
@@ -385,7 +378,7 @@ namespace QLDSV.GUI.Forms.GiangVien
                     lstSinhVien.SelectedIndex = selectedIndex;
                 }
 
-                // 7. Giữ khóa điểm thành phần
+                
                 txtDiemCC.ReadOnly = true;
                 txtDiemKT1.ReadOnly = true;
                 txtDiemKT2.ReadOnly = true;
@@ -394,11 +387,11 @@ namespace QLDSV.GUI.Forms.GiangVien
                 txtDiemKT1.BackColor = Color.FromArgb(230, 230, 230);
                 txtDiemKT2.BackColor = Color.FromArgb(230, 230, 230);
 
-                // 8. CK vẫn cho sửa tiếp
+                
                 txtDiemCK.ReadOnly = false;
                 txtDiemCK.BackColor = Color.White;
 
-                // 9. Trạng thái button
+                
                 btnNhap.Enabled = false;
                 btnSua.Enabled = true;
             }
@@ -413,7 +406,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        // ─── Button Hủy ───────────────────────────────────────────────────────────
+        
         private void BtnHuy_Click(object sender, EventArgs e)
         {
             txtMaSV.Text = "";
@@ -435,36 +428,35 @@ namespace QLDSV.GUI.Forms.GiangVien
             lstSinhVien.Focus();
         }
 
-        // ─── Button Reset ─────────────────────────────────────────────────────────
+        
         private void BtnReset_Click(object sender, EventArgs e)
         {
-            // Chỉ xóa ô điểm đang editable, giữ nguyên MaSV và HoTen
             if (!txtDiemCC.ReadOnly)  txtDiemCC.Text  = "";
             if (!txtDiemKT1.ReadOnly) txtDiemKT1.Text = "";
             if (!txtDiemKT2.ReadOnly) txtDiemKT2.Text = "";
             if (!txtDiemCK.ReadOnly)  txtDiemCK.Text  = "";
         }
 
-        // ─── Quản lý trạng thái form ──────────────────────────────────────────────
+        
         private void SetFormState(bool isEditMode)
         {
             _isEditMode = isEditMode;
             if (isEditMode)
             {
-                // Chế độ Sửa: chỉ CK được nhập
+                
                 btnNhap.Enabled  = false;
                 btnSua.Enabled   = false;
                 btnReset.Enabled = false;
                 btnHuy.Enabled   = true;
 
-                txtDiemCC.ReadOnly  = true;  txtDiemCC.BackColor  = Color.FromArgb(230, 230, 230);
-                txtDiemKT1.ReadOnly = true;  txtDiemKT1.BackColor = Color.FromArgb(230, 230, 230);
-                txtDiemKT2.ReadOnly = true;  txtDiemKT2.BackColor = Color.FromArgb(230, 230, 230);
-                txtDiemCK.ReadOnly  = false; txtDiemCK.BackColor  = Color.White;
+                txtDiemCC.ReadOnly  = true;  
+                txtDiemKT1.ReadOnly = true;  
+                txtDiemKT2.ReadOnly = true;  
+                txtDiemCK.ReadOnly  = false; 
             }
             else
             {
-                // Chế độ Rảnh: btnNhap/btnSua sẽ được cập nhật khi chọn SV
+                
                 btnNhap.Enabled  = true;
                 btnSua.Enabled   = false;
                 btnReset.Enabled = true;
@@ -472,16 +464,16 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        // ─── Helpers ──────────────────────────────────────────────────────────────
+        
         private void ClearInputs()
         {
             txtMaSV.Text = "";
             txtHoTen.Text = "";
 
-            txtDiemCC.Text  = ""; txtDiemCC.ReadOnly  = false; txtDiemCC.BackColor  = Color.White;
-            txtDiemKT1.Text = ""; txtDiemKT1.ReadOnly = false; txtDiemKT1.BackColor = Color.White;
-            txtDiemKT2.Text = ""; txtDiemKT2.ReadOnly = false; txtDiemKT2.BackColor = Color.White;
-            txtDiemCK.Text  = ""; txtDiemCK.ReadOnly  = false; txtDiemCK.BackColor  = Color.White;
+            txtDiemCC.Text  = ""; txtDiemCC.ReadOnly  = false; 
+            txtDiemKT1.Text = ""; txtDiemKT1.ReadOnly = false;
+            txtDiemKT2.Text = ""; txtDiemKT2.ReadOnly = false; 
+            txtDiemCK.Text  = ""; txtDiemCK.ReadOnly  = false; 
         }
 
         private bool ValidateGrade(Guna.UI2.WinForms.Guna2TextBox txt, string label,

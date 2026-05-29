@@ -96,9 +96,10 @@
             this.guna2Panel1.Controls.Add(this.lblLop);
             this.guna2Panel1.Controls.Add(this.lblhocky);
             this.guna2Panel1.Controls.Add(this.lblNamhoc);
+            this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(1305, 89);
+            this.guna2Panel1.Size = new System.Drawing.Size(1325, 89);
             this.guna2Panel1.TabIndex = 0;
             // 
             // txtMaTen
@@ -163,7 +164,6 @@
             this.cboNam.Name = "cboNam";
             this.cboNam.Size = new System.Drawing.Size(170, 26);
             this.cboNam.TabIndex = 34;
-            this.cboNam.SelectedIndexChanged += new System.EventHandler(this.guna2ComboBox1_SelectedIndexChanged);
             // 
             // btnLoc
             // 
@@ -250,9 +250,11 @@
             this.guna2Panel2.Controls.Add(this.guna2GroupBox4);
             this.guna2Panel2.Controls.Add(this.guna2GroupBox5);
             this.guna2Panel2.Controls.Add(this.guna2GroupBox1);
-            this.guna2Panel2.Location = new System.Drawing.Point(0, 96);
+            this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.guna2Panel2.Location = new System.Drawing.Point(0, 89);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(1305, 90);
+            this.guna2Panel2.Padding = new System.Windows.Forms.Padding(6, 4, 6, 6);
+            this.guna2Panel2.Size = new System.Drawing.Size(1325, 100);
             this.guna2Panel2.TabIndex = 1;
             // 
             // guna2GroupBox6
@@ -269,12 +271,14 @@
             // 
             // lblYeu
             // 
-            this.lblYeu.AutoSize = true;
-            this.lblYeu.Location = new System.Drawing.Point(65, 50);
+            this.lblYeu.BackColor = System.Drawing.Color.White;
+            this.lblYeu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblYeu.Location = new System.Drawing.Point(0, 40);
             this.lblYeu.Name = "lblYeu";
-            this.lblYeu.Size = new System.Drawing.Size(38, 15);
+            this.lblYeu.Size = new System.Drawing.Size(167, 37);
             this.lblYeu.TabIndex = 5;
             this.lblYeu.Text = "label6";
+            this.lblYeu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2GroupBox7
             // 
@@ -290,12 +294,14 @@
             // 
             // lblDiemTB
             // 
-            this.lblDiemTB.AutoSize = true;
-            this.lblDiemTB.Location = new System.Drawing.Point(66, 52);
+            this.lblDiemTB.BackColor = System.Drawing.Color.White;
+            this.lblDiemTB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDiemTB.Location = new System.Drawing.Point(0, 40);
             this.lblDiemTB.Name = "lblDiemTB";
-            this.lblDiemTB.Size = new System.Drawing.Size(38, 15);
+            this.lblDiemTB.Size = new System.Drawing.Size(167, 37);
             this.lblDiemTB.TabIndex = 6;
             this.lblDiemTB.Text = "label7";
+            this.lblDiemTB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2GroupBox2
             // 
@@ -311,12 +317,14 @@
             // 
             // lblXuatsac
             // 
-            this.lblXuatsac.AutoSize = true;
-            this.lblXuatsac.Location = new System.Drawing.Point(69, 50);
+            this.lblXuatsac.BackColor = System.Drawing.Color.White;
+            this.lblXuatsac.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblXuatsac.Location = new System.Drawing.Point(0, 40);
             this.lblXuatsac.Name = "lblXuatsac";
-            this.lblXuatsac.Size = new System.Drawing.Size(38, 15);
+            this.lblXuatsac.Size = new System.Drawing.Size(167, 37);
             this.lblXuatsac.TabIndex = 1;
             this.lblXuatsac.Text = "label2";
+            this.lblXuatsac.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2GroupBox3
             // 
@@ -332,12 +340,14 @@
             // 
             // lblGioi
             // 
-            this.lblGioi.AutoSize = true;
-            this.lblGioi.Location = new System.Drawing.Point(64, 50);
+            this.lblGioi.BackColor = System.Drawing.Color.White;
+            this.lblGioi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblGioi.Location = new System.Drawing.Point(0, 40);
             this.lblGioi.Name = "lblGioi";
-            this.lblGioi.Size = new System.Drawing.Size(38, 15);
+            this.lblGioi.Size = new System.Drawing.Size(167, 37);
             this.lblGioi.TabIndex = 2;
             this.lblGioi.Text = "label3";
+            this.lblGioi.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2GroupBox4
             // 
@@ -353,12 +363,14 @@
             // 
             // lblKha
             // 
-            this.lblKha.AutoSize = true;
-            this.lblKha.Location = new System.Drawing.Point(67, 51);
+            this.lblKha.BackColor = System.Drawing.Color.White;
+            this.lblKha.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblKha.Location = new System.Drawing.Point(0, 40);
             this.lblKha.Name = "lblKha";
-            this.lblKha.Size = new System.Drawing.Size(38, 15);
+            this.lblKha.Size = new System.Drawing.Size(167, 37);
             this.lblKha.TabIndex = 3;
             this.lblKha.Text = "label4";
+            this.lblKha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2GroupBox5
             // 
@@ -374,12 +386,14 @@
             // 
             // lblTB
             // 
-            this.lblTB.AutoSize = true;
-            this.lblTB.Location = new System.Drawing.Point(66, 50);
+            this.lblTB.BackColor = System.Drawing.Color.White;
+            this.lblTB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTB.Location = new System.Drawing.Point(0, 40);
             this.lblTB.Name = "lblTB";
-            this.lblTB.Size = new System.Drawing.Size(38, 15);
+            this.lblTB.Size = new System.Drawing.Size(167, 37);
             this.lblTB.TabIndex = 4;
             this.lblTB.Text = "label5";
+            this.lblTB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2GroupBox1
             // 
@@ -395,30 +409,54 @@
             // 
             // lblTong
             // 
-            this.lblTong.AutoSize = true;
-            this.lblTong.Location = new System.Drawing.Point(57, 50);
+            this.lblTong.BackColor = System.Drawing.Color.White;
+            this.lblTong.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTong.Location = new System.Drawing.Point(0, 40);
             this.lblTong.Name = "lblTong";
-            this.lblTong.Size = new System.Drawing.Size(46, 15);
+            this.lblTong.Size = new System.Drawing.Size(167, 37);
             this.lblTong.TabIndex = 0;
             this.lblTong.Text = "lblTong";
+            this.lblTong.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2GroupBox8
             // 
             this.guna2GroupBox8.Controls.Add(this.dataGridView1);
+            this.guna2GroupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2GroupBox8.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2GroupBox8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2GroupBox8.Location = new System.Drawing.Point(0, 193);
+            this.guna2GroupBox8.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.guna2GroupBox8.Location = new System.Drawing.Point(0, 189);
             this.guna2GroupBox8.Name = "guna2GroupBox8";
-            this.guna2GroupBox8.Size = new System.Drawing.Size(1305, 258);
+            this.guna2GroupBox8.Size = new System.Drawing.Size(1325, 497);
             this.guna2GroupBox8.TabIndex = 2;
             this.guna2GroupBox8.Text = "Danh sách kết quả học tập";
             // 
             // dataGridView1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 44);
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(101)))), ((int)(((byte)(192)))));
+            this.dataGridView1.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dataGridView1.ColumnHeadersHeight = 36;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridView1.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dataGridView1.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(222)))), ((int)(((byte)(251)))));
+            this.dataGridView1.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridView1.Location = new System.Drawing.Point(0, 40);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1282, 211);
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowTemplate.Height = 28;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(1325, 457);
             this.dataGridView1.TabIndex = 0;
             // 
             // groupBox1
@@ -434,19 +472,40 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(0, 458);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox1.Location = new System.Drawing.Point(0, 448);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1305, 238);
+            this.groupBox1.Size = new System.Drawing.Size(1325, 238);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin chi tiết sinh viên";
             // 
             // dataGridView2
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(12, 57);
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AllowUserToResizeRows = false;
+            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(101)))), ((int)(((byte)(192)))));
+            this.dataGridView2.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.dataGridView2.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            this.dataGridView2.ColumnHeadersHeight = 36;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridView2.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.dataGridView2.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(222)))), ((int)(((byte)(251)))));
+            this.dataGridView2.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
+            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dataGridView2.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dataGridView2.Location = new System.Drawing.Point(3, 60);
+            this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(1282, 175);
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowTemplate.Height = 28;
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView2.Size = new System.Drawing.Size(1319, 175);
             this.dataGridView2.TabIndex = 26;
             // 
             // txthocky
@@ -593,7 +652,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1306, 723);
+            this.ClientSize = new System.Drawing.Size(1325, 686);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.guna2GroupBox8);
             this.Controls.Add(this.guna2Panel2);
@@ -605,19 +664,12 @@
             this.guna2Panel1.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);
             this.guna2GroupBox6.ResumeLayout(false);
-            this.guna2GroupBox6.PerformLayout();
             this.guna2GroupBox7.ResumeLayout(false);
-            this.guna2GroupBox7.PerformLayout();
             this.guna2GroupBox2.ResumeLayout(false);
-            this.guna2GroupBox2.PerformLayout();
             this.guna2GroupBox3.ResumeLayout(false);
-            this.guna2GroupBox3.PerformLayout();
             this.guna2GroupBox4.ResumeLayout(false);
-            this.guna2GroupBox4.PerformLayout();
             this.guna2GroupBox5.ResumeLayout(false);
-            this.guna2GroupBox5.PerformLayout();
             this.guna2GroupBox1.ResumeLayout(false);
-            this.guna2GroupBox1.PerformLayout();
             this.guna2GroupBox8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
