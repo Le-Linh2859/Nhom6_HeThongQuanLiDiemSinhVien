@@ -17,7 +17,11 @@ namespace QLDSV.GUI
 
         public static void ketnoi()
         {
-            connstring = @"Data Source=.\SQLEXPRESS01;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+            if (conn != null && conn.State == ConnectionState.Open)
+                return;
+
+            connstring = ConfigurationManager.ConnectionStrings["QLDSV"]?.ConnectionString
+                ?? @"Data Source=localhost\SQL2022DEV;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
 
             conn = new SqlConnection(connstring);
             conn.Open();

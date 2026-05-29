@@ -227,8 +227,8 @@ namespace QLDSV.GUI
 
                 SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, false);
                 SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, false);
-                SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
-                SetMenuRowVisibility(11, btnBaocao, guna2PictureBox12, true); // Tra cứu điểm / Báo cáo
+                SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, false);
+                SetMenuRowVisibility(11, btnBaocao, guna2PictureBox12, false); // Tra cứu điểm / Báo cáo
             }
             // Sinh viên (VT003): Môn học, Giảng viên, Lớp học phần, Kết quả học tập, Phúc khảo, Cảnh báo học vụ, Tra cứu điểm
             else if (role == "VT003")
@@ -431,6 +431,13 @@ namespace QLDSV.GUI
                         SetActiveButton(btnCanhbao);
                         OpenChildForm(new frmCanhBaoHocVu_SV(),
                             "Cảnh Báo Học Vụ");
+                    };
+                if (btnPhuckhao != null)
+                    btnPhuckhao.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnPhuckhao);
+                        OpenChildForm(new frmPhucKhao_SV(),
+                            "Phúc Khảo");
                     };
             }
 
