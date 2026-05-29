@@ -30,6 +30,7 @@ namespace QLDSV.DAL
 
         public static DataTable GetDataToTable(string sql)
         {
+            KetNoi(); // thêm dòng này
             SqlDataAdapter da = new SqlDataAdapter(sql, conn);
             DataTable table = new DataTable();
             da.Fill(table);
@@ -38,6 +39,7 @@ namespace QLDSV.DAL
 
         public static void RunSql(string sql)
         {
+            KetNoi(); // thêm dòng này
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
             cmd.CommandText = sql;
@@ -47,6 +49,7 @@ namespace QLDSV.DAL
 
         public static object ExecuteScalar(string sql)
         {
+            KetNoi(); // thêm dòng này
             SqlCommand cmd = new SqlCommand(sql, conn);
             object result = cmd.ExecuteScalar();
             cmd.Dispose();

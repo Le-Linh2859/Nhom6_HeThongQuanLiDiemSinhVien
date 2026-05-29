@@ -1,3 +1,4 @@
+using QLDSV.GUI.Forms.GiangVien;
 using System;
 using System.Windows.Forms;
 
@@ -13,7 +14,12 @@ namespace QLDSV.GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmCanhBaoHocVu());
+
+            SessionHelper.MaTaiKhoan = "TK007"; // tài khoản có thật trong DB
+            SessionHelper.TenDangNhap = "GV20260001";
+            SessionHelper.MaVaiTro = "VT002";
+
+            Application.Run(new frmThongTinCaNhan_GV());
         }
     }
 }
