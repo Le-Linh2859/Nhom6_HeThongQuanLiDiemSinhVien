@@ -4,7 +4,8 @@
     "\\HT_QLDSV",
     "\\HT_QLDSV\\QLDSV.GUI",
     "\\HT_QLDSV\\QLDSV.GUI\\Forms",
-    "\\HT_QLDSV\\QLDSV.GUI\\Forms\\SinhVien"
+    "\\HT_QLDSV\\QLDSV.GUI\\Forms\\Admin"
   ],
+  "SelectedNode": "\\HT_QLDSV\\QLDSV.GUI\\Forms\\Admin\\frmPhucKhao_Admin.cs",
   "PreviewInSolutionExplorer": false
 }

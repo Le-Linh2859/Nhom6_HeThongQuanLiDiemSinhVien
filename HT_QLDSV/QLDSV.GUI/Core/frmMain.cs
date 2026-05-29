@@ -115,20 +115,13 @@ namespace QLDSV.GUI
                     OpenChildForm(new QLDSV.GUI.Forms.Admin.frmPhucKhao_Admin(), "Phúc Khảo");
                 }
 
-                // 6. Nhấp vào ảnh đại diện hoặc Tên tài khoản để mở trang Thông tin cá nhân
+                // 6. Nhấp vào ảnh đại diện hoặc Tên tài khoản để mở trang Thông tin tài khoản
                 if (guna2CirclePictureBox1 != null)
                 {
                     guna2CirclePictureBox1.Cursor = Cursors.Hand;
                     guna2CirclePictureBox1.Click += (s, ev) =>
                     {
-                        if (SessionHelper.MaVaiTro == "VT003")
-                        {
-                            OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmThongTinCaNhan_SV(), "Thông Tin Cá Nhân");
-                        }
-                        else if (SessionHelper.MaVaiTro == "VT002")
-                        {
-                            OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmThongTinCaNhan_GV(), "Thông Tin Cá Nhân");
-                        }
+                        OpenChildForm(new QLDSV.GUI.Forms.frmThongTinTaiKhoan(), "Thông Tin Tài Khoản");
                     };
                 }
                 if (guna2HtmlLabel13 != null)
@@ -136,14 +129,7 @@ namespace QLDSV.GUI
                     guna2HtmlLabel13.Cursor = Cursors.Hand;
                     guna2HtmlLabel13.Click += (s, ev) =>
                     {
-                        if (SessionHelper.MaVaiTro == "VT003")
-                        {
-                            OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmThongTinCaNhan_SV(), "Thông Tin Cá Nhân");
-                        }
-                        else if (SessionHelper.MaVaiTro == "VT002")
-                        {
-                            OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmThongTinCaNhan_GV(), "Thông Tin Cá Nhân");
-                        }
+                        OpenChildForm(new QLDSV.GUI.Forms.frmThongTinTaiKhoan(), "Thông Tin Tài Khoản");
                     };
                 }
             }

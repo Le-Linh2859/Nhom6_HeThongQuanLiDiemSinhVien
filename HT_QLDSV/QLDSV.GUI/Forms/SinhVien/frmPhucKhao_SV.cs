@@ -55,6 +55,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             }
 
             SetAnchorAllGrids(this.Controls);
+            MakeLayoutResponsive();
         }
 
         private void SetAnchorAllGrids(Control.ControlCollection controls)
@@ -80,6 +81,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             BuildSidebarMenu();
 
             // Wire up event handlers programmatically
+            this.Resize += (s, e) => MakeLayoutResponsive();
             this.Load += frmPhucKhao_SV_Load;
             this.btnThem.Click += btnThem_Click;
             this.btnLamMoi.Click += btnLamMoi_Click;
@@ -623,6 +625,93 @@ namespace QLDSV.GUI.Forms.SinhVien
             if (kw != "Tìm lớp học phần...")
             {
                 TaiDuLieu();
+            }
+        }
+
+        private void MakeLayoutResponsive()
+        {
+            try
+            {
+                // 1. Căn lề phải cho cụm tìm kiếm/lọc trong pnlToolbar
+                if (pnlToolbar != null)
+                {
+                    int rightMargin = 16;
+
+                    // txtTimKiem ở ngoài cùng bên phải
+                    if (txtTimKiem != null)
+                    {
+                        txtTimKiem.Left = pnlToolbar.Width - txtTimKiem.Width - rightMargin;
+                    }
+
+                    // cboFilterTrangThai ở bên trái txtTimKiem
+                    if (cboFilterTrangThai != null && txtTimKiem != null)
+                    {
+                        cboFilterTrangThai.Left = txtTimKiem.Left - cboFilterTrangThai.Width - 12;
+                    }
+
+                    // lblFilterTrangThai ở bên trái cboFilterTrangThai
+                    if (lblFilterTrangThai != null && cboFilterTrangThai != null)
+                    {
+                        lblFilterTrangThai.Left = cboFilterTrangThai.Left - lblFilterTrangThai.Width - 8;
+                    }
+                }
+
+                // 2. Phân phối tỷ lệ động cho các panel thống kê trong pnlStats
+                if (pnlStats != null)
+                {
+                    int startX = 100;
+                    if (lblThongKeCaption != null)
+                    {
+                        startX = lblThongKeCaption.Right + 12;
+                    }
+
+                    Panel[] statPanels = { pnlStatTong, pnlStatChoDuyet, pnlStatDaDuyet, pnlStatTuChoi };
+                    int activeCount = 0;
+                    foreach (var p in statPanels)
+                    {
+                        if (p != null && p.Visible) activeCount++;
+                    }
+
+                    if (activeCount > 0)
+                    {
+                        int availableWidth = pnlStats.Width - startX - 16;
+                        int panelWidth = 120; // Chiều rộng cơ bản
+                        int gap = 16;
+
+                        int totalNeeded = (panelWidth * activeCount) + (gap * (activeCount - 1));
+                        if (availableWidth >= totalNeeded)
+                        {
+                            // Mở rộng nhẹ panel khi có nhiều khoảng trống (lên đến 160px)
+                            panelWidth = Math.Min(160, availableWidth / activeCount - gap);
+                            if (panelWidth < 120) panelWidth = 120;
+
+                            gap = (availableWidth - (panelWidth * activeCount)) / (activeCount - 1);
+                            if (gap > 40) gap = 40; // Giới hạn khoảng cách tối đa
+                        }
+                        else
+                        {
+                            // Màn hình hẹp, thu nhỏ ô và khoảng cách để không bị đè lấp
+                            gap = 8;
+                            panelWidth = (availableWidth - (gap * (activeCount - 1))) / activeCount;
+                            if (panelWidth < 70) panelWidth = 70;
+                        }
+
+                        int currentX = startX;
+                        foreach (var p in statPanels)
+                        {
+                            if (p != null && p.Visible)
+                            {
+                                p.Left = currentX;
+                                p.Width = panelWidth;
+                                currentX += panelWidth + gap;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Lỗi thực thi MakeLayoutResponsive: " + ex.Message);
             }
         }
     }
