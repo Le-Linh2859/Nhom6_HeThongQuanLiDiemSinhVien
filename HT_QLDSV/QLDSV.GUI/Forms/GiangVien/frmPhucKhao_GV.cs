@@ -288,7 +288,10 @@ namespace QLDSV.GUI.Forms.GiangVien
                              "pk.MaSV AS [Mã SV], " +
                              "lhp.TenLopHocPhan AS [Lớp Học Phần], " +
                              "CONVERT(varchar,pk.NgayYeuCau,103) AS [Ngày Yêu Cầu], " +
-                             "pk.TrangThai AS [Trạng Thái], " +
+                             "CASE WHEN pk.TrangThai = 'ChoDuyet' OR pk.TrangThai = N'Chờ duyệt' THEN N'Chờ duyệt' " +
+                             "     WHEN pk.TrangThai = 'DaDuyet' OR pk.TrangThai = N'Đã duyệt' OR pk.TrangThai = 'DangXuLy' THEN N'Đã duyệt' " +
+                             "     WHEN pk.TrangThai = 'TuChoi' OR pk.TrangThai = N'Từ chối' THEN N'Từ chối' " +
+                             "     ELSE pk.TrangThai END AS [Trạng Thái], " +
                              "pk.LyDo AS [Lý Do], " +
                              "pk.MaSV AS _MaSV, pk.MaLHP AS _MaLHP " +
                              "FROM PhucKhao pk " +
@@ -305,7 +308,22 @@ namespace QLDSV.GUI.Forms.GiangVien
                 if (cboFilterTrangThai.SelectedIndex > 0)
                 {
                     string filterStatus = cboFilterTrangThai.SelectedItem.ToString();
-                    sql += $" AND pk.TrangThai = N'{filterStatus}'";
+                    if (filterStatus == "Chờ duyệt")
+                    {
+                        sql += " AND (pk.TrangThai = 'ChoDuyet' OR pk.TrangThai = N'Chờ duyệt')";
+                    }
+                    else if (filterStatus == "Đã duyệt")
+                    {
+                        sql += " AND (pk.TrangThai = 'DaDuyet' OR pk.TrangThai = N'Đã duyệt' OR pk.TrangThai = 'DangXuLy')";
+                    }
+                    else if (filterStatus == "Từ chối")
+                    {
+                        sql += " AND (pk.TrangThai = 'TuChoi' OR pk.TrangThai = N'Từ chối')";
+                    }
+                    else
+                    {
+                        sql += $" AND pk.TrangThai = N'{filterStatus}'";
+                    }
                 }
 
                 sql += " ORDER BY pk.MaPhucKhao DESC";
@@ -371,9 +389,9 @@ namespace QLDSV.GUI.Forms.GiangVien
                 return;
             }
 
-            int choDuyet = tblPhucKhao.Select("TrangThai = 'Chờ duyệt'").Length;
-            int daDuyet  = tblPhucKhao.Select("TrangThai = 'Đã duyệt'").Length;
-            int tuChoi   = tblPhucKhao.Select("TrangThai = 'Từ chối'").Length;
+            int choDuyet = tblPhucKhao.Select("[Trạng Thái] = 'Chờ duyệt'").Length;
+            int daDuyet  = tblPhucKhao.Select("[Trạng Thái] = 'Đã duyệt'").Length;
+            int tuChoi   = tblPhucKhao.Select("[Trạng Thái] = 'Từ chối'").Length;
             int tong     = choDuyet + daDuyet + tuChoi;
 
             lblStatTongVal.Text     = tong.ToString();

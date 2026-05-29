@@ -44,7 +44,6 @@ GO
 
 
 
-
 USE DB_QLDiemSinhVien;
 GO
 
