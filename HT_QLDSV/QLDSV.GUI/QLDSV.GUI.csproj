@@ -282,12 +282,6 @@
     <Compile Include="Forms\GiangVien\frmPhucKhao_GV.Designer.cs">
       <DependentUpon>frmPhucKhao_GV.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\GiangVien\FrmTraCuuDiem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\GiangVien\FrmTraCuuDiem.Designer.cs">
-      <DependentUpon>FrmTraCuuDiem.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\SinhVien\CanhBaoHocTap_SV.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -377,14 +371,14 @@
     <EmbeddedResource Include="Forms\GiangVien\frmLophocphan_GV.resx">
       <DependentUpon>frmLophocphan_GV.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GiangVien\frmMonhoc_GV.resx">
+      <DependentUpon>frmMonhoc_GV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GiangVien\FrmNhapDiemSV.resx">
       <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GiangVien\frmThongTinCaNhan_GV.resx">
       <DependentUpon>frmThongTinCaNhan_GV.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GiangVien\FrmTraCuuDiem.resx">
-      <DependentUpon>FrmTraCuuDiem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SinhVien\CanhBaoHocTap_SV.resx">
       <DependentUpon>CanhBaoHocTap_SV.cs</DependentUpon>

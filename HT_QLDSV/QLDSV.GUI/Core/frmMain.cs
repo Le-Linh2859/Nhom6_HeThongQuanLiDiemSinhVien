@@ -101,19 +101,18 @@ namespace QLDSV.GUI
                 // 4. Đăng ký sự kiện Click cho tất cả các nút Sidebar
                 WireUpSidebarEvents();
 
-                // 5. Mở mặc định trang Phúc Khảo cho Sinh viên / Giảng viên / Admin để test nhanh
-                if (SessionHelper.MaVaiTro == "VT003")
+                // 5. Mở form mặc định theo role sau khi đăng nhập
+                if (SessionHelper.MaVaiTro == "VT002")
                 {
-                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmPhucKhao_SV(), "Phúc Khảo");
+                    SetActiveButton(btnGiangvien);
+                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmThongTinCaNhan_GV(), "Thông Tin Cá Nhân");
                 }
-                else if (SessionHelper.MaVaiTro == "VT002")
+                else if (SessionHelper.MaVaiTro == "VT003")
                 {
-                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmPhucKhao_GV(), "Phúc Khảo");
+                    SetActiveButton(btnSinhvien);
+                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmThongTinCaNhan_SV(), "Thông Tin Cá Nhân");
                 }
-                else if (SessionHelper.MaVaiTro == "VT001")
-                {
-                    OpenChildForm(new QLDSV.GUI.Forms.Admin.frmPhucKhao_Admin(), "Phúc Khảo");
-                }
+                // VT001 (Admin): không mở form con mặc định, hiển thị frmMain trống
 
                 // 6. Nhấp vào ảnh đại diện hoặc Tên tài khoản để mở trang Thông tin tài khoản
                 if (guna2CirclePictureBox1 != null)
@@ -210,7 +209,7 @@ namespace QLDSV.GUI
             {
                 SetMenuRowVisibility(0, btnTongquan, guna2PictureBox1, false);
                 SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, true);
-                SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, false);
+                SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, true);
                 SetMenuRowVisibility(3, btnMon, guna2PictureBox4, true);
                 SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, false);
                 SetMenuRowVisibility(5, btnLophp, guna2PictureBox6, true);
@@ -225,11 +224,31 @@ namespace QLDSV.GUI
 
         private void WireUpSidebarEvents()
         {
-            if (btnTongquan != null) btnTongquan.Click += (s, e) => OpenChildForm(new frmTongQuan(), "Tổng Quan");
+            //if (btnTongquan != null) btnTongquan.Click += (s, e) => OpenChildForm(new frmTongQuan(), "Tổng Quan");
             //if (btnGiangvien != null) btnGiangvien.Click += (s, e) => OpenChildForm(new frmGiangvien(), "Giảng Viên");
-            if (btnSinhvien != null) btnSinhvien.Click += (s, e) => OpenChildForm(new frmQuanLiThongTinSinhVien(), "Sinh Viên");
+            //if (btnSinhvien != null) btnSinhvien.Click += (s, e) => OpenChildForm(new frmQuanLiThongTinSinhVien(), "Sinh Viên");
+
+            if (btnTongquan != null) btnTongquan.Click += (s, e) => { SetActiveButton(btnTongquan); OpenChildForm(new frmTongQuan(), "Tổng Quan"); };
+            if (btnGiangvien != null) btnGiangvien.Click += (s, e) =>
+            {
+                SetActiveButton(btnGiangvien);
+                if (SessionHelper.MaVaiTro == "VT002")
+                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmThongTinCaNhan_GV(), "Thông Tin Cá Nhân");
+                else
+                    OpenChildForm(new frmGiangvien(), "Giảng Viên");
+            };
+            if (btnSinhvien != null) btnSinhvien.Click += (s, e) =>
+            {
+                SetActiveButton(btnSinhvien);
+                if (SessionHelper.MaVaiTro == "VT003")
+                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmThongTinCaNhan_SV(), "Thông Tin Cá Nhân");
+                else
+                    OpenChildForm(new frmQuanLiThongTinSinhVien(), "Sinh Viên");
+            };
+
             if (btnMon != null) btnMon.Click += (s, e) =>
             {
+                SetActiveButton(btnMon);
                 if (SessionHelper.MaVaiTro == "VT002")
                     OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmMonhoc_GV(), "Môn Học");
                 else if (SessionHelper.MaVaiTro == "VT003")
@@ -237,6 +256,7 @@ namespace QLDSV.GUI
                 else
                     OpenChildForm(new frmMonhoc(), "Môn Học");
             };
+
             if (btnCanhbao != null)
             {
                 btnCanhbao.Click += (s, e) =>
@@ -251,9 +271,11 @@ namespace QLDSV.GUI
                             "Cảnh Báo Học Vụ");
                 };
             }
-            if (btnLopnc != null) btnLopnc.Click += (s, e) => OpenChildForm(new FrmLopNienChe(), "Lớp Niên Chế");
+            //if (btnLopnc != null) btnLopnc.Click += (s, e) => OpenChildForm(new FrmLopNienChe(), "Lớp Niên Chế");
+            if (btnLopnc != null) btnLopnc.Click += (s, e) => { SetActiveButton(btnLopnc); OpenChildForm(new FrmLopNienChe(), "Lớp Niên Chế"); };
             if (btnLophp != null) btnLophp.Click += (s, e) =>
             {
+                SetActiveButton(btnLophp);
                 if (SessionHelper.MaVaiTro == "VT002")
                     OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmLophocphan_GV(), "Lớp Học Phần");
                 else if (SessionHelper.MaVaiTro == "VT003")
@@ -261,9 +283,10 @@ namespace QLDSV.GUI
                 else
                     OpenChildForm(new frmLophocphan(), "Lớp Học Phần");
             };
-            if (btnDangky != null) btnDangky.Click += (s, e) => OpenChildForm(new frmKhoa(), "Khoa");
+            if (btnDangky != null) btnDangky.Click += (s, e) => { SetActiveButton(btnDangky); OpenChildForm(new frmKhoa(), "Khoa"); };
             if (btnDiem != null) btnDiem.Click += (s, e) =>
             {
+                SetActiveButton(btnDiem);
                 // Điều hướng động theo vai trò
                 if (SessionHelper.MaVaiTro == "VT001")
                     OpenChildForm(new QLDSV.GUI.frmQuanLiTaiKhoan(), "Quản Lý Tài Khoản");
@@ -272,31 +295,22 @@ namespace QLDSV.GUI
             };
             if (btnKetqua != null) btnKetqua.Click += (s, e) =>
             {
+                SetActiveButton(btnKetqua);
                 if (SessionHelper.MaVaiTro == "VT003")
                     OpenChildForm(new QLDSV.GUI.Forms.SinhVien.KetQuaHocTap(), "Kết Quả Học Tập");
                 else OpenChildForm(new QLDSV.GUI.Forms.Admin.frmTheoDoiDiem(), "Theo Dõi Điểm");
             };
 
 
-            if (btnGiangvien != null) btnGiangvien.Click += (s, e) =>
+            if (btnBaocao != null) btnBaocao.Click += (s, e) =>
             {
-                if (SessionHelper.MaVaiTro == "VT001")
-                    OpenChildForm(new QLDSV.GUI.frmGiangvien(), "Quản lý giảng viên");
-                else OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmThongTinCaNhan_GV(), "Thông tin giảng viên");
+                SetActiveButton(btnBaocao);
+                if (SessionHelper.MaVaiTro == "VT002" || SessionHelper.MaVaiTro == "VT003")
+                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.FrmTraCuuDiem(), "Tra Cứu Điểm");
+                else
+                    OpenChildForm(new frmBaoCaoThongKe(), "Báo Cáo Thống Kê");
             };
 
-
-            //if (btnCanhbao != null) btnCanhbao.Click += (s, e) => OpenChildForm(new frmCanhBaoHocVu(), "Cảnh Báo Học Vụ");
-            if (btnPhuckhao != null) btnPhuckhao.Click += (s, e) =>
-            {
-                if (SessionHelper.MaVaiTro == "VT001")
-                    OpenChildForm(new QLDSV.GUI.Forms.Admin.frmPhucKhao_Admin(), "Phúc Khảo");
-                else if (SessionHelper.MaVaiTro == "VT002")
-                    OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmPhucKhao_GV(), "Phúc Khảo");
-                else if (SessionHelper.MaVaiTro == "VT003")
-                    OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmPhucKhao_SV(), "Phúc Khảo");
-            };
-            if (btnBaocao != null) btnBaocao.Click += (s, e) => OpenChildForm(new frmBaoCaoThongKe(), "Báo Cáo Thống Kê");
 
             if (guna2Button7 != null)
             {
@@ -309,6 +323,39 @@ namespace QLDSV.GUI
                         Logout();
                     }
                 };
+            }
+        }
+
+        /// <summary>
+        /// Đặt nút được chọn thành trạng thái active (nền xám, chữ đen, in đậm, bo tròn).
+        /// Các nút còn lại trở về trạng thái mặc định (nền trong suốt, chữ trắng, không in đậm).
+        /// </summary>
+        private void SetActiveButton(Guna.UI2.WinForms.Guna2Button activeBtn)
+        {
+            var allButtons = new[]
+            {
+                btnTongquan, btnGiangvien, btnSinhvien, btnMon,
+                btnLopnc, btnLophp, btnDangky, btnDiem,
+                btnKetqua, btnCanhbao, btnPhuckhao, btnBaocao
+            };
+
+            foreach (var btn in allButtons)
+            {
+                if (btn == null) continue;
+                if (btn == activeBtn)
+                {
+                    btn.FillColor = System.Drawing.Color.FromArgb(224, 224, 224);
+                    btn.ForeColor = System.Drawing.Color.Black;
+                    btn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+                    btn.BorderRadius = 5;
+                }
+                else
+                {
+                    btn.FillColor = System.Drawing.Color.Transparent;
+                    btn.ForeColor = System.Drawing.Color.White;
+                    btn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular);
+                    btn.BorderRadius = 0;
+                }
             }
         }
 

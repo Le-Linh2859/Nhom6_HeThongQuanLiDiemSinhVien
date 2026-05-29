@@ -20,9 +20,9 @@ namespace QLDSV.DAL
             if (conn != null && conn.State == ConnectionState.Open)
                 return;
 
-            // Đọc từ App.config, fallback về hardcode
+            // Đọc từ App.config, fallback về hardcode localhost\SQL2022DEV
             connstring = ConfigurationManager.ConnectionStrings["QLDSV"]?.ConnectionString
-                ?? @"Data Source=DESKTOP-1MI6150;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+                ?? @"Data Source=localhost\SQL2022DEV;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
 
             conn = new SqlConnection(connstring);
             conn.Open();

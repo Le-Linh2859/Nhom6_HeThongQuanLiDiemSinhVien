@@ -54,7 +54,65 @@ namespace QLDSV.DAL
 
             return Connection.GetDataToTable(sql);
         }
+        //lấy danh sách theo role giảng viên
+        public DataTable GetDanhSachTheoGiangVien(string maGV, string keyword, string maMon)
+        {
+            string escapedMaGV = maGV.Replace("'", "''");
+            string sql =
+                "SELECT lhp.MaLHP, lhp.TenLopHocPhan, " +
+                "lhp.Thu + N' (Ca ' + CAST(lhp.CaHoc AS varchar) + N')' AS ThoiGianHoc, " +
+                "lhp.PhongHoc, k.TenKhoa, mh.TenMon, gv.HoTen AS TenGiangVien, " +
+                "CASE WHEN lhp.TrangThai = 'DangMo' THEN N'Đang mở' ELSE N'Đã đóng' END AS TrangThai, " +
+                "mh.MaKhoa, lhp.MaMon, lhp.MaGV " +
+                "FROM LopHocPhan lhp " +
+                "LEFT JOIN MonHoc mh ON lhp.MaMon = mh.MaMon " +
+                "LEFT JOIN Khoa k ON mh.MaKhoa = k.MaKhoa " +
+                "LEFT JOIN GiangVien gv ON lhp.MaGV = gv.MaGV " +
+                $"WHERE lhp.MaGV = '{escapedMaGV}'";
 
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                string esc = keyword.Replace("'", "''");
+                sql += $" AND (lhp.MaLHP LIKE N'%{esc}%' OR lhp.TenLopHocPhan LIKE N'%{esc}%')";
+            }
+
+            if (!string.IsNullOrEmpty(maMon) && maMon != "ALL")
+            {
+                string escMon = maMon.Replace("'", "''");
+                sql += $" AND lhp.MaMon = '{escMon}'";
+            }
+
+            return Connection.GetDataToTable(sql);
+        }
+        public DataTable GetMonHocTheoGiangVien(string maGV)
+        {
+            string escapedMaGV = maGV.Replace("'", "''");
+            string sql =
+                "SELECT DISTINCT mh.MaMon, mh.TenMon " +
+                "FROM MonHoc mh " +
+                "INNER JOIN LopHocPhan lhp ON mh.MaMon = lhp.MaMon " +
+                $"WHERE lhp.MaGV = '{escapedMaGV}'";
+
+            return Connection.GetDataToTable(sql);
+        }
+        //Lấy danh sách theo role sinh viên
+        public DataTable GetDanhSachTheoSinhVien(string maSV)
+        {
+            string escapedMaSV = maSV.Replace("'", "''");
+            string sql =
+                "SELECT lhp.MaLHP, lhp.TenLopHocPhan, " +
+                "lhp.Thu + N' (Ca ' + CAST(lhp.CaHoc AS varchar) + N')' AS ThoiGianHoc, " +
+                "lhp.PhongHoc, k.TenKhoa, mh.TenMon, gv.HoTen AS TenGiangVien, " +
+                "CASE WHEN lhp.TrangThai = 'DangMo' THEN N'Đang mở' ELSE N'Đã đóng' END AS TrangThai " +
+                "FROM LopHocPhan lhp " +
+                "INNER JOIN DangKyLopHoc dk ON lhp.MaLHP = dk.MaLHP " +
+                "LEFT JOIN MonHoc mh ON lhp.MaMon = mh.MaMon " +
+                "LEFT JOIN Khoa k ON mh.MaKhoa = k.MaKhoa " +
+                "LEFT JOIN GiangVien gv ON lhp.MaGV = gv.MaGV " +
+                $"WHERE dk.MaSV = '{escapedMaSV}'";
+
+            return Connection.GetDataToTable(sql);
+        }
         public DataTable GetKhoa()
         {
             DataTable dt = new DataTable();

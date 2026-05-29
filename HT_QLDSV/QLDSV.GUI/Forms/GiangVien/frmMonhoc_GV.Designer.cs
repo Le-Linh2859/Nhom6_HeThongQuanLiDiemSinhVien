@@ -63,8 +63,6 @@
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.btnTim = new System.Windows.Forms.Button();
-            this.lblFilterKhoa = new System.Windows.Forms.Label();
-            this.cboFilterKhoa = new System.Windows.Forms.ComboBox();
             this.pnlFooter = new System.Windows.Forms.Panel();
             this.lblTongBanGhi = new System.Windows.Forms.Label();
             this.pnlSidebar.SuspendLayout();
@@ -225,7 +223,6 @@
             this.btnCloseDetail.TabIndex = 0;
             this.btnCloseDetail.Text = "✕";
             this.btnCloseDetail.UseVisualStyleBackColor = false;
-            //this.btnCloseDetail.Click += new System.EventHandler(this.btnCloseDetail_Click);
             // 
             // lblDetailHeader
             // 
@@ -472,7 +469,6 @@
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.Size = new System.Drawing.Size(1033, 603);
             this.dataGridView.TabIndex = 0;
-            //this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             // 
             // pnlToolbar
             // 
@@ -480,8 +476,6 @@
             this.pnlToolbar.Controls.Add(this.btnLamMoi);
             this.pnlToolbar.Controls.Add(this.txtTimKiem);
             this.pnlToolbar.Controls.Add(this.btnTim);
-            this.pnlToolbar.Controls.Add(this.lblFilterKhoa);
-            this.pnlToolbar.Controls.Add(this.cboFilterKhoa);
             this.pnlToolbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlToolbar.Location = new System.Drawing.Point(0, 0);
             this.pnlToolbar.Name = "pnlToolbar";
@@ -497,13 +491,12 @@
             this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLamMoi.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnLamMoi.ForeColor = System.Drawing.Color.White;
-            this.btnLamMoi.Location = new System.Drawing.Point(654, 12);
+            this.btnLamMoi.Location = new System.Drawing.Point(342, 11);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(100, 30);
             this.btnLamMoi.TabIndex = 2;
             this.btnLamMoi.Text = "↺ Làm mới";
             this.btnLamMoi.UseVisualStyleBackColor = false;
-            //this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // txtTimKiem
             // 
@@ -512,7 +505,6 @@
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(204, 27);
             this.txtTimKiem.TabIndex = 4;
-            //this.txtTimKiem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTimKiem_KeyDown);
             // 
             // btnTim
             // 
@@ -528,28 +520,6 @@
             this.btnTim.TabIndex = 5;
             this.btnTim.Text = "Tìm";
             this.btnTim.UseVisualStyleBackColor = false;
-            //this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
-            // 
-            // lblFilterKhoa
-            // 
-            this.lblFilterKhoa.AutoSize = true;
-            this.lblFilterKhoa.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblFilterKhoa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.lblFilterKhoa.Location = new System.Drawing.Point(366, 17);
-            this.lblFilterKhoa.Name = "lblFilterKhoa";
-            this.lblFilterKhoa.Size = new System.Drawing.Size(49, 20);
-            this.lblFilterKhoa.TabIndex = 6;
-            this.lblFilterKhoa.Text = "Khoa:";
-            // 
-            // cboFilterKhoa
-            // 
-            this.cboFilterKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboFilterKhoa.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cboFilterKhoa.Location = new System.Drawing.Point(421, 14);
-            this.cboFilterKhoa.Name = "cboFilterKhoa";
-            this.cboFilterKhoa.Size = new System.Drawing.Size(206, 28);
-            this.cboFilterKhoa.TabIndex = 7;
-            //this.cboFilterKhoa.SelectedIndexChanged += new System.EventHandler(this.cboFilterKhoa_SelectedIndexChanged);
             // 
             // pnlFooter
             // 
@@ -572,7 +542,7 @@
             this.lblTongBanGhi.TabIndex = 0;
             this.lblTongBanGhi.Text = "Tổng: 0 môn học";
             // 
-            // frmMonhoc_SV
+            // frmMonhoc_GV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -580,10 +550,9 @@
             this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.pnlHeader);
             this.Controls.Add(this.pnlSidebar);
-            this.Name = "frmMonhoc_SV";
+            this.Name = "frmMonhoc_GV";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Danh Sách Môn Học";
-            //this.Load += new System.EventHandler(this.frmMonhoc_SV_Load);
             this.pnlSidebar.ResumeLayout(false);
             this.pnlSidebar.PerformLayout();
             this.pnlHeader.ResumeLayout(false);
@@ -616,8 +585,6 @@
         private System.Windows.Forms.Button btnLamMoi;
         private System.Windows.Forms.TextBox txtTimKiem;
         private System.Windows.Forms.Button btnTim;
-        private System.Windows.Forms.Label lblFilterKhoa;
-        private System.Windows.Forms.ComboBox cboFilterKhoa;
         private System.Windows.Forms.Panel pnlMain;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Panel pnlDetail;
