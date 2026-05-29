@@ -111,7 +111,7 @@ namespace QLDSV.GUI.Forms.GiangVien
                 bll.UpdateGiangVien(
                     txtSdt.Text.Trim(),
                     txtTengv.Text.Trim(),
-                    true, // tạm giữ nguyên giới tính
+                    true, 
                     txtDiachi.Text.Trim(),
                     txtMagv.Text.Trim(),
                     txtEmail.Text.Trim(),

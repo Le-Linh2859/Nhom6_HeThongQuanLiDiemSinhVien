@@ -51,9 +51,13 @@ private void frmCanhBaoHocVu_Load(object sender, EventArgs e)
             {
                 bll.PhatHienVaLuuCanhBao();
             }
-            catch
+            catch (Exception ex)
             {
-                // Chạy ngầm, không block form dù có lỗi
+                MessageBox.Show(
+                    ex.Message,
+                    "Debug",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
             }
         }
 

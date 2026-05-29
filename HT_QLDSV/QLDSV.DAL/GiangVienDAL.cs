@@ -169,5 +169,42 @@ namespace QLDSV.DAL
 
             return table.Rows.Count > 0;
         }
+        public bool CheckMaGV(string maGV)
+        {
+            string sql =
+                $"SELECT * FROM GiangVien WHERE MaGV = '{maGV}'";
+
+            return Connection.GetDataToTable(sql).Rows.Count > 0;
+        }
+
+        public bool CheckEmail(string email)
+        {
+            string sql =
+                $"SELECT * FROM GiangVien WHERE Email = '{email}'";
+
+            return Connection.GetDataToTable(sql).Rows.Count > 0;
+        }
+
+        public bool CheckSoDT(string soDT)
+        {
+            string sql =
+                $"SELECT * FROM GiangVien WHERE SoDT = '{soDT}'";
+
+            return Connection.GetDataToTable(sql).Rows.Count > 0;
+        }
+        public bool CheckEmailUpdate(string email, string maGV)
+        {
+            string sql =
+                $"SELECT * FROM GiangVien WHERE Email='{email}' AND MaGV<>'{maGV}'";
+
+            return Connection.GetDataToTable(sql).Rows.Count > 0;
+        }
+        public bool CheckSoDTUpdate(string soDT, string maGV)
+        {
+            string sql =
+                $"SELECT * FROM GiangVien WHERE SoDT='{soDT}' AND MaGV<>'{maGV}'";
+
+            return Connection.GetDataToTable(sql).Rows.Count > 0;
+        }
     }
 }

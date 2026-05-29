@@ -183,7 +183,7 @@ AND CAST(RIGHT(sv.NienKhoa,4) AS INT)
 AND sv.MaSV NOT IN
 (
     SELECT DISTINCT dkl.MaSV
-    FROM DangKyLop dkl
+    FROM DangKyLopHoc dkl
     INNER JOIN LopHocPhan lhp
         ON dkl.MaLHP = lhp.MaLHP
     WHERE lhp.MaHKNH = '{maHKNH}'
@@ -198,7 +198,27 @@ AND sv.MaSV NOT IN
                     "Lỗi DAL - GetSinhVienKhoiLuongZero: " + ex.Message);
             }
         }
+        public int GetSoLanCanhBaoTruocDo(
+    string maSV,
+    string maCanhBao)
+        {
+            try
+            {
+                string sql = $@"
+            SELECT ISNULL(MAX(LanThu),0)
+            FROM CanhBao_SinhVien
+            WHERE MaSV = '{maSV}'
+              AND MaCanhBao = '{maCanhBao}'";
 
+                object result = Connection.ExecuteScalar(sql);
+
+                return Convert.ToInt32(result);
+            }
+            catch
+            {
+                return 0;
+            }
+        }
         /// <summary>
         /// TH2: SV có TBC học kỳ dưới 1.5
         /// </summary>
@@ -207,64 +227,103 @@ AND sv.MaSV NOT IN
             try
             {
                 string sql = $@"
-                    WITH DiemMon AS (
-                        SELECT
-                            dkl.MaSV,
-                            lhp.MaMon,
-                            lhp.MaHKNH,
-                            SUM(kq.Diem * ld.TyLePhanTram / 100.0) AS DiemMon
-                        FROM DangKyLop dkl
-                        INNER JOIN LopHocPhan lhp
-                            ON dkl.MaLHP = lhp.MaLHP
-                        INNER JOIN KetQua kq
-                            ON kq.MaSV  = dkl.MaSV
-                           AND kq.MaLHP = dkl.MaLHP
-                        INNER JOIN LoaiDiem ld
-                            ON ld.MaLoaiDiem = kq.MaLoaiDiem
-                        WHERE lhp.MaHKNH   = '{maHKNH}'
-                          AND dkl.TrangThai = 1
-                        GROUP BY dkl.MaSV, lhp.MaMon, lhp.MaHKNH
+        WITH DiemMon AS
+        (
+            SELECT
+                dkl.MaSV,
+                lhp.MaMon,
+                lhp.MaHKNH,
+                mh.SoTC,
+
+                ROUND(
+                    SUM(
+                        kq.Diem * ld.TyLePhanTram / 100.0
                     ),
-                    TBCHocKy AS (
-                        SELECT
-                            MaSV,
-                            MaHKNH,
-                            AVG(DiemMon) AS TBCHocKy,
-                            COUNT(*)     AS SoMon
-                        FROM DiemMon
-                        GROUP BY MaSV, MaHKNH
-                    )
-                    SELECT
-                        sv.MaSV,
-                        sv.HoTen,
-                        sv.MaLopNienChe,
-                        tbc.MaHKNH,
-                        ROUND(tbc.TBCHocKy, 2) AS TBCHocKy,
-                        tbc.SoMon
-FROM TBCHocKy tbc
-INNER JOIN SinhVien sv
-    ON sv.MaSV = tbc.MaSV
+                    2
+                ) AS DiemMon
 
-INNER JOIN HocKy_NamHoc hknh
-    ON hknh.MaHKNH = tbc.MaHKNH
+            FROM DangKyLopHoc dkl
 
-INNER JOIN NamHoc nh
-    ON nh.MaNamHoc = hknh.MaNamHoc
+            INNER JOIN LopHocPhan lhp
+                ON dkl.MaLHP = lhp.MaLHP
 
-WHERE tbc.TBCHocKy < 1.5
+            INNER JOIN MonHoc mh
+                ON mh.MaMon = lhp.MaMon
 
-AND CAST(LEFT(sv.NienKhoa,4) AS INT)
-        <= CAST(SUBSTRING(nh.TenNamHoc,9,4) AS INT)
+            INNER JOIN KetQua kq
+                ON kq.MaSV = dkl.MaSV
+               AND kq.MaLHP = dkl.MaLHP
 
-AND CAST(RIGHT(sv.NienKhoa,4) AS INT)
-        >= CAST(SUBSTRING(nh.TenNamHoc,14,4) AS INT)
-                ";
+            INNER JOIN LoaiDiem ld
+                ON ld.MaLoaiDiem = kq.MaLoaiDiem
+
+            WHERE lhp.MaHKNH = '{maHKNH}'
+              AND dkl.TrangThai = 1
+
+            GROUP BY
+                dkl.MaSV,
+                lhp.MaMon,
+                lhp.MaHKNH,
+                mh.SoTC
+        ),
+
+        TBCHocKy AS
+        (
+            SELECT
+                MaSV,
+                MaHKNH,
+
+                ROUND(
+                    SUM(DiemMon * SoTC)
+                    /
+                    NULLIF(SUM(SoTC), 0),
+                    2
+                ) AS TBCHocKy,
+
+                SUM(SoTC) AS TongTinChi
+
+            FROM DiemMon
+
+            GROUP BY
+                MaSV,
+                MaHKNH
+        )
+
+        SELECT
+            sv.MaSV,
+            sv.HoTen,
+            sv.MaLopNienChe,
+            tbc.MaHKNH,
+            tbc.TBCHocKy,
+            tbc.TongTinChi
+
+        FROM TBCHocKy tbc
+
+        INNER JOIN SinhVien sv
+            ON sv.MaSV = tbc.MaSV
+
+        INNER JOIN HocKy_NamHoc hknh
+            ON hknh.MaHKNH = tbc.MaHKNH
+
+        INNER JOIN NamHoc nh
+            ON nh.MaNamHoc = hknh.MaNamHoc
+
+        WHERE tbc.TBCHocKy < 1.5
+
+        AND CAST(LEFT(sv.NienKhoa,4) AS INT)
+            <= CAST(SUBSTRING(nh.TenNamHoc,9,4) AS INT)
+
+        AND CAST(RIGHT(sv.NienKhoa,4) AS INT)
+            >= CAST(SUBSTRING(nh.TenNamHoc,14,4) AS INT)
+        ";
+
                 return Connection.GetDataToTable(sql);
             }
             catch (Exception ex)
             {
                 throw new Exception(
-                    "Lỗi DAL - GetSinhVienDiemThapDuoi1_5: " + ex.Message);
+                    "Lỗi DAL - GetSinhVienDiemThapDuoi1_5: "
+                    + ex.Message);
             }
         }
 
@@ -369,32 +428,25 @@ AND CAST(RIGHT(sv.NienKhoa,4) AS INT)
         /// </summary>
         public DataTable GetHocKyDangHoatDong()
         {
-            try
-            {
-                string sql = @"
-                    SELECT
-                        hknh.MaHKNH,
-                        lhk.TenLoaiHK,
-                        nh.TenNamHoc
-                    FROM HocKy_NamHoc hknh
-                    INNER JOIN LoaiHocKy lhk
-                        ON hknh.MaLoaiHK = lhk.MaLoaiHK
-                    INNER JOIN NamHoc nh
-                        ON hknh.MaNamHoc = nh.MaNamHoc
-                    WHERE hknh.MaHKNH IN (
-                        SELECT DISTINCT MaHKNH
-                        FROM LopHocPhan
-                        WHERE TrangThai = 'DangMo'
-                    )
-                ";
-                return Connection.GetDataToTable(sql);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(
-                    "Lỗi DAL - GetHocKyDangHoatDong: " + ex.Message);
-            }
+            string sql = @"
+        SELECT DISTINCT
+            hknh.MaHKNH,
+            lhk.TenLoaiHK,
+            nh.TenNamHoc
+        FROM HocKy_NamHoc hknh
+        INNER JOIN LoaiHocKy lhk
+            ON hknh.MaLoaiHK = lhk.MaLoaiHK
+        INNER JOIN NamHoc nh
+            ON hknh.MaNamHoc = nh.MaNamHoc
+        WHERE hknh.MaHKNH IN
+        (
+            SELECT DISTINCT MaHKNH
+            FROM LopHocPhan
+            WHERE TrangThai = 'Dong'
+        )
+    ";
 
+            return Connection.GetDataToTable(sql);
         }
         public DataTable GetCanhBaoBySinhVien(string maSV)
         {

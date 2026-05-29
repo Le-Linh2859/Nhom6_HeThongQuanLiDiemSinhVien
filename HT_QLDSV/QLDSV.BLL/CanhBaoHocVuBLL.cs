@@ -124,12 +124,10 @@ namespace QLDSV.BLL
                 {
                     string maHKNH = rowHK["MaHKNH"].ToString();
 
-                    // --- TH1: Sinh viên có 0 tín chỉ ---
                     var (m1, c1) = XuLyCanhBaoKhoiLuongZero(maHKNH);
                     soMoi += m1;
                     soCapNhat += c1;
 
-                    // --- TH2: TBC học kỳ < 1.5 ---
                     var (m2, c2) = XuLyCanhBaoDiemThap(maHKNH);
                     soMoi += m2;
                     soCapNhat += c2;
@@ -148,7 +146,6 @@ namespace QLDSV.BLL
         private (int soMoi, int soCapNhat) XuLyCanhBaoKhoiLuongZero(
     string maHKNH)
         {
-            // ✅ Bỏ qua học kỳ hè, không áp dụng TH1
             if (dal.IsHocKyHe(maHKNH))
                 return (0, 0);
 
@@ -173,15 +170,18 @@ namespace QLDSV.BLL
 
                 if (lanThuHienTai == 0)
                 {
+                    int lanMoi =
+                        dal.GetSoLanCanhBaoTruocDo(
+                            maSV,
+                            maCanhBao) + 1;
+
                     dal.InsertCanhBaoSinhVien(
-                        maSV, maCanhBao, maHKNH, lanThu: 1);
+                        maSV,
+                        maCanhBao,
+                        maHKNH,
+                        lanMoi);
+
                     soMoi++;
-                }
-                else
-                {
-                    dal.UpdateLanThuCanhBao(
-                        maSV, maCanhBao, maHKNH);
-                    soCapNhat++;
                 }
             }
 
@@ -215,19 +215,23 @@ namespace QLDSV.BLL
 
                 if (lanThuHienTai == 0)
                 {
+                    int lanMoi =
+                        dal.GetSoLanCanhBaoTruocDo(
+                            maSV,
+                            maCanhBao) + 1;
+
                     dal.InsertCanhBaoSinhVien(
-                        maSV, maCanhBao, maHKNH, lanThu: 1);
+                        maSV,
+                        maCanhBao,
+                        maHKNH,
+                        lanMoi);
+
                     soMoi++;
-                }
-                else
-                {
-                    dal.UpdateLanThuCanhBao(
-                        maSV, maCanhBao, maHKNH);
-                    soCapNhat++;
                 }
             }
 
             return (soMoi, soCapNhat);
+
         }
         public DataTable GetCanhBaoBySinhVien(string maSV)
         {

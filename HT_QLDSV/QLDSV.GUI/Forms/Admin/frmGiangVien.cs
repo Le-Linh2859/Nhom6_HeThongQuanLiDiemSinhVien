@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using System.Windows.Media.Animation;
 
 
-    namespace QLDSV.GUI
+namespace QLDSV.GUI
 {
     public partial class frmGiangvien : Form, IShellChildForm
     {
@@ -25,10 +25,10 @@ using System.Windows.Media.Animation;
         public void OnEmbeddedInShell()
         {
             // Ẩn tất cả các control Sidebar & Header trùng lặp bằng tìm kiếm động an toàn
-            string[] controlNames = { 
-                "pnlSidebar", "pnlHeader", "guna2ImageButton1", "label3", "label4", 
-                "guna2ImageButton2", "guna2CirclePictureBox1", "guna2HtmlLabel13", 
-                "guna2HtmlLabel14", "guna2ImageButton3" 
+            string[] controlNames = {
+                "pnlSidebar", "pnlHeader", "guna2ImageButton1", "label3", "label4",
+                "guna2ImageButton2", "guna2CirclePictureBox1", "guna2HtmlLabel13",
+                "guna2HtmlLabel14", "guna2ImageButton3"
             };
             foreach (var name in controlNames)
             {
@@ -521,6 +521,7 @@ using System.Windows.Media.Animation;
             string hoTen = cboTenGV.Text.Trim();
             string diaChi = cboDiaChi.Text.Trim();
             string email = cboEmail.Text.Trim();
+
             string soDT = mskSoDienThoai.Text
                 .Replace("(", "")
                 .Replace(")", "")
@@ -530,25 +531,14 @@ using System.Windows.Media.Animation;
 
             bool gioiTinh = rdoNam.Checked;
 
-            // Validate dữ liệu
-            if (string.IsNullOrEmpty(maGV))
-            {
-                MessageBox.Show("Mã giảng viên không được để trống.");
-                cboMaGV.Focus();
-                return;
-            }
-
-            if (string.IsNullOrEmpty(hoTen))
-            {
-                MessageBox.Show("Tên giảng viên không được để trống.");
-                cboTenGV.Focus();
-                return;
-            }
-
             if (cboKhoa2.SelectedValue == null)
             {
-                MessageBox.Show("Vui lòng chọn khoa.");
-                cboKhoa2.Focus();
+                MessageBox.Show(
+                    "Vui lòng chọn khoa.",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
                 return;
             }
 
@@ -564,40 +554,28 @@ using System.Windows.Media.Animation;
                     string matKhau = cboMatKhau.Text.Trim();
                     string nhapLaiMK = cboMatKhau1.Text.Trim();
 
-                    // Kiểm tra mật khẩu
-                    if (string.IsNullOrEmpty(matKhau))
-                    {
-                        MessageBox.Show("Vui lòng nhập mật khẩu.");
-                        cboMatKhau.Focus();
-                        return;
-                    }
+                    string loi = bll.ValidateThemGiangVien(
+                        maGV,
+                        hoTen,
+                        email,
+                        soDT,
+                        matKhau,
+                        nhapLaiMK);
 
-                    if (matKhau != nhapLaiMK)
-                    {
-                        MessageBox.Show("Mật khẩu nhập lại không khớp.");
-                        cboMatKhau1.Focus();
-                        return;
-                    }
-
-                    // Kiểm tra mã GV tồn tại
-                    if (bll.CheckKeyExist(maGV))
+                    if (!string.IsNullOrEmpty(loi))
                     {
                         MessageBox.Show(
-                            "Mã giảng viên đã tồn tại.",
+                            loi,
                             "Thông báo",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Warning);
 
-                        cboMaGV.Focus();
                         return;
                     }
 
-                    // ==========================
-                    // Tạo mã tài khoản
-                    // ==========================
-
                     string maTK = bll.TaoMaTaiKhoanMoi();
 
+<<<<<<< Updated upstream
                     // ==========================
                     // Insert bảng TaiKhoan
                     // ==========================
@@ -605,10 +583,13 @@ using System.Windows.Media.Animation;
                     // Hash mật khẩu trước khi lưu vào Database
                     string hashedMatKhau = PasswordHelper.HashPassword(matKhau);
 
+=======
+>>>>>>> Stashed changes
                     bll.InsertTaiKhoan(
                         maTK,
                         "VT002",
                         maGV,
+<<<<<<< Updated upstream
                         hashedMatKhau,
                         1
                     );
@@ -616,6 +597,10 @@ using System.Windows.Media.Animation;
                     // ==========================
                     // Insert bảng GiangVien
                     // ==========================
+=======
+                        matKhau,
+                        1);
+>>>>>>> Stashed changes
 
                     bll.InsertGiangVien(
                         soDT,
@@ -625,8 +610,7 @@ using System.Windows.Media.Animation;
                         maGV,
                         email,
                         maKhoa,
-                        maTK
-                    );
+                        maTK);
 
                     MessageBox.Show(
                         "Thêm giảng viên thành công!",
@@ -640,6 +624,23 @@ using System.Windows.Media.Animation;
                 // =====================================
                 else if (isEditing)
                 {
+                    string loi = bll.ValidateCapNhatGiangVien(
+                        maGV,
+                        hoTen,
+                        email,
+                        soDT);
+
+                    if (!string.IsNullOrEmpty(loi))
+                    {
+                        MessageBox.Show(
+                            loi,
+                            "Thông báo",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+
+                        return;
+                    }
+
                     bll.UpdateGiangVien(
                         soDT,
                         hoTen,
@@ -647,8 +648,7 @@ using System.Windows.Media.Animation;
                         diaChi,
                         maGV,
                         email,
-                        maKhoa
-                    );
+                        maKhoa);
 
                     MessageBox.Show(
                         "Cập nhật giảng viên thành công!",
@@ -665,38 +665,21 @@ using System.Windows.Media.Animation;
 
                 ResetFormState();
 
-                // Ẩn password
                 cboMatKhau.Visible = false;
                 cboMatKhau1.Visible = false;
 
                 lblMatKhau.Visible = false;
                 lblNhapLaiMK.Visible = false;
 
-                // Chọn lại dòng vừa lưu
                 foreach (DataGridViewRow row in DataGridViewGV.Rows)
                 {
                     if (row.Cells["MaGV"].Value?.ToString().Trim() == maGV)
                     {
                         row.Selected = true;
-
                         DataGridViewGV.CurrentCell = row.Cells["MaGV"];
-
                         DataGridViewGV_CellClick(null, null);
-
                         break;
                     }
-                }
-                if (!string.IsNullOrEmpty(email) && !email.Contains("@"))
-                {
-                    MessageBox.Show("Email không hợp lệ.");
-                    cboEmail.Focus();
-                    return;
-                }
-                if (soDT.Length < 10)
-                {
-                    MessageBox.Show("Số điện thoại không hợp lệ.");
-                    mskSoDienThoai.Focus();
-                    return;
                 }
             }
             catch (Exception ex)
@@ -707,6 +690,8 @@ using System.Windows.Media.Animation;
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+        
+        
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -759,7 +744,7 @@ using System.Windows.Media.Animation;
 
             cboTenGV.Focus();
         }
-    
+
         private void cboFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             ApplyFilter();
