@@ -17,15 +17,10 @@ namespace QLDSV.GUI.Forms.Admin
             InitializeComponent();
         }
 
-        // ════════════════════════════════════════════════════════════════════
-        //  FORM LOAD
-        // ════════════════════════════════════════════════════════════════════
         private void frmTheoDoiDiem_Load(object sender, EventArgs e)
         {
             try
             {
-                // frmMain đã gọi FunctionQa.ketnoi() và sync Connection.conn rồi.
-                // Chỉ cần đảm bảo connection còn mở; nếu chưa thì mở lại.
                 if (FunctionQa.conn == null ||
                     FunctionQa.conn.State != System.Data.ConnectionState.Open)
                 {
@@ -34,7 +29,6 @@ namespace QLDSV.GUI.Forms.Admin
                 }
                 else
                 {
-                    // Đảm bảo DAL dùng cùng connection với GUI
                     QLDSV.DAL.Connection.conn = FunctionQa.conn;
                 }
 
@@ -46,9 +40,6 @@ namespace QLDSV.GUI.Forms.Admin
                 btnLammoi.Click += BtnLammoi_Click;
                 dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
 
-                StyleMainGrid();
-                StyleDetailGrid();
-
                 LoadKetQua();
             }
             catch (Exception ex)
@@ -58,9 +49,6 @@ namespace QLDSV.GUI.Forms.Admin
             }
         }
 
-        // ════════════════════════════════════════════════════════════════════
-        //  LOAD COMBOBOXES  (GUI → BLL → DAL)
-        // ════════════════════════════════════════════════════════════════════
         private void LoadComboNamHoc()
         {
             _isLoadingCombo = true;
@@ -133,9 +121,6 @@ namespace QLDSV.GUI.Forms.Admin
             finally { _isLoadingCombo = false; }
         }
 
-        // ════════════════════════════════════════════════════════════════════
-        //  LOAD KẾT QUẢ CHÍNH  (GUI → BLL → DAL)
-        // ════════════════════════════════════════════════════════════════════
         private void LoadKetQua()
         {
             try
@@ -149,10 +134,8 @@ namespace QLDSV.GUI.Forms.Admin
                 if (string.IsNullOrEmpty(maLoaiHK)) maLoaiHK = "ALL";
                 if (string.IsNullOrEmpty(maLop))    maLop    = "ALL";
 
-                // Gọi BLL → DAL, không có SQL trong GUI
                 _dtKetQua = _bll.GetKetQuaHocTapAdmin(maNamHoc, maLoaiHK, maLop, keyword);
 
-                // Thêm cột tính toán — logic quy đổi nằm trong BLL
                 if (!_dtKetQua.Columns.Contains("DiemChu"))
                     _dtKetQua.Columns.Add("DiemChu", typeof(string));
                 if (!_dtKetQua.Columns.Contains("GPA4"))
@@ -174,7 +157,6 @@ namespace QLDSV.GUI.Forms.Admin
                 BindMainGrid();
                 UpdateStatCards();
 
-                // Reset panel chi tiết mỗi khi bộ lọc được áp dụng lại
                 ResetChiTiet();
             }
             catch (Exception ex)
@@ -184,7 +166,6 @@ namespace QLDSV.GUI.Forms.Admin
             }
         }
 
-        /// <summary>Xóa trắng toàn bộ panel thông tin chi tiết sinh viên.</summary>
         private void ResetChiTiet()
         {
             dataGridView2.DataSource = null;
@@ -195,9 +176,6 @@ namespace QLDSV.GUI.Forms.Admin
             txthocky.Text  = "";
         }
 
-        // ════════════════════════════════════════════════════════════════════
-        //  BIND GRID CHÍNH
-        // ════════════════════════════════════════════════════════════════════
         private void BindMainGrid()
         {
             dataGridView1.SelectionChanged -= DataGridView1_SelectionChanged;
@@ -209,7 +187,6 @@ namespace QLDSV.GUI.Forms.Admin
             foreach (DataGridViewColumn col in dataGridView1.Columns)
                 col.Visible = false;
 
-            // Tên cột trong DataTable → Header hiển thị
             string[] colNames = { "MaSV",        "HoTen",      "TenLop",
                                    "DTB10",       "DiemChu",    "GPA4",    "XepLoai" };
             string[] headers  = { "Mã Sinh Viên", "Họ và Tên", "Lớp Niên Chế",
@@ -223,75 +200,8 @@ namespace QLDSV.GUI.Forms.Admin
                 col.DisplayIndex = i;
                 col.HeaderText   = headers[i];
             }
-
-            // Căn giữa cột điểm
-            foreach (string c in new[] { "DTB10", "DiemChu", "GPA4", "XepLoai" })
-            {
-                if (dataGridView1.Columns.Contains(c))
-                    dataGridView1.Columns[c].DefaultCellStyle.Alignment =
-                        DataGridViewContentAlignment.MiddleCenter;
-            }
-
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-
-        // ════════════════════════════════════════════════════════════════════
-        //  STYLE GRID CHÍNH
-        // ════════════════════════════════════════════════════════════════════
-        private void StyleMainGrid()
-        {
-            dataGridView1.AllowUserToAddRows    = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.ReadOnly              = true;
-            dataGridView1.RowHeadersVisible     = false;
-            dataGridView1.SelectionMode         = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.MultiSelect           = false;
-            dataGridView1.BorderStyle           = BorderStyle.None;
-            dataGridView1.CellBorderStyle       = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridView1.GridColor             = Color.FromArgb(220, 230, 245);
-            dataGridView1.BackgroundColor       = Color.White;
-
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(21, 101, 192);
-            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridView1.ColumnHeadersDefaultCellStyle.Font      = new Font("Segoe UI", 9.5f, FontStyle.Bold);
-            dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.ColumnHeadersHeight                     = 36;
-            dataGridView1.ColumnHeadersHeightSizeMode             = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView1.EnableHeadersVisualStyles               = false;
-
-            dataGridView1.DefaultCellStyle.BackColor          = Color.White;
-            dataGridView1.DefaultCellStyle.ForeColor          = Color.FromArgb(30, 40, 60);
-            dataGridView1.DefaultCellStyle.Font               = new Font("Segoe UI", 9.5f);
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.FromArgb(207, 226, 255);
-            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.FromArgb(21, 101, 192);
-            dataGridView1.RowTemplate.Height                  = 28;
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 249, 255);
-
-            dataGridView1.CellFormatting += DgvMain_CellFormatting;
-        }
-
-        private void DgvMain_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.RowIndex < 0 || !dataGridView1.Columns.Contains("XepLoai")) return;
-            if (e.ColumnIndex != dataGridView1.Columns["XepLoai"].Index) return;
-
-            string val = e.Value?.ToString() ?? "";
-            e.CellStyle.Font = new Font("Segoe UI", 9.5f, FontStyle.Bold);
-            switch (val)
-            {
-                case "Xuất sắc":   e.CellStyle.ForeColor = Color.FromArgb(27, 94, 32);   break;
-                case "Giỏi":       e.CellStyle.ForeColor = Color.FromArgb(51, 105, 30);  break;
-                case "Khá":        e.CellStyle.ForeColor = Color.FromArgb(13, 71, 161);  break;
-                case "Trung bình": e.CellStyle.ForeColor = Color.FromArgb(200, 100, 0);  break;
-                case "Yếu":
-                case "Kém":        e.CellStyle.ForeColor = Color.FromArgb(183, 28, 28);  break;
-            }
-        }
-
-        // ════════════════════════════════════════════════════════════════════
-        //  THỐNG KÊ CARDS  — FIX: phần gọi SetCardLabel bị thiếu trước đây
-        // ════════════════════════════════════════════════════════════════════
         private void UpdateStatCards()
         {
             int tongSV = 0, xuatSac = 0, gioi = 0, kha = 0, trungBinh = 0, yeuKem = 0;
@@ -318,7 +228,6 @@ namespace QLDSV.GUI.Forms.Admin
                 }
             }
 
-            // Card Điểm TB Lớp chỉ có ý nghĩa khi đang lọc theo một lớp cụ thể
             bool locTheoLop = cboLop.SelectedValue?.ToString() != "ALL"
                            && !string.IsNullOrEmpty(cboLop.SelectedValue?.ToString());
 
@@ -335,18 +244,15 @@ namespace QLDSV.GUI.Forms.Admin
             SetCardLabel(lblDiemTB,  gpaText,              Color.FromArgb(106, 27, 154));
         }
 
+
+
         private void SetCardLabel(Label lbl, string text, Color color)
         {
-            lbl.Text      = text;
+            lbl.Text = text;
             lbl.ForeColor = color;
-            lbl.Font      = new Font("Segoe UI", 18f, FontStyle.Bold);
-            lbl.AutoSize  = true;
+            lbl.Font = new Font("Segoe UI", 16f, FontStyle.Bold);
         }
 
-
-        // ════════════════════════════════════════════════════════════════════
-        //  CHỌN DÒNG → LOAD CHI TIẾT
-        // ════════════════════════════════════════════════════════════════════
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0) return;
@@ -367,9 +273,6 @@ namespace QLDSV.GUI.Forms.Admin
                 LoadChiTietDiem(maSV);
         }
 
-        // ════════════════════════════════════════════════════════════════════
-        //  LOAD CHI TIẾT ĐIỂM TỪNG MÔN  (GUI → BLL → DAL)
-        // ════════════════════════════════════════════════════════════════════
         private void LoadChiTietDiem(string maSV)
         {
             try
@@ -379,10 +282,8 @@ namespace QLDSV.GUI.Forms.Admin
                 if (string.IsNullOrEmpty(maNamHoc)) maNamHoc = "ALL";
                 if (string.IsNullOrEmpty(maLoaiHK)) maLoaiHK = "ALL";
 
-                // DAL đã lọc sẵn: chỉ trả về môn có đủ 4 điểm thành phần
                 DataTable dt = _bll.GetChiTietDiemSinhVien(maSV, maNamHoc, maLoaiHK);
 
-                // Thêm cột tính toán
                 if (!dt.Columns.Contains("DiemTongKet"))
                     dt.Columns.Add("DiemTongKet", typeof(double));
                 if (!dt.Columns.Contains("DiemChu"))
@@ -394,7 +295,6 @@ namespace QLDSV.GUI.Forms.Admin
 
                 foreach (DataRow row in dt.Rows)
                 {
-                    // DAL đã đảm bảo tất cả 4 cột đều NOT NULL
                     double cc  = Convert.ToDouble(row["DiemCC"]);
                     double kt1 = Convert.ToDouble(row["DiemKT1"]);
                     double kt2 = Convert.ToDouble(row["DiemKT2"]);
@@ -441,81 +341,8 @@ namespace QLDSV.GUI.Forms.Admin
                 col.DisplayIndex = i;
                 col.HeaderText   = headers[i];
             }
-
-            foreach (string c in new[] { "DiemCC","DiemKT1","DiemKT2","DiemThi",
-                                          "DiemTongKet","DiemChu","DiemHe4","XepLoai" })
-            {
-                if (dataGridView2.Columns.Contains(c))
-                    dataGridView2.Columns[c].DefaultCellStyle.Alignment =
-                        DataGridViewContentAlignment.MiddleCenter;
-            }
-
-            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-
-        // ════════════════════════════════════════════════════════════════════
-        //  STYLE GRID CHI TIẾT
-        // ════════════════════════════════════════════════════════════════════
-        private void StyleDetailGrid()
-        {
-            dataGridView2.AllowUserToAddRows    = false;
-            dataGridView2.AllowUserToDeleteRows = false;
-            dataGridView2.ReadOnly              = true;
-            dataGridView2.RowHeadersVisible     = false;
-            dataGridView2.SelectionMode         = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView2.MultiSelect           = false;
-            dataGridView2.BorderStyle           = BorderStyle.None;
-            dataGridView2.CellBorderStyle       = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridView2.GridColor             = Color.FromArgb(220, 230, 245);
-            dataGridView2.BackgroundColor       = Color.White;
-
-            dataGridView2.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(44, 62, 80);
-            dataGridView2.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridView2.ColumnHeadersDefaultCellStyle.Font      = new Font("Segoe UI", 9f, FontStyle.Bold);
-            dataGridView2.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView2.ColumnHeadersHeight                     = 34;
-            dataGridView2.ColumnHeadersHeightSizeMode             = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridView2.EnableHeadersVisualStyles               = false;
-
-            dataGridView2.DefaultCellStyle.BackColor          = Color.White;
-            dataGridView2.DefaultCellStyle.ForeColor          = Color.FromArgb(30, 40, 60);
-            dataGridView2.DefaultCellStyle.Font               = new Font("Segoe UI", 9f);
-            dataGridView2.DefaultCellStyle.SelectionBackColor = Color.FromArgb(207, 226, 255);
-            dataGridView2.DefaultCellStyle.SelectionForeColor = Color.FromArgb(21, 101, 192);
-            dataGridView2.RowTemplate.Height                  = 26;
-            dataGridView2.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 249, 255);
-
-            dataGridView2.CellFormatting += DgvDetail_CellFormatting;
-        }
-
-        private void DgvDetail_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.RowIndex < 0 || !dataGridView2.Columns.Contains("DiemChu")) return;
-            if (e.ColumnIndex != dataGridView2.Columns["DiemChu"].Index) return;
-
-            string val = e.Value?.ToString() ?? "";
-            e.CellStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
-            switch (val)
-            {
-                case "A+": case "A":
-                    e.CellStyle.ForeColor = Color.FromArgb(27, 94, 32);  break;
-                case "B+": case "B":
-                    e.CellStyle.ForeColor = Color.FromArgb(13, 71, 161); break;
-                case "C+": case "C":
-                    e.CellStyle.ForeColor = Color.FromArgb(200, 100, 0); break;
-                case "D+": case "D":
-                    e.CellStyle.ForeColor = Color.FromArgb(183, 28, 28); break;
-                case "F":
-                    e.CellStyle.ForeColor = Color.White;
-                    e.CellStyle.BackColor = Color.FromArgb(183, 28, 28);
-                    break;
-            }
-        }
-
-        // ════════════════════════════════════════════════════════════════════
-        //  BUTTON EVENTS
-        // ════════════════════════════════════════════════════════════════════
         private void BtnLoc_Click(object sender, EventArgs e)
         {
             LoadKetQua();
@@ -533,10 +360,7 @@ namespace QLDSV.GUI.Forms.Admin
             }
             finally { _isLoadingCombo = false; }
 
-            LoadKetQua(); // LoadKetQua đã gọi ResetChiTiet() bên trong
+            LoadKetQua();
         }
-
-        // Handler giữ lại từ Designer (cboNam.SelectedIndexChanged)
-        private void guna2ComboBox1_SelectedIndexChanged(object sender, EventArgs e) { }
     }
 }
