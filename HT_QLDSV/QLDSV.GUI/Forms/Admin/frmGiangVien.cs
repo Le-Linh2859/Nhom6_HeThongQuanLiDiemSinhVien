@@ -195,7 +195,7 @@ using System.Windows.Media.Animation;
                 DataRow row = dtFilter.NewRow();
 
                 row["MaKhoa"] = "ALL";
-                row["TenKhoa"] = "--- Tất cả ---";
+                row["TenKhoa"] = "Tất cả";
 
                 dtFilter.Rows.InsertAt(row, 0);
 

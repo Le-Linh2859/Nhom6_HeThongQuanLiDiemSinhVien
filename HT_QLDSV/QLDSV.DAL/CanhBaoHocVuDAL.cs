@@ -1,71 +1,373 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QLDSV.DAL
 {
     public class CanhBaoHocVuDAL
     {
-        // Load danh sách cảnh báo
-        public DataTable LoadCanhBao()
+        // =====================================================
+        // LOAD DANH SÁCH CẢNH BÁO HỌC VỤ (cho form hiển thị)
+        // =====================================================
+        public DataTable GetDanhSachCanhBao()
         {
-            string sql =
-            @"SELECT MaCanhBao,
-                     NoiDung,
-                     LoaiCanhBao
-              FROM CanhBaoHocVu";
-
-            return Connection.GetDataToTable(sql);
+            try
+            {
+                string sql = @"
+            SELECT
+                cbsv.MaCanhBao,
+                sv.MaSV,
+                sv.HoTen,
+                k.TenKhoa,
+                lnc.MaLopNienChe,
+                hk.TenLoaiHK,
+                nh.TenNamHoc,
+                cbhv.Noidung,
+                cbhv.LoaiCanhBao,
+                cbsv.ThoiDiem,
+                cbsv.LanThu
+            FROM CanhBao_SinhVien cbsv
+            INNER JOIN CanhBaoHocVu cbhv
+                ON cbsv.MaCanhBao = cbhv.MaCanhBao
+            INNER JOIN SinhVien sv
+                ON cbsv.MaSV = sv.MaSV
+            INNER JOIN LopNienChe lnc
+                ON sv.MaLopNienChe = lnc.MaLopNienChe
+            INNER JOIN Khoa k
+                ON lnc.MaKhoa = k.MaKhoa
+            INNER JOIN HocKy_NamHoc hknh
+                ON cbsv.MaHKNH = hknh.MaHKNH
+            INNER JOIN LoaiHocKy hk
+                ON hknh.MaLoaiHK = hk.MaLoaiHK
+            INNER JOIN NamHoc nh
+                ON hknh.MaNamHoc = nh.MaNamHoc
+        ";
+                return Connection.GetDataToTable(sql);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Lỗi DAL - GetDanhSachCanhBao: " + ex.Message);
+            }
         }
 
-        // Load danh sách sinh viên bị cảnh báo
-        public DataTable LoadCanhBaoSinhVien()
+        // =====================================================
+        // LOAD NĂM HỌC
+        // =====================================================
+        public DataTable GetNamHoc()
         {
-            string sql =
-            @"SELECT MaCanhBao,
-                     MaSV,
-                     MaHKNH,
-                     ThoiDiem,
-                     LanThu
-              FROM CanhBao_SinhVien";
-
-            return Connection.GetDataToTable(sql);
+            try
+            {
+                string sql = @"
+                    SELECT MaNamHoc, TenNamHoc
+                    FROM NamHoc
+                ";
+                return Connection.GetDataToTable(sql);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Lỗi DAL - Load năm học: " + ex.Message);
+            }
         }
 
-        // Load năm học
-        public DataTable LoadNamHoc()
+        // =====================================================
+        // LOAD HỌC KỲ
+        // =====================================================
+        public DataTable GetHocKy()
         {
-            string sql =
-            @"SELECT MaNamHoc,
-                     TenNamHoc
-              FROM NamHoc";
-
-            return Connection.GetDataToTable(sql);
+            try
+            {
+                string sql = @"
+                    SELECT MaLoaiHK, TenLoaiHK
+                    FROM LoaiHocKy
+                ";
+                return Connection.GetDataToTable(sql);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Lỗi DAL - Load học kỳ: " + ex.Message);
+            }
         }
 
-        // Load học kỳ
-        public DataTable LoadHocKy()
+        // =====================================================
+        // LOAD LỚP NIÊN CHẾ
+        // =====================================================
+        public DataTable GetLopNienChe()
         {
-            string sql =
-            @"SELECT MaLoaiHK,
-                     TenLoaiHK
-              FROM LoaiHocKy";
-
-            return Connection.GetDataToTable(sql);
+            try
+            {
+                string sql = @"
+                    SELECT MaLopNienChe, TenLop
+                    FROM LopNienChe
+                ";
+                return Connection.GetDataToTable(sql);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Lỗi DAL - Load lớp niên chế: " + ex.Message);
+            }
         }
 
-        // Load lớp niên chế
-        public DataTable LoadLop()
+        // =====================================================
+        // KIỂM TRA KẾT NỐI
+        // =====================================================
+        public bool TestConnection()
         {
-            string sql =
-            @"SELECT MaLopNienChe,
-                     TenLop
-              FROM LopNienChe";
+            try
+            {
+                Connection.KetNoi();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
-            return Connection.GetDataToTable(sql);
+        // =====================================================
+        // PHÁT HIỆN CẢNH BÁO TỰ ĐỘNG
+        // =====================================================
+
+        /// <summary>
+        /// Kiểm tra học kỳ có phải học kỳ hè không (Hocky_3)
+        /// </summary>
+        public bool IsHocKyHe(string maHKNH)
+        {
+            try
+            {
+                string sql = $@"
+                    SELECT COUNT(1)
+                    FROM HocKy_NamHoc hknh
+                    INNER JOIN LoaiHocKy lhk
+                        ON hknh.MaLoaiHK = lhk.MaLoaiHK
+                    WHERE hknh.MaHKNH  = '{maHKNH}'
+                      AND lhk.MaLoaiHK = 'Hocky_3'
+                ";
+                object result = Connection.ExecuteScalar(sql);
+                return Convert.ToInt32(result) > 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Lỗi DAL - IsHocKyHe: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// TH1: SV có khối lượng = 0 TC trong học kỳ
+        /// </summary>
+        public DataTable GetSinhVienKhoiLuongZero(string maHKNH)
+        {
+            try
+            {
+                string sql = $@"
+                    SELECT
+                        sv.MaSV,
+                        sv.HoTen,
+                        sv.MaLopNienChe,
+                        '{maHKNH}' AS MaHKNH
+                    FROM SinhVien sv
+                    WHERE sv.MaSV NOT IN (
+                        SELECT DISTINCT dkl.MaSV
+                        FROM DangKyLop dkl
+                        INNER JOIN LopHocPhan lhp
+                            ON dkl.MaLHP = lhp.MaLHP
+                        WHERE lhp.MaHKNH   = '{maHKNH}'
+                          AND dkl.TrangThai = 1
+                    )
+                ";
+                return Connection.GetDataToTable(sql);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Lỗi DAL - GetSinhVienKhoiLuongZero: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// TH2: SV có TBC học kỳ dưới 1.5
+        /// </summary>
+        public DataTable GetSinhVienDiemThapDuoi1_5(string maHKNH)
+        {
+            try
+            {
+                string sql = $@"
+                    WITH DiemMon AS (
+                        SELECT
+                            dkl.MaSV,
+                            lhp.MaMon,
+                            lhp.MaHKNH,
+                            SUM(kq.Diem * ld.TyLePhanTram / 100.0) AS DiemMon
+                        FROM DangKyLop dkl
+                        INNER JOIN LopHocPhan lhp
+                            ON dkl.MaLHP = lhp.MaLHP
+                        INNER JOIN KetQua kq
+                            ON kq.MaSV  = dkl.MaSV
+                           AND kq.MaLHP = dkl.MaLHP
+                        INNER JOIN LoaiDiem ld
+                            ON ld.MaLoaiDiem = kq.MaLoaiDiem
+                        WHERE lhp.MaHKNH   = '{maHKNH}'
+                          AND dkl.TrangThai = 1
+                        GROUP BY dkl.MaSV, lhp.MaMon, lhp.MaHKNH
+                    ),
+                    TBCHocKy AS (
+                        SELECT
+                            MaSV,
+                            MaHKNH,
+                            AVG(DiemMon) AS TBCHocKy,
+                            COUNT(*)     AS SoMon
+                        FROM DiemMon
+                        GROUP BY MaSV, MaHKNH
+                    )
+                    SELECT
+                        sv.MaSV,
+                        sv.HoTen,
+                        sv.MaLopNienChe,
+                        tbc.MaHKNH,
+                        ROUND(tbc.TBCHocKy, 2) AS TBCHocKy,
+                        tbc.SoMon
+                    FROM TBCHocKy tbc
+                    INNER JOIN SinhVien sv ON sv.MaSV = tbc.MaSV
+                    WHERE tbc.TBCHocKy < 1.5
+                ";
+                return Connection.GetDataToTable(sql);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Lỗi DAL - GetSinhVienDiemThapDuoi1_5: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Kiểm tra SV đã có cảnh báo chưa, trả về LanThu (0 = chưa có)
+        /// </summary>
+        public int GetLanThuCanhBao(string maSV, string maHKNH, int loaiCanhBao)
+        {
+            try
+            {
+                string sql = $@"
+                    SELECT ISNULL(MAX(cbsv.LanThu), 0)
+                    FROM CanhBao_SinhVien cbsv
+                    INNER JOIN CanhBaoHocVu cbhv
+                        ON cbsv.MaCanhBao = cbhv.MaCanhBao
+                    WHERE cbsv.MaSV        = '{maSV}'
+                      AND cbsv.MaHKNH      = '{maHKNH}'
+                      AND cbhv.LoaiCanhBao  = {loaiCanhBao}
+                ";
+                object result = Connection.ExecuteScalar(sql);
+                return result == null ? 0 : Convert.ToInt32(result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Lỗi DAL - GetLanThuCanhBao: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Lấy MaCanhBao theo LoaiCanhBao
+        /// </summary>
+        public string GetMaCanhBaoByLoai(int loaiCanhBao)
+        {
+            try
+            {
+                string sql = $@"
+                    SELECT TOP 1 MaCanhBao
+                    FROM CanhBaoHocVu
+                    WHERE LoaiCanhBao = {loaiCanhBao}
+                ";
+                object result = Connection.ExecuteScalar(sql);
+                return result?.ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Lỗi DAL - GetMaCanhBaoByLoai: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Insert cảnh báo mới
+        /// </summary>
+        public void InsertCanhBaoSinhVien(
+            string maSV, string maCanhBao, string maHKNH, int lanThu)
+        {
+            try
+            {
+                string sql = $@"
+                    INSERT INTO CanhBao_SinhVien
+                        (MaSV, MaCanhBao, MaHKNH, ThoiDiem, LanThu)
+                    VALUES
+                        ('{maSV}', '{maCanhBao}', '{maHKNH}', GETDATE(), {lanThu})
+                ";
+                Connection.ExecuteNonQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Lỗi DAL - InsertCanhBaoSinhVien: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Cập nhật LanThu tăng lên
+        /// </summary>
+        public void UpdateLanThuCanhBao(
+            string maSV, string maCanhBao, string maHKNH)
+        {
+            try
+            {
+                string sql = $@"
+                    UPDATE CanhBao_SinhVien
+                    SET LanThu   = LanThu + 1,
+                        ThoiDiem = GETDATE()
+                    WHERE MaSV      = '{maSV}'
+                      AND MaCanhBao = '{maCanhBao}'
+                      AND MaHKNH    = '{maHKNH}'
+                ";
+                Connection.ExecuteNonQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Lỗi DAL - UpdateLanThuCanhBao: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Lấy danh sách học kỳ đang mở (TrangThai = 'DangMo')
+        /// </summary>
+        public DataTable GetHocKyDangHoatDong()
+        {
+            try
+            {
+                string sql = @"
+                    SELECT
+                        hknh.MaHKNH,
+                        lhk.TenLoaiHK,
+                        nh.TenNamHoc
+                    FROM HocKy_NamHoc hknh
+                    INNER JOIN LoaiHocKy lhk
+                        ON hknh.MaLoaiHK = lhk.MaLoaiHK
+                    INNER JOIN NamHoc nh
+                        ON hknh.MaNamHoc = nh.MaNamHoc
+                    WHERE hknh.MaHKNH IN (
+                        SELECT DISTINCT MaHKNH
+                        FROM LopHocPhan
+                        WHERE TrangThai = 'DangMo'
+                    )
+                ";
+                return Connection.GetDataToTable(sql);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(
+                    "Lỗi DAL - GetHocKyDangHoatDong: " + ex.Message);
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace QLDSV.DAL
 
             // Đọc từ App.config, fallback về hardcode
             connstring = ConfigurationManager.ConnectionStrings["QLDSV"]?.ConnectionString
-                ?? @"Data Source=DESKTOP-1MI6150;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+                ?? @"Data Source=admin-pc\quynhanh;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
 
             conn = new SqlConnection(connstring);
             conn.Open();
@@ -43,6 +43,19 @@ namespace QLDSV.DAL
             cmd.CommandText = sql;
             cmd.ExecuteNonQuery();
             cmd.Dispose();
+        }
+
+        public static object ExecuteScalar(string sql)
+        {
+            SqlCommand cmd = new SqlCommand(sql, conn);
+            object result = cmd.ExecuteScalar();
+            cmd.Dispose();
+            return result;
+        }
+
+        public static void ExecuteNonQuery(string sql)
+        {
+            RunSql(sql); // dùng lại RunSql đã có sẵn
         }
     }
 }
