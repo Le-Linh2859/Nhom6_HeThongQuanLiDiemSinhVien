@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -22,20 +22,52 @@ namespace QLDSV.GUI.Forms.SinhVien
         public KetQuaHocTap()
         {
             InitializeComponent();
-            this.Load += KetQuaHocTap_Load;
-            cboNamHoc.SelectedIndexChanged += CboNamHoc_SelectedIndexChanged;
-            cboHocKy.SelectedIndexChanged  += CboHocKy_SelectedIndexChanged;
+            InitDataGridColumns();
         }
 
-        // ── Load ──────────────────────────────────────────────────────────────────
+        private void InitDataGridColumns()
+        {
+            if (DataGridViewKQDiem.Columns.Count > 0)
+                return;
+
+            DataGridViewKQDiem.AutoGenerateColumns = false;
+            DataGridViewKQDiem.Columns.AddRange(
+                MakeCol("colSTT", "STT", 50, DataGridViewAutoSizeColumnMode.None, DataGridViewContentAlignment.MiddleCenter),
+                MakeCol("colMaMon", "Mã môn", 100, DataGridViewAutoSizeColumnMode.None, DataGridViewContentAlignment.MiddleCenter),
+                MakeCol("colTenMon", "Tên môn học", 220, DataGridViewAutoSizeColumnMode.Fill, DataGridViewContentAlignment.MiddleLeft),
+                MakeCol("colSoTC", "Số TC", 70, DataGridViewAutoSizeColumnMode.None, DataGridViewContentAlignment.MiddleCenter),
+                MakeCol("colDiemCC", "CC", 60, DataGridViewAutoSizeColumnMode.None, DataGridViewContentAlignment.MiddleCenter),
+                MakeCol("colDiemKT1", "KT1", 60, DataGridViewAutoSizeColumnMode.None, DataGridViewContentAlignment.MiddleCenter),
+                MakeCol("colDiemKT2", "KT2", 60, DataGridViewAutoSizeColumnMode.None, DataGridViewContentAlignment.MiddleCenter),
+                MakeCol("colDiemThi", "Thi", 60, DataGridViewAutoSizeColumnMode.None, DataGridViewContentAlignment.MiddleCenter),
+                MakeCol("colDiemTK", "Tổng kết", 80, DataGridViewAutoSizeColumnMode.None, DataGridViewContentAlignment.MiddleCenter));
+        }
+
+        private static DataGridViewTextBoxColumn MakeCol(
+            string name, string header, int width,
+            DataGridViewAutoSizeColumnMode autoSizeMode = DataGridViewAutoSizeColumnMode.None,
+            DataGridViewContentAlignment alignment = DataGridViewContentAlignment.MiddleLeft)
+        {
+            var col = new DataGridViewTextBoxColumn
+            {
+                Name = name,
+                HeaderText = header,
+                Width = width,
+                MinimumWidth = 30,
+                ReadOnly = true,
+                SortMode = DataGridViewColumnSortMode.NotSortable,
+                AutoSizeMode = autoSizeMode
+            };
+            col.HeaderCell.Style.Alignment = alignment;
+            col.DefaultCellStyle.Alignment = alignment;
+            return col;
+        }
+
+
         private void KetQuaHocTap_Load(object sender, EventArgs e)
         {
             try
             {
-                // Cố định tiêu đề cột — không cuộn theo dữ liệu
-                DataGridViewKQDiem.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-                DataGridViewKQDiem.Columns["colSTT"].Frozen    = true;   // cột STT luôn hiển thị
-
                 LoadThongTinSinhVien();
                 LoadHocKy();
                 LoadNamHocCuaSinhVien();
@@ -47,7 +79,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             }
         }
 
-        // ── 1. Lấy thông tin sinh viên từ session ─────────────────────────────────
+ 
         private void LoadThongTinSinhVien()
         {
             string maTK = SessionHelper.MaTaiKhoan;
@@ -65,13 +97,13 @@ namespace QLDSV.GUI.Forms.SinhVien
             lblTen.Text = dt.Rows[0]["HoTen"].ToString().Trim();
         }
 
-        // ── 2. Nạp học kỳ (luôn cố định từ DB, thêm "Tất cả" đầu danh sách) ────────
+
         private void LoadHocKy()
         {
             _loading = true;
             DataTable dt = _bll.GetLoaiHocKy();
 
-            // Thêm dòng "Tất cả" vào đầu
+
             DataRow rowAll = dt.NewRow();
             rowAll["MaLoaiHK"]  = "ALL";
             rowAll["TenLoaiHK"] = "-- Tất cả --";
@@ -83,7 +115,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             _loading = false;
         }
 
-        // ── 3. Nạp năm học mà sinh viên có đăng ký (thêm "Tất cả" đầu danh sách) ──
+
         private void LoadNamHocCuaSinhVien()
         {
             if (string.IsNullOrEmpty(_maSV)) return;
@@ -152,10 +184,9 @@ namespace QLDSV.GUI.Forms.SinhVien
                 decimal? thi = ToDecimal(row["DiemThi"]);
                 decimal? tk  = TinhDiemTongKet(cc, kt1, kt2, thi);
 
-                string xepLoai = tk.HasValue ? XepLoai(tk.Value) : "--";
                 string tkStr   = tk.HasValue ? tk.Value.ToString("F2") : "--";
 
-                int idx = DataGridViewKQDiem.Rows.Add(
+                DataGridViewKQDiem.Rows.Add(
                     stt++,
                     row["MaMon"],
                     row["TenMon"],
@@ -164,13 +195,8 @@ namespace QLDSV.GUI.Forms.SinhVien
                     FormatDiem(kt1),
                     FormatDiem(kt2),
                     FormatDiem(thi),
-                    tkStr,
-                    xepLoai
+                    tkStr
                 );
-
-                // Tô màu cột xếp loại
-                if (tk.HasValue)
-                    DataGridViewKQDiem.Rows[idx].Cells["colXepLoai"].Style.ForeColor = MauXepLoai(tk.Value);
             }
         }
 
