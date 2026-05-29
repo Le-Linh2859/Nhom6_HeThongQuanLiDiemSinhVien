@@ -76,18 +76,22 @@
             this.guna2Panel1.Controls.Add(this.guna2HtmlLabel4);
             this.guna2Panel1.Controls.Add(this.txtTimKiem);
             this.guna2Panel1.CustomBorderColor = System.Drawing.Color.White;
+            this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(200)))), ((int)(((byte)(223)))));
             this.guna2Panel1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.guna2Panel1.Location = new System.Drawing.Point(10, 14);
+            this.guna2Panel1.Location = new System.Drawing.Point(8, 8);
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(1);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(763, 283);
+            this.guna2Panel1.Size = new System.Drawing.Size(775, 554);
             this.guna2Panel1.TabIndex = 55;
             // 
             // DataGridViewLop
             // 
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.DataGridViewLop.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.DataGridViewLop.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DataGridViewLop.BackgroundColor = System.Drawing.Color.Gainsboro;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
@@ -114,7 +118,7 @@
             this.DataGridViewLop.RowHeadersVisible = false;
             this.DataGridViewLop.RowHeadersWidth = 62;
             this.DataGridViewLop.RowTemplate.Height = 28;
-            this.DataGridViewLop.Size = new System.Drawing.Size(727, 185);
+            this.DataGridViewLop.Size = new System.Drawing.Size(739, 222);
             this.DataGridViewLop.TabIndex = 32;
             this.DataGridViewLop.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.DataGridViewLop.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -137,6 +141,7 @@
             this.DataGridViewLop.ThemeStyle.RowsStyle.Height = 28;
             this.DataGridViewLop.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(216)))), ((int)(((byte)(230)))));
             this.DataGridViewLop.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.DataGridViewLop.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewLop_CellClick);
             // 
             // btnLammoi
             // 
@@ -157,6 +162,7 @@
             this.btnLammoi.TabIndex = 31;
             this.btnLammoi.Text = "Làm mới";
             this.btnLammoi.TextOffset = new System.Drawing.Point(1, 0);
+            this.btnLammoi.Click += new System.EventHandler(this.btnLammoi_Click);
             // 
             // cboKhoa
             // 
@@ -243,12 +249,13 @@
             this.txtTimKiem.SelectedText = "";
             this.txtTimKiem.Size = new System.Drawing.Size(205, 32);
             this.txtTimKiem.TabIndex = 1;
+            this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
             // guna2HtmlLabel15
             // 
             this.guna2HtmlLabel15.BackColor = System.Drawing.SystemColors.ControlDark;
             this.guna2HtmlLabel15.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.guna2HtmlLabel15.Location = new System.Drawing.Point(204, 102);
+            this.guna2HtmlLabel15.Location = new System.Drawing.Point(212, 110);
             this.guna2HtmlLabel15.Margin = new System.Windows.Forms.Padding(1);
             this.guna2HtmlLabel15.Name = "guna2HtmlLabel15";
             this.guna2HtmlLabel15.Size = new System.Drawing.Size(3, 2);
@@ -272,12 +279,13 @@
             this.groupBox1.Controls.Add(this.btnThem);
             this.groupBox1.Controls.Add(this.cboKhoa2);
             this.groupBox1.Controls.Add(this.cboCV);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(11, 320);
+            this.groupBox1.Location = new System.Drawing.Point(8, 333);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(762, 243);
+            this.groupBox1.Size = new System.Drawing.Size(775, 229);
             this.groupBox1.TabIndex = 59;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin lớp niên chế";
@@ -363,6 +371,7 @@
             this.btnReset.TabIndex = 74;
             this.btnReset.Text = "Reset";
             this.btnReset.TextOffset = new System.Drawing.Point(1, 0);
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // lblMalop
             // 
@@ -394,6 +403,7 @@
             this.btnHuy.TabIndex = 73;
             this.btnHuy.Text = "Hủy";
             this.btnHuy.TextOffset = new System.Drawing.Point(1, 0);
+            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
             // 
             // lblTenlop
             // 
@@ -425,6 +435,7 @@
             this.btnLuu.TabIndex = 72;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.TextOffset = new System.Drawing.Point(1, 0);
+            this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
             // lblNienkhoa
             // 
@@ -468,6 +479,7 @@
             this.btnSua.TabIndex = 70;
             this.btnSua.Text = "Sửa";
             this.btnSua.TextOffset = new System.Drawing.Point(1, 0);
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // lblCovan
             // 
@@ -500,6 +512,7 @@
             this.btnThem.TabIndex = 69;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextOffset = new System.Drawing.Point(1, 0);
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // cboKhoa2
             // 
@@ -539,12 +552,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 580);
+            this.ClientSize = new System.Drawing.Size(791, 570);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.guna2HtmlLabel15);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmLopNienChe";
+            this.Padding = new System.Windows.Forms.Padding(8);
             this.Text = "FrmLopNienChe";
             this.Load += new System.EventHandler(this.FrmLopNienChe_Load);
             this.guna2Panel1.ResumeLayout(false);
