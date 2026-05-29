@@ -123,7 +123,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             _loading = true;
             DataTable dt = _bll.GetNamHocBySinhVien(_maSV);
 
-            // Thêm dòng "Tất cả" vào đầu
+            
             DataRow rowAll = dt.NewRow();
             rowAll["MaNamHoc"]  = "ALL";
             rowAll["TenNamHoc"] = "-- Tất cả --";
@@ -134,10 +134,10 @@ namespace QLDSV.GUI.Forms.SinhVien
             cboNamHoc.DisplayMember = "TenNamHoc";
             _loading = false;
 
-            LoadBangDiem();   // tự động load kỳ đầu tiên
+            LoadBangDiem();   
         }
 
-        // ── 4. Sự kiện thay đổi bộ lọc ───────────────────────────────────────────
+        
         private void CboNamHoc_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!_loading) LoadBangDiem();
@@ -148,7 +148,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             if (!_loading) LoadBangDiem();
         }
 
-        // ── 5. Load và hiển thị bảng điểm ────────────────────────────────────────
+        
         private void LoadBangDiem()
         {
             if (string.IsNullOrEmpty(_maSV)) return;
@@ -170,7 +170,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             }
         }
 
-        // ── 6. Điền dữ liệu vào DataGridView ─────────────────────────────────────
+       
         private void HienThiBangDiem(DataTable dt)
         {
             DataGridViewKQDiem.Rows.Clear();
@@ -200,7 +200,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             }
         }
 
-        // ── 7. Tính và hiển thị tổng kết ─────────────────────────────────────────
+        
         private void TinhVaHienThiTongKet(DataTable dt)
         {
             int    tcDangKy    = 0;
