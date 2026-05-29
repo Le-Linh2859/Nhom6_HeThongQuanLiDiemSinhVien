@@ -575,32 +575,15 @@ namespace QLDSV.GUI
 
                     string maTK = bll.TaoMaTaiKhoanMoi();
 
-<<<<<<< Updated upstream
-                    // ==========================
-                    // Insert bảng TaiKhoan
-                    // ==========================
-
                     // Hash mật khẩu trước khi lưu vào Database
                     string hashedMatKhau = PasswordHelper.HashPassword(matKhau);
 
-=======
->>>>>>> Stashed changes
                     bll.InsertTaiKhoan(
                         maTK,
                         "VT002",
                         maGV,
-<<<<<<< Updated upstream
                         hashedMatKhau,
-                        1
-                    );
-
-                    // ==========================
-                    // Insert bảng GiangVien
-                    // ==========================
-=======
-                        matKhau,
                         1);
->>>>>>> Stashed changes
 
                     bll.InsertGiangVien(
                         soDT,
