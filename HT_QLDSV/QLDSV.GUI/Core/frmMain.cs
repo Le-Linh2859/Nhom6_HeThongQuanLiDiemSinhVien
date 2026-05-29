@@ -173,7 +173,11 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, true);
                 SetMenuRowVisibility(5, btnLophp, guna2PictureBox6, true);
                 SetMenuRowVisibility(6, btnDangky, guna2PictureBox7, true);
-                SetMenuRowVisibility(7, btnDiem, guna2PictureBox8, false);
+                
+                // Mở chức năng Tài khoản cho Admin
+                if (btnDiem != null) btnDiem.Text = "Tài khoản";
+                SetMenuRowVisibility(7, btnDiem, guna2PictureBox8, true);
+
                 SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, true);
                 SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, true);
                 SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
@@ -191,7 +195,11 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, false);
                 SetMenuRowVisibility(5, btnLophp, guna2PictureBox6, true);
                 SetMenuRowVisibility(6, btnDangky, guna2PictureBox7, false);
+                
+                // Đặt lại text Nhập điểm cho Giảng viên
+                if (btnDiem != null) btnDiem.Text = "Nhập điểm";
                 SetMenuRowVisibility(7, btnDiem, guna2PictureBox8, true);
+
                 SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, false);
                 SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, false);
                 SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
@@ -256,8 +264,10 @@ namespace QLDSV.GUI
             if (btnDangky != null) btnDangky.Click += (s, e) => OpenChildForm(new frmKhoa(), "Khoa");
             if (btnDiem != null) btnDiem.Click += (s, e) =>
             {
-                // Giảng viên dùng form nhập điểm riêng; Admin dùng form quản lý chung
-                if (SessionHelper.MaVaiTro == "VT002")
+                // Điều hướng động theo vai trò
+                if (SessionHelper.MaVaiTro == "VT001")
+                    OpenChildForm(new QLDSV.GUI.frmQuanLiTaiKhoan(), "Quản Lý Tài Khoản");
+                else if (SessionHelper.MaVaiTro == "VT002")
                     OpenChildForm(new QLDSV.GUI.Forms.GiangVien.FrmNhapDiemSV(), "Nhập Điểm");
             };
             if (btnKetqua != null) btnKetqua.Click += (s, e) =>
