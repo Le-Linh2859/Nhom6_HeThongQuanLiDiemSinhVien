@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.WinForms;
+using QLDSV.BLL;
 
 namespace QLDSV.GUI
 {
@@ -628,7 +629,7 @@ namespace QLDSV.GUI
 
                     if (hasGrade)
                     {
-                        double tk = Math.Round((cc * 0.1) + (kt1 * 0.15) + (kt2 * 0.15) + (ck * 0.6), 2);
+                        double tk = KetQuaBLL.TinhDiemTongKet(cc, kt1, kt2, ck);
                         row["Tổng Kết"] = tk;
                         if      (tk >= 8.5) row["Xếp Loại"] = "A  (Giỏi)";
                         else if (tk >= 7.0) row["Xếp Loại"] = "B  (Khá)";

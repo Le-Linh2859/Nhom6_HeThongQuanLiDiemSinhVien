@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
@@ -7,6 +8,17 @@ namespace QLDSV.DAL
 {
     public class KetQuaDAL
     {
+        /// <summary>Lấy tỷ lệ phần trăm của từng loại điểm từ bảng LoaiDiem.</summary>
+        public Dictionary<string, decimal> GetTyLePhanTram()
+        {
+            const string sql = "SELECT MaLoaiDiem, TyLePhanTram FROM LoaiDiem";
+            DataTable dt = Connection.GetDataToTable(sql);
+            var tyLe = new Dictionary<string, decimal>(StringComparer.OrdinalIgnoreCase);
+            foreach (DataRow row in dt.Rows)
+                tyLe[row["MaLoaiDiem"].ToString().Trim()] = Convert.ToDecimal(row["TyLePhanTram"]);
+            return tyLe;
+        }
+
         // ─── Lấy danh sách năm học ────────────────────────────────────────────────
         public DataTable GetNamHoc()
         {
@@ -245,10 +257,7 @@ namespace QLDSV.DAL
                 "WITH DiemMon AS ( " +
                 "  SELECT dklh.MaSV, lhp.MaMon, mh.SoTC, " +
                 "    ROUND( " +
-                "      ISNULL(MAX(CASE WHEN kq.MaLoaiDiem='CC'  THEN kq.Diem END), 0) * 0.1  + " +
-                "      ISNULL(MAX(CASE WHEN kq.MaLoaiDiem='KT1' THEN kq.Diem END), 0) * 0.15 + " +
-                "      ISNULL(MAX(CASE WHEN kq.MaLoaiDiem='KT2' THEN kq.Diem END), 0) * 0.15 + " +
-                "      ISNULL(MAX(CASE WHEN kq.MaLoaiDiem='CK'  THEN kq.Diem END), 0) * 0.6, 2) AS DiemTK, " +
+                "      ISNULL(SUM(kq.Diem * ld.TyLePhanTram / 100.0), 0), 2) AS DiemTK, " +
                 "    CASE WHEN " +
                 "      MAX(CASE WHEN kq.MaLoaiDiem='CC'  THEN kq.Diem END) IS NOT NULL AND " +
                 "      MAX(CASE WHEN kq.MaLoaiDiem='KT1' THEN kq.Diem END) IS NOT NULL AND " +
@@ -260,6 +269,7 @@ namespace QLDSV.DAL
                 "  INNER JOIN HocKy_NamHoc hknh ON lhp.MaHKNH = hknh.MaHKNH " +
                 "  INNER JOIN MonHoc mh ON lhp.MaMon = mh.MaMon " +
                 "  LEFT  JOIN KetQua kq ON kq.MaSV = dklh.MaSV AND kq.MaLHP = dklh.MaLHP " +
+                "  LEFT  JOIN LoaiDiem ld ON ld.MaLoaiDiem = kq.MaLoaiDiem " +
                 "  WHERE 1=1" + wNam + wHK +
                 "  GROUP BY dklh.MaSV, lhp.MaMon, mh.SoTC " +
                 ") " +

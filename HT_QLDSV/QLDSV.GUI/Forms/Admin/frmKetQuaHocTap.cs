@@ -2,6 +2,7 @@
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using QLDSV.BLL;
 
 namespace QLDSV.GUI
 {
@@ -94,8 +95,7 @@ namespace QLDSV.GUI
 
                     if (hasGrades)
                     {
-                        // Công thức tính điểm tổng kết: CC * 10% + KT1 * 15% + KT2 * 15% + CK * 60%
-                        double tongKet = (cc * 0.1) + (kt1 * 0.15) + (kt2 * 0.15) + (ck * 0.6);
+                        double tongKet = KetQuaBLL.TinhDiemTongKet(cc, kt1, kt2, ck);
                         row["Điểm Tổng Kết"] = Math.Round(tongKet, 2);
 
                         // Quy đổi sang điểm chữ

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using QLDSV.DAL;
 
@@ -7,6 +8,8 @@ namespace QLDSV.BLL
     public class KetQuaBLL
     {
         private readonly KetQuaDAL _dal = new KetQuaDAL();
+        private static Dictionary<string, decimal> _tyLePhanTram;
+        private static readonly object _tyLeLock = new object();
 
         // ─── Danh mục ─────────────────────────────────────────────────────────────
         public DataTable GetNamHoc()       => _dal.GetNamHoc();
@@ -135,9 +138,34 @@ namespace QLDSV.BLL
 
         /// <summary>
         /// Tính điểm tổng kết hệ 10 từ các điểm thành phần.
-        /// Công thức: CC*0.1 + KT1*0.15 + KT2*0.15 + CK*0.6
+        /// Tỷ lệ lấy từ bảng LoaiDiem (TyLePhanTram).
         /// </summary>
         public static double TinhDiemTongKet(double cc, double kt1, double kt2, double ck)
-            => Math.Round((cc * 0.1) + (kt1 * 0.15) + (kt2 * 0.15) + (ck * 0.6), 2);
+        {
+            decimal tong =
+                (decimal)cc * LayTyLe("CC") +
+                (decimal)kt1 * LayTyLe("KT1") +
+                (decimal)kt2 * LayTyLe("KT2") +
+                (decimal)ck * LayTyLe("CK");
+            return Math.Round((double)tong, 2);
+        }
+
+        private static decimal LayTyLe(string maLoaiDiem)
+        {
+            if (_tyLePhanTram == null)
+            {
+                lock (_tyLeLock)
+                {
+                    if (_tyLePhanTram == null)
+                        _tyLePhanTram = new KetQuaDAL().GetTyLePhanTram();
+                }
+            }
+
+            if (_tyLePhanTram.TryGetValue(maLoaiDiem, out decimal tyLePhanTram))
+                return tyLePhanTram / 100m;
+
+            throw new InvalidOperationException(
+                $"Không tìm thấy tỷ lệ phần trăm cho loại điểm '{maLoaiDiem}' trong bảng LoaiDiem.");
+        }
     }
 }

@@ -237,12 +237,13 @@ namespace QLDSV.GUI.Forms.SinhVien
 
         // ── Helpers tính điểm ─────────────────────────────────────────────────────
 
-        /// <summary>TK = CC×0.1 + KT1×0.15 + KT2×0.15 + Thi×0.6 (cần đủ 4 thành phần)</summary>
+        /// <summary>Tính điểm tổng kết theo tỷ lệ trong bảng LoaiDiem (cần đủ 4 thành phần).</summary>
         private static decimal? TinhDiemTongKet(decimal? cc, decimal? kt1, decimal? kt2, decimal? thi)
         {
             if (!cc.HasValue || !kt1.HasValue || !kt2.HasValue || !thi.HasValue)
                 return null;
-            return Math.Round(cc.Value * 0.1m + kt1.Value * 0.15m + kt2.Value * 0.15m + thi.Value * 0.6m, 2);
+            return (decimal)KetQuaBLL.TinhDiemTongKet(
+                (double)cc.Value, (double)kt1.Value, (double)kt2.Value, (double)thi.Value);
         }
 
         /// <summary>
