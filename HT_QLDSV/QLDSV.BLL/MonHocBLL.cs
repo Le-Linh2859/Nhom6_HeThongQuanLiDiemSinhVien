@@ -17,7 +17,10 @@ namespace QLDSV.BLL
         {
             return dal.GetMonHocList(keyword, maKhoa);
         }
-
+        public DataTable GetDanhSachTheoGiangVien(string maGV, string keyword)
+        {
+            return dal.GetDanhSachTheoGiangVien(maGV, keyword);
+        }
         // Lấy danh sách các Khoa
         public DataTable GetKhoa()
         {

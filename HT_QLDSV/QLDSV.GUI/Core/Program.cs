@@ -1,3 +1,4 @@
+
 using QLDSV.GUI.Forms.GiangVien;
 using QLDSV.GUI.Forms.SinhVien;
 using System;
@@ -15,7 +16,6 @@ namespace QLDSV.GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             Application.Run(new frmDangNhap());
         }
     }

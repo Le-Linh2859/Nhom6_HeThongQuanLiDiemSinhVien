@@ -371,6 +371,9 @@
     <EmbeddedResource Include="Forms\GiangVien\frmLophocphan_GV.resx">
       <DependentUpon>frmLophocphan_GV.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GiangVien\frmMonhoc_GV.resx">
+      <DependentUpon>frmMonhoc_GV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GiangVien\FrmNhapDiemSV.resx">
       <DependentUpon>FrmNhapDiemSV.cs</DependentUpon>
     </EmbeddedResource>

@@ -17,10 +17,8 @@ namespace QLDSV.GUI
 
         public static void ketnoi()
         {
-            // Đọc connection string từ App.config (key "QLDSV")
-            // Fallback về hardcode nếu không tìm thấy
-            connstring = ConfigurationManager.ConnectionStrings["QLDSV"]?.ConnectionString
-                ?? @"Data Source=DESKTOP-58Q7HI9\SQLEXPRESS01;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+            //connstring = @"Data Source=DESKTOP-58Q7HI9\SQLEXPRESS01;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+            connstring = @"Data Source=localhost\SQL2022DEV;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
 
             conn = new SqlConnection(connstring);
             conn.Open();

@@ -20,7 +20,21 @@ namespace QLDSV.BLL
         {
             return dal.GetDanhSach(keyword, maKhoa, maMon);
         }
+        
+        public DataTable GetDanhSachTheoGiangVien(string maGV, string keyword, string maMon)
+        {
+            return dal.GetDanhSachTheoGiangVien(maGV, keyword, maMon);
+        }
 
+        public DataTable GetMonHocTheoGiangVien(string maGV)
+        {
+            return dal.GetMonHocTheoGiangVien(maGV);
+        }
+
+        public DataTable GetDanhSachTheoSinhVien(string maSV)
+        {
+            return dal.GetDanhSachTheoSinhVien(maSV);
+        }
         public DataTable GetKhoa()
         {
             return dal.GetKhoa();

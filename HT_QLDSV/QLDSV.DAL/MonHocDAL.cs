@@ -29,7 +29,25 @@ namespace QLDSV.DAL
 
             return Connection.GetDataToTable(sql);
         }
+        //danh sách môn học theo khoa của giảng viên
+        public DataTable GetDanhSachTheoGiangVien(string maGV, string keyword)
+        {
+            string escapedMaGV = maGV.Replace("'", "''");
+            string sql =
+                "SELECT mh.MaMon, mh.TenMon, mh.SoTC, k.TenKhoa, mh.MoTa, mh.MaKhoa " +
+                "FROM MonHoc mh " +
+                "INNER JOIN Khoa k ON mh.MaKhoa = k.MaKhoa " +
+                "INNER JOIN GiangVien gv ON mh.MaKhoa = gv.MaKhoa " +
+                $"WHERE gv.MaGV = '{escapedMaGV}'";
 
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                string esc = keyword.Replace("'", "''");
+                sql += $" AND (mh.MaMon LIKE '%{esc}%' OR mh.TenMon LIKE N'%{esc}%')";
+            }
+
+            return Connection.GetDataToTable(sql);
+        }
         // 2. Lấy danh sách Khoa để nạp ComboBox
         public DataTable LoadKhoa()
         {
