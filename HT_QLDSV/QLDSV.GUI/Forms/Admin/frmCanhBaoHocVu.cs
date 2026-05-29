@@ -22,8 +22,7 @@ namespace QLDSV.GUI
         }
         public void OnEmbeddedInShell()
         {
-            if (pnlSidebar != null)
-                pnlSidebar.Visible = false;
+
         }
 private void frmCanhBaoHocVu_Load(object sender, EventArgs e)
         {

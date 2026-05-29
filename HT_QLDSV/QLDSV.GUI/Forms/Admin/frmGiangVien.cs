@@ -120,7 +120,11 @@ using System.Windows.Media.Animation;
                 };
             }
         }
-
+        private void frmGiangvien_Resize(object sender, EventArgs e)
+        {
+            guna2Panel1.Width = this.ClientSize.Width - 210;
+            groupBox1.Width = this.ClientSize.Width - 210;
+        }
         private void frmGiangvien_Load(object sender, EventArgs e)
         {
             try
@@ -159,7 +163,8 @@ using System.Windows.Media.Animation;
                     DataGridViewGV.Columns["SoDT"].HeaderText = "Số điện thoại";
                     DataGridViewGV.Columns["Email"].HeaderText = "Email";
 
-                    DataGridViewGV.Columns["MaKhoa"].HeaderText = "Mã khoa";
+                    // DataGridViewGV.Columns["MaKhoa"].HeaderText = "Mã khoa";
+                    DataGridViewGV.Columns["MaKhoa"].Visible = false;
 
                     // Ẩn nếu chưa dùng
                     DataGridViewGV.Columns["MaTaiKhoan"].Visible = false;
@@ -869,6 +874,11 @@ using System.Windows.Media.Animation;
 
             btnGiangvien.Font =
                 new Font(btnGiangvien.Font, FontStyle.Bold);
+        }
+
+        private void cboKhoa2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
