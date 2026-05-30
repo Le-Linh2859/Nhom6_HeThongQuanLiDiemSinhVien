@@ -1,10 +1,9 @@
 using System;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML.Excel;
 using QLDSV.BLL;
 
 namespace QLDSV.GUI.Forms.SinhVien
@@ -311,5 +310,238 @@ namespace QLDSV.GUI.Forms.SinhVien
 
         private static string FormatDiem(decimal? d)
             => d.HasValue ? d.Value.ToString("F1") : "--";
+
+        // ── Xuất bảng điểm (toàn bộ môn, không lọc năm học / học kỳ) ───────────────
+
+        private sealed class TongKetHocTap
+        {
+            public int TongTinChi { get; set; }
+            public double DiemHe10 { get; set; }
+            public double DiemHe4 { get; set; }
+            public string XepLoai { get; set; }
+            public bool CoDuLieu { get; set; }
+        }
+
+        private void btnXuatBangDiem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(_maSV))
+                {
+                    MessageBox.Show("Chưa có thông tin sinh viên.", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                DataTable thongTin = _bll.GetThongTinSinhVienDayDu(_maSV);
+                if (thongTin.Rows.Count == 0)
+                {
+                    MessageBox.Show("Không tìm thấy thông tin sinh viên.", "Thông báo",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                DataTable bangDiem = LayBangDiemXuatToanBo();
+                var tongKet = TinhTongKetTuBangDiem(bangDiem);
+                if (!tongKet.CoDuLieu)
+                {
+                    MessageBox.Show("Chưa có môn nào đủ điểm tổng kết để xuất bảng điểm.",
+                        "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                using (var dlg = new SaveFileDialog())
+                {
+                    dlg.Filter = "Excel Workbook|*.xlsx";
+                    dlg.FileName = $"BangDiem_{_maSV}_{DateTime.Now:yyyyMMdd}.xlsx";
+                    dlg.Title = "Lưu bảng điểm sinh viên";
+
+                    if (dlg.ShowDialog() != DialogResult.OK) return;
+
+                    XuatBangDiemExcel(dlg.FileName, thongTin.Rows[0], bangDiem, tongKet);
+
+                    MessageBox.Show("Xuất bảng điểm thành công!\n" + dlg.FileName,
+                        "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    Process.Start(dlg.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi xuất bảng điểm: " + ex.Message, "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>Lấy điểm toàn bộ môn đã đăng ký — không áp dụng bộ lọc trên form.</summary>
+        private DataTable LayBangDiemXuatToanBo()
+        {
+            DataTable dt = _bll.GetBangDiemSinhVien(_maSV, "ALL", "ALL");
+            dt.Columns.Add("DiemTK", typeof(double));
+            dt.Columns.Add("DiemChu", typeof(string));
+
+            foreach (DataRow row in dt.Rows)
+            {
+                decimal? tk = TinhDiemTongKet(
+                    ToDecimal(row["DiemCC"]),
+                    ToDecimal(row["DiemKT1"]),
+                    ToDecimal(row["DiemKT2"]),
+                    ToDecimal(row["DiemThi"]));
+
+                if (!tk.HasValue) continue;
+
+                row["DiemTK"] = (double)tk.Value;
+                row["DiemChu"] = KetQuaBLL.QuyDoiDiemChu((double)tk.Value);
+            }
+
+            return dt;
+        }
+
+        private static TongKetHocTap TinhTongKetTuBangDiem(DataTable dt)
+        {
+            var ketQua = new TongKetHocTap();
+            if (dt == null || dt.Rows.Count == 0) return ketQua;
+
+            int tongTc = 0;
+            double sumWeighted = 0;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row["DiemTK"] == DBNull.Value) continue;
+
+                int soTc = Convert.ToInt32(row["SoTC"]);
+                double diemTk = Convert.ToDouble(row["DiemTK"]);
+                tongTc += soTc;
+                sumWeighted += soTc * diemTk;
+            }
+
+            if (tongTc == 0) return ketQua;
+
+            ketQua.CoDuLieu = true;
+            ketQua.TongTinChi = tongTc;
+            ketQua.DiemHe10 = Math.Round(sumWeighted / tongTc, 2);
+            ketQua.DiemHe4 = KetQuaBLL.QuyDoiHe4(ketQua.DiemHe10);
+            ketQua.XepLoai = KetQuaBLL.XepLoaiHocLuc(ketQua.DiemHe4);
+            return ketQua;
+        }
+
+        private static void XuatBangDiemExcel(
+            string filePath, DataRow thongTinSv, DataTable bangDiem, TongKetHocTap tongKet)
+        {
+            using (var wb = new XLWorkbook())
+            {
+                var ws = wb.Worksheets.Add("Bảng điểm");
+
+                ws.Cell("A1").Value = "BẢNG ĐIỂM SINH VIÊN (TOÀN KHÓA)";
+                ws.Cell("A1").Style.Font.Bold = true;
+                ws.Cell("A1").Style.Font.FontSize = 16;
+                ws.Cell("A1").Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                ws.Range("A1:F1").Merge();
+
+                ws.Cell("A2").Value = $"Ngày xuất: {DateTime.Now:dd/MM/yyyy HH:mm}";
+                ws.Cell("A2").Style.Font.Italic = true;
+                ws.Range("A2:F2").Merge();
+
+                int row = 4;
+                row = GhiDongThongTin(ws, row, "Mã sinh viên", thongTinSv["MaSV"]);
+                row = GhiDongThongTin(ws, row, "Họ và tên", thongTinSv["HoTen"]);
+                row = GhiDongThongTin(ws, row, "Giới tính",
+                    Convert.ToBoolean(thongTinSv["GioiTinh"]) ? "Nam" : "Nữ");
+                row = GhiDongThongTin(ws, row, "Ngày sinh",
+                    thongTinSv["NgaySinh"] != DBNull.Value
+                        ? Convert.ToDateTime(thongTinSv["NgaySinh"]).ToString("dd/MM/yyyy")
+                        : "");
+                row = GhiDongThongTin(ws, row, "Khoa", ChuoiAnToan(thongTinSv, "TenKhoa"));
+                row = GhiDongThongTin(ws, row, "Lớp", ChuoiAnToan(thongTinSv, "TenLop"));
+                row = GhiDongThongTin(ws, row, "Niên khóa", ChuoiAnToan(thongTinSv, "NienKhoa"));
+                row = GhiDongThongTin(ws, row, "Địa chỉ", ChuoiAnToan(thongTinSv, "DiaChi"));
+                row = GhiDongThongTin(ws, row, "Số điện thoại", ChuoiAnToan(thongTinSv, "SoDT"));
+                row = GhiDongThongTin(ws, row, "Email", ChuoiAnToan(thongTinSv, "Email"));
+                row = GhiDongThongTin(ws, row, "Tài khoản", ChuoiAnToan(thongTinSv, "TenDangNhap"));
+
+                row += 1;
+                int headerRow = row;
+                string[] headers = { "STT", "Mã môn", "Tên môn học", "Số TC", "Điểm tổng kết", "Điểm chữ" };
+
+                for (int i = 0; i < headers.Length; i++)
+                {
+                    var cell = ws.Cell(headerRow, i + 1);
+                    cell.Value = headers[i];
+                    cell.Style.Font.Bold = true;
+                    cell.Style.Fill.BackgroundColor = XLColor.FromArgb(43, 54, 116);
+                    cell.Style.Font.FontColor = XLColor.White;
+                    cell.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                    cell.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+                }
+
+                int dataRow = headerRow + 1;
+                int stt = 1;
+
+                foreach (DataRow dr in bangDiem.Rows)
+                {
+                    if (dr["DiemTK"] == DBNull.Value) continue;
+
+                    ws.Cell(dataRow, 1).Value = stt++;
+                    ws.Cell(dataRow, 2).Value = dr["MaMon"].ToString();
+                    ws.Cell(dataRow, 3).Value = dr["TenMon"].ToString();
+                    ws.Cell(dataRow, 4).Value = Convert.ToInt32(dr["SoTC"]);
+                    ws.Cell(dataRow, 5).Value = Convert.ToDouble(dr["DiemTK"]);
+                    ws.Cell(dataRow, 5).Style.NumberFormat.Format = "0.00";
+                    ws.Cell(dataRow, 6).Value = dr["DiemChu"].ToString();
+
+                    var rowRange = ws.Range(dataRow, 1, dataRow, 6);
+                    rowRange.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
+                    rowRange.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
+                    if (stt % 2 == 0)
+                        rowRange.Style.Fill.BackgroundColor = XLColor.FromArgb(242, 242, 242);
+
+                    dataRow++;
+                }
+
+                int summaryRow = dataRow + 1;
+                ws.Cell(summaryRow, 1).Value = "Tổng kết";
+                ws.Cell(summaryRow, 1).Style.Font.Bold = true;
+                ws.Range(summaryRow, 1, summaryRow, 3).Merge();
+
+                ws.Cell(summaryRow, 4).Value = "Số tín chỉ đạt được:";
+                ws.Cell(summaryRow, 4).Style.Font.Bold = true;
+                ws.Cell(summaryRow, 5).Value = tongKet.TongTinChi;
+
+                ws.Cell(summaryRow + 1, 4).Value = "Điểm tổng kết (hệ 10):";
+                ws.Cell(summaryRow + 1, 4).Style.Font.Bold = true;
+                ws.Cell(summaryRow + 1, 5).Value = tongKet.DiemHe10;
+                ws.Cell(summaryRow + 1, 5).Style.NumberFormat.Format = "0.00";
+
+                ws.Cell(summaryRow + 2, 4).Value = "Điểm tổng kết (hệ 4):";
+                ws.Cell(summaryRow + 2, 4).Style.Font.Bold = true;
+                ws.Cell(summaryRow + 2, 5).Value = tongKet.DiemHe4;
+                ws.Cell(summaryRow + 2, 5).Style.NumberFormat.Format = "0.00";
+
+                ws.Cell(summaryRow + 3, 4).Value = "Xếp loại:";
+                ws.Cell(summaryRow + 3, 4).Style.Font.Bold = true;
+                ws.Cell(summaryRow + 3, 5).Value = tongKet.XepLoai;
+
+                ws.Columns().AdjustToContents();
+                ws.Column(3).Width = Math.Max(ws.Column(3).Width, 28);
+
+                wb.SaveAs(filePath);
+            }
+        }
+
+        private static int GhiDongThongTin(IXLWorksheet ws, int row, string nhan, object giaTri)
+        {
+            ws.Cell(row, 1).Value = nhan + ":";
+            ws.Cell(row, 1).Style.Font.Bold = true;
+            ws.Cell(row, 2).Value = giaTri?.ToString() ?? "";
+            ws.Range(row, 2, row, 6).Merge();
+            return row + 1;
+        }
+
+        private static string ChuoiAnToan(DataRow row, string cot)
+        {
+            return row.Table.Columns.Contains(cot) && row[cot] != DBNull.Value
+                ? row[cot].ToString()
+                : "";
+        }
     }
 }

@@ -48,6 +48,10 @@ namespace QLDSV.BLL
         public DataTable GetThongTinSinhVien(string maTaiKhoan)
             => _dal.GetThongTinSinhVienByTaiKhoan(maTaiKhoan);
 
+        /// <summary>Thông tin đầy đủ sinh viên (xuất bảng điểm).</summary>
+        public DataTable GetThongTinSinhVienDayDu(string maSV)
+            => _dal.GetThongTinSinhVienDayDu(maSV);
+
         /// <summary>Lấy danh sách năm học mà sinh viên có đăng ký lớp học phần.</summary>
         public DataTable GetNamHocBySinhVien(string maSV)
             => _dal.GetNamHocBySinhVien(maSV);

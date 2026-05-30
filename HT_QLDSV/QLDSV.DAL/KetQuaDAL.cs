@@ -113,6 +113,20 @@ namespace QLDSV.DAL
             return Connection.GetDataToTable(sql);
         }
 
+        /// <summary>Thông tin đầy đủ sinh viên để xuất bảng điểm.</summary>
+        public DataTable GetThongTinSinhVienDayDu(string maSV)
+        {
+            string sql =
+                "SELECT sv.MaSV, sv.HoTen, sv.NgaySinh, sv.GioiTinh, sv.DiaChi, sv.SoDT, sv.Email, " +
+                "       sv.NienKhoa, lnc.TenLop, k.TenKhoa, tk.TenDangNhap " +
+                "FROM SinhVien sv " +
+                "INNER JOIN TaiKhoan tk ON sv.MaTaiKhoan = tk.MaTaiKhoan " +
+                "LEFT JOIN LopNienChe lnc ON sv.MaLopNienChe = lnc.MaLopNienChe " +
+                "LEFT JOIN Khoa k ON lnc.MaKhoa = k.MaKhoa " +
+                $"WHERE sv.MaSV = '{maSV}'";
+            return Connection.GetDataToTable(sql);
+        }
+
         // ─── Lấy danh sách NamHoc mà sinh viên có đăng ký lớp học phần ──────────
         public DataTable GetNamHocBySinhVien(string maSV)
         {

@@ -21,6 +21,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.btnXuatBangDiem = new Guna.UI2.WinForms.Guna2Button();
             this.pnlFilter = new Guna.UI2.WinForms.Guna2Panel();
             this.lblTen = new System.Windows.Forms.Label();
             this.lblMa = new System.Windows.Forms.Label();
@@ -45,6 +46,20 @@ namespace QLDSV.GUI.Forms.SinhVien
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewKQDiem)).BeginInit();
             this.SuspendLayout();
             // 
+            // btnXuatBangDiem
+            // 
+            this.btnXuatBangDiem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnXuatBangDiem.BorderRadius = 8;
+            this.btnXuatBangDiem.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(54)))), ((int)(((byte)(116)))));
+            this.btnXuatBangDiem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnXuatBangDiem.ForeColor = System.Drawing.Color.White;
+            this.btnXuatBangDiem.Location = new System.Drawing.Point(1000, 52);
+            this.btnXuatBangDiem.Name = "btnXuatBangDiem";
+            this.btnXuatBangDiem.Size = new System.Drawing.Size(180, 36);
+            this.btnXuatBangDiem.TabIndex = 6;
+            this.btnXuatBangDiem.Text = "Xuất bảng điểm";
+            this.btnXuatBangDiem.Click += new System.EventHandler(this.btnXuatBangDiem_Click);
+            // 
             // pnlFilter
             // 
             this.pnlFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -53,6 +68,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             this.pnlFilter.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(233)))), ((int)(((byte)(240)))));
             this.pnlFilter.BorderRadius = 12;
             this.pnlFilter.BorderThickness = 1;
+            this.pnlFilter.Controls.Add(this.btnXuatBangDiem);
             this.pnlFilter.Controls.Add(this.lblTen);
             this.pnlFilter.Controls.Add(this.lblMa);
             this.pnlFilter.Controls.Add(this.lblTenSV);
@@ -394,5 +410,6 @@ namespace QLDSV.GUI.Forms.SinhVien
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTK10;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTC;
         private Guna.UI2.WinForms.Guna2DataGridView DataGridViewKQDiem;
+        private Guna.UI2.WinForms.Guna2Button btnXuatBangDiem;
     }
 }

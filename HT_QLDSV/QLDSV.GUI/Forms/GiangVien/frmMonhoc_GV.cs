@@ -84,8 +84,6 @@ namespace QLDSV.GUI.Forms.GiangVien
                     Form targetForm = null;
                     if (itemText == "Đăng ký lớp")
                         targetForm = new frmDangKyHocPhan();
-                    else if (itemText == "Kết quả học tập")
-                        targetForm = new frmKetQuaHocTap();
                     else if (itemText == "Phúc khảo")
                         targetForm = new frmPhucKhao_GV();
 
