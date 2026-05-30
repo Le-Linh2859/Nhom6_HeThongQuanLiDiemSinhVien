@@ -1,4 +1,4 @@
-﻿using QLDSV.BLL;
+using QLDSV.BLL;
 using QLDSV.DAL;
 using System;
 using System.Collections.Generic;
@@ -146,8 +146,6 @@ namespace QLDSV.GUI.Forms.GiangVien
                 dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
                 lblTongBanGhi.Text = $"Tổng: {tblLophocphan?.Rows.Count ?? 0} lớp học phần";
-                
-);
             }
             catch (Exception ex)
             {

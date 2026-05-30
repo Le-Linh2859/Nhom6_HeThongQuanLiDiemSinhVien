@@ -143,6 +143,61 @@ namespace QLDSV.GUI
             {
                 FunctionQa.ketnoi();
 
+                // Ẩn các thẻ thống kê số lượng tài khoản theo yêu cầu
+                guna2Panel1.Visible = false;
+                guna2Panel2.Visible = false;
+                guna2Panel3.Visible = false;
+
+                // Cấu hình tableLayoutPanel2 thành 1 dòng duy nhất và có tính responsive cao
+                tableLayoutPanel2.RowCount = 1;
+                tableLayoutPanel2.RowStyles.Clear();
+                tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+
+                tableLayoutPanel2.ColumnCount = 5;
+                tableLayoutPanel2.ColumnStyles.Clear();
+                tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 42F));   // Cột 0: Icon tìm kiếm
+                tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F)); // Cột 1: Ô nhập tìm kiếm (tự động giãn rộng)
+                tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));  // Cột 2: Lọc Vai trò
+                tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));  // Cột 3: Lọc Trạng thái
+                tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 160F));  // Cột 4: Nút thêm tài khoản
+
+                // Đặt lại ColumnSpan cho các control về 1 để không bị chiếm sang cột khác
+                tableLayoutPanel2.SetColumnSpan(guna2TextBox2, 1);
+                tableLayoutPanel2.SetColumnSpan(guna2TextBox1, 1);
+                tableLayoutPanel2.SetColumnSpan(guna2ComboBox2, 1);
+                tableLayoutPanel2.SetColumnSpan(guna2ComboBox1, 1);
+                tableLayoutPanel2.SetColumnSpan(guna2Button1, 1);
+
+                // Gán các control vào từng ô tương ứng
+                tableLayoutPanel2.Controls.Clear();
+                tableLayoutPanel2.Controls.Add(guna2TextBox2, 0, 0);
+                tableLayoutPanel2.Controls.Add(guna2TextBox1, 1, 0);
+                tableLayoutPanel2.Controls.Add(guna2ComboBox2, 2, 0);
+                tableLayoutPanel2.Controls.Add(guna2ComboBox1, 3, 0);
+                tableLayoutPanel2.Controls.Add(guna2Button1, 4, 0);
+
+                // Dock Fill các control trong ô để co giãn hoàn hảo
+                guna2TextBox2.Dock = DockStyle.Fill;
+                guna2TextBox2.Margin = new Padding(3, 2, 3, 2);
+                guna2TextBox1.Dock = DockStyle.Fill;
+                guna2TextBox1.Margin = new Padding(3, 2, 3, 2);
+                guna2ComboBox2.Dock = DockStyle.Fill;
+                guna2ComboBox2.Margin = new Padding(3, 2, 3, 2);
+                guna2ComboBox1.Dock = DockStyle.Fill;
+                guna2ComboBox1.Margin = new Padding(3, 2, 3, 2);
+                guna2Button1.Dock = DockStyle.Fill;
+                guna2Button1.Margin = new Padding(3, 2, 3, 2);
+
+                // Thiết lập Anchor cho DataGridView
+                dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+
+                // Điều chỉnh vị trí và kích thước tổng thể
+                tableLayoutPanel2.Top = 42;
+                tableLayoutPanel2.Height = 38;
+
+                guna2GroupBox2.Top = 86;
+                guna2GroupBox2.Height = 281;
+
                 // Khởi tạo bộ lọc quyền hạn (guna2ComboBox2)
                 guna2ComboBox2.Items.Clear();
                 guna2ComboBox2.Items.Add("--- Tất cả vai trò ---");
@@ -323,17 +378,7 @@ namespace QLDSV.GUI
 
         private void UpdateStats()
         {
-            try
-            {
-                string countAll = FunctionQa.getfieldvalue("SELECT COUNT(*) FROM TaiKhoan");
-                string countGV = FunctionQa.getfieldvalue("SELECT COUNT(*) FROM TaiKhoan WHERE MaVaiTro = 'VT002'");
-                string countSV = FunctionQa.getfieldvalue("SELECT COUNT(*) FROM TaiKhoan WHERE MaVaiTro = 'VT003'");
-
-                label5.Text = $"TỔNG TÀI KHOẢN\n{countAll}";
-                label6.Text = $"GIẢNG VIÊN\n{countGV}";
-                label7.Text = $"SINH VIÊN\n{countSV}";
-            }
-            catch { }
+            // Số liệu thống kê đã bị loại bỏ theo yêu cầu
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
