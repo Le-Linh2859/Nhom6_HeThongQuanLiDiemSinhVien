@@ -241,7 +241,12 @@ namespace QLDSV.GUI.Forms.SinhVien
                 FunctionQa.fillcombo(sqlSV, cboSinhVien, "MaSV", "HienThi");
                 cboSinhVien.SelectedIndex = -1;
 
-                string sqlLHP = "SELECT MaLHP, MaLHP + ' - ' + TenLopHocPhan AS HienThi FROM LopHocPhan";
+                // Chỉ hiển thị các lớp học phần sinh viên đã đăng ký học và đã được cập nhật điểm trên hệ thống
+                string sqlLHP = "SELECT DISTINCT lhp.MaLHP, lhp.MaLHP + ' - ' + lhp.TenLopHocPhan AS HienThi " +
+                                "FROM DangKyLopHoc dklh " +
+                                "JOIN LopHocPhan lhp ON dklh.MaLHP = lhp.MaLHP " +
+                                "JOIN KetQua kq ON dklh.MaSV = kq.MaSV AND dklh.MaLHP = kq.MaLHP " +
+                                $"WHERE dklh.MaSV = '{maSVHienTai}'";
                 FunctionQa.fillcombo(sqlLHP, cboLopHocPhan, "MaLHP", "HienThi");
                 cboLopHocPhan.SelectedIndex = -1;
             }
