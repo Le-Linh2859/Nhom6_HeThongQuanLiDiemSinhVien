@@ -57,7 +57,7 @@ namespace QLDSV.GUI
             {
                 // Khởi tạo kết nối cơ sở dữ liệu toàn cục cho các Form con sử dụng FunctionQa
                 FunctionQa.ketnoi();
-                
+
                 // Kiểm tra xem kết nối đã mở thành công hay chưa
                 if (FunctionQa.conn == null || FunctionQa.conn.State != ConnectionState.Open)
                 {
@@ -69,7 +69,7 @@ namespace QLDSV.GUI
 
                 // Đồng bộ Connection.conn (DAL layer) với FunctionQa.conn (GUI layer)
                 // để các form dùng DAL layer không cần mở kết nối riêng
-                QLDSV.DAL.Connection.conn       = FunctionQa.conn;
+                QLDSV.DAL.Connection.conn = FunctionQa.conn;
                 QLDSV.DAL.Connection.connstring = FunctionQa.connstring;
 
                 // 1. Khởi tạo pnlContent động bên phải Sidebar (x=147) và dưới Header (y=40)
@@ -85,7 +85,7 @@ namespace QLDSV.GUI
                 {
                     guna2HtmlLabel13.Text = SessionHelper.TenDangNhap ?? "User";
                 }
-                
+
                 if (guna2HtmlLabel14 != null)
                 {
                     string roleTitle = "Khách";
@@ -97,6 +97,30 @@ namespace QLDSV.GUI
 
                 // 3. Phân quyền hiển thị Sidebar
                 PhanQuyenSidebar();
+                using (Graphics g = btnCanhbao.CreateGraphics())
+                {
+                    SizeF textSize = g.MeasureString(
+                        btnCanhbao.Text,
+                        btnCanhbao.Font);
+
+                    MessageBox.Show(
+                        $"Text: {btnCanhbao.Text}\n" +
+                        $"TextWidth: {textSize.Width}\n" +
+                        $"ButtonWidth: {btnCanhbao.Width}\n" +
+                        $"ButtonHeight: {btnCanhbao.Height}");
+                }
+                tableLayoutPanel1.SuspendLayout();
+
+                for (int i = 0; i < tableLayoutPanel1.RowCount; i++)
+                {
+                    tableLayoutPanel1.RowStyles[i].Height =
+                        tableLayoutPanel1.RowStyles[i].Height;
+                }
+
+                tableLayoutPanel1.ResumeLayout(true);
+                tableLayoutPanel1.PerformLayout();
+
+                pnlSidebar.PerformLayout();
 
                 // 4. Đăng ký sự kiện Click cho tất cả các nút Sidebar
                 WireUpSidebarEvents();
@@ -131,6 +155,7 @@ namespace QLDSV.GUI
                         OpenChildForm(new QLDSV.GUI.Forms.frmThongTinTaiKhoan(), "Thông Tin Tài Khoản");
                     };
                 }
+
             }
             catch (Exception ex)
             {
@@ -140,23 +165,7 @@ namespace QLDSV.GUI
             }
         }
 
-        //private void SetMenuRowVisibility(int rowIndex, Control button, Control pictureBox, bool visible)
-        //{
-        //    if (button != null) button.Visible = visible;
-        //    if (pictureBox != null) pictureBox.Visible = visible;
-
-        //    if (tableLayoutPanel1 != null && rowIndex >= 0 && rowIndex < tableLayoutPanel1.RowStyles.Count)
-        //    {
-        //        if (visible)
-        //        {
-        //            tableLayoutPanel1.RowStyles[rowIndex] = new RowStyle(SizeType.Percent, 8.333335F);
-        //        }
-        //        else
-        //        {
-        //            tableLayoutPanel1.RowStyles[rowIndex] = new RowStyle(SizeType.Absolute, 0F);
-        //        }
-        //    }
-        //}
+        
         private const int MENU_ROW_HEIGHT = 29;
 
         private void SetMenuRowVisibility(int rowIndex, Control button, Control pictureBox, bool visible)
@@ -198,9 +207,12 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, true);
                 SetMenuRowVisibility(5, btnLophp, guna2PictureBox6, true);
                 SetMenuRowVisibility(6, btnDangky, guna2PictureBox7, true);
-                
+
                 // Mở chức năng Tài khoản cho Admin
-                if (btnDiem != null) btnDiem.Text = "Tài khoản";
+                if (btnDiem != null)
+                {
+                    btnDiem.Text = "Tài khoản";
+                }
                 SetMenuRowVisibility(7, btnDiem, guna2PictureBox8, true);
 
                 SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, true);
@@ -217,7 +229,8 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, true);
                 SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, true);
                 SetMenuRowVisibility(3, btnMon, guna2PictureBox4, true);
-                SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, false);
+                if (btnLopnc != null) btnLopnc.Text = "Lớp cố vấn";
+                SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, true);
                 SetMenuRowVisibility(5, btnLophp, guna2PictureBox6, true);
                 SetMenuRowVisibility(6, btnDangky, guna2PictureBox7, false);
                 
@@ -226,8 +239,8 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(7, btnDiem, guna2PictureBox8, true);
 
                 SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, false);
-                SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, false);
-                SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, false);
+                SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, true);
+                SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
                 SetMenuRowVisibility(11, btnBaocao, guna2PictureBox12, false); // Tra cứu điểm / Báo cáo
             }
             // Sinh viên (VT003): Môn học, Giảng viên, Lớp học phần, Kết quả học tập, Phúc khảo, Cảnh báo học vụ, Tra cứu điểm
@@ -241,6 +254,7 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(5, btnLophp, guna2PictureBox6, true);
                 SetMenuRowVisibility(6, btnDangky, guna2PictureBox7, false);
                 SetMenuRowVisibility(7, btnDiem, guna2PictureBox8, false);
+                if (btnKetqua != null) btnKetqua.Text = "Kết quả học tập";
                 SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, true);
                 SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, true);
                 SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
@@ -363,6 +377,13 @@ namespace QLDSV.GUI
                         OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmMonhoc_GV(),
                             "Môn Học");
                     };
+                if (btnLopnc != null)
+                    btnLopnc.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnLopnc);
+                        OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmCovanHoctap(),
+                            "Lớp cố vấn");
+                    };
 
                 if (btnLophp != null)
                     btnLophp.Click += (s, e) =>
@@ -378,6 +399,20 @@ namespace QLDSV.GUI
                         SetActiveButton(btnDiem);
                         OpenChildForm(new QLDSV.GUI.Forms.GiangVien.FrmNhapDiemSV(),
                             "Nhập Điểm");
+                    };
+                if (btnPhuckhao != null)
+                    btnPhuckhao.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnPhuckhao);
+                        OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmPhucKhao_GV(),
+                            "Phúc Khảo");
+                    };
+                if (btnCanhbao != null)
+                    btnCanhbao.Click += (s, e) =>
+                    {
+                        SetActiveButton(btnCanhbao);
+                        OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmCanhbaohocvu_GV(),
+                            "Cảnh báo học vụ");
                     };
 
                 if (btnBaocao != null)
