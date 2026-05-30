@@ -579,6 +579,19 @@ namespace QLDSV.GUI.Forms.SinhVien
             }
 
             string maLHP = cboLopHocPhan.SelectedValue.ToString();
+
+            // Kiểm tra xem sinh viên đã có điểm nào của lớp học phần này trên hệ thống chưa
+            string sqlCheckDiem = $"SELECT COUNT(*) FROM KetQua WHERE MaSV = '{maSVHienTai}' AND MaLHP = '{maLHP}'";
+            int countDiem = 0;
+            int.TryParse(FunctionQa.getfieldvalue(sqlCheckDiem), out countDiem);
+
+            if (countDiem == 0)
+            {
+                MessageBox.Show("Sinh viên chỉ có thể phúc khảo khi đã có đầy đủ điểm hoặc có cập nhật điểm trên hệ thống.", 
+                    "Không thể phúc khảo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             string ngayYC = dtpNgayYeuCau.Value.ToString("yyyy-MM-dd");
             string trangThai = txtTrangThai.Text;
 
