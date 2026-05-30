@@ -1,3 +1,4 @@
+using DocumentFormat.OpenXml.Bibliography;
 using QLDSV.BLL;
 using QLDSV.DAL;
 using System;
@@ -79,6 +80,20 @@ namespace QLDSV.GUI
                 cboEditKhoa.DisplayMember = "TenKhoa";
                 cboEditKhoa.SelectedIndex = -1;
 
+                // Load học kỳ
+                DataTable dtHK = bll.GetHocKy();
+                cboEdithocky.DataSource = dtHK;
+                cboEdithocky.ValueMember = "MaLoaiHK";
+                cboEdithocky.DisplayMember = "TenLoaiHK";
+                cboEdithocky.SelectedIndex = -1;
+
+                // Load năm học
+                DataTable dtNH = bll.GetNamHoc();
+                cboEditnamhoc.DataSource = dtNH;
+                cboEditnamhoc.ValueMember = "MaNamHoc";
+                cboEditnamhoc.DisplayMember = "TenNamhoc";
+                cboEditnamhoc.SelectedIndex = -1;
+
                 UpdateFilterMonComboBox();
             }
             catch (Exception ex)
@@ -134,7 +149,14 @@ namespace QLDSV.GUI
                 dataGridView.Columns["TenMon"].HeaderText = "Môn học";
                 dataGridView.Columns["TenGiangVien"].HeaderText = "Giảng viên";
                 dataGridView.Columns["TrangThai"].HeaderText = "Trạng thái";
-
+                if (dataGridView.Columns.Contains("TenLoaiHK"))
+                    dataGridView.Columns["TenLoaiHK"].HeaderText = "Học kỳ";
+                if (dataGridView.Columns.Contains("TenNamhoc"))
+                    dataGridView.Columns["TenNamhoc"].HeaderText = "Năm học";
+                if (dataGridView.Columns.Contains("ThoiGianBD"))
+                    dataGridView.Columns["ThoiGianBD"].HeaderText = "Ngày bắt đầu";
+                if (dataGridView.Columns.Contains("ThoiGianKT"))
+                    dataGridView.Columns["ThoiGianKT"].HeaderText = "Ngày kết thúc";
                 dataGridView.Columns["MaKhoa"].Visible = false;
                 dataGridView.Columns["MaMon"].Visible = false;
                 dataGridView.Columns["MaGV"].Visible = false;
@@ -203,7 +225,14 @@ namespace QLDSV.GUI
             string trangThai = row.Cells["TrangThai"].Value?.ToString();
             bool isActive = trangThai == "DangMo";
 
-            ShowEditMode(maLHP, tenLHP, thoiGian, phong, maKhoa, maMon, maGV, isActive);
+            DateTime thoiGianBD = DateTime.Today;
+            DateTime thoiGianKT = DateTime.Today;
+            if (row.Cells["ThoiGianBD"].Value != null && row.Cells["ThoiGianBD"].Value != DBNull.Value)
+                DateTime.TryParse(row.Cells["ThoiGianBD"].Value.ToString(), out thoiGianBD);
+            if (row.Cells["ThoiGianKT"].Value != null && row.Cells["ThoiGianKT"].Value != DBNull.Value)
+                DateTime.TryParse(row.Cells["ThoiGianKT"].Value.ToString(), out thoiGianKT);
+
+            ShowEditMode(maLHP, tenLHP, thoiGian, phong, maKhoa, maMon, maGV, isActive, thoiGianBD, thoiGianKT);
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
@@ -276,7 +305,6 @@ namespace QLDSV.GUI
                 string ma = txtEditMaLHP.Text.Trim();
                 string ten = txtEditTenLHP.Text.Trim();
                 string phong = txtEditPhongHoc.Text.Trim();
-                //string thoiGian = txtEditThoiGianHoc.Text.Trim();
                 string thu = cboEditThu.Text;
                 int caHoc = int.Parse(cboEditCaHoc.Text);
                 string thoiGian = $"{thu} - Ca {caHoc}";
@@ -292,41 +320,37 @@ namespace QLDSV.GUI
                     return;
                 }
 
+                if (cboEdithocky.SelectedValue == null || cboEditnamhoc.SelectedValue == null)
+                {
+                    MessageBox.Show("Vui lòng chọn Học kỳ và Năm học.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 string maMon = cboEditMon.SelectedValue.ToString();
                 string maGV = cboEditGiangVien.SelectedValue.ToString();
                 string maKhoa = cboEditKhoa.SelectedValue.ToString();
-                string maHKNH = "HK007";
                 string trangThai = chkEditActive.Checked ? "DangMo" : "DaDong";
+                string maLoaiHK = cboEdithocky.SelectedValue.ToString();
+                string maNamHoc = cboEditnamhoc.SelectedValue.ToString();
+                DateTime thoiGianBD = dtpEditThoiGianBD.Value.Date;
+                DateTime thoiGianKT = dtpEditThoiGianKT.Value.Date;
 
-                //string thu = "Thứ 2";
-                //string thu = "";
-                //int caHoc = 1;
-
-                //if (thoiGian.Contains("3"))
-                //    thu = "Thứ 3";
-                //else if (thoiGian.Contains("4"))
-                //    thu = "Thứ 4";
-                //else if (thoiGian.Contains("5"))
-                //    thu = "Thứ 5";
-                //else if (thoiGian.Contains("6"))
-                //    thu = "Thứ 6";
-                //else if (thoiGian.Contains("7"))
-                //    thu = "Thứ 7";
-
-                //var match = System.Text.RegularExpressions.Regex.Match(thoiGian, @"\d+");
-                //if (match.Success)
-                //    int.TryParse(match.Value, out caHoc);
+                if (thoiGianKT < thoiGianBD)
+                {
+                    MessageBox.Show("Thời gian kết thúc phải sau thời gian bắt đầu.", "Dữ liệu không hợp lệ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 string message;
                 bool result;
 
                 if (isAddingNew)
                 {
-                    result = bll.Them(ma, ten, thu, caHoc, phong, trangThai, maMon, maGV, out message);
+                    result = bll.Them(ma, ten, thu, caHoc, phong, trangThai, maMon, maGV, maLoaiHK, maNamHoc, thoiGianBD, thoiGianKT, out message);
                 }
                 else
                 {
-                    result = bll.Sua(ma, ten, thu, caHoc, phong, trangThai, maMon, maGV, out message);
+                    result = bll.Sua(ma, ten, thu, caHoc, phong, trangThai, maMon, maGV, maLoaiHK, maNamHoc, thoiGianBD, thoiGianKT, out message);
                 }
 
                 MessageBox.Show(message);
@@ -336,11 +360,12 @@ namespace QLDSV.GUI
                     LoadData();
                     detailPanelVisible = false;
 
-                    // Show view mode of the saved entry
                     string tenKhoa = cboEditKhoa.Text;
                     string tenMon = cboEditMon.Text;
                     string tenGV = cboEditGiangVien.Text;
-                    ShowViewMode(ma, ten, thoiGian, phong, tenKhoa, tenMon, tenGV, maKhoa, maMon, maGV, trangThai);
+                    string tenHK = cboEdithocky.Text;
+                    string tenNH = cboEditnamhoc.Text;
+                    ShowViewMode(ma, ten, thoiGian, phong, tenKhoa, tenMon, tenGV, maKhoa, maMon, maGV, trangThai, tenHK, tenNH, thoiGianBD, thoiGianKT);
                 }
             }
             catch (Exception ex)
@@ -373,8 +398,17 @@ namespace QLDSV.GUI
                     string maMon = row.Cells["MaMon"].Value?.ToString();
                     string maGV = row.Cells["MaGV"].Value?.ToString();
                     string trangThai = row.Cells["TrangThai"].Value?.ToString();
+                    string tenHK = dataGridView.Columns.Contains("TenLoaiHK") ? row.Cells["TenLoaiHK"].Value?.ToString() : "";
+                    string tenNH = dataGridView.Columns.Contains("TenNamhoc") ? row.Cells["TenNamhoc"].Value?.ToString() : "";
 
-                    ShowViewMode(maLHP, tenLHP, thoiGian, phong, tenKhoa, tenMon, tenGV, maKhoa, maMon, maGV, trangThai);
+                    DateTime thoiGianBD = DateTime.Today;
+                    DateTime thoiGianKT = DateTime.Today;
+                    if (dataGridView.Columns.Contains("ThoiGianBD") && row.Cells["ThoiGianBD"].Value != null && row.Cells["ThoiGianBD"].Value != DBNull.Value)
+                        DateTime.TryParse(row.Cells["ThoiGianBD"].Value.ToString(), out thoiGianBD);
+                    if (dataGridView.Columns.Contains("ThoiGianKT") && row.Cells["ThoiGianKT"].Value != null && row.Cells["ThoiGianKT"].Value != DBNull.Value)
+                        DateTime.TryParse(row.Cells["ThoiGianKT"].Value.ToString(), out thoiGianKT);
+
+                    ShowViewMode(maLHP, tenLHP, thoiGian, phong, tenKhoa, tenMon, tenGV, maKhoa, maMon, maGV, trangThai, tenHK, tenNH, thoiGianBD, thoiGianKT);
                 }
                 else
                 {
@@ -386,7 +420,7 @@ namespace QLDSV.GUI
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            if (isEditMode) return; // Không cho chuyển row khi đang nhập liệu
+            if (isEditMode) return;
 
             DataGridViewRow row = dataGridView.Rows[e.RowIndex];
             
@@ -401,11 +435,21 @@ namespace QLDSV.GUI
             string maMon = row.Cells["MaMon"].Value?.ToString();
             string maGV = row.Cells["MaGV"].Value?.ToString();
             string trangThai = row.Cells["TrangThai"].Value?.ToString();
+            string hocKy = dataGridView.Columns.Contains("TenLoaiHK") ? row.Cells["TenLoaiHK"].Value?.ToString() : "";
+            string namHoc = dataGridView.Columns.Contains("TenNamhoc") ? row.Cells["TenNamhoc"].Value?.ToString() : "";
 
-            ShowViewMode(maLHP, tenLHP, thoiGian, phong, tenKhoa, tenMon, tenGV, maKhoa, maMon, maGV, trangThai);
+            DateTime thoiGianBD = DateTime.Today;
+            DateTime thoiGianKT = DateTime.Today;
+            if (dataGridView.Columns.Contains("ThoiGianBD") && row.Cells["ThoiGianBD"].Value != null && row.Cells["ThoiGianBD"].Value != DBNull.Value)
+                DateTime.TryParse(row.Cells["ThoiGianBD"].Value.ToString(), out thoiGianBD);
+            if (dataGridView.Columns.Contains("ThoiGianKT") && row.Cells["ThoiGianKT"].Value != null && row.Cells["ThoiGianKT"].Value != DBNull.Value)
+                DateTime.TryParse(row.Cells["ThoiGianKT"].Value.ToString(), out thoiGianKT);
+
+            ShowViewMode(maLHP, tenLHP, thoiGian, phong, tenKhoa, tenMon, tenGV, maKhoa, maMon, maGV, trangThai, hocKy, namHoc, thoiGianBD, thoiGianKT);
         }
 
-        private void ShowViewMode(string maLHP, string tenLHP, string thoiGian, string phong, string tenKhoa, string tenMon, string tenGV, string maKhoa, string maMon, string maGV, string trangThai)
+        private void ShowViewMode(string maLHP, string tenLHP, string thoiGian, string phong, string tenKhoa, string tenMon, string tenGV, string maKhoa, string maMon, string maGV, string trangThai, 
+            string tenHK = "", string tenNH = "", DateTime? thoiGianBD = null, DateTime? thoiGianKT = null)
         {
             isEditMode = false;
             isAddingNew = false;
@@ -414,7 +458,7 @@ namespace QLDSV.GUI
             lblDetailHeader.Text = "Chi tiết Lớp Học Phần";
             lblDetailHeader.ForeColor = Color.FromArgb(21, 101, 192);
 
-            // Toggle Visibility
+            // Toggle Visibility — labels visible, inputs hidden
             lblDetailMaLHP.Visible = true;
             lblDetailTenLHP.Visible = true;
             lblDetailThoiGianHoc.Visible = true;
@@ -422,16 +466,25 @@ namespace QLDSV.GUI
             lblDetailKhoa.Visible = true;
             lblDetailMon.Visible = true;
             lblDetailGiangVien.Visible = true;
+            lblDetailHocKy.Visible = true;
+            lblDetailNamHoc.Visible = true;
             lblDetailTrangThai.Visible = true;
+            lblDetailThoiGianBD.Visible = true;
+            lblDetailThoiGianKT.Visible = true;
 
             txtEditMaLHP.Visible = false;
             txtEditTenLHP.Visible = false;
-            //txtEditThoiGianHoc.Visible = false;
             txtEditPhongHoc.Visible = false;
+            cboEditThu.Visible = false;
+            cboEditCaHoc.Visible = false;
             cboEditKhoa.Visible = false;
             cboEditMon.Visible = false;
             cboEditGiangVien.Visible = false;
+            cboEdithocky.Visible = false;
+            cboEditnamhoc.Visible = false;
             chkEditActive.Visible = false;
+            dtpEditThoiGianBD.Visible = false;
+            dtpEditThoiGianKT.Visible = false;
             btnLuuDetail.Visible = false;
             btnHuyDetail.Visible = false;
             btnCloseDetail.Visible = true;
@@ -444,12 +497,16 @@ namespace QLDSV.GUI
             lblDetailKhoa.Text = tenKhoa ?? "";
             lblDetailMon.Text = tenMon ?? "";
             lblDetailGiangVien.Text = tenGV ?? "";
+            lblDetailHocKy.Text = tenHK ?? "";
+            lblDetailNamHoc.Text = tenNH ?? "";
             lblDetailTrangThai.Text = trangThai == "DangMo" ? "Đang mở" : "Đã đóng";
+            lblDetailThoiGianBD.Text = thoiGianBD.HasValue ? thoiGianBD.Value.ToString("dd/MM/yyyy") : "";
+            lblDetailThoiGianKT.Text = thoiGianKT.HasValue ? thoiGianKT.Value.ToString("dd/MM/yyyy") : "";
 
             OpenSidebar();
         }
 
-        private void ShowEditMode(string maLHP = "", string tenLHP = "", string thoiGian = "", string phong = "", string maKhoa = "", string maMon = "", string maGV = "", bool isActive = true)
+        private void ShowEditMode(string maLHP = "", string tenLHP = "", string thoiGian = "", string phong = "", string maKhoa = "", string maMon = "", string maGV = "", bool isActive = true, DateTime? thoiGianBD = null, DateTime? thoiGianKT = null)
         {
             isEditMode = true;
             currentMaLHP = maLHP;
@@ -457,7 +514,7 @@ namespace QLDSV.GUI
             lblDetailHeader.Text = isAddingNew ? "✚  Thêm lớp học phần mới" : "✎  Chỉnh sửa lớp học phần";
             lblDetailHeader.ForeColor = isAddingNew ? Color.FromArgb(27, 120, 53) : Color.FromArgb(180, 80, 0);
 
-            // Toggle Visibility
+            // Toggle Visibility — inputs visible, labels hidden
             lblDetailMaLHP.Visible = false;
             lblDetailTenLHP.Visible = false;
             lblDetailThoiGianHoc.Visible = false;
@@ -466,15 +523,22 @@ namespace QLDSV.GUI
             lblDetailMon.Visible = false;
             lblDetailGiangVien.Visible = false;
             lblDetailTrangThai.Visible = false;
+            lblDetailThoiGianBD.Visible = false;
+            lblDetailThoiGianKT.Visible = false;
 
             txtEditMaLHP.Visible = true;
             txtEditTenLHP.Visible = true;
-            //txtEditThoiGianHoc.Visible = true;
             txtEditPhongHoc.Visible = true;
+            cboEditThu.Visible = true;
+            cboEditCaHoc.Visible = true;
             cboEditKhoa.Visible = true;
             cboEditMon.Visible = true;
             cboEditGiangVien.Visible = true;
+            cboEdithocky.Visible = true;
+            cboEditnamhoc.Visible = true;
             chkEditActive.Visible = true;
+            dtpEditThoiGianBD.Visible = true;
+            dtpEditThoiGianKT.Visible = true;
             btnLuuDetail.Visible = true;
             btnHuyDetail.Visible = true;
             btnCloseDetail.Visible = false;
@@ -482,9 +546,10 @@ namespace QLDSV.GUI
             // Load values to inputs
             txtEditMaLHP.Text = maLHP;
             txtEditTenLHP.Text = tenLHP;
-            //txtEditThoiGianHoc.Text = thoiGian;
             txtEditPhongHoc.Text = phong;
             chkEditActive.Checked = isActive;
+            dtpEditThoiGianBD.Value = thoiGianBD ?? DateTime.Today;
+            dtpEditThoiGianKT.Value = thoiGianKT ?? DateTime.Today.AddMonths(4);
 
             if (!string.IsNullOrEmpty(maKhoa))
             {

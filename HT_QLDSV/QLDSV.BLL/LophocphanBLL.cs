@@ -8,11 +8,6 @@ namespace QLDSV.BLL
     {
         private LopHocPhanDAL dal = new LopHocPhanDAL();
 
-        /// <summary>
-        /// Mã học kỳ - năm học mặc định dùng khi tạo lớp học phần mới.
-        /// </summary>
-        private const string MaHKNH_Default = "HK007";
-
         public DataTable GetDanhSachLopHocPhan(
             string keyword,
             string maKhoa,
@@ -20,7 +15,7 @@ namespace QLDSV.BLL
         {
             return dal.GetDanhSach(keyword, maKhoa, maMon);
         }
-        
+
         public DataTable GetDanhSachTheoGiangVien(string maGV, string keyword, string maMon)
         {
             return dal.GetDanhSachTheoGiangVien(maGV, keyword, maMon);
@@ -35,6 +30,7 @@ namespace QLDSV.BLL
         {
             return dal.GetDanhSachTheoSinhVien(maSV);
         }
+
         public DataTable GetKhoa()
         {
             return dal.GetKhoa();
@@ -50,8 +46,23 @@ namespace QLDSV.BLL
             return dal.GetGiangVienTheoKhoa(maKhoa);
         }
 
+        public DataTable GetHocKy()
+        {
+            return dal.GetHocKy();
+        }
+
+        public DataTable GetNamHoc()
+        {
+            return dal.GetNamHoc();
+        }
+
+        public DataTable GetLopHocPhanTheoMonVaSinhVien(string maMon, string maSV)
+        {
+            return dal.GetLopHocPhanTheoMonVaSinhVien(maMon, maSV);
+        }
+
         /// <summary>
-        /// Thêm lớp học phần mới. Nhận thu và caHoc trực tiếp từ UI.
+        /// Thêm lớp học phần mới.
         /// </summary>
         public bool Them(
             string ma,
@@ -62,6 +73,10 @@ namespace QLDSV.BLL
             string trangThai,
             string maMon,
             string maGV,
+            string maLoaiHK,
+            string maNamHoc,
+            DateTime thoiGianBD,
+            DateTime thoiGianKT,
             out string message)
         {
             if (dal.CheckMaExists(ma))
@@ -70,14 +85,33 @@ namespace QLDSV.BLL
                 return false;
             }
 
-            dal.Insert(ma, ten, caHoc, thu, phong, trangThai, maMon, maGV, MaHKNH_Default);
+            string maHKNH = dal.GetMaHKNH(maLoaiHK, maNamHoc);
+
+            if (string.IsNullOrEmpty(maHKNH))
+            {
+                message = "Không tìm thấy học kỳ - năm học";
+                return false;
+            }
+
+            dal.Insert(
+                ma,
+                ten,
+                caHoc,
+                thu,
+                phong,
+                trangThai,
+                maMon,
+                maGV,
+                maHKNH,
+                thoiGianBD,
+                thoiGianKT);
 
             message = "Thêm lớp học phần thành công";
             return true;
         }
 
         /// <summary>
-        /// Cập nhật lớp học phần. Nhận thu và caHoc trực tiếp từ UI.
+        /// Cập nhật lớp học phần.
         /// </summary>
         public bool Sua(
             string ma,
@@ -88,9 +122,32 @@ namespace QLDSV.BLL
             string trangThai,
             string maMon,
             string maGV,
+            string maLoaiHK,
+            string maNamHoc,
+            DateTime thoiGianBD,
+            DateTime thoiGianKT,
             out string message)
         {
-            dal.Update(ma, ten, caHoc, thu, phong, trangThai, maMon, maGV);
+            string maHKNH = dal.GetMaHKNH(maLoaiHK, maNamHoc);
+
+            if (string.IsNullOrEmpty(maHKNH))
+            {
+                message = "Không tìm thấy học kỳ - năm học";
+                return false;
+            }
+
+            dal.Update(
+                ma,
+                ten,
+                caHoc,
+                thu,
+                phong,
+                trangThai,
+                maMon,
+                maGV,
+                maHKNH,
+                thoiGianBD,
+                thoiGianKT);
 
             message = "Cập nhật lớp học phần thành công";
             return true;
@@ -102,5 +159,3 @@ namespace QLDSV.BLL
         }
     }
 }
-
-

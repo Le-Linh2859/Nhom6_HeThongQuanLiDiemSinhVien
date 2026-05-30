@@ -10,16 +10,6 @@ namespace QLDSV.DAL
 {
     public class LopHocPhanDAL
     {
-        //private string connectionString =
-        //    @"Data Source=localhost\SQL2022DEV;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
-
-        //private SqlConnection conn;
-
-        //public LopHocPhanDAL()
-        //{
-        //    conn = new SqlConnection(connectionString);
-        //}
-
         public DataTable GetDanhSach(string keyword, string maKhoa, string maMon)
         {
             DataTable dt = new DataTable();
@@ -27,13 +17,19 @@ namespace QLDSV.DAL
             string sql =
                 "SELECT lhp.MaLHP, lhp.TenLopHocPhan, " +
                 "lhp.Thu + ' (Ca ' + CAST(lhp.CaHoc AS varchar) + ')' AS ThoiGianHoc, " +
-                "lhp.PhongHoc, k.TenKhoa, mh.TenMon, gv.HoTen AS TenGiangVien, " +
+                "lhp.PhongHoc, k.TenKhoa, mh.TenMon, " +
+                "hk.TenLoaiHK, nh.TenNamhoc, " +
+                "gv.HoTen AS TenGiangVien, " +
                 "CASE WHEN lhp.TrangThai = 'DangMo' THEN N'Hoạt động' ELSE N'Khóa' END AS TrangThai, " +
+                "lhp.ThoiGianBD, lhp.ThoiGianKT, " +
                 "mh.MaKhoa, lhp.MaMon, lhp.MaGV " +
                 "FROM LopHocPhan lhp " +
                 "LEFT JOIN MonHoc mh ON lhp.MaMon = mh.MaMon " +
                 "LEFT JOIN Khoa k ON mh.MaKhoa = k.MaKhoa " +
                 "LEFT JOIN GiangVien gv ON lhp.MaGV = gv.MaGV " +
+                "LEFT JOIN HocKy_NamHoc hknh ON lhp.MaHKNH = hknh.MaHKNH " +
+                "LEFT JOIN LoaiHocKy hk ON hk.MaLoaiHK = hknh.MaLoaiHK " +
+                "LEFT JOIN Namhoc nh ON nh.MaNamHoc = hknh.MaNamHoc " +
                 "WHERE 1=1";
 
             if (!string.IsNullOrEmpty(keyword))
@@ -59,17 +55,22 @@ namespace QLDSV.DAL
         {
             string escapedMaGV = maGV.Replace("'", "''");
             string sql =
-                "SELECT lhp.MaLHP, lhp.TenLopHocPhan, " +
-                "lhp.Thu + N' (Ca ' + CAST(lhp.CaHoc AS varchar) + N')' AS ThoiGianHoc, " +
-                "lhp.PhongHoc, k.TenKhoa, mh.TenMon, gv.HoTen AS TenGiangVien, " +
-                "CASE WHEN lhp.TrangThai = 'DangMo' THEN N'Đang mở' ELSE N'Đã đóng' END AS TrangThai, " +
-                "mh.MaKhoa, lhp.MaMon, lhp.MaGV " +
-                "FROM LopHocPhan lhp " +
-                "LEFT JOIN MonHoc mh ON lhp.MaMon = mh.MaMon " +
-                "LEFT JOIN Khoa k ON mh.MaKhoa = k.MaKhoa " +
-                "LEFT JOIN GiangVien gv ON lhp.MaGV = gv.MaGV " +
-                $"WHERE lhp.MaGV = '{escapedMaGV}'";
-
+                 "SELECT lhp.MaLHP, lhp.TenLopHocPhan, " +
+                 "lhp.Thu + N' (Ca ' + CAST(lhp.CaHoc AS varchar) + N')' AS ThoiGianHoc, " +
+                 "lhp.PhongHoc, k.TenKhoa, mh.TenMon, " +
+                 "hk.TenLoaiHK, nh.TenNamhoc, " +
+                 "gv.HoTen AS TenGiangVien, " +
+                 "CASE WHEN lhp.TrangThai = 'DangMo' THEN N'Đang mở' ELSE N'Đã đóng' END AS TrangThai, " +
+                 "lhp.ThoiGianBD, lhp.ThoiGianKT, " +
+                 "mh.MaKhoa, lhp.MaMon, lhp.MaGV " +
+                 "FROM LopHocPhan lhp " +
+                 "LEFT JOIN MonHoc mh ON lhp.MaMon = mh.MaMon " +
+                 "LEFT JOIN Khoa k ON mh.MaKhoa = k.MaKhoa " +
+                 "LEFT JOIN GiangVien gv ON lhp.MaGV = gv.MaGV " +
+                 "LEFT JOIN HocKy_NamHoc hknh ON lhp.MaHKNH = hknh.MaHKNH " +
+                 "LEFT JOIN LoaiHocKy hk ON hk.MaLoaiHK = hknh.MaLoaiHK " +
+                 "LEFT JOIN Namhoc nh ON nh.MaNamHoc = hknh.MaNamHoc " +
+                 $"WHERE lhp.MaGV = '{escapedMaGV}'";
             if (!string.IsNullOrEmpty(keyword))
             {
                 string esc = keyword.Replace("'", "''");
@@ -99,17 +100,32 @@ namespace QLDSV.DAL
         public DataTable GetDanhSachTheoSinhVien(string maSV)
         {
             string escapedMaSV = maSV.Replace("'", "''");
-            string sql =
-                "SELECT lhp.MaLHP, lhp.TenLopHocPhan, " +
-                "lhp.Thu + N' (Ca ' + CAST(lhp.CaHoc AS varchar) + N')' AS ThoiGianHoc, " +
-                "lhp.PhongHoc, k.TenKhoa, mh.TenMon, gv.HoTen AS TenGiangVien, " +
-                "CASE WHEN lhp.TrangThai = 'DangMo' THEN N'Đang mở' ELSE N'Đã đóng' END AS TrangThai " +
-                "FROM LopHocPhan lhp " +
-                "INNER JOIN DangKyLopHoc dk ON lhp.MaLHP = dk.MaLHP " +
-                "LEFT JOIN MonHoc mh ON lhp.MaMon = mh.MaMon " +
-                "LEFT JOIN Khoa k ON mh.MaKhoa = k.MaKhoa " +
-                "LEFT JOIN GiangVien gv ON lhp.MaGV = gv.MaGV " +
-                $"WHERE dk.MaSV = '{escapedMaSV}'";
+            string sql = $@"
+        SELECT 
+            lhp.MaLHP, 
+            lhp.TenLopHocPhan, 
+            lhp.Thu + N' (Ca ' + CAST(lhp.CaHoc AS varchar) + N')' AS ThoiGianHoc, 
+            lhp.PhongHoc, 
+            k.TenKhoa, 
+            mh.TenMon, 
+            hk.TenLoaiHK, 
+            nh.TenNamhoc, 
+            gv.HoTen AS TenGiangVien, 
+            CASE 
+                WHEN lhp.TrangThai = 'DangMo' THEN N'Đang mở' 
+                ELSE N'Đã đóng' 
+            END AS TrangThai,
+            lhp.ThoiGianBD,
+            lhp.ThoiGianKT
+        FROM LopHocPhan lhp 
+        INNER JOIN DangKyLopHoc dk ON lhp.MaLHP = dk.MaLHP 
+        LEFT JOIN MonHoc mh ON lhp.MaMon = mh.MaMon 
+        LEFT JOIN Khoa k ON mh.MaKhoa = k.MaKhoa 
+        LEFT JOIN GiangVien gv ON lhp.MaGV = gv.MaGV 
+        LEFT JOIN HocKy_NamHoc hknh ON lhp.MaHKNH = hknh.MaHKNH 
+        LEFT JOIN LoaiHocKy hk ON hk.MaLoaiHK = hknh.MaLoaiHK 
+        LEFT JOIN Namhoc nh ON nh.MaNamHoc = hknh.MaNamHoc 
+        WHERE dk.MaSV = '{escapedMaSV}';";
 
             return Connection.GetDataToTable(sql);
         }
@@ -126,8 +142,9 @@ namespace QLDSV.DAL
         {
             DataTable dt = new DataTable();
 
-            string sql =
-                $"SELECT MaMon, TenMon FROM MonHoc WHERE MaKhoa = '{maKhoa}'";
+            //string sql =
+            //    $"SELECT MaMon, TenMon FROM MonHoc WHERE MaKhoa = '{maKhoa}'";
+            string sql = $"SELECT MaMon, TenMon FROM MonHoc";
             return Connection.GetDataToTable(sql);
             
         }
@@ -155,6 +172,63 @@ namespace QLDSV.DAL
 
             return count > 0;
         }
+        public string GetMaHKNH(string maLoaiHK, string maNamHoc)
+        {
+            string sql = $@"
+        SELECT MaHKNH
+        FROM HocKy_NamHoc
+        WHERE MaLoaiHK = '{maLoaiHK}'
+          AND MaNamHoc = '{maNamHoc}'";
+
+            DataTable dt = Connection.GetDataToTable(sql);
+
+            if (dt.Rows.Count > 0)
+                return dt.Rows[0]["MaHKNH"].ToString();
+
+            return "";
+        }
+        public DataTable GetHocKy()
+        {
+            string sql = @"
+        SELECT MaLoaiHK, TenLoaiHK
+        FROM LoaiHocKy";
+
+            return Connection.GetDataToTable(sql);
+        }
+
+        public DataTable GetNamHoc()
+        {
+            string sql = @"
+        SELECT MaNamHoc, TenNamhoc
+        FROM Namhoc
+        ORDER BY TenNamhoc";
+
+            return Connection.GetDataToTable(sql);
+        }
+
+        /// <summary>
+        /// Lấy thông tin lớp học phần mà sinh viên đang đăng ký cho một môn học cụ thể.
+        /// </summary>
+        public DataTable GetLopHocPhanTheoMonVaSinhVien(string maMon, string maSV)
+        {
+            string escMon = maMon.Replace("'", "''");
+            string escSV  = maSV.Replace("'", "''");
+            string sql = $@"
+        SELECT TOP 1
+            hk.TenLoaiHK,
+            nh.TenNamhoc,
+            lhp.ThoiGianBD,
+            lhp.ThoiGianKT
+        FROM LopHocPhan lhp
+        INNER JOIN DangKyLopHoc dk ON lhp.MaLHP = dk.MaLHP
+        LEFT JOIN HocKy_NamHoc hknh ON lhp.MaHKNH = hknh.MaHKNH
+        LEFT JOIN LoaiHocKy hk ON hk.MaLoaiHK = hknh.MaLoaiHK
+        LEFT JOIN Namhoc nh ON nh.MaNamHoc = hknh.MaNamHoc
+        WHERE lhp.MaMon = '{escMon}'
+          AND dk.MaSV   = '{escSV}'";
+            return Connection.GetDataToTable(sql);
+        }
+
 
         public void Insert(
             string ma,
@@ -165,9 +239,12 @@ namespace QLDSV.DAL
             string trangThai,
             string maMon,
             string maGV,
-            string maHKNH)
+            string maHKNH,
+            DateTime thoiGianBD,
+            DateTime thoiGianKT)
         {
-            //conn.Open();
+            string bdStr = thoiGianBD.ToString("yyyy-MM-dd");
+            string ktStr = thoiGianKT.ToString("yyyy-MM-dd");
 
             string sql =
                 "INSERT INTO LopHocPhan " +
@@ -176,27 +253,26 @@ namespace QLDSV.DAL
                 "MaMon, MaGV, MaHKNH) " +
                 "VALUES " +
                 $"('{ma}', N'{ten}', {caHoc}, N'{thu}', N'{phong}', " +
-                "'2026-08-15', '2026-12-15', 50, " +
+                $"'{bdStr}', '{ktStr}', 50, " +
                 $"N'{trangThai}', '{maMon}', '{maGV}', '{maHKNH}')";
             Connection.RunSql(sql);
-            //SqlCommand cmd = new SqlCommand(sql, conn);
-
-            //cmd.ExecuteNonQuery();
-
-            //conn.Close();
         }
 
         public void Update(
-            string ma,
-            string ten,
-            int caHoc,
-            string thu,
-            string phong,
-            string trangThai,
-            string maMon,
-            string maGV)
+    string ma,
+    string ten,
+    int caHoc,
+    string thu,
+    string phong,
+    string trangThai,
+    string maMon,
+    string maGV,
+    string maHKNH,
+    DateTime thoiGianBD,
+    DateTime thoiGianKT)
         {
-            //conn.Open();
+            string bdStr = thoiGianBD.ToString("yyyy-MM-dd");
+            string ktStr = thoiGianKT.ToString("yyyy-MM-dd");
 
             string sql =
                 "UPDATE LopHocPhan SET " +
@@ -206,14 +282,13 @@ namespace QLDSV.DAL
                 $"PhongHoc = N'{phong}', " +
                 $"TrangThai = N'{trangThai}', " +
                 $"MaMon = '{maMon}', " +
-                $"MaGV = '{maGV}' " +
+                $"MaGV = '{maGV}', " +
+                $"MaHKNH = '{maHKNH}', " +
+                $"ThoiGianBD = '{bdStr}', " +
+                $"ThoiGianKT = '{ktStr}' " +
                 $"WHERE MaLHP = '{ma}'";
+
             Connection.RunSql(sql);
-            //SqlCommand cmd = new SqlCommand(sql, conn);
-
-            //cmd.ExecuteNonQuery();
-
-            //conn.Close();
         }
 
         public void Delete(string ma)

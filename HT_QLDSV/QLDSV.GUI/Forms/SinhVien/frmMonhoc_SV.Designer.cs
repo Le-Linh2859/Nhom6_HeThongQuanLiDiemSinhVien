@@ -45,6 +45,7 @@
             this.lblMoTaCaption = new System.Windows.Forms.Label();
             this.lblDetailMoTa = new System.Windows.Forms.Label();
             this.txtEditMoTa = new System.Windows.Forms.TextBox();
+            
             this.lblTrangThaiCaption = new System.Windows.Forms.Label();
             this.lblDetailTrangThai = new System.Windows.Forms.Label();
             this.chkEditActive = new System.Windows.Forms.CheckBox();
@@ -371,7 +372,7 @@
             this.txtEditMoTa.Size = new System.Drawing.Size(283, 59);
             this.txtEditMoTa.TabIndex = 17;
             this.txtEditMoTa.Visible = false;
-            // 
+             
             // lblTrangThaiCaption
             // 
             this.lblTrangThaiCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);

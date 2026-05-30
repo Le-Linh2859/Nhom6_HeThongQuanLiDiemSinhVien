@@ -80,6 +80,10 @@ namespace QLDSV.GUI.Forms.SinhVien
                 if (dataGridView.Columns.Contains("TenMon"))        dataGridView.Columns["TenMon"].HeaderText        = "Môn học";
                 if (dataGridView.Columns.Contains("TenGiangVien"))  dataGridView.Columns["TenGiangVien"].HeaderText  = "Giảng viên";
                 if (dataGridView.Columns.Contains("TrangThai"))     dataGridView.Columns["TrangThai"].HeaderText     = "Trạng thái";
+                if (dataGridView.Columns.Contains("TenLoaiHK"))     dataGridView.Columns["TenLoaiHK"].HeaderText = "Học kỳ";
+
+                if (dataGridView.Columns.Contains("TenNamhoc"))
+                    dataGridView.Columns["TenNamhoc"].HeaderText = "Năm học";
 
                 // Ẩn các cột khoá ngoài
                 if (dataGridView.Columns.Contains("MaKhoa")) dataGridView.Columns["MaKhoa"].Visible = false;
@@ -113,12 +117,20 @@ namespace QLDSV.GUI.Forms.SinhVien
             string tenMon   = row.Cells["TenMon"].Value?.ToString();
             string tenGV    = row.Cells["TenGiangVien"].Value?.ToString();
             string trangThai = row.Cells["TrangThai"].Value?.ToString();
-
-            ShowViewMode(maLHP, tenLHP, thoiGian, phong, tenKhoa, tenMon, tenGV, trangThai);
+            string hocKy = row.Cells["TenLoaiHK"].Value?.ToString();
+            string namHoc = row.Cells["TenNamhoc"].Value?.ToString();
+            DateTime thoiGianBD = DateTime.Today;
+            DateTime thoiGianKT = DateTime.Today;
+            if (dataGridView.Columns.Contains("ThoiGianBD") && row.Cells["ThoiGianBD"].Value != null && row.Cells["ThoiGianBD"].Value != DBNull.Value)
+                DateTime.TryParse(row.Cells["ThoiGianBD"].Value.ToString(), out thoiGianBD);
+            if (dataGridView.Columns.Contains("ThoiGianKT") && row.Cells["ThoiGianKT"].Value != null && row.Cells["ThoiGianKT"].Value != DBNull.Value)
+                DateTime.TryParse(row.Cells["ThoiGianKT"].Value.ToString(), out thoiGianKT);
+            ShowViewMode(maLHP, tenLHP, thoiGian, phong, tenKhoa, tenMon, tenGV, trangThai, hocKy, namHoc, thoiGianBD, thoiGianKT);
         }
 
         private void ShowViewMode(string maLHP, string tenLHP, string thoiGian,
-            string phong, string tenKhoa, string tenMon, string tenGV, string trangThai)
+            string phong, string tenKhoa, string tenMon, string tenGV, string trangThai,
+            string tenHK = "", string tenNH = "", DateTime? thoiGianBD = null, DateTime? thoiGianKT = null)
         {
             lblDetailHeader.Text      = "Chi tiết Lớp Học Phần";
             lblDetailHeader.ForeColor = Color.FromArgb(21, 101, 192);
@@ -131,7 +143,10 @@ namespace QLDSV.GUI.Forms.SinhVien
             lblDetailMon.Visible        = true;
             lblDetailGiangVien.Visible  = true;
             lblDetailTrangThai.Visible  = true;
-
+            lblDetailHocKy.Visible = true;
+            lblDetailNamHoc.Visible = true;
+            lblDetailThoiGianBD.Visible = true;
+            lblDetailThoiGianKT.Visible = true;
             // Ẩn tất cả controls chỉnh sửa (SV chỉ xem)
             txtEditMaLHP.Visible    = false;
             txtEditTenLHP.Visible   = false;
@@ -140,9 +155,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             cboEditKhoa.Visible     = false;
             cboEditMon.Visible      = false;
             cboEditGiangVien.Visible = false;
-            chkEditActive.Visible   = false;
-            btnLuuDetail.Visible    = false;
-            btnHuyDetail.Visible    = false;
+            chkEditActive.Visible = false;
             btnCloseDetail.Visible  = true;
 
             lblDetailMaLHP.Text       = maLHP    ?? "";
@@ -153,7 +166,10 @@ namespace QLDSV.GUI.Forms.SinhVien
             lblDetailMon.Text         = tenMon   ?? "";
             lblDetailGiangVien.Text   = tenGV    ?? "";
             lblDetailTrangThai.Text   = trangThai ?? "";
-
+            lblDetailHocKy.Text = tenHK ?? "";
+            lblDetailNamHoc.Text = tenNH ?? "";
+            lblDetailThoiGianBD.Text = thoiGianBD.HasValue ? thoiGianBD.Value.ToString("dd/MM/yyyy") : "";
+            lblDetailThoiGianKT.Text = thoiGianKT.HasValue ? thoiGianKT.Value.ToString("dd/MM/yyyy") : "";
             OpenSidebar();
         }
 

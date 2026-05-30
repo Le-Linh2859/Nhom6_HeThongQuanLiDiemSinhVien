@@ -188,14 +188,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             lblDetailMoTa.Visible = true;
 
             // bỏ tất cả controls nhập liệu và nút ghi
-            //txtEditMaMon.Visible = false;
-            //txtEditTenMon.Visible = false;
-            //txtEditSoTC.Visible = false;
-            //cboEditKhoa.Visible = false;
-            //txtEditMoTa.Visible = false;
-            //chkEditActive.Visible = false;
-            //btnLuuDetail.Visible = false;
-            //btnHuyDetail.Visible = false;
+            
             btnCloseDetail.Visible = true;
 
             // Gán giá trị
