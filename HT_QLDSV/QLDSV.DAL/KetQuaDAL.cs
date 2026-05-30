@@ -136,6 +136,18 @@ namespace QLDSV.DAL
             return Connection.GetDataToTable(sql);
         }
 
+        public DataTable GetNamHocByGiangVien(string maGV)
+        {
+            string sql =
+                "SELECT DISTINCT nh.MaNamHoc, nh.TenNamHoc " +
+                "FROM LopHocPhan lhp " +
+                "INNER JOIN HocKy_NamHoc hknh ON lhp.MaHKNH = hknh.MaHKNH " +
+                "INNER JOIN NamHoc nh ON hknh.MaNamHoc = nh.MaNamHoc " +
+                $"WHERE lhp.MaGV = '{maGV}' " +
+                "ORDER BY nh.MaNamHoc DESC";
+            return Connection.GetDataToTable(sql);
+        }
+
         
         public DataTable GetBangDiemSinhVien(string maSV, string maNamHoc, string maLoaiHK)
         {
@@ -202,6 +214,22 @@ namespace QLDSV.DAL
                 CapNhatDiem(maSV, maLHP, maLoaiDiem, diem);
             else
                 ThemDiem(maSV, maLHP, maLoaiDiem, diem);
+        }
+
+        public void XoaDiem(string maSV, string maLHP, string maLoaiDiem)
+        {
+            string sql =
+                $"DELETE FROM KetQua " +
+                $"WHERE MaSV = '{maSV}' AND MaLHP = '{maLHP}' AND MaLoaiDiem = '{maLoaiDiem}'";
+            Connection.RunSql(sql);
+        }
+
+        public void XoaTatCaDiemSinhVienLop(string maSV, string maLHP)
+        {
+            string sql =
+                $"DELETE FROM KetQua " +
+                $"WHERE MaSV = '{maSV}' AND MaLHP = '{maLHP}'";
+            Connection.RunSql(sql);
         }
 
         private string GetSingleValue(string sql)

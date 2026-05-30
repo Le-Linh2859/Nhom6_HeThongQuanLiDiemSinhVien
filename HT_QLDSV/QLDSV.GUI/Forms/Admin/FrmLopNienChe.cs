@@ -472,8 +472,6 @@ namespace QLDSV.GUI
                 cboKhoa2.SelectedIndex = -1;
                 cboCV.SelectedIndex = -1;
             }
-        }
-
-        
+        } 
     }
 }

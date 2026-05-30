@@ -10,20 +10,26 @@ namespace QLDSV.GUI.Forms.GiangVien
 {
     public partial class FrmNhapDiemSV : Form
     {
-        
+
         private readonly KetQuaBLL _bll = new KetQuaBLL();
         private string maGV = "";
         private bool isInitializing = true;
-        private bool _isEditMode = false;
+        private decimal? _gocCC, _gocKT1, _gocKT2, _gocCK;
+        private string _pendingGridFocusMaSV;
+        private string _highlightMaSV = "";
+        private bool _cheDoNhapLai;
+        private string _maSVTruocDo = "";
+        private static readonly Color RowSavedHighlight = Color.LightGreen;
 
-        
+
         public FrmNhapDiemSV()
         {
             InitializeComponent();
             ThemeHelper.ApplyTheme(this);
+            dgvDiem.DataBindingComplete += DgvDiem_DataBindingComplete;
         }
 
-        
+
         private void FrmNhapDiemSV_Load(object sender, EventArgs e)
         {
             try
@@ -45,7 +51,6 @@ namespace QLDSV.GUI.Forms.GiangVien
                 isInitializing = false;
 
                 PopulateClasses();
-                SetFormState(false);
             }
             catch (Exception ex)
             {
@@ -54,14 +59,14 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        
+
         private void LoadNamHoc()
         {
             try
             {
-                DataTable dt = _bll.GetNamHoc();
-                cboNamHoc.DataSource    = dt;
-                cboNamHoc.ValueMember   = "MaNamHoc";
+                DataTable dt = _bll.GetNamHocByGiangVien(maGV);
+                cboNamHoc.DataSource = dt;
+                cboNamHoc.ValueMember = "MaNamHoc";
                 cboNamHoc.DisplayMember = "TenNamHoc";
                 if (cboNamHoc.Items.Count > 0) cboNamHoc.SelectedIndex = 0;
             }
@@ -76,8 +81,8 @@ namespace QLDSV.GUI.Forms.GiangVien
             try
             {
                 DataTable dt = _bll.GetLoaiHocKy();
-                cboHocKy.DataSource    = dt;
-                cboHocKy.ValueMember   = "MaLoaiHK";
+                cboHocKy.DataSource = dt;
+                cboHocKy.ValueMember = "MaLoaiHK";
                 cboHocKy.DisplayMember = "TenLoaiHK";
                 if (cboHocKy.Items.Count > 0) cboHocKy.SelectedIndex = 0;
             }
@@ -87,7 +92,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        
+
         private void PopulateClasses()
         {
             if (isInitializing) return;
@@ -96,13 +101,13 @@ namespace QLDSV.GUI.Forms.GiangVien
                 if (cboNamHoc.SelectedValue == null || cboHocKy.SelectedValue == null) return;
 
                 string namHocVal = cboNamHoc.SelectedValue.ToString();
-                string hocKyVal  = cboHocKy.SelectedValue.ToString();
+                string hocKyVal = cboHocKy.SelectedValue.ToString();
 
                 DataTable dt = _bll.GetLopHocPhan(namHocVal, hocKyVal, maGV);
 
                 cboLopHocPhan.SelectedIndexChanged -= CboLopHocPhan_SelectedIndexChanged;
-                cboLopHocPhan.DataSource    = dt.Rows.Count > 0 ? dt : null;
-                cboLopHocPhan.ValueMember   = "MaLHP";
+                cboLopHocPhan.DataSource = dt.Rows.Count > 0 ? dt : null;
+                cboLopHocPhan.ValueMember = "MaLHP";
                 cboLopHocPhan.DisplayMember = "DisplayText";
                 if (dt.Rows.Count > 0)
                     cboLopHocPhan.SelectedIndex = 0;
@@ -118,8 +123,8 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        
-        private void LoadClassData()
+
+        private void LoadClassData(string selectMaSV = null)
         {
             try
             {
@@ -135,37 +140,130 @@ namespace QLDSV.GUI.Forms.GiangVien
 
                 string maLHP = cboLopHocPhan.SelectedValue.ToString();
 
-                
                 DataTable dtSV = _bll.GetSinhVien(maLHP);
                 lstSinhVien.SelectedIndexChanged -= LstSinhVien_SelectedIndexChanged;
-                lstSinhVien.DataSource    = dtSV;
-                lstSinhVien.ValueMember   = "MaSV";
+                lstSinhVien.DataSource = dtSV;
+                lstSinhVien.ValueMember = "MaSV";
                 lstSinhVien.DisplayMember = "DisplayText";
-                lstSinhVien.SelectedIndex = -1;
-                lstSinhVien.SelectedIndexChanged += LstSinhVien_SelectedIndexChanged;
 
-                
-                DataTable dtDiem = _bll.GetBangDiem(maLHP);
-                if (dtDiem != null)
-                {
-                    
-                    dtDiem.DefaultView.RowFilter =
-                        "([Điểm CC] IS NOT NULL) OR ([Điểm KT1] IS NOT NULL) OR ([Điểm KT2] IS NOT NULL) OR ([Điểm CK] IS NOT NULL)";
-                    dgvDiem.DataSource = dtDiem.DefaultView;
-                    lblTongSV.Text = $"Tổng số sinh viên nhập điểm: {dtDiem.DefaultView.Count}";
-                }
+                if (!string.IsNullOrEmpty(selectMaSV))
+                    lstSinhVien.SelectedValue = selectMaSV;
                 else
                 {
-                    dgvDiem.DataSource = null;
-                    lblTongSV.Text = "Tổng số sinh viên nhập điểm: 0";
+                    lstSinhVien.SelectedIndex = -1;
+                    ClearInputs();
                 }
 
-                ClearInputs();
+                lstSinhVien.SelectedIndexChanged += LstSinhVien_SelectedIndexChanged;
+
+                BindBangDiemGrid(maLHP);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi tải dữ liệu lớp học phần: " + ex.Message,
                     "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BindBangDiemGrid(string maLHP)
+        {
+            DataTable dtDiem = _bll.GetBangDiem(maLHP);
+            if (dtDiem != null)
+            {
+                dtDiem.DefaultView.RowFilter =
+                    "([Điểm CC] IS NOT NULL) OR ([Điểm KT1] IS NOT NULL) OR ([Điểm KT2] IS NOT NULL) OR ([Điểm CK] IS NOT NULL)";
+                dgvDiem.DataSource = dtDiem.DefaultView;
+                lblTongSV.Text = $"Tổng số sinh viên nhập điểm: {dtDiem.DefaultView.Count}";
+            }
+            else
+            {
+                dgvDiem.DataSource = null;
+                lblTongSV.Text = "Tổng số sinh viên nhập điểm: 0";
+            }
+        }
+
+        private void RefreshAfterSave(string maSV)
+        {
+            _highlightMaSV = maSV;
+            _pendingGridFocusMaSV = maSV;
+            LoadClassData(maSV);
+        }
+
+        private void DgvDiem_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            ApplyGridRowHighlight();
+            if (string.IsNullOrEmpty(_pendingGridFocusMaSV))
+                return;
+
+            string maSV = _pendingGridFocusMaSV;
+            _pendingGridFocusMaSV = null;
+            FocusGridRow(maSV);
+        }
+
+        private void ApplyGridRowHighlight()
+        {
+            if (dgvDiem.Rows.Count == 0 || !dgvDiem.Columns.Contains("Mã SV"))
+                return;
+
+            foreach (DataGridViewRow row in dgvDiem.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                string ma = row.Cells["Mã SV"].Value?.ToString();
+                bool isSaved = !string.IsNullOrEmpty(_highlightMaSV)
+                    && string.Equals(ma, _highlightMaSV, StringComparison.OrdinalIgnoreCase);
+
+                if (isSaved)
+                {
+                    row.DefaultCellStyle.BackColor = RowSavedHighlight;
+                    row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(144, 238, 144);
+                    row.DefaultCellStyle.SelectionForeColor = Color.Black;
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = row.Index % 2 == 0
+                        ? Color.White
+                        : Color.FromArgb(250, 250, 252);
+                    row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 216, 242);
+                    row.DefaultCellStyle.SelectionForeColor = Color.Black;
+                }
+            }
+        }
+
+        private void FocusGridRow(string maSV)
+        {
+            if (string.IsNullOrEmpty(maSV) || !dgvDiem.Columns.Contains("Mã SV"))
+                return;
+
+            DataGridViewRow targetRow = null;
+            foreach (DataGridViewRow row in dgvDiem.Rows)
+            {
+                if (row.IsNewRow) continue;
+                string ma = row.Cells["Mã SV"].Value?.ToString();
+                if (string.Equals(ma, maSV, StringComparison.OrdinalIgnoreCase))
+                {
+                    targetRow = row;
+                    break;
+                }
+            }
+
+            if (targetRow == null)
+                return;
+
+            dgvDiem.ClearSelection();
+            targetRow.Selected = true;
+
+            if (dgvDiem.Columns.Contains("Mã SV"))
+                dgvDiem.CurrentCell = targetRow.Cells["Mã SV"];
+            else if (dgvDiem.Columns.Count > 0)
+                dgvDiem.CurrentCell = targetRow.Cells[0];
+
+            int rowIndex = targetRow.Index;
+            if (rowIndex >= 0)
+            {
+                int firstVisible = Math.Max(0, rowIndex - 2);
+                if (firstVisible < dgvDiem.Rows.Count)
+                    dgvDiem.FirstDisplayedScrollingRowIndex = firstVisible;
             }
         }
 
@@ -175,15 +273,25 @@ namespace QLDSV.GUI.Forms.GiangVien
 
             try
             {
-                string maSV  = lstSinhVien.SelectedValue.ToString();
+                string maSV = lstSinhVien.SelectedValue.ToString();
                 string maLHP = cboLopHocPhan.SelectedValue.ToString();
+
+                if (!string.Equals(maSV, _maSVTruocDo, StringComparison.OrdinalIgnoreCase))
+                    _cheDoNhapLai = false;
+                _maSVTruocDo = maSV;
 
                 // Hiển thị thông tin sinh viên
                 txtMaSV.Text = maSV;
                 string[] parts = lstSinhVien.Text.Split(new[] { " - " }, StringSplitOptions.None);
                 txtHoTen.Text = parts.Length > 1 ? parts[1] : "";
 
-                
+                if (_cheDoNhapLai)
+                {
+                    btnNhap.Enabled = true;
+                    btnSua.Enabled  = false;
+                    return;
+                }
+
                 DataTable dt = _bll.GetDiemSinhVien(maSV, maLHP);
 
                 decimal? cc = null, kt1 = null, kt2 = null, ck = null;
@@ -191,26 +299,24 @@ namespace QLDSV.GUI.Forms.GiangVien
                 {
                     string loai = row["MaLoaiDiem"].ToString().Trim();
                     decimal val = Convert.ToDecimal(row["Diem"]);
-                    if      (loai == "CC")  cc  = val;
+                    if (loai == "CC") cc = val;
                     else if (loai == "KT1") kt1 = val;
                     else if (loai == "KT2") kt2 = val;
-                    else if (loai == "CK")  ck  = val;
+                    else if (loai == "CK") ck = val;
                 }
 
-                // CC, KT1, KT2: chỉ nhập 1 lần
-                ConfigureGradeInput(txtDiemCC,  cc);
-                ConfigureGradeInput(txtDiemKT1, kt1);
-                ConfigureGradeInput(txtDiemKT2, kt2);
+                _gocCC  = cc;
+                _gocKT1 = kt1;
+                _gocKT2 = kt2;
+                _gocCK  = ck;
 
-               
-                txtDiemCK.Text      = ck.HasValue ? ck.Value.ToString("0.#") : "";
-                txtDiemCK.ReadOnly  = false;
-                txtDiemCK.BackColor = Color.White;
+                SetGradeField(txtDiemCC,  cc);
+                SetGradeField(txtDiemKT1, kt1);
+                SetGradeField(txtDiemKT2, kt2);
+                SetGradeField(txtDiemCK,  ck);
 
-                
-                bool daDu = cc.HasValue && kt1.HasValue && kt2.HasValue;
-                btnNhap.Enabled = !daDu;
-                btnSua.Enabled  = daDu;
+                if (!_cheDoNhapLai)
+                    CapNhatTrangThaiNut(cc, kt1, kt2);
             }
             catch (Exception ex)
             {
@@ -219,23 +325,117 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        private void ConfigureGradeInput(Guna.UI2.WinForms.Guna2TextBox txt, decimal? gradeValue)
+        private static void SetGradeField(Guna.UI2.WinForms.Guna2TextBox txt, decimal? gradeValue)
         {
-            if (gradeValue.HasValue)
-            {
-                txt.Text      = gradeValue.Value.ToString("0.#");
-                txt.ReadOnly  = true;
-                txt.BackColor = Color.FromArgb(230, 230, 230);
-            }
-            else
-            {
-                txt.Text      = "";
-                txt.ReadOnly  = false;
-                txt.BackColor = Color.White;
-            }
+            txt.Text = gradeValue.HasValue ? gradeValue.Value.ToString("0.#") : "";
+            txt.ReadOnly = false;
+            txt.BackColor = Color.White;
         }
 
-        
+        private void CapNhatTrangThaiNut(decimal? cc, decimal? kt1, decimal? kt2)
+        {
+            bool hasStudent = !string.IsNullOrEmpty(txtMaSV.Text.Trim());
+            bool daDu = cc.HasValue && kt1.HasValue && kt2.HasValue;
+
+            if (_cheDoNhapLai)
+            {
+                btnNhap.Enabled = hasStudent;
+                btnSua.Enabled  = false;
+                return;
+            }
+
+            btnNhap.Enabled = hasStudent && !daDu;
+            btnSua.Enabled  = hasStudent && daDu;
+        }
+
+        private bool ThuThapDiemTuForm(
+            out decimal cc, out decimal kt1, out decimal kt2, out decimal ck,
+            out bool hasCC, out bool hasKT1, out bool hasKT2, out bool hasCK)
+        {
+            cc = kt1 = kt2 = ck = 0;
+            hasCC = hasKT1 = hasKT2 = hasCK = false;
+
+            if (!ValidateGrade(txtDiemCC,  "chuyên cần",  out cc,  out hasCC))  return false;
+            if (!ValidateGrade(txtDiemKT1, "kiểm tra 1",  out kt1, out hasKT1)) return false;
+            if (!ValidateGrade(txtDiemKT2, "kiểm tra 2",  out kt2, out hasKT2)) return false;
+            if (!ValidateGrade(txtDiemCK,  "thi cuối kỳ", out ck,  out hasCK))  return false;
+            return true;
+        }
+
+        private bool KiemTraBatBuocBaDiemThanhPhan()
+        {
+            if (string.IsNullOrEmpty(txtDiemCC.Text.Trim()))
+            {
+                MessageBox.Show("Vui lòng nhập điểm chuyên cần!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDiemCC.Focus();
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtDiemKT1.Text.Trim()))
+            {
+                MessageBox.Show("Vui lòng nhập điểm kiểm tra 1!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDiemKT1.Focus();
+                return false;
+            }
+            if (string.IsNullOrEmpty(txtDiemKT2.Text.Trim()))
+            {
+                MessageBox.Show("Vui lòng nhập điểm kiểm tra 2!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDiemKT2.Focus();
+                return false;
+            }
+            return true;
+        }
+
+        private void LuuBoDiemNhap(string maSV, string maLHP,
+            decimal cc, decimal kt1, decimal kt2, decimal ck, bool hasCK)
+        {
+            _bll.LuuDiem(maSV, maLHP, "CC",  cc);
+            _bll.LuuDiem(maSV, maLHP, "KT1", kt1);
+            _bll.LuuDiem(maSV, maLHP, "KT2", kt2);
+            if (hasCK)
+                _bll.LuuDiem(maSV, maLHP, "CK", ck);
+        }
+
+        private void LuuDiemKhiSua(string maSV, string maLHP,
+            decimal cc, decimal kt1, decimal kt2, decimal ck,
+            bool hasCC, bool hasKT1, bool hasKT2, bool hasCK)
+        {
+            XuLyLoaiDiemKhiSua(maSV, maLHP, "CC",  _gocCC,  cc,  hasCC);
+            XuLyLoaiDiemKhiSua(maSV, maLHP, "KT1", _gocKT1, kt1, hasKT1);
+            XuLyLoaiDiemKhiSua(maSV, maLHP, "KT2", _gocKT2, kt2, hasKT2);
+            XuLyLoaiDiemKhiSua(maSV, maLHP, "CK",  _gocCK,  ck,  hasCK);
+        }
+
+        private void XuLyLoaiDiemKhiSua(string maSV, string maLHP, string loai,
+            decimal? goc, decimal moi, bool coGiaTriMoi)
+        {
+            if (coGiaTriMoi && (!goc.HasValue || goc.Value != moi))
+                _bll.LuuDiem(maSV, maLHP, loai, moi);
+            else if (!coGiaTriMoi && goc.HasValue)
+                _bll.XoaDiem(maSV, maLHP, loai);
+        }
+
+        private bool CoThayDoiSoVoiGoc(
+            decimal cc, decimal kt1, decimal kt2, decimal ck,
+            bool hasCC, bool hasKT1, bool hasKT2, bool hasCK)
+        {
+            return LoaiDiemThayDoi(_gocCC,  cc,  hasCC)
+                || LoaiDiemThayDoi(_gocKT1, kt1, hasKT1)
+                || LoaiDiemThayDoi(_gocKT2, kt2, hasKT2)
+                || LoaiDiemThayDoi(_gocCK,  ck,  hasCK);
+        }
+
+        private static bool LoaiDiemThayDoi(decimal? goc, decimal moi, bool coGiaTriMoi)
+        {
+            if (!coGiaTriMoi)
+                return goc.HasValue;
+            if (!goc.HasValue)
+                return true;
+            return goc.Value != moi;
+        }
+
         private void BtnNhap_Click(object sender, EventArgs e)
         {
             string maSV = txtMaSV.Text.Trim();
@@ -248,45 +448,37 @@ namespace QLDSV.GUI.Forms.GiangVien
 
             string maLHP = cboLopHocPhan.SelectedValue.ToString();
 
-            if (_bll.DaDuDiemThanhPhan(maSV, maLHP))
+            if (!_cheDoNhapLai && _bll.DaDuDiemThanhPhan(maSV, maLHP))
             {
-                MessageBox.Show("Sinh viên đã có điểm thành phần.",
+                MessageBox.Show(
+                    "Sinh viên đã có đủ điểm thành phần.\nVui lòng ấn Reset để nhập lại, hoặc dùng Sửa để chỉnh điểm.",
                     "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
-            // Bắt buộc nhập đủ 3 điểm thành phần
-            if (!txtDiemCC.ReadOnly  && string.IsNullOrEmpty(txtDiemCC.Text.Trim()))
-            { MessageBox.Show("Vui lòng nhập điểm chuyên cần!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning); txtDiemCC.Focus(); return; }
-            if (!txtDiemKT1.ReadOnly && string.IsNullOrEmpty(txtDiemKT1.Text.Trim()))
-            { MessageBox.Show("Vui lòng nhập điểm kiểm tra 1!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning); txtDiemKT1.Focus(); return; }
-            if (!txtDiemKT2.ReadOnly && string.IsNullOrEmpty(txtDiemKT2.Text.Trim()))
-            { MessageBox.Show("Vui lòng nhập điểm kiểm tra 2!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning); txtDiemKT2.Focus(); return; }
+            if (!KiemTraBatBuocBaDiemThanhPhan())
+                return;
 
-            decimal cc = 0, kt1 = 0, kt2 = 0, ck = 0;
+            decimal cc, kt1, kt2, ck;
             bool hasCC, hasKT1, hasKT2, hasCK;
-            if (!ValidateGrade(txtDiemCC,  "chuyên cần",  out cc,  out hasCC))  return;
-            if (!ValidateGrade(txtDiemKT1, "kiểm tra 1",  out kt1, out hasKT1)) return;
-            if (!ValidateGrade(txtDiemKT2, "kiểm tra 2",  out kt2, out hasKT2)) return;
-            if (!ValidateGrade(txtDiemCK,  "thi cuối kỳ", out ck,  out hasCK))  return;
+            if (!ThuThapDiemTuForm(out cc, out kt1, out kt2, out ck, out hasCC, out hasKT1, out hasKT2, out hasCK))
+                return;
+
+            if (!hasCC || !hasKT1 || !hasKT2)
+                return;
 
             try
             {
-                if (!txtDiemCC.ReadOnly  && hasCC)  _bll.LuuDiem(maSV, maLHP, "CC",  cc);
-                if (!txtDiemKT1.ReadOnly && hasKT1) _bll.LuuDiem(maSV, maLHP, "KT1", kt1);
-                if (!txtDiemKT2.ReadOnly && hasKT2) _bll.LuuDiem(maSV, maLHP, "KT2", kt2);
-                if (hasCK)                          _bll.LuuDiem(maSV, maLHP, "CK",  ck);
+                if (_cheDoNhapLai)
+                    _bll.XoaTatCaDiemSinhVienLop(maSV, maLHP);
+
+                LuuBoDiemNhap(maSV, maLHP, cc, kt1, kt2, ck, hasCK);
 
                 MessageBox.Show("Thêm điểm sinh viên thành công!",
                     "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                int idx = lstSinhVien.SelectedIndex;
-                LoadClassData();
-                if (idx >= 0 && idx < lstSinhVien.Items.Count)
-                    lstSinhVien.SelectedIndex = idx;
-
-                btnNhap.Enabled = false;
-                btnSua.Enabled  = true;
+                _cheDoNhapLai = false;
+                RefreshAfterSave(maSV);
             }
             catch (Exception ex)
             {
@@ -295,10 +487,9 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        
+
         private void BtnSua_Click(object sender, EventArgs e)
         {
-            
             string maSV = txtMaSV.Text.Trim();
 
             if (string.IsNullOrEmpty(maSV) || cboLopHocPhan.SelectedValue == null)
@@ -307,173 +498,120 @@ namespace QLDSV.GUI.Forms.GiangVien
                     "Vui lòng chọn sinh viên cần sửa điểm!",
                     "Thông báo",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
+                    MessageBoxIcon.Warning);
                 return;
             }
 
             string maLHP = cboLopHocPhan.SelectedValue.ToString();
 
-            
-            bool daDuDiemThanhPhan = _bll.DaDuDiemThanhPhan(maSV, maLHP);
-
-            if (!daDuDiemThanhPhan)
+            if (!_bll.DaDuDiemThanhPhan(maSV, maLHP))
             {
                 MessageBox.Show(
-                    "Sinh viên chưa có đủ điểm thành phần để sửa điểm thi!",
+                    "Sinh viên chưa có đủ điểm thành phần để sửa điểm!",
                     "Thông báo",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
+                    MessageBoxIcon.Warning);
                 return;
             }
 
-            
-            if (string.IsNullOrEmpty(txtDiemCK.Text.Trim()))
+            decimal cc, kt1, kt2, ck;
+            bool hasCC, hasKT1, hasKT2, hasCK;
+            if (!ThuThapDiemTuForm(out cc, out kt1, out kt2, out ck, out hasCC, out hasKT1, out hasKT2, out hasCK))
+                return;
+
+            if (!CoThayDoiSoVoiGoc(cc, kt1, kt2, ck, hasCC, hasKT1, hasKT2, hasCK))
             {
                 MessageBox.Show(
-                    "Vui lòng nhập điểm thi cuối kỳ!",
+                    "Không có sự thay đổi điểm sinh viên",
                     "Thông báo",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-
-                txtDiemCK.Focus();
-                return;
-            }
-
-            
-            decimal diemCK;
-            bool hasCK;
-
-            if (!ValidateGrade(
-                    txtDiemCK,
-                    "thi cuối kỳ",
-                    out diemCK,
-                    out hasCK))
-            {
+                    MessageBoxIcon.Information);
                 return;
             }
 
             try
             {
-                
-                _bll.LuuDiem(maSV, maLHP, "CK", diemCK);
+                LuuDiemKhiSua(maSV, maLHP, cc, kt1, kt2, ck, hasCC, hasKT1, hasKT2, hasCK);
 
                 MessageBox.Show(
-                    "Cập nhật điểm thi cuối kỳ thành công!",
+                    "Cập nhật điểm sinh viên thành công!",
                     "Thành công",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Information
-                );
+                    MessageBoxIcon.Information);
 
-                
-                int selectedIndex = lstSinhVien.SelectedIndex;
-
-                LoadClassData();
-
-                if (selectedIndex >= 0 &&
-                    selectedIndex < lstSinhVien.Items.Count)
-                {
-                    lstSinhVien.SelectedIndex = selectedIndex;
-                }
-
-                
-                txtDiemCC.ReadOnly = true;
-                txtDiemKT1.ReadOnly = true;
-                txtDiemKT2.ReadOnly = true;
-
-                txtDiemCC.BackColor = Color.FromArgb(230, 230, 230);
-                txtDiemKT1.BackColor = Color.FromArgb(230, 230, 230);
-                txtDiemKT2.BackColor = Color.FromArgb(230, 230, 230);
-
-                
-                txtDiemCK.ReadOnly = false;
-                txtDiemCK.BackColor = Color.White;
-
-                
-                btnNhap.Enabled = false;
-                btnSua.Enabled = true;
+                RefreshAfterSave(maSV);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Lỗi cập nhật điểm thi cuối kỳ: " + ex.Message,
+                    "Lỗi cập nhật điểm sinh viên: " + ex.Message,
                     "Lỗi",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
+                    MessageBoxIcon.Error);
             }
         }
 
-        
         private void BtnHuy_Click(object sender, EventArgs e)
         {
-            txtMaSV.Text = "";
-            txtHoTen.Text = "";
+            lstSinhVien.SelectedIndexChanged -= LstSinhVien_SelectedIndexChanged;
+            lstSinhVien.SelectedIndex = -1;
+            lstSinhVien.SelectedIndexChanged += LstSinhVien_SelectedIndexChanged;
 
-            txtDiemCC.Text = "";
-            txtDiemKT1.Text = "";
-            txtDiemKT2.Text = "";
-            txtDiemCK.Text = "";
-
+            ClearInputs();
+            XoaHighlightGrid();
 
             btnNhap.Enabled = true;
             btnSua.Enabled = false;
-            btnReset.Enabled = true;
-            btnHuy.Enabled = true;
-
-            _isEditMode = false;
 
             lstSinhVien.Focus();
         }
 
-        
+        private void XoaHighlightGrid()
+        {
+            _highlightMaSV = "";
+            _pendingGridFocusMaSV = null;
+            dgvDiem.ClearSelection();
+            ApplyGridRowHighlight();
+        }
+
+
         private void BtnReset_Click(object sender, EventArgs e)
         {
-            if (!txtDiemCC.ReadOnly)  txtDiemCC.Text  = "";
-            if (!txtDiemKT1.ReadOnly) txtDiemKT1.Text = "";
-            if (!txtDiemKT2.ReadOnly) txtDiemKT2.Text = "";
-            if (!txtDiemCK.ReadOnly)  txtDiemCK.Text  = "";
+            if (string.IsNullOrEmpty(txtMaSV.Text.Trim()))
+            {
+                MessageBox.Show("Vui lòng chọn sinh viên trước khi Reset!",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            SetGradeField(txtDiemCC,  null);
+            SetGradeField(txtDiemKT1, null);
+            SetGradeField(txtDiemKT2, null);
+            SetGradeField(txtDiemCK,  null);
+
+            _gocCC = _gocKT1 = _gocKT2 = _gocCK = null;
+            _cheDoNhapLai = true;
+            XoaHighlightGrid();
+
+            btnNhap.Enabled = true;
+            btnSua.Enabled  = false;
+
+            txtDiemCC.Focus();
         }
 
-        
-        private void SetFormState(bool isEditMode)
-        {
-            _isEditMode = isEditMode;
-            if (isEditMode)
-            {
-                
-                btnNhap.Enabled  = false;
-                btnSua.Enabled   = false;
-                btnReset.Enabled = false;
-                btnHuy.Enabled   = true;
-
-                txtDiemCC.ReadOnly  = true;  
-                txtDiemKT1.ReadOnly = true;  
-                txtDiemKT2.ReadOnly = true;  
-                txtDiemCK.ReadOnly  = false; 
-            }
-            else
-            {
-                
-                btnNhap.Enabled  = true;
-                btnSua.Enabled   = false;
-                btnReset.Enabled = true;
-                btnHuy.Enabled   = true;
-            }
-        }
-
-        
         private void ClearInputs()
         {
             txtMaSV.Text = "";
             txtHoTen.Text = "";
 
-            txtDiemCC.Text  = ""; txtDiemCC.ReadOnly  = false; 
-            txtDiemKT1.Text = ""; txtDiemKT1.ReadOnly = false;
-            txtDiemKT2.Text = ""; txtDiemKT2.ReadOnly = false; 
-            txtDiemCK.Text  = ""; txtDiemCK.ReadOnly  = false; 
+            SetGradeField(txtDiemCC,  null);
+            SetGradeField(txtDiemKT1, null);
+            SetGradeField(txtDiemKT2, null);
+            SetGradeField(txtDiemCK,  null);
+
+            _gocCC = _gocKT1 = _gocKT2 = _gocCK = null;
+            _cheDoNhapLai = false;
+            _maSVTruocDo = "";
         }
 
         private bool ValidateGrade(Guna.UI2.WinForms.Guna2TextBox txt, string label,
@@ -500,8 +638,9 @@ namespace QLDSV.GUI.Forms.GiangVien
             return true;
         }
 
-        private void CboNamHoc_SelectedIndexChanged(object sender, EventArgs e)      => PopulateClasses();
-        private void CboHocKy_SelectedIndexChanged(object sender, EventArgs e)       => PopulateClasses();
-        private void CboLopHocPhan_SelectedIndexChanged(object sender, EventArgs e)  => LoadClassData();
+        private void CboNamHoc_SelectedIndexChanged(object sender, EventArgs e) => PopulateClasses();
+        private void CboHocKy_SelectedIndexChanged(object sender, EventArgs e) => PopulateClasses();
+        private void CboLopHocPhan_SelectedIndexChanged(object sender, EventArgs e) => LoadClassData();
+
     }
 }

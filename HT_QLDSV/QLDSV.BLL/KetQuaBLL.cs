@@ -56,6 +56,9 @@ namespace QLDSV.BLL
         public DataTable GetNamHocBySinhVien(string maSV)
             => _dal.GetNamHocBySinhVien(maSV);
 
+        public DataTable GetNamHocByGiangVien(string maGV)
+            => _dal.GetNamHocByGiangVien(maGV);
+
         /// <summary>
         /// Lấy bảng điểm thô (CC, KT1, KT2, CK) của sinh viên theo năm học + học kỳ.
         /// Trả về: MaMon, TenMon, SoTC, DiemCC, DiemKT1, DiemKT2, DiemThi.
@@ -66,6 +69,12 @@ namespace QLDSV.BLL
         // ─── Lưu điểm (thêm mới hoặc cập nhật) ───────────────────────────────────
         public void LuuDiem(string maSV, string maLHP, string maLoaiDiem, decimal diem)
             => _dal.LuuHoacCapNhatDiem(maSV, maLHP, maLoaiDiem, diem);
+
+        public void XoaDiem(string maSV, string maLHP, string maLoaiDiem)
+            => _dal.XoaDiem(maSV, maLHP, maLoaiDiem);
+
+        public void XoaTatCaDiemSinhVienLop(string maSV, string maLHP)
+            => _dal.XoaTatCaDiemSinhVienLop(maSV, maLHP);
 
         public bool DaDuDiemThanhPhan(string maSV, string maLHP)
         {
