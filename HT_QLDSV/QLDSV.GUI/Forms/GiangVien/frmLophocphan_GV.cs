@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//using System.Windows;
 using System.Windows.Forms;
 
 namespace QLDSV.GUI.Forms.GiangVien
@@ -58,6 +59,7 @@ namespace QLDSV.GUI.Forms.GiangVien
 
         private void LoadInitialComboBoxes()
         {
+            
             try
             {
                 DataTable dtKhoa = bll.GetKhoa();
@@ -68,11 +70,6 @@ namespace QLDSV.GUI.Forms.GiangVien
                 rAll["TenKhoa"] = "--- Tất cả ---";
 
                 dtKhoa.Rows.InsertAt(rAll, 0);
-
-                //EditKhoa.DataSource = dtKhoa;
-                //cboEditKhoacbo.ValueMember = "MaKhoa";
-                //cboEditKhoa.DisplayMember = "TenKhoa";
-                //cboEditKhoa.SelectedIndex = -1;
 
                 UpdateFilterMonComboBox();
             }
@@ -103,6 +100,7 @@ namespace QLDSV.GUI.Forms.GiangVien
                 cboFilterMon.ValueMember   = "MaMon";
                 cboFilterMon.DisplayMember = "TenMon";
                 cboFilterMon.SelectedIndex = 0;
+                
             }
             catch (Exception ex)
             {
@@ -148,6 +146,8 @@ namespace QLDSV.GUI.Forms.GiangVien
                 dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
                 lblTongBanGhi.Text = $"Tổng: {tblLophocphan?.Rows.Count ?? 0} lớp học phần";
+                
+);
             }
             catch (Exception ex)
             {
@@ -155,29 +155,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             }
         }
 
-        //private void PopulateEditCascadeCombos(string maKhoa)
-        //{
-        //    try
-        //    {
-        //        DataTable dtMon =
-        //            bll.GetMonHocTheoKhoa(maKhoa);
 
-        //        cboEditMon.DataSource = dtMon;
-        //        cboEditMon.ValueMember = "MaMon";
-        //        cboEditMon.DisplayMember = "TenMon";
-
-        //        DataTable dtGV =
-        //            bll.GetGiangVienTheoKhoa(maKhoa);
-
-        //        cboEditGiangVien.DataSource = dtGV;
-        //        cboEditGiangVien.ValueMember = "MaGV";
-        //        cboEditGiangVien.DisplayMember = "HoTen";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             txtTimKiem.Text = "";
