@@ -160,6 +160,7 @@ namespace QLDSV.DAL
                 "  mh.MaMon, " +
                 "  mh.TenMon, " +
                 "  mh.SoTC, " +
+                "  lhp.MaLHP, " +
                 "  MAX(CASE WHEN kq.MaLoaiDiem = 'CC'  THEN kq.Diem END) AS DiemCC, " +
                 "  MAX(CASE WHEN kq.MaLoaiDiem = 'KT1' THEN kq.Diem END) AS DiemKT1, " +
                 "  MAX(CASE WHEN kq.MaLoaiDiem = 'KT2' THEN kq.Diem END) AS DiemKT2, " +
@@ -172,8 +173,8 @@ namespace QLDSV.DAL
                 $"WHERE dklh.MaSV = '{maSV}' " +
                 whereNamHoc +
                 whereLoaiHK +
-                "GROUP BY mh.MaMon, mh.TenMon, mh.SoTC " +
-                "ORDER BY mh.MaMon";
+                "GROUP BY mh.MaMon, mh.TenMon, mh.SoTC, lhp.MaLHP " +
+                "ORDER BY mh.MaMon, lhp.MaLHP";
             return Connection.GetDataToTable(sql);
         }
 
@@ -278,8 +279,8 @@ namespace QLDSV.DAL
 
           
             string sql =
-                "WITH DiemMon AS ( " +
-                "  SELECT dklh.MaSV, lhp.MaMon, mh.SoTC, " +
+                "WITH DiemLHP AS ( " +
+                "  SELECT dklh.MaSV, lhp.MaLHP, lhp.MaMon, mh.SoTC, " +
                 "    ROUND( " +
                 "      ISNULL(SUM(kq.Diem * ld.TyLePhanTram / 100.0), 0), 2) AS DiemTK, " +
                 "    CASE WHEN " +
@@ -295,17 +296,41 @@ namespace QLDSV.DAL
                 "  LEFT  JOIN KetQua kq ON kq.MaSV = dklh.MaSV AND kq.MaLHP = dklh.MaLHP " +
                 "  LEFT  JOIN LoaiDiem ld ON ld.MaLoaiDiem = kq.MaLoaiDiem " +
                 "  WHERE 1=1" + wNam + wHK +
-                "  GROUP BY dklh.MaSV, lhp.MaMon, mh.SoTC " +
+                "  GROUP BY dklh.MaSV, lhp.MaLHP, lhp.MaMon, mh.SoTC " +
+                "), " +
+                "DiemMon AS ( " +
+                "  SELECT MaSV, MaMon, SoTC, DiemTK " +
+                "  FROM ( " +
+                "    SELECT MaSV, MaMon, SoTC, DiemTK, " +
+                "      ROW_NUMBER() OVER (PARTITION BY MaSV, MaMon ORDER BY DiemTK DESC, MaLHP) AS rn " +
+                "    FROM DiemLHP " +
+                "    WHERE DaDuDiem = 1 " +
+                "  ) ranked " +
+                "  WHERE rn = 1 " +
                 ") " +
                 "SELECT sv.MaSV, sv.HoTen, lnc.TenLop, " +
                 "  ROUND( " +
                 "    SUM(dm.DiemTK * dm.SoTC) / NULLIF(SUM(dm.SoTC), 0) " +
-                "  , 2) AS DTB10 " +
+                "  , 2) AS DTB10, " +
+                "  ROUND( " +
+                "    SUM( " +
+                "      (CASE " +
+                "        WHEN dm.DiemTK >= 9.5 THEN 4.0 " +
+                "        WHEN dm.DiemTK >= 8.5 THEN 4.0 " +
+                "        WHEN dm.DiemTK >= 8.0 THEN 3.5 " +
+                "        WHEN dm.DiemTK >= 7.0 THEN 3.0 " +
+                "        WHEN dm.DiemTK >= 6.5 THEN 2.5 " +
+                "        WHEN dm.DiemTK >= 5.5 THEN 2.0 " +
+                "        WHEN dm.DiemTK >= 5.0 THEN 1.5 " +
+                "        WHEN dm.DiemTK >= 4.0 THEN 1.0 " +
+                "        ELSE 0.0 " +
+                "      END) * dm.SoTC " +
+                "    ) / NULLIF(SUM(dm.SoTC), 0) " +
+                "  , 2) AS GPA4 " +
                 "FROM SinhVien sv " +
                 "INNER JOIN LopNienChe lnc ON sv.MaLopNienChe = lnc.MaLopNienChe " +
                 "INNER JOIN DiemMon dm ON dm.MaSV = sv.MaSV " +
-                // Chỉ tính trung bình trên các môn đã có đủ điểm tổng kết
-                "WHERE dm.DaDuDiem = 1" + wLop + wKey +
+                "WHERE 1=1" + wLop + wKey +
                 " GROUP BY sv.MaSV, sv.HoTen, lnc.TenLop" +
                 " ORDER BY sv.MaSV";
             return Connection.GetDataToTable(sql);

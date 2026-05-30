@@ -227,44 +227,64 @@ AND sv.MaSV NOT IN
             try
             {
                 string sql = $@"
-        WITH DiemMon AS
+        WITH DiemLHP AS
         (
             SELECT
                 dkl.MaSV,
                 lhp.MaMon,
                 lhp.MaHKNH,
                 mh.SoTC,
-
                 ROUND(
-                    SUM(
-                        kq.Diem * ld.TyLePhanTram / 100.0
-                    ),
+                    SUM(kq.Diem * ld.TyLePhanTram / 100.0),
                     2
-                ) AS DiemMon
-
+                ) AS DiemTK
             FROM DangKyLopHoc dkl
-
             INNER JOIN LopHocPhan lhp
                 ON dkl.MaLHP = lhp.MaLHP
-
             INNER JOIN MonHoc mh
                 ON mh.MaMon = lhp.MaMon
-
             INNER JOIN KetQua kq
                 ON kq.MaSV = dkl.MaSV
                AND kq.MaLHP = dkl.MaLHP
-
             INNER JOIN LoaiDiem ld
                 ON ld.MaLoaiDiem = kq.MaLoaiDiem
-
             WHERE lhp.MaHKNH = '{maHKNH}'
               AND dkl.TrangThai = 1
-
             GROUP BY
                 dkl.MaSV,
                 lhp.MaMon,
                 lhp.MaHKNH,
+                lhp.MaLHP,
                 mh.SoTC
+            HAVING
+                MAX(CASE WHEN kq.MaLoaiDiem = 'CC'  THEN kq.Diem END) IS NOT NULL
+            AND MAX(CASE WHEN kq.MaLoaiDiem = 'KT1' THEN kq.Diem END) IS NOT NULL
+            AND MAX(CASE WHEN kq.MaLoaiDiem = 'KT2' THEN kq.Diem END) IS NOT NULL
+            AND MAX(CASE WHEN kq.MaLoaiDiem = 'CK'  THEN kq.Diem END) IS NOT NULL
+        ),
+        DiemMon AS
+        (
+            SELECT
+                MaSV,
+                MaMon,
+                MaHKNH,
+                SoTC,
+                DiemMon
+            FROM
+            (
+                SELECT
+                    MaSV,
+                    MaMon,
+                    MaHKNH,
+                    SoTC,
+                    DiemTK AS DiemMon,
+                    ROW_NUMBER() OVER (
+                        PARTITION BY MaSV, MaMon, MaHKNH
+                        ORDER BY DiemTK DESC
+                    ) AS rn
+                FROM DiemLHP
+            ) ranked
+            WHERE rn = 1
         ),
 
         TBCHocKy AS

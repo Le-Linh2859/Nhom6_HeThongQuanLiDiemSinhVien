@@ -183,54 +183,41 @@ namespace QLDSV.GUI.Forms.SinhVien
                 decimal? thi = ToDecimal(row["DiemThi"]);
                 decimal? tk  = TinhDiemTongKet(cc, kt1, kt2, thi);
 
-                string tkStr   = tk.HasValue ? tk.Value.ToString("F2") : "--";
+                string tkStr = tk.HasValue ? tk.Value.ToString("F2") : "--";
 
-                DataGridViewKQDiem.Rows.Add(
+                // Môn học lại: chỉ dòng có điểm cao nhất mới hiện TC tính vào tích lũy
+                bool tinhTichLuy = KetQuaBLL.LaDongTinhTichLuy(row, dt);
+                string soTcStr = (tk.HasValue && !tinhTichLuy) ? "—" : row["SoTC"].ToString();
+
+                int rowIndex = DataGridViewKQDiem.Rows.Add(
                     stt++,
                     row["MaMon"],
                     row["TenMon"],
-                    row["SoTC"],
+                    soTcStr,
                     FormatDiem(cc),
                     FormatDiem(kt1),
                     FormatDiem(kt2),
                     FormatDiem(thi),
                     tkStr
                 );
+
+                if (tk.HasValue && !tinhTichLuy)
+                {
+                    var gridRow = DataGridViewKQDiem.Rows[rowIndex];
+                    gridRow.DefaultCellStyle.ForeColor = Color.Gray;
+                }
             }
         }
 
         
         private void TinhVaHienThiTongKet(DataTable dt)
         {
-            int    tcDangKy    = 0;
-            int    tcTichLuy   = 0;
-            double sumWeighted = 0;
+            var tongKet = KetQuaBLL.TinhGPATuBangDiem(dt);
 
-            foreach (DataRow row in dt.Rows)
-            {
-                int soTC = Convert.ToInt32(row["SoTC"]);
-                tcDangKy += soTC;
-
-                decimal? tk = TinhDiemTongKet(
-                    ToDecimal(row["DiemCC"]),
-                    ToDecimal(row["DiemKT1"]),
-                    ToDecimal(row["DiemKT2"]),
-                    ToDecimal(row["DiemThi"]));
-
-                if (tk.HasValue)
-                {
-                    tcTichLuy   += soTC;
-                    sumWeighted += soTC * (double)tk.Value;
-                }
-            }
-
-            double dtbHK10 = tcTichLuy > 0 ? sumWeighted / tcTichLuy : 0;
-            double dtbHK4  = Quy4(dtbHK10);
-
-            lblTC.Text       = tcTichLuy.ToString();
-            lblTK10.Text     = tcTichLuy > 0 ? dtbHK10.ToString("F2") : "--";
-            lblTK4.Text      = tcTichLuy > 0 ? dtbHK4.ToString("F2")  : "--";
-            lblPhanloai.Text = tcTichLuy > 0 ? PhanLoaiGPA(dtbHK4)    : "--";
+            lblTC.Text       = tongKet.CoDuLieu ? tongKet.TinChiTichLuy.ToString() : "0";
+            lblTK10.Text     = tongKet.CoDuLieu ? tongKet.DiemHe10.ToString("F2") : "--";
+            lblTK4.Text      = tongKet.CoDuLieu ? tongKet.DiemHe4.ToString("F2")  : "--";
+            lblPhanloai.Text = tongKet.CoDuLieu ? PhanLoaiGPA(tongKet.DiemHe4)    : "--";
         }
 
         
@@ -372,21 +359,17 @@ namespace QLDSV.GUI.Forms.SinhVien
         private DataTable LayBangDiemXuatToanBo()
         {
             DataTable dt = _bll.GetBangDiemSinhVien(_maSV, "ALL", "ALL");
+            dt = KetQuaBLL.LocDiemTotNhatTheoMon(dt);
             dt.Columns.Add("DiemTK", typeof(double));
             dt.Columns.Add("DiemChu", typeof(string));
 
             foreach (DataRow row in dt.Rows)
             {
-                decimal? tk = TinhDiemTongKet(
-                    ToDecimal(row["DiemCC"]),
-                    ToDecimal(row["DiemKT1"]),
-                    ToDecimal(row["DiemKT2"]),
-                    ToDecimal(row["DiemThi"]));
-
+                double? tk = KetQuaBLL.TryTinhDiemTongKet(row);
                 if (!tk.HasValue) continue;
 
-                row["DiemTK"] = (double)tk.Value;
-                row["DiemChu"] = KetQuaBLL.QuyDoiDiemChu((double)tk.Value);
+                row["DiemTK"] = tk.Value;
+                row["DiemChu"] = KetQuaBLL.QuyDoiDiemChu(tk.Value);
             }
 
             return dt;
@@ -395,28 +378,15 @@ namespace QLDSV.GUI.Forms.SinhVien
         private static TongKetHocTap TinhTongKetTuBangDiem(DataTable dt)
         {
             var ketQua = new TongKetHocTap();
-            if (dt == null || dt.Rows.Count == 0) return ketQua;
+            var gpa = KetQuaBLL.TinhGPATuBangDiem(dt);
 
-            int tongTc = 0;
-            double sumWeighted = 0;
-
-            foreach (DataRow row in dt.Rows)
-            {
-                if (row["DiemTK"] == DBNull.Value) continue;
-
-                int soTc = Convert.ToInt32(row["SoTC"]);
-                double diemTk = Convert.ToDouble(row["DiemTK"]);
-                tongTc += soTc;
-                sumWeighted += soTc * diemTk;
-            }
-
-            if (tongTc == 0) return ketQua;
+            if (!gpa.CoDuLieu) return ketQua;
 
             ketQua.CoDuLieu = true;
-            ketQua.TongTinChi = tongTc;
-            ketQua.DiemHe10 = Math.Round(sumWeighted / tongTc, 2);
-            ketQua.DiemHe4 = KetQuaBLL.QuyDoiHe4(ketQua.DiemHe10);
-            ketQua.XepLoai = KetQuaBLL.XepLoaiHocLuc(ketQua.DiemHe4);
+            ketQua.TongTinChi = gpa.TinChiTichLuy;
+            ketQua.DiemHe10 = gpa.DiemHe10;
+            ketQua.DiemHe4 = gpa.DiemHe4;
+            ketQua.XepLoai = gpa.XepLoai;
             return ketQua;
         }
 

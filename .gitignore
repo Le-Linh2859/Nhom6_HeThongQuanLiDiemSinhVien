@@ -3,11 +3,16 @@
 
 ## [ Visual Studio ]
 .vs/
+**/.vs/
+**/*.dtbcache.json
 [Bb]in/
 [Oo]bj/
+**/bin/
+**/obj/
 *.user
 *.userosscache
 *.sln.docstates
+*.csproj.user
 
 ## [ Build Results ]
 *.exe

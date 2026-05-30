@@ -198,7 +198,9 @@ namespace QLDSV.GUI.Forms.Admin
                 {
                     double dtb = row["DTB10"] != DBNull.Value
                         ? Convert.ToDouble(row["DTB10"]) : 0;
-                    double gpa4 = KetQuaBLL.QuyDoiHe4(dtb);
+                    double gpa4 = row.Table.Columns.Contains("GPA4") && row["GPA4"] != DBNull.Value
+                        ? Convert.ToDouble(row["GPA4"])
+                        : 0;
 
                     row["DiemChu"] = KetQuaBLL.QuyDoiDiemChu(dtb);
                     row["GPA4"] = gpa4;
