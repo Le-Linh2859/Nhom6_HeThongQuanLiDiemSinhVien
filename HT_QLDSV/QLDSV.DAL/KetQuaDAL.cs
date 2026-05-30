@@ -8,7 +8,7 @@ namespace QLDSV.DAL
 {
     public class KetQuaDAL
     {
-        /// <summary>Lấy tỷ lệ phần trăm của từng loại điểm từ bảng LoaiDiem.</summary>
+        ///Lấy tỷ lệ phần trăm của từng loại điểm từ bảng LoaiDiem.
         public Dictionary<string, decimal> GetTyLePhanTram()
         {
             const string sql = "SELECT MaLoaiDiem, TyLePhanTram FROM LoaiDiem";
@@ -19,21 +19,21 @@ namespace QLDSV.DAL
             return tyLe;
         }
 
-        // ─── Lấy danh sách năm học ────────────────────────────────────────────────
+        
         public DataTable GetNamHoc()
         {
             string sql = "SELECT MaNamHoc, TenNamHoc FROM NamHoc";
             return Connection.GetDataToTable(sql);
         }
 
-        // ─── Lấy danh sách loại học kỳ ───────────────────────────────────────────
+        
         public DataTable GetLoaiHocKy()
         {
             string sql = "SELECT MaLoaiHK, TenLoaiHK FROM LoaiHocKy";
             return Connection.GetDataToTable(sql);
         }
 
-        // ─── Lấy lớp học phần theo năm học, học kỳ, giảng viên ───────────────────
+        
         public DataTable GetLopHocPhanByGiangVien(string maNamHoc, string maLoaiHK, string maGV)
         {
             string sql =
@@ -46,7 +46,7 @@ namespace QLDSV.DAL
             return Connection.GetDataToTable(sql);
         }
 
-        // ─── Lấy danh sách sinh viên trong lớp học phần ──────────────────────────
+        
         public DataTable GetSinhVienByLopHocPhan(string maLHP)
         {
             string sql =
@@ -57,7 +57,7 @@ namespace QLDSV.DAL
             return Connection.GetDataToTable(sql);
         }
 
-        // ─── Lấy bảng điểm tổng hợp (pivot) của lớp học phần ────────────────────
+        
         public DataTable GetDiemByLopHocPhan(string maLHP)
         {
             string sql =
@@ -76,7 +76,7 @@ namespace QLDSV.DAL
             return Connection.GetDataToTable(sql);
         }
 
-        // ─── Lấy điểm của một sinh viên trong lớp học phần ───────────────────────
+        
         public DataTable GetDiemSinhVien(string maSV, string maLHP)
         {
             string sql =
@@ -85,25 +85,20 @@ namespace QLDSV.DAL
             return Connection.GetDataToTable(sql);
         }
 
-        // ─── Lấy MaGV theo MaTaiKhoan ─────────────────────────────────────────────
+        
         public string GetMaGVByTaiKhoan(string maTaiKhoan)
         {
             string sql = $"SELECT MaGV FROM GiangVien WHERE MaTaiKhoan = '{maTaiKhoan}'";
             return GetSingleValue(sql);
         }
 
-        // ─── Lấy MaGV theo TenDangNhap (fallback) ────────────────────────────────
         public string GetMaGVByTenDangNhap(string tenDangNhap)
         {
             string sql = $"SELECT MaGV FROM GiangVien WHERE MaGV = '{tenDangNhap}'";
             return GetSingleValue(sql);
         }
 
-        // ═══════════════════════════════════════════════════════════════════════════
-        // SINH VIÊN – Kết quả học tập
-        // ═══════════════════════════════════════════════════════════════════════════
-
-        // ─── Lấy MaSV và HoTen theo MaTaiKhoan ───────────────────────────────────
+        
         public DataTable GetThongTinSinhVienByTaiKhoan(string maTaiKhoan)
         {
             string sql =
@@ -113,7 +108,7 @@ namespace QLDSV.DAL
             return Connection.GetDataToTable(sql);
         }
 
-        /// <summary>Thông tin đầy đủ sinh viên để xuất bảng điểm.</summary>
+        
         public DataTable GetThongTinSinhVienDayDu(string maSV)
         {
             string sql =
@@ -127,7 +122,7 @@ namespace QLDSV.DAL
             return Connection.GetDataToTable(sql);
         }
 
-        // ─── Lấy danh sách NamHoc mà sinh viên có đăng ký lớp học phần ──────────
+        
         public DataTable GetNamHocBySinhVien(string maSV)
         {
             string sql =
@@ -141,11 +136,10 @@ namespace QLDSV.DAL
             return Connection.GetDataToTable(sql);
         }
 
-        // ─── Lấy bảng điểm của sinh viên theo năm học và học kỳ ─────────────────
-        // Trả về: MaMon, TenMon, SoTC, DiemCC, DiemKT1, DiemKT2, DiemThi
+        
         public DataTable GetBangDiemSinhVien(string maSV, string maNamHoc, string maLoaiHK)
         {
-            // Xây dựng điều kiện lọc linh hoạt
+            
             string whereNamHoc  = (maNamHoc  == "ALL") ? "" : $"  AND hknh.MaNamHoc = '{maNamHoc}' ";
             string whereLoaiHK  = (maLoaiHK  == "ALL") ? "" : $"  AND hknh.MaLoaiHK = '{maLoaiHK}' ";
 
@@ -171,7 +165,7 @@ namespace QLDSV.DAL
             return Connection.GetDataToTable(sql);
         }
 
-        // ─── Kiểm tra bản ghi điểm đã tồn tại chưa ───────────────────────────────
+        
         public bool KiemTraDiemTonTai(string maSV, string maLHP, string maLoaiDiem)
         {
             string sql =
@@ -181,7 +175,7 @@ namespace QLDSV.DAL
             return dt.Rows.Count > 0;
         }
 
-        // ─── Thêm mới điểm ────────────────────────────────────────────────────────
+        
         public void ThemDiem(string maSV, string maLHP, string maLoaiDiem, decimal diem)
         {
             string diemStr = diem.ToString(CultureInfo.InvariantCulture);
@@ -191,7 +185,7 @@ namespace QLDSV.DAL
             Connection.RunSql(sql);
         }
 
-        // ─── Cập nhật điểm ────────────────────────────────────────────────────────
+        
         public void CapNhatDiem(string maSV, string maLHP, string maLoaiDiem, decimal diem)
         {
             string diemStr = diem.ToString(CultureInfo.InvariantCulture);
@@ -201,7 +195,7 @@ namespace QLDSV.DAL
             Connection.RunSql(sql);
         }
 
-        // ─── Lưu hoặc cập nhật điểm (upsert) ─────────────────────────────────────
+        
         public void LuuHoacCapNhatDiem(string maSV, string maLHP, string maLoaiDiem, decimal diem)
         {
             if (KiemTraDiemTonTai(maSV, maLHP, maLoaiDiem))
@@ -222,38 +216,28 @@ namespace QLDSV.DAL
             return result;
         }
 
-        // ═══════════════════════════════════════════════════════════════════════════
-        // ADMIN – Theo dõi kết quả học tập
-        // ═══════════════════════════════════════════════════════════════════════════
-
-        // ─── Danh mục cho ComboBox Admin ─────────────────────────────────────────
-
-        /// <summary>Lấy danh sách năm học (MaNamHoc, TenNamHoc) cho ComboBox.</summary>
+        ///Lấy danh sách năm học
         public DataTable GetDanhSachNamHoc()
         {
             string sql = "SELECT MaNamHoc, TenNamHoc FROM NamHoc ORDER BY MaNamHoc DESC";
             return Connection.GetDataToTable(sql);
         }
 
-        /// <summary>Lấy danh sách loại học kỳ (MaLoaiHK, TenLoaiHK) cho ComboBox.</summary>
+        ///Lấy danh sách loại học kỳ 
         public DataTable GetDanhSachLoaiHocKy()
         {
             string sql = "SELECT MaLoaiHK, TenLoaiHK FROM LoaiHocKy ORDER BY MaLoaiHK";
             return Connection.GetDataToTable(sql);
         }
 
-        /// <summary>Lấy danh sách lớp niên chế (MaLopNienChe, TenLop) cho ComboBox.</summary>
+        ///Lấy danh sách lớp niên chế
         public DataTable GetDanhSachLopNienChe()
         {
             string sql = "SELECT MaLopNienChe, TenLop FROM LopNienChe ORDER BY MaLopNienChe";
             return Connection.GetDataToTable(sql);
         }
 
-        /// <summary>
-        /// Lấy danh sách tổng hợp kết quả học tập của sinh viên theo bộ lọc.
-        /// Truyền "ALL" để bỏ qua điều kiện tương ứng.
-        /// Trả về: MaSV, HoTen, TenLop, DTB10
-        /// </summary>
+        
         public DataTable GetKetQuaHocTapAdmin(
             string maNamHoc, string maLoaiHK, string maLopNienChe, string keyword)
         {
@@ -264,9 +248,7 @@ namespace QLDSV.DAL
                 : $" AND (sv.MaSV LIKE N'%{keyword.Replace("'","''")}%'" +
                   $" OR sv.HoTen LIKE N'%{keyword.Replace("'","''")}%')";
 
-            // CTE bước 1: tính điểm tổng kết từng môn (hệ 10) cho từng SV-LHP
-            // CTE bước 2: tính DTB10 có trọng số tín chỉ theo từng sinh viên
-            // Tránh nested aggregate (SUM(SoTC * MAX(...))) không hợp lệ trong SQL Server
+          
             string sql =
                 "WITH DiemMon AS ( " +
                 "  SELECT dklh.MaSV, lhp.MaMon, mh.SoTC, " +
@@ -300,11 +282,6 @@ namespace QLDSV.DAL
                 " ORDER BY sv.MaSV";
             return Connection.GetDataToTable(sql);
         }
-
-        /// <summary>
-        /// Lấy chi tiết điểm từng môn của một sinh viên theo bộ lọc.
-        /// Trả về: MaLHP, TenMon, SoTC, DiemCC, DiemKT1, DiemKT2, DiemThi
-        /// </summary>
         public DataTable GetChiTietDiemSinhVien(
             string maSV, string maNamHoc, string maLoaiHK)
         {

@@ -381,8 +381,8 @@ namespace QLDSV.GUI
                     btnLopnc.Click += (s, e) =>
                     {
                         SetActiveButton(btnLopnc);
-                        OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmCovanHoctap(),
-                            "Lớp cố vấn");
+                        //OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmCovanHoctap(),
+                           // "Lớp cố vấn");
                     };
 
                 if (btnLophp != null)
@@ -411,8 +411,8 @@ namespace QLDSV.GUI
                     btnCanhbao.Click += (s, e) =>
                     {
                         SetActiveButton(btnCanhbao);
-                        OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmCanhbaohocvu_GV(),
-                            "Cảnh báo học vụ");
+                        //OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmCanhbaohocvu_GV(),
+                         //   "Cảnh báo học vụ");
                     };
 
                 if (btnBaocao != null)

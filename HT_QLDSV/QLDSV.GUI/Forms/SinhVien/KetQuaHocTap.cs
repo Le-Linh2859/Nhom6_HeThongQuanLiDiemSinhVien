@@ -10,14 +10,14 @@ namespace QLDSV.GUI.Forms.SinhVien
 {
     public partial class KetQuaHocTap : Form
     {
-        // ── Dependencies ──────────────────────────────────────────────────────────
+        
         private readonly KetQuaBLL _bll = new KetQuaBLL();
 
-        // ── State ─────────────────────────────────────────────────────────────────
+        
         private string _maSV    = "";
         private bool   _loading = false;  // tránh trigger event khi đang nạp combo
 
-        // ─────────────────────────────────────────────────────────────────────────
+        
         public KetQuaHocTap()
         {
             InitializeComponent();
@@ -224,7 +224,6 @@ namespace QLDSV.GUI.Forms.SinhVien
                 }
             }
 
-            // ĐTB hệ 10 = Σ(TC_i × TK_i) / Σ(TC_i có điểm)
             double dtbHK10 = tcTichLuy > 0 ? sumWeighted / tcTichLuy : 0;
             double dtbHK4  = Quy4(dtbHK10);
 
@@ -234,9 +233,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             lblPhanloai.Text = tcTichLuy > 0 ? PhanLoaiGPA(dtbHK4)    : "--";
         }
 
-        // ── Helpers tính điểm ─────────────────────────────────────────────────────
-
-        /// <summary>Tính điểm tổng kết theo tỷ lệ trong bảng LoaiDiem (cần đủ 4 thành phần).</summary>
+        
         private static decimal? TinhDiemTongKet(decimal? cc, decimal? kt1, decimal? kt2, decimal? thi)
         {
             if (!cc.HasValue || !kt1.HasValue || !kt2.HasValue || !thi.HasValue)
@@ -245,12 +242,12 @@ namespace QLDSV.GUI.Forms.SinhVien
                 (double)cc.Value, (double)kt1.Value, (double)kt2.Value, (double)thi.Value);
         }
 
-        /// <summary>
+        
         /// Xếp loại chữ và quy đổi hệ 4 từ điểm tổng kết hệ 10.
         /// Thang: 9.5-10→A+(4.0) | 8.5-9.5→A(4.0) | 8.0-8.5→B+(3.5) |
         ///        7.0-8.0→B(3.0) | 6.5-7.0→C+(2.5) | 5.5-6.5→C(2.0) |
         ///        5.0-5.5→D+(1.5) | 4.0-5.0→D(1.0) | <4.0→F(0)
-        /// </summary>
+       
         private static string XepLoai(decimal d)
         {
             if (d >= 9.5m) return "A+";
@@ -264,7 +261,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             return "F";
         }
 
-        /// <summary>Quy đổi điểm hệ 10 → hệ 4 theo thang chuẩn.</summary>
+        
         private static double Quy4(double d10)
         {
             if (d10 >= 9.5) return 4.0;
@@ -278,11 +275,9 @@ namespace QLDSV.GUI.Forms.SinhVien
             return 0.0;
         }
 
-        /// <summary>
         /// Phân loại học lực theo GPA hệ 4.
         /// 3.6-4.0→Xuất sắc | 3.2-3.6→Giỏi | 2.5-3.2→Khá |
         /// 2.0-2.5→Trung bình | 1.0-2.0→Yếu | <1.0→Kém
-        /// </summary>
         private static string PhanLoaiGPA(double gpa4)
         {
             if (gpa4 >= 3.6) return "Xuất sắc";
@@ -293,7 +288,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             return "Kém";
         }
 
-        /// <summary>Màu sắc theo điểm tổng kết.</summary>
+        
         private static Color MauXepLoai(decimal d)
         {
             if (d >= 8.5m) return Color.FromArgb(0, 140, 0);
@@ -311,7 +306,7 @@ namespace QLDSV.GUI.Forms.SinhVien
         private static string FormatDiem(decimal? d)
             => d.HasValue ? d.Value.ToString("F1") : "--";
 
-        // ── Xuất bảng điểm (toàn bộ môn, không lọc năm học / học kỳ) ───────────────
+        
 
         private sealed class TongKetHocTap
         {
@@ -373,7 +368,7 @@ namespace QLDSV.GUI.Forms.SinhVien
             }
         }
 
-        /// <summary>Lấy điểm toàn bộ môn đã đăng ký — không áp dụng bộ lọc trên form.</summary>
+       
         private DataTable LayBangDiemXuatToanBo()
         {
             DataTable dt = _bll.GetBangDiemSinhVien(_maSV, "ALL", "ALL");

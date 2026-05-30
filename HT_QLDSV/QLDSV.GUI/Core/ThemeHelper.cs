@@ -162,10 +162,18 @@ namespace QLDSV.GUI
                 }
                 else if (control is Guna2GroupBox grpGuna)
                 {
+                    Color origBorder = grpGuna.CustomBorderColor;
+                    bool customHeader = origBorder != Color.Empty
+                        && origBorder != Color.FromArgb(220, 225, 235)
+                        && (origBorder.R + origBorder.G + origBorder.B) < 500;
+
                     grpGuna.FillColor = Color.White;
-                    grpGuna.Font = new Font("Segoe UI", 10, FontStyle.Bold | FontStyle.Italic);
-                    grpGuna.ForeColor = Color.FromArgb(31, 41, 55); // #1F2937
-                    grpGuna.CustomBorderColor = Color.FromArgb(220, 225, 235);
+                    if (!customHeader)
+                    {
+                        grpGuna.Font = new Font("Segoe UI", 10, FontStyle.Bold | FontStyle.Italic);
+                        grpGuna.ForeColor = Color.FromArgb(31, 41, 55);
+                        grpGuna.CustomBorderColor = Color.FromArgb(220, 225, 235);
+                    }
                 }
                 else if (control is GroupBox grpBox)
                 {
@@ -276,6 +284,27 @@ namespace QLDSV.GUI
             btn.MouseLeave += Button_MouseLeave;
         }
 
+        private static bool IsExplicitDesignerButtonColor(Color color)
+        {
+            if (color.A == 0 || color == Color.Transparent || color == SystemColors.Control)
+                return false;
+
+            // Các màu mặc định / placeholder — ThemeHelper được phép ghi đè theo text nút
+            if (color == Color.FromArgb(79, 93, 117)) return false;
+            if (color == Color.FromArgb(94, 148, 255)) return false;
+            if (color == Color.FromArgb(87, 123, 180)) return false;
+
+            return true;
+        }
+
+        private static Color DarkenColor(Color color, int amount = 20)
+        {
+            return Color.FromArgb(
+                Math.Max(0, color.R - amount),
+                Math.Max(0, color.G - amount),
+                Math.Max(0, color.B - amount));
+        }
+
         private static void ApplyGunaButtonTheme(Guna2Button btn)
         {
             // Kiểm tra xem đây có phải nút sidebar không (FillColor = Transparent)
@@ -288,12 +317,23 @@ namespace QLDSV.GUI
                 return;
             }
 
-            btn.BorderRadius = 5;
+            btn.BorderRadius = Math.Max(btn.BorderRadius, 5);
             btn.ForeColor = Color.White;
 
-            // Phân loại màu theo text của nút (ưu tiên cao nhất)
-            string text = btn.Text != null ? btn.Text.ToLower().Trim() : "";
             Color origColor = btn.FillColor;
+
+            // Giữ màu đã chọn trong Designer
+            if (IsExplicitDesignerButtonColor(origColor))
+            {
+                btn.HoverState.FillColor = DarkenColor(origColor);
+                ApplyGunaButtonFont(btn);
+                btn.DisabledState.FillColor = Color.FromArgb(189, 189, 189);
+                btn.DisabledState.ForeColor = Color.FromArgb(100, 100, 100);
+                return;
+            }
+
+            // Phân loại màu theo text của nút (form chưa tùy chỉnh màu trong Designer)
+            string text = btn.Text != null ? btn.Text.ToLower().Trim() : "";
 
             if (text.Contains("xóa") || text.Contains("xoa") || text.Contains("hủy") || text.Contains("huy") || text.Contains("từ chối"))
             {
@@ -340,6 +380,14 @@ namespace QLDSV.GUI
                 btn.HoverState.FillColor = Color.FromArgb(62, 78, 104);
             }
 
+            ApplyGunaButtonFont(btn);
+
+            btn.DisabledState.FillColor = Color.FromArgb(189, 189, 189);
+            btn.DisabledState.ForeColor = Color.FromArgb(100, 100, 100);
+        }
+
+        private static void ApplyGunaButtonFont(Guna2Button btn)
+        {
             // Tự động điều chỉnh font theo kích thước nút
             float fontSize;
             if (btn.Width < 65 || btn.Height < 25)
@@ -354,9 +402,6 @@ namespace QLDSV.GUI
                 fontSize = 10.5f;
 
             btn.Font = new Font("Segoe UI", fontSize, FontStyle.Bold);
-
-            btn.DisabledState.FillColor = Color.FromArgb(189, 189, 189);
-            btn.DisabledState.ForeColor = Color.FromArgb(100, 100, 100);
         }
 
         private static void Button_MouseEnter(object sender, EventArgs e)
@@ -390,6 +435,11 @@ namespace QLDSV.GUI
 
         private static void ConfigureDataGridView(DataGridView grid)
         {
+            Color designerHeader = grid.ColumnHeadersDefaultCellStyle.BackColor;
+            bool customHeader = designerHeader != Color.Empty
+                && designerHeader != SystemColors.Control
+                && designerHeader != Color.FromArgb(100, 88, 255);
+
             grid.BackgroundColor = Color.White;
             grid.AllowUserToAddRows = false;
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -399,24 +449,31 @@ namespace QLDSV.GUI
             grid.EnableHeadersVisualStyles = false;
             grid.BorderStyle = BorderStyle.None;
 
-            grid.ColumnHeadersHeight = 40;
-            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(100, 88, 255); // Indigo #6458FF
-            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(100, 88, 255);
-            grid.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
-            grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            grid.ColumnHeadersHeight = Math.Max(grid.ColumnHeadersHeight, 40);
+
+            if (!customHeader)
+            {
+                grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(100, 88, 255);
+                grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+                grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(100, 88, 255);
+                grid.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.White;
+                grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            }
 
             grid.DefaultCellStyle.BackColor = Color.White;
             grid.DefaultCellStyle.ForeColor = Color.Black;
-            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 216, 242); // Sky Blue #AED8F2
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(174, 216, 242);
             grid.DefaultCellStyle.SelectionForeColor = Color.Black;
             grid.DefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Regular);
 
             if (grid is Guna2DataGridView gunaGrid)
             {
-                gunaGrid.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-                gunaGrid.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-                gunaGrid.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                if (!customHeader)
+                {
+                    gunaGrid.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+                    gunaGrid.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+                    gunaGrid.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                }
 
                 gunaGrid.ThemeStyle.RowsStyle.BackColor = Color.White;
                 gunaGrid.ThemeStyle.RowsStyle.ForeColor = Color.Black;

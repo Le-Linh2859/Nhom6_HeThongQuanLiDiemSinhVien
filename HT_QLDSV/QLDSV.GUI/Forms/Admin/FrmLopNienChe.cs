@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace QLDSV.GUI
 {
-    public partial class FrmLopNienChe : Form
+    public partial class FrmLopNienChe : Form, IShellChildForm
     {
         private LopNienCheBLL bll = new LopNienCheBLL();
         private bool isAdding = false;
@@ -22,8 +22,6 @@ namespace QLDSV.GUI
         public FrmLopNienChe()
         {
             InitializeComponent();
-
-            SetupResponsiveLayout();
 
             ThemeHelper.ApplyTheme(this);
 
@@ -46,6 +44,19 @@ namespace QLDSV.GUI
                     txtTimKiem.ForeColor = Color.Gray;
                 }
             };
+
+            this.Resize += (s, e) => MakeLayoutResponsive();
+        }
+
+        public void OnEmbeddedInShell()
+        {
+            MinimumSize = Size.Empty;
+            AutoScroll = false;
+
+            if (Parent != null)
+                Parent.Resize += (s, e) => MakeLayoutResponsive();
+
+            MakeLayoutResponsive();
         }
 
         private void FrmLopNienChe_Load(object sender, EventArgs e)
@@ -64,26 +75,10 @@ namespace QLDSV.GUI
                 MessageBox.Show("Lỗi khởi tạo Form: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            DataGridViewLop.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            DataGridViewLop.ThemeStyle.HeaderStyle.ForeColor = Color.White;
             DataGridViewLop.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            MakeLayoutResponsive();
         }
 
-        private void SetupResponsiveLayout()
-        {
-            AutoSize = false;
-            MinimumSize = new Size(700, 500);
-            Padding = new Padding(8);
-
-            guna2HtmlLabel15.Visible = false;
-
-            groupBox1.Dock = DockStyle.Bottom;
-            groupBox1.Height = 250;
-
-            guna2Panel1.Dock = DockStyle.Fill;
-
-            DataGridViewLop.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-        }
 
         private void LoadData()
         {
@@ -158,7 +153,7 @@ namespace QLDSV.GUI
                 cboGiangVien.DisplayMember = "HoTen";
                 cboGiangVien.SelectedIndex = 0;
 
-                // Đăng ký sự kiện lọc sau khi nạp xong dữ liệu
+                
                 cboKhoa.SelectedIndexChanged += cboFilter_SelectedIndexChanged;
                 cboGiangVien.SelectedIndexChanged += cboFilter_SelectedIndexChanged;
             }
@@ -197,21 +192,20 @@ namespace QLDSV.GUI
             isAdding = false;
             isEditing = false;
 
-            // Khóa các trường nhập liệu
-            cboMaLopNC.Enabled = false; // Mã lớp
-            cboTenlop.Enabled = false; // Tên lớp
-            cboNienkhoa.Enabled = false; // Niên khóa
-            cboKhoa2.Enabled = false; // Khoa
-            cboCV.Enabled = false; // Cố vấn
+            
+            cboMaLopNC.Enabled = false; 
+            cboTenlop.Enabled = false; 
+            cboNienkhoa.Enabled = false; 
+            cboKhoa2.Enabled = false; 
+            cboCV.Enabled = false;
 
-            // Thiết lập trạng thái các nút
             btnThem.Enabled = true;
             btnSua.Enabled = true;
             btnLuu.Enabled = false;
             btnHuy.Enabled = false;
             btnReset.Enabled = false;
 
-            // Nạp lại chi tiết dòng đang chọn
+            
             if (DataGridViewLop.SelectedRows.Count > 0)
             {
                 DataGridViewLop_CellClick(null, null);
@@ -297,14 +291,14 @@ namespace QLDSV.GUI
             isAdding = false;
             isEditing = true;
 
-            // Mở khóa nhập liệu ngoại trừ Mã lớp (Khóa chính)
+            
             cboMaLopNC.Enabled = false;
             cboTenlop.Enabled = true;
             cboNienkhoa.Enabled = true;
             cboKhoa2.Enabled = true;
             cboCV.Enabled = true;
 
-            // Trạng thái các nút điều hướng (btnSua_Click)
+            
             btnThem.Enabled = false;
             btnSua.Enabled = false;
             btnLuu.Enabled = true;
@@ -414,7 +408,7 @@ namespace QLDSV.GUI
             cboGiangVien.SelectedIndexChanged -= cboFilter_SelectedIndexChanged;
 
             txtTimKiem.Text = "Tìm kiếm theo mã lớp, tên lớp ...";
-            txtTimKiem.ForeColor = Color.Gray;
+            
 
             cboKhoa.SelectedIndex = 0;
             cboGiangVien.SelectedIndex = 0;
@@ -491,6 +485,138 @@ namespace QLDSV.GUI
                 cboKhoa2.SelectedIndex = -1;
                 cboCV.SelectedIndex = -1;
             }
+        }
+
+        private void MakeLayoutResponsive()
+        {
+            try
+            {
+                ApplyShellSizing();
+                ApplyToolbarLayout();
+                ApplyDetailPanelLayout();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("MakeLayoutResponsive: " + ex.Message);
+            }
+        }
+
+        private void ApplyShellSizing()
+        {
+            if (ClientSize.Height <= 0) return;
+
+            int detailH = Math.Max(200, Math.Min(280, (int)(ClientSize.Height * 0.34)));
+            if (groupBox1 != null && groupBox1.Dock == DockStyle.Bottom)
+                groupBox1.Height = detailH;
+        }
+
+        private void ApplyToolbarLayout()
+        {
+            if (pnlToolbar == null) return;
+
+            const int pad = 20;
+            const int gap = 12;
+            const int rowTop = 40;
+            const int controlH = 36;
+            const int minSearch = 160;
+            const int minCombo = 130;
+
+            int clientW = pnlToolbar.ClientSize.Width;
+            int rightEdge = clientW - pad;
+
+            if (btnLammoi != null)
+                btnLammoi.Left = rightEdge - btnLammoi.Width;
+
+            int filterRight = (btnLammoi?.Left ?? rightEdge) - gap;
+            int available = filterRight - pad;
+            if (available < minSearch + minCombo * 2 + gap * 2)
+                return;
+
+            int searchW = Math.Max(minSearch, (int)(available * 0.28));
+            int remain = available - searchW - gap * 2;
+            int khoaW = Math.Max(minCombo, remain / 2);
+            int gvW = Math.Max(minCombo, remain - khoaW);
+
+            if (searchW + gap + khoaW + gap + gvW > available)
+            {
+                int overflow = searchW + gap + khoaW + gap + gvW - available;
+                searchW = Math.Max(minSearch, searchW - overflow);
+            }
+
+            if (txtTimKiem != null)
+                txtTimKiem.SetBounds(pad, rowTop, searchW, controlH);
+
+            if (cboKhoa != null)
+                cboKhoa.SetBounds(txtTimKiem.Right + gap, rowTop, khoaW, controlH);
+
+            if (guna2HtmlLabel5 != null && cboKhoa != null)
+                guna2HtmlLabel5.Left = cboKhoa.Left;
+
+            if (cboGiangVien != null && cboKhoa != null)
+                cboGiangVien.SetBounds(cboKhoa.Right + gap, rowTop - 1, gvW, controlH);
+
+            if (guna2HtmlLabel4 != null && cboGiangVien != null)
+                guna2HtmlLabel4.Left = cboGiangVien.Left;
+        }
+
+        private void ApplyDetailPanelLayout()
+        {
+            if (groupBox1 == null) return;
+
+            const int pad = 16;
+            const int leftLabelX = 8;
+            const int inputLeft = 152;
+            const int leftInputW = 260;
+            const int rightLabelW = 110;
+            const int midGap = 24;
+            const int controlH = 36;
+            const int btnH = 40;
+            const int btnGap = 12;
+
+            int clientW = groupBox1.ClientSize.Width;
+            int clientH = groupBox1.ClientSize.Height;
+
+            int rightLabelX = inputLeft + leftInputW + midGap;
+            int rightInputLeft = rightLabelX + rightLabelW;
+            int rightInputW = Math.Max(140, clientW - rightInputLeft - pad);
+
+            SetFieldRow(lblMalop, cboMaLopNC, leftLabelX, inputLeft, 48, leftInputW, controlH);
+            SetFieldRow(lblTenlop, cboTenlop, leftLabelX, inputLeft, 107, leftInputW, controlH);
+            SetFieldRow(lblNienkhoa, cboNienkhoa, leftLabelX, inputLeft, 169, leftInputW, controlH);
+
+            if (lblKhoa != null) lblKhoa.Left = rightLabelX;
+            if (cboKhoa2 != null) cboKhoa2.SetBounds(rightInputLeft, 48, rightInputW, controlH);
+
+            if (lblCovan != null) lblCovan.Left = rightLabelX;
+            if (cboCV != null) cboCV.SetBounds(rightInputLeft, 107, rightInputW, controlH);
+
+            int btnW = 100;
+            // Đặt từ phải sang trái: Reset → Hủy → Lưu → Sửa → Thêm (đúng thứ tự Designer)
+            var buttonsRightToLeft = new[] { btnReset, btnHuy, btnLuu, btnSua, btnThem };
+            int totalBtnWidth = btnW * buttonsRightToLeft.Length + btnGap * (buttonsRightToLeft.Length - 1);
+            int btnTop = clientH - pad - btnH;
+
+            int leftBlockRight = inputLeft + leftInputW;
+            if (leftBlockRight + 20 + totalBtnWidth > clientW - pad)
+                btnTop = Math.Max(169 + controlH + 12, btnTop);
+
+            int x = clientW - pad;
+            foreach (var btn in buttonsRightToLeft)
+            {
+                if (btn == null) continue;
+                x -= btnW;
+                btn.SetBounds(x, btnTop, btnW, btnH);
+                x -= btnGap;
+            }
+        }
+
+        private static void SetFieldRow(
+            Guna.UI2.WinForms.Guna2HtmlLabel label,
+            Control input,
+            int labelX, int inputX, int top, int inputW, int inputH)
+        {
+            if (label != null) label.Left = labelX;
+            if (input != null) input.SetBounds(inputX, top, inputW, inputH);
         }
     }
 }
