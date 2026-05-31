@@ -22,6 +22,113 @@ namespace QLDSV.BLL
         }
 
         /// <summary>
+        /// Lấy danh sách tất cả sinh viên.
+        /// </summary>
+        public DataTable GetSinhVien()
+        {
+            return _dal.GetSinhVien();
+        }
+
+        /// <summary>
+        /// Lấy danh sách khoa.
+        /// </summary>
+        public DataTable GetKhoa()
+        {
+            return _dal.GetKhoa();
+        }
+
+        /// <summary>
+        /// Lấy danh sách lớp niên chế theo mã khoa.
+        /// </summary>
+        /// <param name="maKhoa">Mã khoa (có thể là chuỗi rỗng để trả về danh sách trống)</param>
+        public DataTable GetLopNienChe(string maKhoa)
+        {
+            return _dal.GetLopNienChe(maKhoa);
+        }
+
+        /// <summary>
+        /// Lấy danh sách lớp niên chế theo mã khoa (được sử dụng để lọc trong combobox).
+        /// </summary>
+        /// <param name="maKhoa">Mã khoa</param>
+        public DataTable LoadLopNienCheTheoKhoa(string maKhoa)
+        {
+            return _dal.LoadLopNienCheTheoKhoa(maKhoa);
+        }
+
+        /// <summary>
+        /// Tạo mã sinh viên mới.
+        /// </summary>
+        public string TaoMaSVMoi()
+        {
+            return _dal.TaoMaSVMoi();
+        }
+
+        /// <summary>
+        /// Thêm sinh viên mới.
+        /// </summary>
+        public (bool success, string message) ThemSinhVien(string maSV, string hoTen, DateTime? ngaySinh, bool gioiTinh, string diaChi, string email, string soDT, string maLopNienChe, string nienKhoa)
+        {
+            // Validate input
+            string validationError = ValidateThongTin(soDT, email);
+            if (!string.IsNullOrEmpty(validationError))
+            {
+                return (false, validationError);
+            }
+
+            // Check for duplicate email
+            if (!string.IsNullOrEmpty(email) && IsDuplicateEmail(email, maSV))
+            {
+                return (false, "Email đã tồn tại.");
+            }
+
+            // Check for duplicate phone number
+            if (!string.IsNullOrEmpty(soDT) && IsDuplicateSoDT(soDT, maSV))
+            {
+                return (false, "Số điện thoại đã tồn tại.");
+            }
+
+            bool result = _dal.ThemSinhVien(maSV, hoTen, ngaySinh, gioiTinh, diaChi, email, soDT, maLopNienChe, nienKhoa);
+            return (result, result ? "Thêm sinh viên thành công." : "Thêm sinh viên thất bại.");
+        }
+
+        /// <summary>
+        /// Cập nhật thông tin sinh viên.
+        /// </summary>
+        public (bool success, string message) SuaSinhVien(string maSV, string hoTen, DateTime? ngaySinh, bool gioiTinh, string diaChi, string email, string soDT, string maLopNienChe, string nienKhoa)
+        {
+            // Validate input
+            string validationError = ValidateThongTin(soDT, email);
+            if (!string.IsNullOrEmpty(validationError))
+            {
+                return (false, validationError);
+            }
+
+            // Check for duplicate email (excluding current student)
+            if (!string.IsNullOrEmpty(email) && IsDuplicateEmail(email, maSV))
+            {
+                return (false, "Email đã tồn tại.");
+            }
+
+            // Check for duplicate phone number (excluding current student)
+            if (!string.IsNullOrEmpty(soDT) && IsDuplicateSoDT(soDT, maSV))
+            {
+                return (false, "Số điện thoại đã tồn tại.");
+            }
+
+            bool result = _dal.SuaSinhVien(maSV, hoTen, ngaySinh, gioiTinh, diaChi, email, soDT, maLopNienChe, nienKhoa);
+            return (result, result ? "Cập nhật sinh viên thành công." : "Cập nhật sinh viên thất bại.");
+        }
+
+        /// <summary>
+        /// Xóa sinh viên theo mã sinh viên.
+        /// </summary>
+        public (bool success, string message) XoaSinhVien(string maSV)
+        {
+            bool result = _dal.XoaSinhVien(maSV);
+            return (result, result ? "Xóa sinh viên thành công." : "Xóa sinh viên thất bại.");
+        }
+
+        /// <summary>
         /// Cập nhật thông tin sinh viên.
         /// </summary>
         public void UpdateThongTinSinhVien(string soDT, string email, string diaChi, string maSV)
