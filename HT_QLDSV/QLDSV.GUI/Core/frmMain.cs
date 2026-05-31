@@ -205,7 +205,6 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, true);
                 SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, true);
                 SetMenuRowVisibility(3, btnMon, guna2PictureBox4, true);
-                if (btnLopnc != null) btnLopnc.Text = "Lớp cố vấn";
                 SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, true);
                 SetMenuRowVisibility(5, btnLophp, guna2PictureBox6, true);
                 SetMenuRowVisibility(6, btnDangky, guna2PictureBox7, false);
@@ -215,6 +214,7 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(7, btnDiem, guna2PictureBox8, true);
 
                 SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, false);
+                SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, false);
                 SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
                 SetMenuRowVisibility(11, btnBaocao, guna2PictureBox12, false); // Tra cứu điểm / Báo cáo
             }
@@ -357,13 +357,6 @@ namespace QLDSV.GUI
                         SetActiveButton(btnMon);
                         OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmMonhoc_GV(),
                             "Môn Học");
-                    };
-                if (btnLopnc != null)
-                    btnLopnc.Click += (s, e) =>
-                    {
-                        SetActiveButton(btnLopnc);
-                       OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmCovanHoctap(),
-                           "Lớp cố vấn");
                     };
 
 
