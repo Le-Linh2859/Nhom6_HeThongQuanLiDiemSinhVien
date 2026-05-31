@@ -102,7 +102,12 @@ namespace QLDSV.GUI
                 WireUpSidebarEvents();
 
                 // 5. Mở form mặc định theo role sau khi đăng nhập
-                if (SessionHelper.MaVaiTro == "VT002")
+                if (SessionHelper.MaVaiTro == "VT001")
+                {
+                    SetActiveButton(btnBaocao);
+                    OpenChildForm(new frmBaoCaoThongKe(), "Báo cáo thống kê");
+                }
+                else if (SessionHelper.MaVaiTro == "VT002")
                 {
                     SetActiveButton(btnGiangvien);
                     OpenChildForm(new QLDSV.GUI.Forms.GiangVien.frmThongTinCaNhan_GV(), "Thông Tin Cá Nhân");
@@ -112,7 +117,7 @@ namespace QLDSV.GUI
                     SetActiveButton(btnSinhvien);
                     OpenChildForm(new QLDSV.GUI.Forms.SinhVien.frmThongTinCaNhan_SV(), "Thông Tin Cá Nhân");
                 }
-                // VT001 (Admin): không mở form con mặc định, hiển thị frmMain trống
+                
 
                 // 6. Nhấp vào ảnh đại diện hoặc Tên tài khoản để mở trang Thông tin tài khoản
                 if (guna2CirclePictureBox1 != null)
@@ -174,7 +179,7 @@ namespace QLDSV.GUI
             // Admin (VT001): Hiển thị tất cả, khôi phục hàng về mặc định
             if (role == "VT001")
             {
-                SetMenuRowVisibility(0, btnTongquan, guna2PictureBox1, true);
+                SetMenuRowVisibility(0, btnTongquan, guna2PictureBox1, false);
                 SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, true);
                 SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, true);
                 SetMenuRowVisibility(3, btnMon, guna2PictureBox4, true);

@@ -113,8 +113,6 @@ namespace QLDSV.GUI
             btnThem.Click += btnThem_Click;  // Wire nút Thêm
             btnXoa.Text = "Xóa";            // Sửa text sai trong Designer
 
-            // Gán sự kiện cho các nút điều hướng sidebar
-            WireSidebarEvents();
         }
 
         // =====================================================================
@@ -926,45 +924,6 @@ namespace QLDSV.GUI
             this.Close();
         }
 
-        private void WireSidebarEvents()
-        {
-            btnSinhvien.Click += (s, e) => { };
-
-            guna2Button7.Click += (s, e) =>
-            {
-                this.Hide();
-                new frmDangNhap().ShowDialog();
-                this.Close();
-            };
-
-            btnTongquan.Click += (s, e) => OpenForm(new frmTongQuan());
-            btnMon.Click += (s, e) => OpenForm(new frmMonhoc());
-            btnLopnc.Click += (s, e) => OpenForm(new FrmLopNienChe());
-            btnLophp.Click += (s, e) => OpenForm(new frmLophocphan());
-            btnDangky.Click += (s, e) => MessageBox.Show("Tính năng Đăng ký lớp đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnDiem.Click += (s, e) => MessageBox.Show("Tính năng Nhập điểm đang được phát triển!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            btnKetqua.Click += (s, e) => OpenForm(new frmTheoDoiDiem());
-            btnCanhbao.Click += (s, e) => OpenForm(new frmCanhBaoHocVu());
-            btnPhuckhao.Click += (s, e) =>
-            {
-                if (SessionHelper.MaVaiTro == "VT001")
-                    OpenForm(new frmPhucKhao_Admin());
-                else if (SessionHelper.MaVaiTro == "VT002")
-                    OpenForm(new QLDSV.GUI.Forms.GiangVien.frmPhucKhao_GV());
-                else if (SessionHelper.MaVaiTro == "VT003")
-                    OpenForm(new QLDSV.GUI.Forms.SinhVien.frmPhucKhao_SV());
-            };
-            btnBaocao.Click += (s, e) => OpenForm(new frmBaoCaoThongKe());
-            btnGiangvien.Click += (s, e) => OpenForm(new frmGiangvien());
-        }
-
-        // =====================================================================
-        //  EMPTY EVENT HANDLERS REQUIRED BY DESIGNER
-        // =====================================================================
-        private void label3_Click(object sender, EventArgs e) { }
-        private void label4_Click(object sender, EventArgs e) { }
-        private void guna2ImageButton1_Click(object sender, EventArgs e) { }
-        // Handlers required by designer (old control names kept for compatibility)
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e) { }
         private void guna2Button11_Click(object sender, EventArgs e) { }
         private void guna2HtmlLabel7_Click(object sender, EventArgs e) { }
