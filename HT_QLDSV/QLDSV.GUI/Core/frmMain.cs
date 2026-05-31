@@ -179,7 +179,7 @@ namespace QLDSV.GUI
             // Admin (VT001): Hiển thị tất cả, khôi phục hàng về mặc định
             if (role == "VT001")
             {
-                SetMenuRowVisibility(0, btnTongquan, guna2PictureBox1, false);
+                SetMenuRowVisibility(0, btnBaocao, guna2PictureBox1, true);
                 SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, true);
                 SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, true);
                 SetMenuRowVisibility(3, btnMon, guna2PictureBox4, true);
@@ -194,14 +194,14 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, true);
                 SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, true);
                 SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
-                SetMenuRowVisibility(11, btnBaocao, guna2PictureBox12, true);
+                
                 return;
             }
 
             // Giảng viên (VT002): Môn học, Giảng viên, Lớp học phần, Sinh viên, Nhập điểm, Tra cứu điểm, Phúc khảo
             if (role == "VT002")
             {
-                SetMenuRowVisibility(0, btnTongquan, guna2PictureBox1, false);
+                SetMenuRowVisibility(0, btnBaocao, guna2PictureBox1, false);
                 SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, true);
                 SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, true);
                 SetMenuRowVisibility(3, btnMon, guna2PictureBox4, true);
@@ -216,12 +216,12 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, false);
                 SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, false);
                 SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
-                SetMenuRowVisibility(11, btnBaocao, guna2PictureBox12, false); // Tra cứu điểm / Báo cáo
+               
             }
             // Sinh viên (VT003): Môn học, Giảng viên, Lớp học phần, Kết quả học tập, Phúc khảo, Cảnh báo học vụ, Tra cứu điểm
             else if (role == "VT003")
             {
-                SetMenuRowVisibility(0, btnTongquan, guna2PictureBox1, false);
+                SetMenuRowVisibility(0, btnBaocao, guna2PictureBox1, false);
                 SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, false);
                 SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, true);
                 SetMenuRowVisibility(3, btnMon, guna2PictureBox4, true);
@@ -232,7 +232,7 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(8, btnKetqua, guna2PictureBox9, true);
                 SetMenuRowVisibility(9, btnCanhbao, guna2PictureBox10, true);
                 SetMenuRowVisibility(10, btnPhuckhao, guna2PictureBox11, true);
-                SetMenuRowVisibility(11, btnBaocao, guna2PictureBox12, false); // Tra cứu điểm / Báo cáo
+              
             }
         }
 
@@ -245,12 +245,6 @@ namespace QLDSV.GUI
             // =========================
             if (role == "VT001")
             {
-                if (btnTongquan != null)
-                    btnTongquan.Click += (s, e) =>
-                    {
-                        SetActiveButton(btnTongquan);
-                        OpenChildForm(new frmTongQuan(), "Tổng Quan");
-                    };
 
                 if (btnGiangvien != null)
                     btnGiangvien.Click += (s, e) =>
@@ -488,7 +482,7 @@ namespace QLDSV.GUI
         {
             var allButtons = new[]
             {
-                btnTongquan, btnGiangvien, btnSinhvien, btnMon,
+                btnGiangvien, btnSinhvien, btnMon,
                 btnLopnc, btnLophp, btnDangky, btnDiem,
                 btnKetqua, btnCanhbao, btnPhuckhao, btnBaocao
             };
