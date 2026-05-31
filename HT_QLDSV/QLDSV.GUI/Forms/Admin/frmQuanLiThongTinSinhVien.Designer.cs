@@ -95,8 +95,9 @@ namespace QLDSV.GUI
             this.guna2GroupBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2GroupBox2.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.guna2GroupBox2.Location = new System.Drawing.Point(0, 0);
+            this.guna2GroupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2GroupBox2.Name = "guna2GroupBox2";
-            this.guna2GroupBox2.Size = new System.Drawing.Size(755, 355);
+            this.guna2GroupBox2.Size = new System.Drawing.Size(1007, 437);
             this.guna2GroupBox2.TabIndex = 70;
             this.guna2GroupBox2.Text = "THÔNG TIN SINH VIÊN";
             this.guna2GroupBox2.TextOffset = new System.Drawing.Point(0, -9);
@@ -114,9 +115,10 @@ namespace QLDSV.GUI
             this.btnXuatExcel.FillColor = System.Drawing.Color.Green;
             this.btnXuatExcel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXuatExcel.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnXuatExcel.Location = new System.Drawing.Point(148, 316);
+            this.btnXuatExcel.Location = new System.Drawing.Point(197, 389);
+            this.btnXuatExcel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnXuatExcel.Name = "btnXuatExcel";
-            this.btnXuatExcel.Size = new System.Drawing.Size(85, 31);
+            this.btnXuatExcel.Size = new System.Drawing.Size(113, 38);
             this.btnXuatExcel.TabIndex = 69;
             this.btnXuatExcel.Text = "Xuất Excel";
             // 
@@ -125,7 +127,7 @@ namespace QLDSV.GUI
             this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.ColumnCount = 5;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 43F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22F));
@@ -135,11 +137,12 @@ namespace QLDSV.GUI
             this.tableLayoutPanel2.Controls.Add(this.cboTimKhoa, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtTimKiem, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.cboTimLop, 3, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(19, 22);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(25, 27);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(724, 40);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(965, 49);
             this.tableLayoutPanel2.TabIndex = 68;
             // 
             // cboTimNienKhoa
@@ -154,9 +157,10 @@ namespace QLDSV.GUI
             this.cboTimNienKhoa.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboTimNienKhoa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cboTimNienKhoa.ItemHeight = 30;
-            this.cboTimNienKhoa.Location = new System.Drawing.Point(581, 3);
+            this.cboTimNienKhoa.Location = new System.Drawing.Point(773, 4);
+            this.cboTimNienKhoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboTimNienKhoa.Name = "cboTimNienKhoa";
-            this.cboTimNienKhoa.Size = new System.Drawing.Size(140, 36);
+            this.cboTimNienKhoa.Size = new System.Drawing.Size(188, 36);
             this.cboTimNienKhoa.TabIndex = 65;
             // 
             // guna2TextBox2
@@ -175,11 +179,12 @@ namespace QLDSV.GUI
             this.guna2TextBox2.IconRight = ((System.Drawing.Image)(resources.GetObject("guna2TextBox2.IconRight")));
             this.guna2TextBox2.IconRightOffset = new System.Drawing.Point(5, 0);
             this.guna2TextBox2.IconRightSize = new System.Drawing.Size(13, 13);
-            this.guna2TextBox2.Location = new System.Drawing.Point(3, 3);
+            this.guna2TextBox2.Location = new System.Drawing.Point(4, 4);
+            this.guna2TextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2TextBox2.Name = "guna2TextBox2";
             this.guna2TextBox2.PlaceholderText = "Tìm kiếm theo mã lớp, tên lớp ...";
             this.guna2TextBox2.SelectedText = "";
-            this.guna2TextBox2.Size = new System.Drawing.Size(26, 34);
+            this.guna2TextBox2.Size = new System.Drawing.Size(35, 41);
             this.guna2TextBox2.TabIndex = 64;
             // 
             // cboTimKhoa
@@ -194,9 +199,10 @@ namespace QLDSV.GUI
             this.cboTimKhoa.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboTimKhoa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cboTimKhoa.ItemHeight = 30;
-            this.cboTimKhoa.Location = new System.Drawing.Point(277, 3);
+            this.cboTimKhoa.Location = new System.Drawing.Point(369, 4);
+            this.cboTimKhoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboTimKhoa.Name = "cboTimKhoa";
-            this.cboTimKhoa.Size = new System.Drawing.Size(146, 36);
+            this.cboTimKhoa.Size = new System.Drawing.Size(194, 36);
             this.cboTimKhoa.TabIndex = 62;
             // 
             // txtTimKiem
@@ -212,11 +218,12 @@ namespace QLDSV.GUI
             this.txtTimKiem.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtTimKiem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtTimKiem.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtTimKiem.Location = new System.Drawing.Point(35, 3);
+            this.txtTimKiem.Location = new System.Drawing.Point(47, 5);
+            this.txtTimKiem.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.PlaceholderText = "Tìm tên, mã sinh viên...";
             this.txtTimKiem.SelectedText = "";
-            this.txtTimKiem.Size = new System.Drawing.Size(236, 34);
+            this.txtTimKiem.Size = new System.Drawing.Size(314, 39);
             this.txtTimKiem.TabIndex = 60;
             // 
             // cboTimLop
@@ -231,9 +238,10 @@ namespace QLDSV.GUI
             this.cboTimLop.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboTimLop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cboTimLop.ItemHeight = 30;
-            this.cboTimLop.Location = new System.Drawing.Point(429, 3);
+            this.cboTimLop.Location = new System.Drawing.Point(571, 4);
+            this.cboTimLop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboTimLop.Name = "cboTimLop";
-            this.cboTimLop.Size = new System.Drawing.Size(146, 36);
+            this.cboTimLop.Size = new System.Drawing.Size(194, 36);
             this.cboTimLop.TabIndex = 61;
             // 
             // dgvSinhVien
@@ -244,9 +252,11 @@ namespace QLDSV.GUI
             this.dgvSinhVien.BackgroundColor = System.Drawing.Color.White;
             this.dgvSinhVien.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvSinhVien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSinhVien.Location = new System.Drawing.Point(19, 68);
+            this.dgvSinhVien.Location = new System.Drawing.Point(25, 84);
+            this.dgvSinhVien.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvSinhVien.Name = "dgvSinhVien";
-            this.dgvSinhVien.Size = new System.Drawing.Size(724, 243);
+            this.dgvSinhVien.RowHeadersWidth = 51;
+            this.dgvSinhVien.Size = new System.Drawing.Size(965, 299);
             this.dgvSinhVien.TabIndex = 64;
             this.dgvSinhVien.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
@@ -263,10 +273,10 @@ namespace QLDSV.GUI
             this.btnTrangSau.FillColor = System.Drawing.Color.White;
             this.btnTrangSau.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnTrangSau.ForeColor = System.Drawing.Color.Black;
-            this.btnTrangSau.Location = new System.Drawing.Point(697, 316);
-            this.btnTrangSau.Margin = new System.Windows.Forms.Padding(2);
+            this.btnTrangSau.Location = new System.Drawing.Point(929, 389);
+            this.btnTrangSau.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTrangSau.Name = "btnTrangSau";
-            this.btnTrangSau.Size = new System.Drawing.Size(46, 21);
+            this.btnTrangSau.Size = new System.Drawing.Size(61, 26);
             this.btnTrangSau.TabIndex = 66;
             this.btnTrangSau.Text = ">>";
             this.btnTrangSau.Click += new System.EventHandler(this.guna2Button11_Click);
@@ -277,10 +287,10 @@ namespace QLDSV.GUI
             this.lblSoTrang.BackColor = System.Drawing.Color.Transparent;
             this.lblSoTrang.Font = new System.Drawing.Font("Segoe UI Semibold", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSoTrang.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblSoTrang.Location = new System.Drawing.Point(682, 319);
-            this.lblSoTrang.Margin = new System.Windows.Forms.Padding(2);
+            this.lblSoTrang.Location = new System.Drawing.Point(909, 393);
+            this.lblSoTrang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lblSoTrang.Name = "lblSoTrang";
-            this.lblSoTrang.Size = new System.Drawing.Size(7, 15);
+            this.lblSoTrang.Size = new System.Drawing.Size(8, 19);
             this.lblSoTrang.TabIndex = 67;
             this.lblSoTrang.Text = "1";
             this.lblSoTrang.Click += new System.EventHandler(this.guna2HtmlLabel7_Click);
@@ -297,9 +307,10 @@ namespace QLDSV.GUI
             this.btnNhapExcel.FillColor = System.Drawing.Color.Green;
             this.btnNhapExcel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNhapExcel.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnNhapExcel.Location = new System.Drawing.Point(521, 316);
+            this.btnNhapExcel.Location = new System.Drawing.Point(695, 389);
+            this.btnNhapExcel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNhapExcel.Name = "btnNhapExcel";
-            this.btnNhapExcel.Size = new System.Drawing.Size(101, 31);
+            this.btnNhapExcel.Size = new System.Drawing.Size(135, 38);
             this.btnNhapExcel.TabIndex = 70;
             this.btnNhapExcel.Text = "Nhập Excel";
             // 
@@ -316,10 +327,10 @@ namespace QLDSV.GUI
             this.btnTrangTruoc.FillColor = System.Drawing.Color.White;
             this.btnTrangTruoc.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnTrangTruoc.ForeColor = System.Drawing.Color.Black;
-            this.btnTrangTruoc.Location = new System.Drawing.Point(627, 316);
-            this.btnTrangTruoc.Margin = new System.Windows.Forms.Padding(2);
+            this.btnTrangTruoc.Location = new System.Drawing.Point(836, 389);
+            this.btnTrangTruoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTrangTruoc.Name = "btnTrangTruoc";
-            this.btnTrangTruoc.Size = new System.Drawing.Size(46, 21);
+            this.btnTrangTruoc.Size = new System.Drawing.Size(61, 26);
             this.btnTrangTruoc.TabIndex = 65;
             this.btnTrangTruoc.Text = "<<";
             this.btnTrangTruoc.Click += new System.EventHandler(this.guna2Button9_Click);
@@ -336,9 +347,10 @@ namespace QLDSV.GUI
             this.btnThem.FillColor = System.Drawing.Color.RoyalBlue;
             this.btnThem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.btnThem.Location = new System.Drawing.Point(19, 316);
+            this.btnThem.Location = new System.Drawing.Point(25, 389);
+            this.btnThem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(123, 31);
+            this.btnThem.Size = new System.Drawing.Size(164, 38);
             this.btnThem.TabIndex = 63;
             this.btnThem.Text = "+ Thêm sinh viên";
             this.btnThem.Click += new System.EventHandler(this.guna2Button1_Click);
@@ -355,9 +367,10 @@ namespace QLDSV.GUI
             this.guna2GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2GroupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2GroupBox1.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.guna2GroupBox1.Location = new System.Drawing.Point(0, 355);
+            this.guna2GroupBox1.Location = new System.Drawing.Point(0, 437);
+            this.guna2GroupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2GroupBox1.Name = "guna2GroupBox1";
-            this.guna2GroupBox1.Size = new System.Drawing.Size(755, 319);
+            this.guna2GroupBox1.Size = new System.Drawing.Size(1007, 393);
             this.guna2GroupBox1.TabIndex = 71;
             this.guna2GroupBox1.Text = "THÔNG TIN SINH VIÊN";
             this.guna2GroupBox1.TextOffset = new System.Drawing.Point(0, -9);
@@ -375,9 +388,10 @@ namespace QLDSV.GUI
             this.btnXoa.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(87)))), ((int)(((byte)(87)))));
             this.btnXoa.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnXoa.ForeColor = System.Drawing.Color.White;
-            this.btnXoa.Location = new System.Drawing.Point(527, 278);
+            this.btnXoa.Location = new System.Drawing.Point(703, 342);
+            this.btnXoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(68, 26);
+            this.btnXoa.Size = new System.Drawing.Size(91, 32);
             this.btnXoa.TabIndex = 78;
             this.btnXoa.Text = "Khóa";
             // 
@@ -393,9 +407,10 @@ namespace QLDSV.GUI
             this.btnHuy.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnHuy.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnHuy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(79)))), ((int)(((byte)(79)))));
-            this.btnHuy.Location = new System.Drawing.Point(601, 278);
+            this.btnHuy.Location = new System.Drawing.Point(801, 342);
+            this.btnHuy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnHuy.Name = "btnHuy";
-            this.btnHuy.Size = new System.Drawing.Size(68, 26);
+            this.btnHuy.Size = new System.Drawing.Size(91, 32);
             this.btnHuy.TabIndex = 77;
             this.btnHuy.Text = "Hủy";
             this.btnHuy.Click += new System.EventHandler(this.guna2Button6_Click);
@@ -413,9 +428,10 @@ namespace QLDSV.GUI
             this.btnLuu.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(123)))), ((int)(((byte)(255)))));
             this.btnLuu.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnLuu.ForeColor = System.Drawing.Color.White;
-            this.btnLuu.Location = new System.Drawing.Point(675, 278);
+            this.btnLuu.Location = new System.Drawing.Point(900, 342);
+            this.btnLuu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new System.Drawing.Size(68, 26);
+            this.btnLuu.Size = new System.Drawing.Size(91, 32);
             this.btnLuu.TabIndex = 76;
             this.btnLuu.Text = "Lưu";
             // 
@@ -432,9 +448,10 @@ namespace QLDSV.GUI
             this.btnSua.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(153)))), ((int)(((byte)(74)))));
             this.btnSua.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnSua.ForeColor = System.Drawing.Color.White;
-            this.btnSua.Location = new System.Drawing.Point(453, 278);
+            this.btnSua.Location = new System.Drawing.Point(604, 342);
+            this.btnSua.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(68, 26);
+            this.btnSua.Size = new System.Drawing.Size(91, 32);
             this.btnSua.TabIndex = 75;
             this.btnSua.Text = "Sửa";
             // 
@@ -446,10 +463,10 @@ namespace QLDSV.GUI
             this.tableLayoutPanel3.ColumnCount = 6;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.52055F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.47945F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 17F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 101F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 143F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 77F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
             this.tableLayoutPanel3.Controls.Add(this.label5, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.label14, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.txtMaSV, 1, 0);
@@ -471,7 +488,8 @@ namespace QLDSV.GUI
             this.tableLayoutPanel3.Controls.Add(this.txtSoDT, 4, 3);
             this.tableLayoutPanel3.Controls.Add(this.radioButton2, 4, 1);
             this.tableLayoutPanel3.Controls.Add(this.rdoNu, 5, 1);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(9, 23);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(12, 28);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 6;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -480,7 +498,7 @@ namespace QLDSV.GUI
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(743, 241);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(991, 297);
             this.tableLayoutPanel3.TabIndex = 68;
             this.tableLayoutPanel3.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
             // 
@@ -488,9 +506,10 @@ namespace QLDSV.GUI
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(3, 37);
+            this.label5.Location = new System.Drawing.Point(4, 48);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 17);
+            this.label5.Size = new System.Drawing.Size(87, 23);
             this.label5.TabIndex = 67;
             this.label5.Text = "Họ và tên";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -499,9 +518,10 @@ namespace QLDSV.GUI
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(3, 0);
+            this.label14.Location = new System.Drawing.Point(4, 0);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(87, 17);
+            this.label14.Size = new System.Drawing.Size(110, 23);
             this.label14.TabIndex = 66;
             this.label14.Text = "Mã sinh viên";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -518,11 +538,12 @@ namespace QLDSV.GUI
             this.txtMaSV.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtMaSV.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtMaSV.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMaSV.Location = new System.Drawing.Point(191, 3);
+            this.txtMaSV.Location = new System.Drawing.Point(255, 5);
+            this.txtMaSV.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtMaSV.Name = "txtMaSV";
             this.txtMaSV.PlaceholderText = "Mã sinh viên";
             this.txtMaSV.SelectedText = "";
-            this.txtMaSV.Size = new System.Drawing.Size(156, 31);
+            this.txtMaSV.Size = new System.Drawing.Size(208, 38);
             this.txtMaSV.TabIndex = 60;
             this.txtMaSV.TextChanged += new System.EventHandler(this.guna2TextBox4_TextChanged);
             // 
@@ -538,20 +559,22 @@ namespace QLDSV.GUI
             this.txtHoTen.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtHoTen.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtHoTen.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtHoTen.Location = new System.Drawing.Point(191, 40);
+            this.txtHoTen.Location = new System.Drawing.Point(255, 53);
+            this.txtHoTen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtHoTen.Name = "txtHoTen";
             this.txtHoTen.PlaceholderText = "Họ và tên";
             this.txtHoTen.SelectedText = "";
-            this.txtHoTen.Size = new System.Drawing.Size(156, 31);
+            this.txtHoTen.Size = new System.Drawing.Size(208, 38);
             this.txtHoTen.TabIndex = 69;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(3, 74);
+            this.label13.Location = new System.Drawing.Point(4, 96);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(51, 17);
+            this.label13.Size = new System.Drawing.Size(65, 23);
             this.label13.TabIndex = 71;
             this.label13.Text = "Địa chỉ";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -569,20 +592,22 @@ namespace QLDSV.GUI
             this.txtDiaChi.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtDiaChi.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtDiaChi.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtDiaChi.Location = new System.Drawing.Point(191, 77);
+            this.txtDiaChi.Location = new System.Drawing.Point(255, 101);
+            this.txtDiaChi.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.PlaceholderText = "Số nhà, xã, quận. thành phố";
             this.txtDiaChi.SelectedText = "";
-            this.txtDiaChi.Size = new System.Drawing.Size(473, 31);
+            this.txtDiaChi.Size = new System.Drawing.Size(631, 38);
             this.txtDiaChi.TabIndex = 72;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(3, 148);
+            this.label12.Location = new System.Drawing.Point(4, 192);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(39, 17);
+            this.label12.Size = new System.Drawing.Size(50, 23);
             this.label12.TabIndex = 75;
             this.label12.Text = "Khoa";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -599,9 +624,10 @@ namespace QLDSV.GUI
             this.cboKhoa.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboKhoa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cboKhoa.ItemHeight = 30;
-            this.cboKhoa.Location = new System.Drawing.Point(191, 151);
+            this.cboKhoa.Location = new System.Drawing.Point(255, 196);
+            this.cboKhoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboKhoa.Name = "cboKhoa";
-            this.cboKhoa.Size = new System.Drawing.Size(193, 36);
+            this.cboKhoa.Size = new System.Drawing.Size(256, 36);
             this.cboKhoa.TabIndex = 65;
             this.cboKhoa.SelectedIndexChanged += new System.EventHandler(this.guna2ComboBox4_SelectedIndexChanged);
             // 
@@ -617,20 +643,22 @@ namespace QLDSV.GUI
             this.txtEmail.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtEmail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtEmail.Location = new System.Drawing.Point(191, 114);
+            this.txtEmail.Location = new System.Drawing.Point(255, 149);
+            this.txtEmail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.PlaceholderText = "";
             this.txtEmail.SelectedText = "";
-            this.txtEmail.Size = new System.Drawing.Size(156, 31);
+            this.txtEmail.Size = new System.Drawing.Size(208, 38);
             this.txtEmail.TabIndex = 81;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 111);
+            this.label10.Location = new System.Drawing.Point(4, 144);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(42, 17);
+            this.label10.Size = new System.Drawing.Size(54, 23);
             this.label10.TabIndex = 73;
             this.label10.Text = "Email";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -639,9 +667,10 @@ namespace QLDSV.GUI
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(443, 0);
+            this.label6.Location = new System.Drawing.Point(590, 0);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 17);
+            this.label6.Size = new System.Drawing.Size(89, 23);
             this.label6.TabIndex = 68;
             this.label6.Text = "Ngày sinh";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -650,9 +679,10 @@ namespace QLDSV.GUI
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(443, 37);
+            this.label15.Location = new System.Drawing.Point(590, 48);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(62, 17);
+            this.label15.Size = new System.Drawing.Size(80, 23);
             this.label15.TabIndex = 87;
             this.label15.Text = "Giới tính";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -661,9 +691,10 @@ namespace QLDSV.GUI
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(443, 111);
+            this.label11.Location = new System.Drawing.Point(590, 144);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(90, 17);
+            this.label11.Size = new System.Drawing.Size(116, 23);
             this.label11.TabIndex = 74;
             this.label11.Text = "Số điện thoại";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -672,9 +703,10 @@ namespace QLDSV.GUI
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(443, 148);
+            this.label7.Location = new System.Drawing.Point(590, 192);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(87, 17);
+            this.label7.Size = new System.Drawing.Size(112, 23);
             this.label7.TabIndex = 76;
             this.label7.Text = "Lớp niên chế";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -691,9 +723,10 @@ namespace QLDSV.GUI
             this.cboLopNienChe.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboLopNienChe.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cboLopNienChe.ItemHeight = 30;
-            this.cboLopNienChe.Location = new System.Drawing.Point(544, 151);
+            this.cboLopNienChe.Location = new System.Drawing.Point(725, 196);
+            this.cboLopNienChe.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboLopNienChe.Name = "cboLopNienChe";
-            this.cboLopNienChe.Size = new System.Drawing.Size(156, 36);
+            this.cboLopNienChe.Size = new System.Drawing.Size(207, 36);
             this.cboLopNienChe.TabIndex = 61;
             this.cboLopNienChe.SelectedIndexChanged += new System.EventHandler(this.guna2ComboBox6_SelectedIndexChanged);
             // 
@@ -701,9 +734,10 @@ namespace QLDSV.GUI
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(3, 190);
+            this.label9.Location = new System.Drawing.Point(4, 236);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(71, 17);
+            this.label9.Size = new System.Drawing.Size(91, 23);
             this.label9.TabIndex = 78;
             this.label9.Text = "Niên khóa";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -720,9 +754,10 @@ namespace QLDSV.GUI
             this.cboNienKhoa.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboNienKhoa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cboNienKhoa.ItemHeight = 30;
-            this.cboNienKhoa.Location = new System.Drawing.Point(191, 193);
+            this.cboNienKhoa.Location = new System.Drawing.Point(255, 240);
+            this.cboNienKhoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cboNienKhoa.Name = "cboNienKhoa";
-            this.cboNienKhoa.Size = new System.Drawing.Size(193, 36);
+            this.cboNienKhoa.Size = new System.Drawing.Size(256, 36);
             this.cboNienKhoa.TabIndex = 84;
             // 
             // txtNgaySinh
@@ -738,11 +773,12 @@ namespace QLDSV.GUI
             this.txtNgaySinh.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtNgaySinh.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtNgaySinh.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtNgaySinh.Location = new System.Drawing.Point(544, 3);
+            this.txtNgaySinh.Location = new System.Drawing.Point(725, 5);
+            this.txtNgaySinh.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNgaySinh.Name = "txtNgaySinh";
             this.txtNgaySinh.PlaceholderText = "đ/mm/yyyy";
             this.txtNgaySinh.SelectedText = "";
-            this.txtNgaySinh.Size = new System.Drawing.Size(193, 31);
+            this.txtNgaySinh.Size = new System.Drawing.Size(257, 38);
             this.txtNgaySinh.TabIndex = 70;
             // 
             // txtSoDT
@@ -758,20 +794,22 @@ namespace QLDSV.GUI
             this.txtSoDT.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtSoDT.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtSoDT.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtSoDT.Location = new System.Drawing.Point(544, 114);
+            this.txtSoDT.Location = new System.Drawing.Point(725, 149);
+            this.txtSoDT.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtSoDT.Name = "txtSoDT";
             this.txtSoDT.PlaceholderText = "";
             this.txtSoDT.SelectedText = "";
-            this.txtSoDT.Size = new System.Drawing.Size(193, 31);
+            this.txtSoDT.Size = new System.Drawing.Size(257, 38);
             this.txtSoDT.TabIndex = 86;
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.radioButton2.Location = new System.Drawing.Point(544, 40);
+            this.radioButton2.Location = new System.Drawing.Point(725, 52);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(52, 20);
+            this.radioButton2.Size = new System.Drawing.Size(69, 25);
             this.radioButton2.TabIndex = 88;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Nam";
@@ -781,9 +819,10 @@ namespace QLDSV.GUI
             // 
             this.rdoNu.AutoSize = true;
             this.rdoNu.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.rdoNu.Location = new System.Drawing.Point(602, 40);
+            this.rdoNu.Location = new System.Drawing.Point(802, 52);
+            this.rdoNu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rdoNu.Name = "rdoNu";
-            this.rdoNu.Size = new System.Drawing.Size(48, 20);
+            this.rdoNu.Size = new System.Drawing.Size(61, 25);
             this.rdoNu.TabIndex = 89;
             this.rdoNu.TabStop = true;
             this.rdoNu.Text = "Nữ";
@@ -820,11 +859,12 @@ namespace QLDSV.GUI
             // 
             // frmQuanLiThongTinSinhVien
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(755, 674);
+            this.ClientSize = new System.Drawing.Size(1007, 830);
             this.Controls.Add(this.guna2GroupBox1);
             this.Controls.Add(this.guna2GroupBox2);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmQuanLiThongTinSinhVien";
             this.Text = "QUẢN LÍ THÔNG TIN SINH VIÊN";
             this.Load += new System.EventHandler(this.frmQuanLiThongTinSinhVien_Load);
