@@ -206,7 +206,33 @@ namespace QLDSV.DAL
         /// </summary>
         public bool XoaSinhVien(string maSV)
         {
-            string sql = $"DELETE FROM SinhVien WHERE MaSV = '{maSV}'";
+            string sql = $@"
+                DECLARE @MaTK NVARCHAR(50) = NULL;
+                SELECT @MaTK = MaTaiKhoan FROM SinhVien WHERE MaSV = '{maSV}';
+
+                BEGIN TRANSACTION;
+                BEGIN TRY
+                    -- 1. Xóa các bảng liên quan có khóa ngoại trỏ tới SinhVien
+                    DELETE FROM CanhBao_SinhVien WHERE MaSV = '{maSV}';
+                    DELETE FROM PhucKhao WHERE MaSV = '{maSV}';
+                    DELETE FROM KetQua WHERE MaSV = '{maSV}';
+                    DELETE FROM DangKyLopHoc WHERE MaSV = '{maSV}';
+                    
+                    -- 2. Xóa sinh viên
+                    DELETE FROM SinhVien WHERE MaSV = '{maSV}';
+                    
+                    -- 3. Xóa tài khoản liên kết (nếu có)
+                    IF @MaTK IS NOT NULL
+                    BEGIN
+                        DELETE FROM TaiKhoan WHERE MaTaiKhoan = @MaTK;
+                    END
+
+                    COMMIT TRANSACTION;
+                END TRY
+                BEGIN CATCH
+                    ROLLBACK TRANSACTION;
+                    THROW;
+                END CATCH;";
 
             try
             {

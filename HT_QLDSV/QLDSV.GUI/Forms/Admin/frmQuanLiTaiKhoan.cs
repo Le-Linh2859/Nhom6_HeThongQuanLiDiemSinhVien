@@ -206,13 +206,11 @@ namespace QLDSV.GUI
                 guna2ComboBox2.Items.Add("Sinh viên");
                 guna2ComboBox2.SelectedIndex = 0;
 
-                // Khởi tạo bộ lọc trạng thái & liên kết (guna2ComboBox1)
+                // Khởi tạo bộ lọc trạng thái (guna2ComboBox1)
                 guna2ComboBox1.Items.Clear();
                 guna2ComboBox1.Items.Add("--- Tất cả trạng thái ---");
                 guna2ComboBox1.Items.Add("Hoạt động");
                 guna2ComboBox1.Items.Add("Bị khóa");
-                guna2ComboBox1.Items.Add("Chưa liên kết hồ sơ");
-                guna2ComboBox1.Items.Add("Đã liên kết hồ sơ");
                 guna2ComboBox1.SelectedIndex = 0;
 
                 // Khởi tạo các Combobox chi tiết
@@ -280,28 +278,12 @@ namespace QLDSV.GUI
                     else if (roleText == "Sinh viên") sql += " AND tk.MaVaiTro = 'VT003'";
                 }
 
-                // Bộ lọc Trạng thái / Tình trạng liên kết
+                // Bộ lọc Trạng thái
                 if (guna2ComboBox1.SelectedIndex > 0)
                 {
                     string filterText = guna2ComboBox1.SelectedItem.ToString();
                     if (filterText == "Hoạt động") sql += " AND tk.TrangThai = 1";
                     else if (filterText == "Bị khóa") sql += " AND tk.TrangThai = 0";
-                    else if (filterText == "Chưa liên kết hồ sơ")
-                    {
-                        sql += @" AND (
-                            (tk.MaVaiTro = 'VT002' AND tk.MaTaiKhoan NOT IN (SELECT DISTINCT MaTaiKhoan FROM GiangVien WHERE MaTaiKhoan IS NOT NULL))
-                            OR
-                            (tk.MaVaiTro = 'VT003' AND tk.MaTaiKhoan NOT IN (SELECT DISTINCT MaTaiKhoan FROM SinhVien WHERE MaTaiKhoan IS NOT NULL))
-                        )";
-                    }
-                    else if (filterText == "Đã liên kết hồ sơ")
-                    {
-                        sql += @" AND (
-                            (tk.MaVaiTro = 'VT002' AND tk.MaTaiKhoan IN (SELECT DISTINCT MaTaiKhoan FROM GiangVien))
-                            OR
-                            (tk.MaVaiTro = 'VT003' AND tk.MaTaiKhoan IN (SELECT DISTINCT MaTaiKhoan FROM SinhVien))
-                        )";
-                    }
                 }
 
                 sql += " ORDER BY tk.MaTaiKhoan ASC";
@@ -423,7 +405,7 @@ namespace QLDSV.GUI
             // Tự sinh mã tài khoản mới TKxxx
             string nextMaTK = GenerateNewMaTaiKhoan();
             textBox1.Text = nextMaTK;
-            textBox3.Text = "Chưa liên kết hồ sơ";
+            textBox3.Text = "";
 
             comboBox1.SelectedIndex = 2; // Mặc định là Sinh viên
             comboBox4.SelectedIndex = 0; // Mặc định là Hoạt động

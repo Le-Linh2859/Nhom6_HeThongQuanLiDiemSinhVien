@@ -108,6 +108,10 @@ namespace QLDSV.GUI
             btnXuatExcel.Click += btnXuatExcel_Click;
             btnSua.Click += btnSua_Click;
             btnLuu.Click += btnLuu_Click;
+            btnXoa.Click += btnXoa_Click;    // Wire nút Xóa (Designer chưa gán)
+            btnHuy.Click += btnHuy_Click;    // Wire nút Hủy
+            btnThem.Click += btnThem_Click;  // Wire nút Thêm
+            btnXoa.Text = "Xóa";            // Sửa text sai trong Designer
 
             // Gán sự kiện cho các nút điều hướng sidebar
             WireSidebarEvents();
