@@ -1,5 +1,4 @@
 using QLDSV.BLL;
-using QLDSV.DAL;
 using QLDSV.GUI.Forms.Admin;
 using System;
 using System.Collections.Generic;
@@ -15,55 +14,12 @@ using System.Windows.Media.Animation;
 
 namespace QLDSV.GUI
 {
-    public partial class frmGiangvien : Form, IShellChildForm
+    public partial class frmGiangvien : Form
     {
         private GiangVienBLL bll = new GiangVienBLL();
         private bool isAdding = false;
         private bool isEditing = false;
         private DataTable dtGiangVien;
-
-        public void OnEmbeddedInShell()
-        {
-            string[] controlNames = {
-"pnlSidebar", "pnlHeader", "guna2ImageButton1", "label3", "label4",
-"guna2ImageButton2", "guna2CirclePictureBox1", "guna2HtmlLabel13",
-"guna2HtmlLabel14", "guna2ImageButton3"
-};
-            foreach (var name in controlNames)
-            {
-                var ct = this.Controls.Find(name, true);
-                foreach (var c in ct)
-                {
-                    c.Visible = false;
-                }
-            }
-
-            int shiftX = 0;
-            if (pnlSidebar != null)
-            {
-                shiftX = pnlSidebar.Width;
-            }
-
-            if (shiftX == 0) return;
-
-            foreach (Control ctrl in this.Controls)
-            {
-                bool isHiddenControl = false;
-                foreach (var name in controlNames)
-                {
-                    if (ctrl.Name == name)
-                    {
-                        isHiddenControl = true;
-                        break;
-                    }
-                }
-
-                if (!isHiddenControl && ctrl.Left > 0)
-                {
-                    ctrl.Left = Math.Max(0, ctrl.Left - shiftX);
-                }
-            }
-        }
         public frmGiangvien()
         {
             InitializeComponent();
@@ -104,20 +60,6 @@ namespace QLDSV.GUI
                 }
             };
 
-            // Wire up Logout / Close button if it exists
-            if (this.btnSignout != null)
-            {
-                this.btnSignout.Click += (s, e) =>
-                {
-                    var confirm = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận đăng xuất",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (confirm == DialogResult.Yes)
-                    {
-                        MessageBox.Show("Đăng xuất thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Close();
-                    }
-                };
-            }
         }
         private void frmGiangvien_Resize(object sender, EventArgs e)
         {
@@ -128,13 +70,10 @@ namespace QLDSV.GUI
         {
             try
             {
-                Connection.KetNoi();
-                LoadThongKe();
                 LoadComboboxFilters();
                 LoadComboboxDetails();
                 LoadData();
                 ResetFormState();
-                WireSidebarEvents();
             }
             catch (Exception ex)
             {
@@ -143,7 +82,7 @@ namespace QLDSV.GUI
 
             DataGridViewGV.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
             DataGridViewGV.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            // Thêm viền bo góc cho card
+
             pnlThongKeGV.Paint += (s, e2) =>
             {
                 var g = e2.Graphics;
@@ -156,10 +95,6 @@ namespace QLDSV.GUI
             };
 
         }
-        private void LoadThongKe()
-        {
-        }
-        // 1. Tải danh sách lên GridView
         private void LoadData()
         {
             try
@@ -382,7 +317,6 @@ namespace QLDSV.GUI
             ClearDetailInputs();
             ResetFormState();
         }
-
         private void btnReset_Click(object sender, EventArgs e)
         {
             {
@@ -393,16 +327,11 @@ namespace QLDSV.GUI
                     cboTenGV.Text = "";
                     cboDiaChi.Text = "";
                     cboEmail.Text = "";
-
                     mskSoDienThoai.Text = "";
-
                     rdoNam.Checked = true;
-
                     cboKhoa2.SelectedIndex = -1;
-
                     cboMatKhau.Text = "";
                     cboMatKhau1.Text = "";
-
                     cboMaGV.Focus();
                 }
                 // Nếu đang SỬA
@@ -411,33 +340,23 @@ namespace QLDSV.GUI
                     if (DataGridViewGV.SelectedRows.Count > 0)
                     {
                         DataGridViewRow row = DataGridViewGV.SelectedRows[0];
-
                         cboMaGV.Text =
                         row.Cells["MaGV"].Value?.ToString() ?? "";
-
                         cboTenGV.Text =
                         row.Cells["HoTen"].Value?.ToString() ?? "";
-
                         cboDiaChi.Text =
                         row.Cells["DiaChi"].Value?.ToString() ?? "";
-
                         cboEmail.Text =
                         row.Cells["Email"].Value?.ToString() ?? "";
-
                         mskSoDienThoai.Text =
                         row.Cells["SoDT"].Value?.ToString() ?? "";
-
-                        bool gioiTinh =
-                        Convert.ToBoolean(row.Cells["GioiTinh"].Value);
-
+                        bool gioiTinh =Convert.ToBoolean(row.Cells["GioiTinh"].Value);
                         if (gioiTinh)
                             rdoNam.Checked = true;
                         else
                             rdoNu.Checked = true;
-
                         string maKhoa =
                         row.Cells["MaKhoa"].Value?.ToString().Trim() ?? "";
-
                         if (!string.IsNullOrEmpty(maKhoa))
                             cboKhoa2.SelectedValue = maKhoa;
                         else
@@ -467,7 +386,6 @@ namespace QLDSV.GUI
 
             // Reset form
             ClearDetailInputs();
-
             ResetFormState();
         }
         private void ApplyFilter()
@@ -507,12 +425,9 @@ namespace QLDSV.GUI
             else
             {
                 DataGridViewGV.ClearSelection();
-
                 DataGridViewGV.CurrentCell =
                 DataGridViewGV.Rows[0].Cells["MaGV"];
-
                 DataGridViewGV.Rows[0].Selected = true;
-
                 DataGridViewGV_CellClick(null, null);
             }
         }
@@ -524,14 +439,7 @@ namespace QLDSV.GUI
             string hoTen = cboTenGV.Text.Trim();
             string diaChi = cboDiaChi.Text.Trim();
             string email = cboEmail.Text.Trim();
-
-            string soDT = mskSoDienThoai.Text
-            .Replace("(", "")
-            .Replace(")", "")
-            .Replace("-", "")
-            .Replace(" ", "")
-            .Trim();
-
+            string soDT = mskSoDienThoai.Text.Trim();
             bool gioiTinh = rdoNam.Checked;
 
             if (cboKhoa2.SelectedValue == null)
@@ -546,7 +454,6 @@ namespace QLDSV.GUI
             }
 
             string maKhoa = cboKhoa2.SelectedValue.ToString();
-
             try
             {
                 // THÊM
@@ -554,7 +461,6 @@ namespace QLDSV.GUI
                 {
                     string matKhau = cboMatKhau.Text.Trim();
                     string nhapLaiMK = cboMatKhau1.Text.Trim();
-
                     string loi = bll.ValidateThemGiangVien(
                     maGV,
                     hoTen,
@@ -562,7 +468,6 @@ namespace QLDSV.GUI
                     soDT,
                     matKhau,
                     nhapLaiMK);
-
                     if (!string.IsNullOrEmpty(loi))
                     {
                         MessageBox.Show(
@@ -746,88 +651,6 @@ namespace QLDSV.GUI
 
             cboMatKhau.Text = "";
             cboMatKhau1.Text = "";
-        }
-        // 14. Thiết lập sự kiện điều hướng Sidebar
-
-        private void OpenForm(Form targetForm)
-        {
-            if (targetForm != null)
-            {
-                targetForm.FormClosed += (s, ev) =>
-                {
-                    this.Show();
-
-                    // Load lại dữ liệu giảng viên
-                    LoadData();
-                };
-
-                targetForm.Show();
-
-                this.Hide();
-            }
-        }
-
-        private void WireSidebarEvents()
-        {
-            // Điều hướng các Form
-
-            // Đang ở form Giảng viên
-            btnGiangvien.Click += (s, e) => { };
-
-            btnCanhbao.Click +=
-            (s, e) => OpenForm(new frmCanhBaoHocVu());
-
-            btnLopnc.Click +=
-            (s, e) => OpenForm(new FrmLopNienChe());
-
-            btnSinhvien.Click +=
-            (s, e) => OpenForm(new frmQuanLiThongTinSinhVien());
-
-            btnMon.Click +=
-            (s, e) => OpenForm(new frmMonhoc());
-
-            btnLophp.Click +=
-            (s, e) => OpenForm(new frmLophocphan());
-
-            btnKetqua.Click +=
-            (s, e) => OpenForm(new frmTheoDoiDiem());
-
-            btnPhuckhao.Click += (s, e) =>
-            {
-                if (SessionHelper.MaVaiTro == "VT001")
-                    OpenForm(new QLDSV.GUI.Forms.Admin.frmPhucKhao_Admin());
-                else if (SessionHelper.MaVaiTro == "VT002")
-                    OpenForm(new QLDSV.GUI.Forms.GiangVien.frmPhucKhao_GV());
-                else if (SessionHelper.MaVaiTro == "VT003")
-                    OpenForm(new QLDSV.GUI.Forms.SinhVien.frmPhucKhao_SV());
-            };
-
-            btnBaocao.Click +=
-            (s, e) => OpenForm(new frmBaoCaoThongKe());
-
-            btnTongquan.Click +=
-            (s, e) => OpenForm(new frmTongQuan());
-
-            btnDangky.Click += (s, e) =>
-            MessageBox.Show(
-            "Tính năng Đăng ký lớp đang được phát triển!",
-            "Thông báo",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information);
-
-            btnDiem.Click += (s, e) =>
-            MessageBox.Show(
-            "Tính năng Nhập điểm đang được phát triển!",
-            "Thông báo",
-            MessageBoxButtons.OK,
-            MessageBoxIcon.Information);
-            btnGiangvien.FillColor =
-            Color.FromArgb(224, 224, 224);
-
-            btnGiangvien.ForeColor = Color.Black;
-
-            btnGiangvien.Font =
-            new Font(btnGiangvien.Font, FontStyle.Bold);
         }
 
         private void cboKhoa2_SelectedIndexChanged(object sender, EventArgs e)
