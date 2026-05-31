@@ -432,7 +432,10 @@ namespace QLDSV.GUI
             string hoTen = cboTenGV.Text.Trim();
             string diaChi = cboDiaChi.Text.Trim();
             string email = cboEmail.Text.Trim();
-            string soDT = mskSoDienThoai.Text.Trim();
+            string soDT = new string(
+                mskSoDienThoai.Text
+                .Where(char.IsDigit)
+                .ToArray());
             bool gioiTinh = rdoNam.Checked;
 
             if (cboKhoa2.SelectedValue == null)

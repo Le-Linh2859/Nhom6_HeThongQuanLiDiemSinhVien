@@ -97,11 +97,13 @@ namespace QLDSV.BLL
         {
             return dal.CheckKey(maGV);
         }
-        public string ValidateGiangVien(
-        string maGV,
-        string hoTen,
-        string email,
-        string soDT)
+        public string ValidateGiangVien
+            (
+                string maGV,
+                string hoTen,
+                string email,
+                string soDT
+            )
         {
             if (string.IsNullOrWhiteSpace(maGV))
                 return "Mã giảng viên không được để trống.";
@@ -116,7 +118,9 @@ namespace QLDSV.BLL
                 return "Email không hợp lệ.";
             }
 
-            if (!Regex.IsMatch(soDT, @"^0\d{9}$"))
+            string sdtChiSo = new string(soDT.Where(char.IsDigit).ToArray());
+
+            if (!Regex.IsMatch(sdtChiSo, @"^0\d{9}$"))
             {
                 return "Số điện thoại phải gồm 10 số.";
             }
