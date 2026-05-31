@@ -684,7 +684,7 @@ namespace QLDSV.GUI
             // 
             this.cboKhoa.BackColor = System.Drawing.Color.Transparent;
             this.cboKhoa.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboKhoa.DropDownHeight = 50;
+            this.cboKhoa.DropDownHeight = 200;
             this.cboKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboKhoa.DropDownWidth = 350;
             this.cboKhoa.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));

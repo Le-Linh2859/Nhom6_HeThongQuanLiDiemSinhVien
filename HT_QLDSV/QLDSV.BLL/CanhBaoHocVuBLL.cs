@@ -83,7 +83,7 @@ namespace QLDSV.BLL
         // PHÁT HIỆN CẢNH BÁO TỰ ĐỘNG
         // LoaiCanhBao
         private const int LOAI_KHOI_LUONG_ZERO = 2;  // TH1: 0 tín chỉ
-        private const int LOAI_DIEM_THAP = 3;  // TH2: TBC < 1.5
+        private const int LOAI_DIEM_THAP = 3;  // TH2: TBC < 3.5
         public (int soMoi, int soCapNhat) PhatHienVaLuuCanhBao()
         {
             int soMoi = 0;

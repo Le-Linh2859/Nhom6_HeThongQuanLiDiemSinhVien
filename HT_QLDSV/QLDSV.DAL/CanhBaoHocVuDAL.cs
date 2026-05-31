@@ -134,10 +134,7 @@ namespace QLDSV.DAL
                     "Lỗi DAL - IsHocKyHe: " + ex.Message);
             }
         }
-
-        /// <summary>
         /// TH1: SV có khối lượng = 0 TC trong học kỳ
-        /// </summary>
         public DataTable GetSinhVienKhoiLuongZero(string maHKNH)
         {
             try

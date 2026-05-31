@@ -12,7 +12,6 @@ namespace QLDSV.BLL
     public class GiangVienBLL
     {
         GiangVienDAL dal = new GiangVienDAL();
-
         // 1. Lấy danh sách giảng viên
         public DataTable GetGiangVien()
         {
@@ -49,7 +48,6 @@ namespace QLDSV.BLL
             maKhoa,
             maTaiKhoan);
         }
-
         // 4. Cập nhật giảng viên
         public void UpdateGiangVien(
         string soDT,
@@ -69,13 +67,11 @@ namespace QLDSV.BLL
             email,
             maKhoa);
         }
-
         // 5. Xóa giảng viên
         public void DeleteGiangVien(string maGV)
         {
             dal.DeleteGiangVien(maGV);
         }
-
         // 6. Thêm tài khoản
         public void InsertTaiKhoan(
         string maTaiKhoan,
@@ -91,13 +87,11 @@ namespace QLDSV.BLL
             matKhau,
             trangThai);
         }
-
         // 7. Tạo mã tài khoản mới
         public string TaoMaTaiKhoanMoi()
         {
             return dal.TaoMaTaiKhoanMoi();
         }
-
         // 8. Kiểm tra mã giảng viên tồn tại
         public bool CheckKeyExist(string maGV)
         {
@@ -225,7 +219,6 @@ namespace QLDSV.BLL
 
             return "";
         }
-
         // Validate khi SỬA
         public string ValidateCapNhatGiangVien(
         string maGV,
