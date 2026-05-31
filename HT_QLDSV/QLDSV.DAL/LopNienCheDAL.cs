@@ -61,11 +61,22 @@ namespace QLDSV.DAL
             Connection.RunSql(sql);
         }
 
-        //Xóa lớp niên chế
-        public void DeleteLopNienChe(string maLop)
+        public bool ExistsByMaLop(string maLop)
         {
-            string sql = $"DELETE FROM LopNienChe WHERE MaLopNienChe = '{maLop}'";
-            Connection.RunSql(sql);
+            string sql = $"SELECT MaLopNienChe FROM LopNienChe WHERE MaLopNienChe = '{maLop}'";
+            return CheckKey(sql);
+        }
+
+        public bool ExistsKhoa(string maKhoa)
+        {
+            string sql = $"SELECT MaKhoa FROM Khoa WHERE MaKhoa = '{maKhoa}'";
+            return CheckKey(sql);
+        }
+
+        public bool ExistsGiangVien(string maGV)
+        {
+            string sql = $"SELECT MaGV FROM GiangVien WHERE MaGV = '{maGV}'";
+            return CheckKey(sql);
         }
 
         //Kiểm tra sự tồn tại của khóa chính hoặc bản ghi theo điều kiện

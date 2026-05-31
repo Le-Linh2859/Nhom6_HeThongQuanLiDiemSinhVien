@@ -300,62 +300,27 @@ namespace QLDSV.GUI
             string maLop = cboMaLopNC.Text.Trim();
             string tenLop = cboTenlop.Text.Trim();
             string nienKhoa = cboNienkhoa.Text.Trim();
-
-            // Kiểm tra dữ liệu đầu vào
-            if (string.IsNullOrEmpty(maLop))
-            {
-                MessageBox.Show("Mã lớp niên chế không được để trống.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cboMaLopNC.Focus();
-                return;
-            }
-            if (string.IsNullOrEmpty(tenLop))
-            {
-                MessageBox.Show("Tên lớp niên chế không được để trống.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cboTenlop.Focus();
-                return;
-            }
-            if (string.IsNullOrEmpty(nienKhoa))
-            {
-                MessageBox.Show("Niên khóa không được để trống.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cboNienkhoa.Focus();
-                return;
-            }
-            if (cboKhoa2.SelectedValue == null)
-            {
-                MessageBox.Show("Vui lòng chọn Khoa quản lý của lớp.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cboKhoa2.Focus();
-                return;
-            }
-            if (cboCV.SelectedValue == null)
-            {
-                MessageBox.Show("Vui lòng chọn Giảng viên làm cố vấn học tập.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cboCV.Focus();
-                return;
-            }
-
-            string maKhoa = cboKhoa2.SelectedValue.ToString();
-            string maGV = cboCV.SelectedValue.ToString();
+            string maKhoa = cboKhoa2.SelectedValue?.ToString() ?? "";
+            string maGV = cboCV.SelectedValue?.ToString() ?? "";
 
             try
             {
-                if (isAdding)
-                {
-                    // Kiểm tra trùng khóa chính
-                    if (bll.CheckKeyExist(maLop))
-                    {
-                        MessageBox.Show($"Mã lớp niên chế '{maLop}' đã tồn tại trong hệ thống. Vui lòng sử dụng mã khác.", "Trùng khóa chính", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        cboMaLopNC.Focus();
-                        return;
-                    }
+                (bool success, string message) result;
 
-                    bll.InsertLop(maLop, tenLop, nienKhoa, maKhoa, maGV);
-                    MessageBox.Show("Thêm mới lớp niên chế thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                if (isAdding)
+                    result = bll.InsertLop(maLop, tenLop, nienKhoa, maKhoa, maGV);
                 else if (isEditing)
+                    result = bll.UpdateLop(maLop, tenLop, nienKhoa, maKhoa, maGV);
+                else
+                    return;
+
+                if (!result.success)
                 {
-                    bll.UpdateLop(maLop, tenLop, nienKhoa, maKhoa, maGV);
-                    MessageBox.Show("Cập nhật thông tin lớp niên chế thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(result.message, "Không thể lưu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
+
+                MessageBox.Show(result.message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LoadData();
                 ResetFormState();
