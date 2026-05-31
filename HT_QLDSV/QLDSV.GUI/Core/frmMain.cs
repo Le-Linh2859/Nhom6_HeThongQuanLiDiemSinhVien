@@ -205,7 +205,7 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, true);
                 SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, true);
                 SetMenuRowVisibility(3, btnMon, guna2PictureBox4, true);
-                SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, true);
+                SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, false);
                 SetMenuRowVisibility(5, btnLophp, guna2PictureBox6, true);
                 SetMenuRowVisibility(6, btnDangky, guna2PictureBox7, false);
                 
@@ -225,7 +225,9 @@ namespace QLDSV.GUI
                 SetMenuRowVisibility(1, btnGiangvien, guna2PictureBox2, false);
                 SetMenuRowVisibility(2, btnSinhvien, guna2PictureBox3, true);
                 SetMenuRowVisibility(3, btnMon, guna2PictureBox4, true);
+
                 SetMenuRowVisibility(4, btnLopnc, guna2PictureBox5, false);
+
                 SetMenuRowVisibility(5, btnLophp, guna2PictureBox6, true);
                 SetMenuRowVisibility(6, btnDangky, guna2PictureBox7, false);
                 SetMenuRowVisibility(7, btnDiem, guna2PictureBox8, false);

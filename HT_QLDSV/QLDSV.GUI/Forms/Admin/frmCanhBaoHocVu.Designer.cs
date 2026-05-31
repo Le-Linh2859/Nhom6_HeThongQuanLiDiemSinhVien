@@ -89,7 +89,7 @@ namespace QLDSV.GUI
             this.btnLammoi.ForeColor = System.Drawing.Color.White;
             this.btnLammoi.Image = ((System.Drawing.Image)(resources.GetObject("btnLammoi.Image")));
             this.btnLammoi.ImageSize = new System.Drawing.Size(18, 18);
-            this.btnLammoi.Location = new System.Drawing.Point(398, 13);
+            this.btnLammoi.Location = new System.Drawing.Point(429, 13);
             this.btnLammoi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLammoi.Name = "btnLammoi";
             this.btnLammoi.Size = new System.Drawing.Size(101, 30);
@@ -109,7 +109,7 @@ namespace QLDSV.GUI
             // cboLoaiCanhBao
             // 
             this.cboLoaiCanhBao.FormattingEnabled = true;
-            this.cboLoaiCanhBao.Location = new System.Drawing.Point(936, 58);
+            this.cboLoaiCanhBao.Location = new System.Drawing.Point(970, 58);
             this.cboLoaiCanhBao.Name = "cboLoaiCanhBao";
             this.cboLoaiCanhBao.Size = new System.Drawing.Size(227, 28);
             this.cboLoaiCanhBao.TabIndex = 61;
@@ -127,7 +127,7 @@ namespace QLDSV.GUI
             // cboHocKy
             // 
             this.cboHocKy.FormattingEnabled = true;
-            this.cboHocKy.Location = new System.Drawing.Point(596, 59);
+            this.cboHocKy.Location = new System.Drawing.Point(623, 58);
             this.cboHocKy.Name = "cboHocKy";
             this.cboHocKy.Size = new System.Drawing.Size(175, 28);
             this.cboHocKy.TabIndex = 59;
@@ -145,7 +145,7 @@ namespace QLDSV.GUI
             // cboNamHoc
             // 
             this.cboNamHoc.FormattingEnabled = true;
-            this.cboNamHoc.Location = new System.Drawing.Point(97, 58);
+            this.cboNamHoc.Location = new System.Drawing.Point(127, 55);
             this.cboNamHoc.Name = "cboNamHoc";
             this.cboNamHoc.Size = new System.Drawing.Size(206, 28);
             this.cboNamHoc.TabIndex = 57;
@@ -162,14 +162,14 @@ namespace QLDSV.GUI
             // cboLop
             // 
             this.cboLop.FormattingEnabled = true;
-            this.cboLop.Location = new System.Drawing.Point(936, 18);
+            this.cboLop.Location = new System.Drawing.Point(970, 18);
             this.cboLop.Name = "cboLop";
             this.cboLop.Size = new System.Drawing.Size(227, 28);
             this.cboLop.TabIndex = 20;
             // 
             // txtTimKiem
             // 
-            this.txtTimKiem.Location = new System.Drawing.Point(96, 15);
+            this.txtTimKiem.Location = new System.Drawing.Point(127, 15);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(296, 27);
             this.txtTimKiem.TabIndex = 20;
