@@ -256,9 +256,10 @@ namespace QLDSV.GUI
         {
             isAdding = true;
             isEditing = false;
-
+            cboMaGV.Text = bll.TaoMaGiangVienMoi();
+            cboMaGV.ReadOnly = true;
             // Xóa trắng dữ liệu
-            cboMaGV.Text = "";
+            
             cboTenGV.Text = "";
             cboDiaChi.Text = "";
             cboEmail.Text = "";

@@ -206,5 +206,19 @@ namespace QLDSV.DAL
 
             return Connection.GetDataToTable(sql).Rows.Count > 0;
         }
+        public string LayMaGiangVienLonNhat()
+        {
+            string sql = @"
+        SELECT TOP 1 MaGV
+        FROM GiangVien
+        ORDER BY MaGV DESC";
+
+            DataTable dt = Connection.GetDataToTable(sql);
+
+            if (dt.Rows.Count > 0)
+                return dt.Rows[0]["MaGV"].ToString();
+
+            return "";
+        }
     }
 }

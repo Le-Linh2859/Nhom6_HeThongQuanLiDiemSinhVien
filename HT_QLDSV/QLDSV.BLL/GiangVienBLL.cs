@@ -243,5 +243,18 @@ namespace QLDSV.BLL
 
             return "";
         }
+        public string TaoMaGiangVienMoi()
+        {
+            string maCuoi = dal.LayMaGiangVienLonNhat();
+
+            if (string.IsNullOrEmpty(maCuoi))
+                return "GV20260001";
+
+            int soThuTu = int.Parse(maCuoi.Substring(6));
+            soThuTu++;
+
+            return $"GV2026{soThuTu:D4}";
+        }
+
     }
 }
