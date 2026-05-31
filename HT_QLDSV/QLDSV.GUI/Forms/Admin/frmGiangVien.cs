@@ -28,15 +28,7 @@ namespace QLDSV.GUI
 
             ThemeHelper.ApplyTheme(this);
 
-            this.btnThem.Click += btnThem_Click;
-            this.btnSua.Click += btnSua_Click;
-            this.btnLuu.Click += btnLuu_Click;
-            this.btnHuy.Click += btnHuy_Click;
-            this.btnReset.Click += btnReset_Click;
-            this.btnLammoi.Click += btnLammoi_Click;
-
-            this.DataGridViewGV.CellClick += DataGridViewGV_CellClick;
-
+            //this.DataGridViewGV.CellClick += DataGridViewGV_CellClick;
             this.txtTimKiem.TextChanged += txtTimKiem_TextChanged;
 
             txtTimKiem.Text = "Tìm kiếm theo mã, tên giảng viên ...";

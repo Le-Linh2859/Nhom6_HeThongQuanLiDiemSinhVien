@@ -5,9 +5,7 @@ namespace QLDSV.DAL
 {
     public class CanhBaoHocVuDAL
     {
-        // =====================================================
         // LOAD DANH SÁCH CẢNH BÁO HỌC VỤ (cho form hiển thị)
-        // =====================================================
         public DataTable GetDanhSachCanhBao()
         {
             try
@@ -49,10 +47,7 @@ namespace QLDSV.DAL
                     "Lỗi DAL - GetDanhSachCanhBao: " + ex.Message);
             }
         }
-
-        // =====================================================
         // LOAD NĂM HỌC
-        // =====================================================
         public DataTable GetNamHoc()
         {
             try
@@ -69,10 +64,7 @@ namespace QLDSV.DAL
                     "Lỗi DAL - Load năm học: " + ex.Message);
             }
         }
-
-        // =====================================================
         // LOAD HỌC KỲ
-        // =====================================================
         public DataTable GetHocKy()
         {
             try
@@ -89,10 +81,7 @@ namespace QLDSV.DAL
                     "Lỗi DAL - Load học kỳ: " + ex.Message);
             }
         }
-
-        // =====================================================
         // LOAD LỚP NIÊN CHẾ
-        // =====================================================
         public DataTable GetLopNienChe()
         {
             try
@@ -109,10 +98,7 @@ namespace QLDSV.DAL
                     "Lỗi DAL - Load lớp niên chế: " + ex.Message);
             }
         }
-
-        // =====================================================
         // KIỂM TRA KẾT NỐI
-        // =====================================================
         public bool TestConnection()
         {
             try
@@ -125,14 +111,8 @@ namespace QLDSV.DAL
                 return false;
             }
         }
-
-        // =====================================================
         // PHÁT HIỆN CẢNH BÁO TỰ ĐỘNG
-        // =====================================================
-
-        /// <summary>
         /// Kiểm tra học kỳ có phải học kỳ hè không (Hocky_3)
-        /// </summary>
         public bool IsHocKyHe(string maHKNH)
         {
             try
@@ -163,33 +143,33 @@ namespace QLDSV.DAL
             try
             {
                 string sql = $@"
-SELECT
-    sv.MaSV,
-    sv.HoTen,
-    sv.MaLopNienChe,
-    '{maHKNH}' AS MaHKNH
-FROM SinhVien sv
-INNER JOIN HocKy_NamHoc hknh
-    ON hknh.MaHKNH = '{maHKNH}'
-INNER JOIN NamHoc nh
-    ON hknh.MaNamHoc = nh.MaNamHoc
-WHERE
-    CAST(LEFT(sv.NienKhoa,4) AS INT)
-        <= CAST(SUBSTRING(nh.TenNamHoc,9,4) AS INT)
+                    SELECT
+                        sv.MaSV,
+                        sv.HoTen,
+                        sv.MaLopNienChe,
+                        '{maHKNH}' AS MaHKNH
+                    FROM SinhVien sv
+                    INNER JOIN HocKy_NamHoc hknh
+                        ON hknh.MaHKNH = '{maHKNH}'
+                    INNER JOIN NamHoc nh
+                        ON hknh.MaNamHoc = nh.MaNamHoc
+                    WHERE
+                        CAST(LEFT(sv.NienKhoa,4) AS INT)
+                            <= CAST(SUBSTRING(nh.TenNamHoc,9,4) AS INT)
 
-AND CAST(RIGHT(sv.NienKhoa,4) AS INT)
-        >= CAST(SUBSTRING(nh.TenNamHoc,14,4) AS INT)
+                    AND CAST(RIGHT(sv.NienKhoa,4) AS INT)
+                            >= CAST(SUBSTRING(nh.TenNamHoc,14,4) AS INT)
 
-AND sv.MaSV NOT IN
-(
-    SELECT DISTINCT dkl.MaSV
-    FROM DangKyLopHoc dkl
-    INNER JOIN LopHocPhan lhp
-        ON dkl.MaLHP = lhp.MaLHP
-    WHERE lhp.MaHKNH = '{maHKNH}'
-      AND dkl.TrangThai = 1
-)
-";
+                    AND sv.MaSV NOT IN
+                    (
+                        SELECT DISTINCT dkl.MaSV
+                        FROM DangKyLopHoc dkl
+                        INNER JOIN LopHocPhan lhp
+                            ON dkl.MaLHP = lhp.MaLHP
+                        WHERE lhp.MaHKNH = '{maHKNH}'
+                          AND dkl.TrangThai = 1
+                    )
+                    ";
                 return Connection.GetDataToTable(sql);
             }
             catch (Exception ex)
@@ -219,9 +199,7 @@ AND sv.MaSV NOT IN
                 return 0;
             }
         }
-        /// <summary>
         /// TH2: SV có TBC học kỳ dưới 1.5
-        /// </summary>
         public DataTable GetSinhVienDiemThapDuoi1_5(string maHKNH)
         {
             try
@@ -346,10 +324,7 @@ AND sv.MaSV NOT IN
                     + ex.Message);
             }
         }
-
-        /// <summary>
         /// Kiểm tra SV đã có cảnh báo chưa, trả về LanThu (0 = chưa có)
-        /// </summary>
         public int GetLanThuCanhBao(string maSV, string maHKNH, int loaiCanhBao)
         {
             try
@@ -372,10 +347,7 @@ AND sv.MaSV NOT IN
                     "Lỗi DAL - GetLanThuCanhBao: " + ex.Message);
             }
         }
-
-        /// <summary>
         /// Lấy MaCanhBao theo LoaiCanhBao
-        /// </summary>
         public string GetMaCanhBaoByLoai(int loaiCanhBao)
         {
             try
@@ -394,10 +366,7 @@ AND sv.MaSV NOT IN
                     "Lỗi DAL - GetMaCanhBaoByLoai: " + ex.Message);
             }
         }
-
-        /// <summary>
         /// Insert cảnh báo mới
-        /// </summary>
         public void InsertCanhBaoSinhVien(
             string maSV, string maCanhBao, string maHKNH, int lanThu)
         {
@@ -417,10 +386,7 @@ AND sv.MaSV NOT IN
                     "Lỗi DAL - InsertCanhBaoSinhVien: " + ex.Message);
             }
         }
-
-        /// <summary>
         /// Cập nhật LanThu tăng lên
-        /// </summary>
         public void UpdateLanThuCanhBao(
             string maSV, string maCanhBao, string maHKNH)
         {
@@ -442,10 +408,7 @@ AND sv.MaSV NOT IN
                     "Lỗi DAL - UpdateLanThuCanhBao: " + ex.Message);
             }
         }
-
-        /// <summary>
         /// Lấy danh sách học kỳ đang mở (TrangThai = 'DangMo')
-        /// </summary>
         public DataTable GetHocKyDangHoatDong()
         {
             string sql = @"
