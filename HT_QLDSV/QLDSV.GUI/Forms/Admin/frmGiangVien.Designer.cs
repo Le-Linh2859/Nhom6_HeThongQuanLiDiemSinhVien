@@ -593,7 +593,8 @@ namespace QLDSV.GUI
             this.DataGridViewGV.RowHeadersVisible = false;
             this.DataGridViewGV.RowHeadersWidth = 62;
             this.DataGridViewGV.RowTemplate.Height = 28;
-            this.DataGridViewGV.Size = new System.Drawing.Size(1730, 623);
+            this.DataGridViewGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.DataGridViewGV.Size = new System.Drawing.Size(1730, 300);
             this.DataGridViewGV.TabIndex = 32;
             this.DataGridViewGV.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.DataGridViewGV.ThemeStyle.AlternatingRowsStyle.Font = null;
