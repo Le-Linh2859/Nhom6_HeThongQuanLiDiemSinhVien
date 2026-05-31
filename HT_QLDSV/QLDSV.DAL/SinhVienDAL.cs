@@ -277,5 +277,55 @@ namespace QLDSV.DAL
             string sql = $"SELECT * FROM SinhVien WHERE SoDT = '{soDT}' AND MaSV <> '{maSV}'";
             return Connection.GetDataToTable(sql).Rows.Count > 0;
         }
+
+        /// <summary>
+        /// Lấy danh sách sinh viên theo lớp niên chế và từ khóa tìm kiếm.
+        /// </summary>
+        public DataTable GetSinhVienTheoLop(string maLop, string tuKhoa = "")
+        {
+            string sql = $@"
+                SELECT
+                    MaSV AS MaSinhVien,
+                    HoTen,
+                    NgaySinh,
+                    GioiTinh,
+                    DiaChi,
+                    Email,
+                    SoDT,
+                    NienKhoa,
+                    MaLopNienChe
+                FROM SinhVien
+                WHERE MaLopNienChe = '{maLop}'";
+
+            if (!string.IsNullOrEmpty(tuKhoa))
+            {
+                sql += $" AND (MaSV LIKE N'%{tuKhoa}%' OR HoTen LIKE N'%{tuKhoa}%')";
+            }
+
+            sql += " ORDER BY MaSV";
+
+            return Connection.GetDataToTable(sql);
+        }
+
+        /// <summary>
+        /// Lấy thông tin cơ bản sinh viên theo mã sinh viên.
+        /// </summary>
+        public DataTable GetThongTinSinhVienCoBan(string maSV)
+        {
+            string sql = $@"
+                SELECT
+                    sv.MaSV,
+                    sv.HoTen,
+                    sv.NgaySinh,
+                    sv.DiaChi,
+                    sv.SoDT,
+                    sv.Email,
+                    lnc.TenLop
+                FROM SinhVien sv
+                LEFT JOIN LopNienChe lnc ON sv.MaLopNienChe = lnc.MaLopNienChe
+                WHERE sv.MaSV = '{maSV}'";
+
+            return Connection.GetDataToTable(sql);
+        }
     }
 }

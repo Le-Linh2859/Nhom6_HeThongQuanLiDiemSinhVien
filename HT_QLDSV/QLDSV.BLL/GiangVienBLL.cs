@@ -159,18 +159,36 @@ namespace QLDSV.BLL
         {
             return dal.CheckSoDT(soDT);
         }
-        // ========================================
-        // Validate thông tin chung
-        // ========================================
+        public bool IsThongTinChanged(
+    string maGV,
+    string hoTen,
+    string soDT,
+    string email,
+    string diaChi,
+    bool gioiTinh)
+        {
+            DataTable dt = dal.LoadGiangVien();
 
-        // ========================================
-        // Validate mật khẩu
-        // ========================================
+            DataRow row = null;
 
+            foreach (DataRow r in dt.Rows)
+            {
+                if (r["MaGV"].ToString() == maGV)
+                {
+                    row = r;
+                    break;
+                }
+            }
+            if (row == null)
+                return true;
 
-        // ========================================
+            return row["HoTen"].ToString().Trim() != hoTen
+                || row["SoDT"].ToString().Trim() != soDT
+                || row["Email"].ToString().Trim() != email
+                || row["DiaChi"].ToString().Trim() != diaChi
+                || Convert.ToBoolean(row["GioiTinh"]) != gioiTinh;
+        }
         // Validate khi THÊM
-        // ========================================
         public string ValidateThemGiangVien(
         string maGV,
         string hoTen,
@@ -208,9 +226,7 @@ namespace QLDSV.BLL
             return "";
         }
 
-        // ========================================
         // Validate khi SỬA
-        // ========================================
         public string ValidateCapNhatGiangVien(
         string maGV,
         string hoTen,

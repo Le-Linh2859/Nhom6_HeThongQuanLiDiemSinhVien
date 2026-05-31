@@ -15,7 +15,6 @@ namespace QLDSV.GUI.Forms.GiangVien
     {
         private readonly GiangVienBLL bll = new GiangVienBLL();
         private string maTaiKhoan;
-
         public frmThongTinCaNhan_GV()
         {
             InitializeComponent();
@@ -57,10 +56,6 @@ namespace QLDSV.GUI.Forms.GiangVien
 
                 txtMagv.Text = row["MaGV"].ToString();
                 txtTengv.Text = row["HoTen"].ToString();
-                bool gioiTinh = Convert.ToBoolean(row["GioiTinh"]);
-
-                txtMagv.Text = row["MaGV"].ToString();
-                txtTengv.Text = row["HoTen"].ToString();
                 txtTenkhoa.Text = row["TenKhoa"].ToString();
                 txtMatk.Text = row["MaTaiKhoan"].ToString();
                 txtSdt.Text = row["SoDT"].ToString();
@@ -68,7 +63,7 @@ namespace QLDSV.GUI.Forms.GiangVien
                 txtDiachi.Text = row["DiaChi"].ToString();
 
                 // Giới tính dùng RadioButton
-                bool gioitinh = Convert.ToBoolean(row["GioiTinh"]);
+                bool gioiTinh = Convert.ToBoolean(row["GioiTinh"]);
                 rdoNam.Checked = gioiTinh;
                 rdoNu.Checked = !gioiTinh;
             }
@@ -86,37 +81,51 @@ namespace QLDSV.GUI.Forms.GiangVien
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txtTengv.Text))
+                bool gioiTinhMoi = rdoNam.Checked;
+
+                if (!bll.IsThongTinChanged(
+                    txtMagv.Text.Trim(),
+                    txtTengv.Text.Trim(),
+                    txtSdt.Text.Trim(),
+                    txtEmail.Text.Trim(),
+                    txtDiachi.Text.Trim(),
+                    gioiTinhMoi))
                 {
-                    MessageBox.Show("Vui lòng nhập họ tên!");
-                    txtTengv.Focus();
+                    MessageBox.Show(
+                        "Bạn chưa thay đổi thông tin nào!",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                    return;
+                }
+                string loi = bll.ValidateCapNhatGiangVien(
+                     txtMagv.Text.Trim(),
+                     txtTengv.Text.Trim(),
+                     txtEmail.Text.Trim(),
+                     txtSdt.Text.Trim());
+
+                if (!string.IsNullOrEmpty(loi))
+                {
+                    MessageBox.Show(
+                        loi,
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+
                     return;
                 }
 
-                if (string.IsNullOrWhiteSpace(txtSdt.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập số điện thoại!");
-                    txtSdt.Focus();
-                    return;
-                }
-
-                if (string.IsNullOrWhiteSpace(txtEmail.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập email!");
-                    txtEmail.Focus();
-                    return;
-                }
-
-                bool gioiTinhMoi = rdoNam.Checked; // ← lấy từ RadioButton
-
-                bll.UpdateGiangVien(
-                txtSdt.Text.Trim(),
-                txtTengv.Text.Trim(),
-                gioiTinhMoi,
-                txtDiachi.Text.Trim(),
-                txtMagv.Text.Trim(),
-                txtEmail.Text.Trim(),
-                LayMaKhoa(txtTenkhoa.Text.Trim())
+          
+                bll.UpdateGiangVien
+               (
+                    txtSdt.Text.Trim(),
+                    txtTengv.Text.Trim(),
+                    gioiTinhMoi,
+                    txtDiachi.Text.Trim(),
+                    txtMagv.Text.Trim(),
+                    txtEmail.Text.Trim(),
+                    LayMaKhoa(txtTenkhoa.Text.Trim())
                 );
 
                 MessageBox.Show(

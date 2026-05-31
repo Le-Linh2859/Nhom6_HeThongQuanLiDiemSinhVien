@@ -8,11 +8,7 @@ namespace QLDSV.BLL
     {
         private readonly CanhBaoHocVuDAL dal =
             new CanhBaoHocVuDAL();
-
-        // =====================================================
         // LẤY DANH SÁCH CẢNH BÁO HỌC VỤ
-        // =====================================================
-
         public DataTable GetDanhSachCanhBao()
         {
             try
@@ -26,11 +22,7 @@ namespace QLDSV.BLL
                     + ex.Message);
             }
         }
-
-        // =====================================================
         // LẤY DANH SÁCH NĂM HỌC
-        // =====================================================
-
         public DataTable GetNamHoc()
         {
             try
@@ -44,11 +36,7 @@ namespace QLDSV.BLL
                     + ex.Message);
             }
         }
-
-        // =====================================================
         // LẤY DANH SÁCH HỌC KỲ
-        // =====================================================
-
         public DataTable GetHocKy()
         {
             try
@@ -62,11 +50,7 @@ namespace QLDSV.BLL
                     + ex.Message);
             }
         }
-
-        // =====================================================
         // LẤY DANH SÁCH LỚP NIÊN CHẾ
-        // =====================================================
-
         public DataTable GetLopNienChe()
         {
             try
@@ -80,11 +64,7 @@ namespace QLDSV.BLL
                     + ex.Message);
             }
         }
-
-        // =====================================================
         // KIỂM TRA KẾT NỐI
-        // =====================================================
-
         public bool CheckConnection()
         {
             try
@@ -100,17 +80,10 @@ namespace QLDSV.BLL
         {
             return dal.GetMaSVByTaiKhoan(maTaiKhoan);
         }
-        // =====================================================
         // PHÁT HIỆN CẢNH BÁO TỰ ĐỘNG
-        // =====================================================
-
-        // Hằng số LoaiCanhBao
+        // LoaiCanhBao
         private const int LOAI_KHOI_LUONG_ZERO = 2;  // TH1: 0 tín chỉ
         private const int LOAI_DIEM_THAP = 3;  // TH2: TBC < 1.5
-
-        /// Hàm chính: quét toàn bộ học kỳ đang hoạt động,
-        /// phát hiện và lưu cảnh báo cho 2 trường hợp
-        /// Trả về tổng số cảnh báo đã xử lý
         public (int soMoi, int soCapNhat) PhatHienVaLuuCanhBao()
         {
             int soMoi = 0;

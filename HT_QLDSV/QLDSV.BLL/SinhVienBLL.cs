@@ -208,5 +208,44 @@ namespace QLDSV.BLL
         {
             return _dal.CheckSoDTUpdate(soDT, maSV);
         }
+
+        /// <summary>
+        /// Lấy danh sách sinh viên theo lớp niên chế và từ khóa tìm kiếm.
+        /// </summary>
+        public DataTable GetSinhVienTheoLop(string maLop, string tuKhoa = "")
+        {
+            return _dal.GetSinhVienTheoLop(maLop, tuKhoa);
+        }
+
+        /// <summary>
+        /// Lấy thông tin chi tiết sinh viên bao gồm GPA, CPA, tín chỉ.
+        /// </summary>
+        public DataTable GetThongTinSinhVienChiTiet(string maSV)
+        {
+            // Lấy thông tin cơ bản từ DAL
+            var dt = _dal.GetThongTinSinhVienCoBan(maSV);
+
+            if (dt.Rows.Count > 0)
+            {
+                // Lấy bảng điểm từ KetQuaDAL để tính GPA
+                var ketQuaDal = new KetQuaDAL();
+                var dtBangDiem = ketQuaDal.GetBangDiemSinhVien(maSV, "ALL", "ALL");
+
+                // Tính GPA từ bảng điểm
+                var ketQua = KetQuaBLL.TinhGPATuBangDiem(dtBangDiem);
+
+                dt.Columns.Add("TcDat", typeof(int));
+                dt.Columns.Add("TcNo", typeof(int));
+                dt.Columns.Add("GPA", typeof(double));
+                dt.Columns.Add("CPA", typeof(double));
+
+                dt.Rows[0]["TcDat"] = ketQua.TinChiTichLuy;
+                dt.Rows[0]["TcNo"] = 0; // Sẽ tính riêng nếu cần
+                dt.Rows[0]["GPA"] = ketQua.DiemHe10;
+                dt.Rows[0]["CPA"] = ketQua.DiemHe4;
+            }
+
+            return dt;
+        }
     }
 }
