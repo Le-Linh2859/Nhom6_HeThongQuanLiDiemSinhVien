@@ -24,7 +24,6 @@ namespace QLDSV.GUI
 
         public void OnEmbeddedInShell()
         {
-            // Ẩn tất cả các control Sidebar & Header trùng lặp bằng tìm kiếm động an toàn
             string[] controlNames = {
 "pnlSidebar", "pnlHeader", "guna2ImageButton1", "label3", "label4",
 "guna2ImageButton2", "guna2CirclePictureBox1", "guna2HtmlLabel13",
@@ -176,18 +175,13 @@ namespace QLDSV.GUI
                     DataGridViewGV.Columns["DiaChi"].HeaderText = "Địa chỉ";
                     DataGridViewGV.Columns["SoDT"].HeaderText = "Số điện thoại";
                     DataGridViewGV.Columns["Email"].HeaderText = "Email";
-
-                    // DataGridViewGV.Columns["MaKhoa"].HeaderText = "Mã khoa";
                     DataGridViewGV.Columns["MaKhoa"].Visible = false;
-
-                    // Ẩn nếu chưa dùng
                     DataGridViewGV.Columns["MaTaiKhoan"].Visible = false;
                 }
 
                 DataGridViewGV.AllowUserToAddRows = false;
                 DataGridViewGV.EditMode = DataGridViewEditMode.EditProgrammatically;
                 DataGridViewGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                // Cập nhật card tổng số thực
                 CapNhatSoLuong(dtGiangVien.Rows.Count);
                 if (DataGridViewGV.Rows.Count > 0)
                 {
@@ -197,7 +191,6 @@ namespace QLDSV.GUI
                     DataGridViewGV_CellClick(null, null);
 
                 }
-                // Cập nhật card số lượng
                 CapNhatSoLuong(dtGiangVien.Rows.Count);
             }
             catch (Exception ex)
@@ -393,9 +386,7 @@ namespace QLDSV.GUI
         private void btnReset_Click(object sender, EventArgs e)
         {
             {
-                // =========================
                 // Nếu đang THÊM
-                // =========================
                 if (isAdding)
                 {
                     cboMaGV.Text = "";
@@ -414,10 +405,7 @@ namespace QLDSV.GUI
 
                     cboMaGV.Focus();
                 }
-
-                // =========================
                 // Nếu đang SỬA
-                // =========================
                 else if (isEditing)
                 {
                     if (DataGridViewGV.SelectedRows.Count > 0)
@@ -561,9 +549,7 @@ namespace QLDSV.GUI
 
             try
             {
-                // =====================================
                 // THÊM
-                // =====================================
                 if (isAdding)
                 {
                     string matKhau = cboMatKhau.Text.Trim();
@@ -617,9 +603,7 @@ namespace QLDSV.GUI
                     MessageBoxIcon.Information);
                 }
 
-                // =====================================
                 // SỬA
-                // =====================================
                 else if (isEditing)
                 {
                     string loi = bll.ValidateCapNhatGiangVien(
@@ -655,10 +639,7 @@ namespace QLDSV.GUI
                     MessageBoxIcon.Information);
                 }
 
-                // =====================================
                 // Reload dữ liệu
-                // =====================================
-
                 LoadData();
 
                 ResetFormState();
@@ -788,9 +769,7 @@ namespace QLDSV.GUI
 
         private void WireSidebarEvents()
         {
-            // =========================
             // Điều hướng các Form
-            // =========================
 
             // Đang ở form Giảng viên
             btnGiangvien.Click += (s, e) => { };
@@ -829,10 +808,6 @@ namespace QLDSV.GUI
             btnTongquan.Click +=
             (s, e) => OpenForm(new frmTongQuan());
 
-            // =========================
-            // Chức năng đang phát triển
-            // =========================
-
             btnDangky.Click += (s, e) =>
             MessageBox.Show(
             "Tính năng Đăng ký lớp đang được phát triển!",
@@ -846,11 +821,6 @@ namespace QLDSV.GUI
             "Thông báo",
             MessageBoxButtons.OK,
             MessageBoxIcon.Information);
-
-            // =========================
-            // Highlight menu Giảng viên
-            // =========================
-
             btnGiangvien.FillColor =
             Color.FromArgb(224, 224, 224);
 

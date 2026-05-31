@@ -62,6 +62,9 @@ namespace QLDSV.GUI
             this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel15 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.pnlThongKeGV = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblSumGV = new System.Windows.Forms.Label();
             this.DataGridViewGV = new Guna.UI2.WinForms.Guna2DataGridView();
             this.btnLammoi = new Guna.UI2.WinForms.Guna2Button();
             this.cboKhoa = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -97,11 +100,9 @@ namespace QLDSV.GUI
             this.pnlSidebar = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.pnlThongKeGV = new System.Windows.Forms.Panel();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.lblSumGV = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
+            this.pnlThongKeGV.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewGV)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox12)).BeginInit();
@@ -117,11 +118,10 @@ namespace QLDSV.GUI
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.pnlSidebar.SuspendLayout();
-            this.pnlThongKeGV.SuspendLayout();
             this.SuspendLayout();
-            //
+            // 
             // btnHuy
-            //
+            // 
             this.btnHuy.BorderRadius = 2;
             this.btnHuy.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnHuy.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -139,9 +139,9 @@ namespace QLDSV.GUI
             this.btnHuy.Text = "Hủy";
             this.btnHuy.TextOffset = new System.Drawing.Point(1, 0);
             this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
-            //
+            // 
             // lblTenlop
-            //
+            // 
             this.lblTenlop.BackColor = System.Drawing.Color.Transparent;
             this.lblTenlop.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTenlop.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -151,9 +151,9 @@ namespace QLDSV.GUI
             this.lblTenlop.Size = new System.Drawing.Size(107, 23);
             this.lblTenlop.TabIndex = 62;
             this.lblTenlop.Text = "Tên giảng viên: ";
-            //
+            // 
             // lblMalop
-            //
+            // 
             this.lblMalop.BackColor = System.Drawing.Color.Transparent;
             this.lblMalop.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMalop.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -163,9 +163,9 @@ namespace QLDSV.GUI
             this.lblMalop.Size = new System.Drawing.Size(104, 23);
             this.lblMalop.TabIndex = 61;
             this.lblMalop.Text = "Mã giảng viên: ";
-            //
+            // 
             // cboDiaChi
-            //
+            // 
             this.cboDiaChi.BorderRadius = 2;
             this.cboDiaChi.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.cboDiaChi.DefaultText = "";
@@ -185,9 +185,9 @@ namespace QLDSV.GUI
             this.cboDiaChi.SelectedText = "";
             this.cboDiaChi.Size = new System.Drawing.Size(557, 36);
             this.cboDiaChi.TabIndex = 77;
-            //
+            // 
             // cboMaGV
-            //
+            // 
             this.cboMaGV.BorderRadius = 2;
             this.cboMaGV.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.cboMaGV.DefaultText = "";
@@ -207,9 +207,9 @@ namespace QLDSV.GUI
             this.cboMaGV.SelectedText = "";
             this.cboMaGV.Size = new System.Drawing.Size(454, 36);
             this.cboMaGV.TabIndex = 76;
-            //
+            // 
             // cboTenGV
-            //
+            // 
             this.cboTenGV.BorderRadius = 2;
             this.cboTenGV.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.cboTenGV.DefaultText = "";
@@ -229,11 +229,11 @@ namespace QLDSV.GUI
             this.cboTenGV.SelectedText = "";
             this.cboTenGV.Size = new System.Drawing.Size(454, 36);
             this.cboTenGV.TabIndex = 75;
-            //
+            // 
             // groupBox1
-            //
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackColor = System.Drawing.Color.White;
             this.groupBox1.Controls.Add(this.cboMatKhau1);
@@ -270,9 +270,9 @@ namespace QLDSV.GUI
             this.groupBox1.TabIndex = 63;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "  THÔNG TIN GIẢNG VIÊN";
-            //
+            // 
             // cboMatKhau1
-            //
+            // 
             this.cboMatKhau1.BorderRadius = 2;
             this.cboMatKhau1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.cboMatKhau1.DefaultText = "";
@@ -292,9 +292,9 @@ namespace QLDSV.GUI
             this.cboMatKhau1.SelectedText = "";
             this.cboMatKhau1.Size = new System.Drawing.Size(159, 36);
             this.cboMatKhau1.TabIndex = 86;
-            //
+            // 
             // lblNhapLaiMK
-            //
+            // 
             this.lblNhapLaiMK.BackColor = System.Drawing.Color.Transparent;
             this.lblNhapLaiMK.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNhapLaiMK.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -304,9 +304,9 @@ namespace QLDSV.GUI
             this.lblNhapLaiMK.Size = new System.Drawing.Size(127, 22);
             this.lblNhapLaiMK.TabIndex = 85;
             this.lblNhapLaiMK.Text = "Nhập lại mật khẩu:";
-            //
+            // 
             // lblMatKhau
-            //
+            // 
             this.lblMatKhau.BackColor = System.Drawing.Color.Transparent;
             this.lblMatKhau.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMatKhau.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -316,17 +316,17 @@ namespace QLDSV.GUI
             this.lblMatKhau.Size = new System.Drawing.Size(67, 22);
             this.lblMatKhau.TabIndex = 83;
             this.lblMatKhau.Text = "Mật khẩu:";
-            //
+            // 
             // mskSoDienThoai
-            //
+            // 
             this.mskSoDienThoai.Location = new System.Drawing.Point(957, 87);
             this.mskSoDienThoai.Mask = "(999) 000-0000";
             this.mskSoDienThoai.Name = "mskSoDienThoai";
             this.mskSoDienThoai.Size = new System.Drawing.Size(557, 36);
             this.mskSoDienThoai.TabIndex = 87;
-            //
+            // 
             // cboEmail
-            //
+            // 
             this.cboEmail.BorderRadius = 2;
             this.cboEmail.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.cboEmail.DefaultText = "";
@@ -346,9 +346,9 @@ namespace QLDSV.GUI
             this.cboEmail.SelectedText = "";
             this.cboEmail.Size = new System.Drawing.Size(454, 36);
             this.cboEmail.TabIndex = 82;
-            //
+            // 
             // guna2HtmlLabel5
-            //
+            // 
             this.guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -358,9 +358,9 @@ namespace QLDSV.GUI
             this.guna2HtmlLabel5.Size = new System.Drawing.Size(44, 23);
             this.guna2HtmlLabel5.TabIndex = 81;
             this.guna2HtmlLabel5.Text = "Email:";
-            //
+            // 
             // cboMatKhau
-            //
+            // 
             this.cboMatKhau.BorderRadius = 2;
             this.cboMatKhau.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.cboMatKhau.DefaultText = "";
@@ -380,9 +380,9 @@ namespace QLDSV.GUI
             this.cboMatKhau.SelectedText = "";
             this.cboMatKhau.Size = new System.Drawing.Size(238, 36);
             this.cboMatKhau.TabIndex = 84;
-            //
+            // 
             // rdoNu
-            //
+            // 
             this.rdoNu.AutoSize = true;
             this.rdoNu.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdoNu.Location = new System.Drawing.Point(260, 148);
@@ -392,9 +392,9 @@ namespace QLDSV.GUI
             this.rdoNu.TabStop = true;
             this.rdoNu.Text = "Nữ";
             this.rdoNu.UseVisualStyleBackColor = true;
-            //
+            // 
             // rdoNam
-            //
+            // 
             this.rdoNam.AutoSize = true;
             this.rdoNam.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdoNam.Location = new System.Drawing.Point(167, 148);
@@ -404,9 +404,9 @@ namespace QLDSV.GUI
             this.rdoNam.TabStop = true;
             this.rdoNam.Text = "Nam";
             this.rdoNam.UseVisualStyleBackColor = true;
-            //
+            // 
             // guna2HtmlLabel1
-            //
+            // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -416,9 +416,9 @@ namespace QLDSV.GUI
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(38, 23);
             this.guna2HtmlLabel1.TabIndex = 78;
             this.guna2HtmlLabel1.Text = "Khoa";
-            //
+            // 
             // btnReset
-            //
+            // 
             this.btnReset.BorderRadius = 2;
             this.btnReset.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnReset.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -436,9 +436,9 @@ namespace QLDSV.GUI
             this.btnReset.Text = "Reset";
             this.btnReset.TextOffset = new System.Drawing.Point(1, 0);
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            //
+            // 
             // btnLuu
-            //
+            // 
             this.btnLuu.BorderRadius = 2;
             this.btnLuu.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnLuu.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -456,9 +456,9 @@ namespace QLDSV.GUI
             this.btnLuu.Text = "Lưu";
             this.btnLuu.TextOffset = new System.Drawing.Point(1, 0);
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
-            //
+            // 
             // lblNienkhoa
-            //
+            // 
             this.lblNienkhoa.BackColor = System.Drawing.Color.Transparent;
             this.lblNienkhoa.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNienkhoa.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -468,9 +468,9 @@ namespace QLDSV.GUI
             this.lblNienkhoa.Size = new System.Drawing.Size(66, 23);
             this.lblNienkhoa.TabIndex = 63;
             this.lblNienkhoa.Text = "Giới tính:";
-            //
+            // 
             // lblKhoa
-            //
+            // 
             this.lblKhoa.BackColor = System.Drawing.Color.Transparent;
             this.lblKhoa.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblKhoa.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -480,9 +480,9 @@ namespace QLDSV.GUI
             this.lblKhoa.Size = new System.Drawing.Size(53, 23);
             this.lblKhoa.TabIndex = 64;
             this.lblKhoa.Text = "Địa chỉ:";
-            //
+            // 
             // btnSua
-            //
+            // 
             this.btnSua.BorderRadius = 2;
             this.btnSua.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnSua.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -500,9 +500,9 @@ namespace QLDSV.GUI
             this.btnSua.Text = "Sửa";
             this.btnSua.TextOffset = new System.Drawing.Point(1, 0);
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
-            //
+            // 
             // lblCovan
-            //
+            // 
             this.lblCovan.BackColor = System.Drawing.Color.Transparent;
             this.lblCovan.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCovan.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -512,9 +512,9 @@ namespace QLDSV.GUI
             this.lblCovan.Size = new System.Drawing.Size(94, 23);
             this.lblCovan.TabIndex = 66;
             this.lblCovan.Text = "Số điện thoại";
-            //
+            // 
             // btnThem
-            //
+            // 
             this.btnThem.BorderRadius = 2;
             this.btnThem.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnThem.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -533,9 +533,9 @@ namespace QLDSV.GUI
             this.btnThem.Text = "Thêm";
             this.btnThem.TextOffset = new System.Drawing.Point(1, 0);
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
-            //
+            // 
             // cboKhoa2
-            //
+            // 
             this.cboKhoa2.BackColor = System.Drawing.Color.Transparent;
             this.cboKhoa2.BorderRadius = 2;
             this.cboKhoa2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
@@ -551,9 +551,9 @@ namespace QLDSV.GUI
             this.cboKhoa2.Size = new System.Drawing.Size(554, 31);
             this.cboKhoa2.TabIndex = 65;
             this.cboKhoa2.SelectedIndexChanged += new System.EventHandler(this.cboKhoa2_SelectedIndexChanged);
-            //
+            // 
             // txtTimKiem
-            //
+            // 
             this.txtTimKiem.BorderRadius = 5;
             this.txtTimKiem.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtTimKiem.DefaultText = "Tìm kiếm theo mã, tên giảng viên ...";
@@ -573,9 +573,9 @@ namespace QLDSV.GUI
             this.txtTimKiem.SelectedText = "";
             this.txtTimKiem.Size = new System.Drawing.Size(659, 39);
             this.txtTimKiem.TabIndex = 1;
-            //
+            // 
             // guna2HtmlLabel15
-            //
+            // 
             this.guna2HtmlLabel15.BackColor = System.Drawing.SystemColors.ControlDark;
             this.guna2HtmlLabel15.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.guna2HtmlLabel15.Location = new System.Drawing.Point(213, 97);
@@ -584,10 +584,10 @@ namespace QLDSV.GUI
             this.guna2HtmlLabel15.Size = new System.Drawing.Size(3, 2);
             this.guna2HtmlLabel15.TabIndex = 61;
             this.guna2HtmlLabel15.Text = null;
-            //
+            // 
             // guna2Panel1
-            //
-            this.guna2Panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            // 
+            this.guna2Panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel1.BorderColor = System.Drawing.Color.LightGray;
@@ -607,13 +607,47 @@ namespace QLDSV.GUI
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(1567, 394);
             this.guna2Panel1.TabIndex = 62;
-            //
+            // 
+            // pnlThongKeGV
+            // 
+            this.pnlThongKeGV.BackColor = System.Drawing.Color.White;
+            this.pnlThongKeGV.Controls.Add(this.lblTitle);
+            this.pnlThongKeGV.Controls.Add(this.lblSumGV);
+            this.pnlThongKeGV.Location = new System.Drawing.Point(1390, 8);
+            this.pnlThongKeGV.Name = "pnlThongKeGV";
+            this.pnlThongKeGV.Size = new System.Drawing.Size(160, 75);
+            this.pnlThongKeGV.TabIndex = 34;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.lblTitle.ForeColor = System.Drawing.Color.Gray;
+            this.lblTitle.Location = new System.Drawing.Point(0, 12);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(160, 18);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Tổng số giảng viên";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSumGV
+            // 
+            this.lblSumGV.BackColor = System.Drawing.Color.Transparent;
+            this.lblSumGV.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
+            this.lblSumGV.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.lblSumGV.Location = new System.Drawing.Point(0, 30);
+            this.lblSumGV.Name = "lblSumGV";
+            this.lblSumGV.Size = new System.Drawing.Size(160, 38);
+            this.lblSumGV.TabIndex = 1;
+            this.lblSumGV.Text = "0";
+            this.lblSumGV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // DataGridViewGV
-            //
+            // 
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.DataGridViewGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.DataGridViewGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.DataGridViewGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DataGridViewGV.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -665,9 +699,9 @@ namespace QLDSV.GUI
             this.DataGridViewGV.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(216)))), ((int)(((byte)(230)))));
             this.DataGridViewGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.DataGridViewGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewGV_CellClick);
-            //
+            // 
             // btnLammoi
-            //
+            // 
             this.btnLammoi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLammoi.BorderColor = System.Drawing.Color.RoyalBlue;
             this.btnLammoi.BorderRadius = 8;
@@ -681,7 +715,7 @@ namespace QLDSV.GUI
             this.btnLammoi.ForeColor = System.Drawing.Color.White;
             this.btnLammoi.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(148)))), ((int)(((byte)(136)))));
             this.btnLammoi.ImageSize = new System.Drawing.Size(18, 18);
-            this.btnLammoi.Location = new System.Drawing.Point(1070, 44);
+            this.btnLammoi.Location = new System.Drawing.Point(1202, 40);
             this.btnLammoi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLammoi.Name = "btnLammoi";
             this.btnLammoi.Size = new System.Drawing.Size(120, 36);
@@ -689,9 +723,9 @@ namespace QLDSV.GUI
             this.btnLammoi.Text = "Làm mới";
             this.btnLammoi.TextOffset = new System.Drawing.Point(1, 0);
             this.btnLammoi.Click += new System.EventHandler(this.btnLammoi_Click);
-            //
+            // 
             // cboKhoa
-            //
+            // 
             this.cboKhoa.BackColor = System.Drawing.Color.Transparent;
             this.cboKhoa.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cboKhoa.DropDownHeight = 50;
@@ -709,9 +743,9 @@ namespace QLDSV.GUI
             this.cboKhoa.Name = "cboKhoa";
             this.cboKhoa.Size = new System.Drawing.Size(511, 25);
             this.cboKhoa.TabIndex = 30;
-            //
+            // 
             // guna2HtmlLabel4
-            //
+            // 
             this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.White;
@@ -721,9 +755,9 @@ namespace QLDSV.GUI
             this.guna2HtmlLabel4.Size = new System.Drawing.Size(105, 22);
             this.guna2HtmlLabel4.TabIndex = 27;
             this.guna2HtmlLabel4.Text = "Lọc theo khoa:";
-            //
+            // 
             // tableLayoutPanel1
-            //
+            // 
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -771,9 +805,9 @@ namespace QLDSV.GUI
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(183, 377);
             this.tableLayoutPanel1.TabIndex = 34;
-            //
+            // 
             // btnSinhvien
-            //
+            // 
             this.btnSinhvien.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnSinhvien.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnSinhvien.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -788,9 +822,9 @@ namespace QLDSV.GUI
             this.btnSinhvien.TabIndex = 48;
             this.btnSinhvien.Text = "Sinh viên";
             this.btnSinhvien.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            //
+            // 
             // guna2PictureBox12
-            //
+            // 
             this.guna2PictureBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox12.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox12.Image")));
             this.guna2PictureBox12.ImageRotate = 0F;
@@ -801,9 +835,9 @@ namespace QLDSV.GUI
             this.guna2PictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox12.TabIndex = 23;
             this.guna2PictureBox12.TabStop = false;
-            //
+            // 
             // guna2PictureBox11
-            //
+            // 
             this.guna2PictureBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox11.Image")));
             this.guna2PictureBox11.ImageRotate = 0F;
@@ -814,9 +848,9 @@ namespace QLDSV.GUI
             this.guna2PictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox11.TabIndex = 22;
             this.guna2PictureBox11.TabStop = false;
-            //
+            // 
             // guna2PictureBox10
-            //
+            // 
             this.guna2PictureBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox10.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox10.Image")));
             this.guna2PictureBox10.ImageRotate = 0F;
@@ -827,9 +861,9 @@ namespace QLDSV.GUI
             this.guna2PictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox10.TabIndex = 21;
             this.guna2PictureBox10.TabStop = false;
-            //
+            // 
             // guna2PictureBox9
-            //
+            // 
             this.guna2PictureBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox9.Image")));
             this.guna2PictureBox9.ImageRotate = 0F;
@@ -840,9 +874,9 @@ namespace QLDSV.GUI
             this.guna2PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox9.TabIndex = 20;
             this.guna2PictureBox9.TabStop = false;
-            //
+            // 
             // guna2PictureBox8
-            //
+            // 
             this.guna2PictureBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox8.Image")));
             this.guna2PictureBox8.ImageRotate = 0F;
@@ -853,9 +887,9 @@ namespace QLDSV.GUI
             this.guna2PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox8.TabIndex = 19;
             this.guna2PictureBox8.TabStop = false;
-            //
+            // 
             // guna2PictureBox7
-            //
+            // 
             this.guna2PictureBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox7.Image")));
             this.guna2PictureBox7.ImageRotate = 0F;
@@ -866,9 +900,9 @@ namespace QLDSV.GUI
             this.guna2PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox7.TabIndex = 18;
             this.guna2PictureBox7.TabStop = false;
-            //
+            // 
             // guna2PictureBox6
-            //
+            // 
             this.guna2PictureBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox6.Image")));
             this.guna2PictureBox6.ImageRotate = 0F;
@@ -879,9 +913,9 @@ namespace QLDSV.GUI
             this.guna2PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox6.TabIndex = 17;
             this.guna2PictureBox6.TabStop = false;
-            //
+            // 
             // guna2PictureBox5
-            //
+            // 
             this.guna2PictureBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox5.Image")));
             this.guna2PictureBox5.ImageRotate = 0F;
@@ -892,9 +926,9 @@ namespace QLDSV.GUI
             this.guna2PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox5.TabIndex = 16;
             this.guna2PictureBox5.TabStop = false;
-            //
+            // 
             // guna2PictureBox4
-            //
+            // 
             this.guna2PictureBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox4.Image")));
             this.guna2PictureBox4.ImageRotate = 0F;
@@ -905,9 +939,9 @@ namespace QLDSV.GUI
             this.guna2PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox4.TabIndex = 15;
             this.guna2PictureBox4.TabStop = false;
-            //
+            // 
             // guna2PictureBox3
-            //
+            // 
             this.guna2PictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox3.Image")));
             this.guna2PictureBox3.ImageRotate = 0F;
@@ -918,9 +952,9 @@ namespace QLDSV.GUI
             this.guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox3.TabIndex = 14;
             this.guna2PictureBox3.TabStop = false;
-            //
+            // 
             // btnGiangvien
-            //
+            // 
             this.btnGiangvien.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.btnGiangvien.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnGiangvien.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -936,9 +970,9 @@ namespace QLDSV.GUI
             this.btnGiangvien.TabIndex = 3;
             this.btnGiangvien.Text = "Giảng viên";
             this.btnGiangvien.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            //
+            // 
             // guna2PictureBox2
-            //
+            // 
             this.guna2PictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("guna2PictureBox2.Image")));
             this.guna2PictureBox2.ImageRotate = 0F;
@@ -949,9 +983,9 @@ namespace QLDSV.GUI
             this.guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox2.TabIndex = 2;
             this.guna2PictureBox2.TabStop = false;
-            //
+            // 
             // btnTongquan
-            //
+            // 
             this.btnTongquan.BorderRadius = 5;
             this.btnTongquan.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnTongquan.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -967,9 +1001,9 @@ namespace QLDSV.GUI
             this.btnTongquan.TabIndex = 0;
             this.btnTongquan.Text = "Tổng quan";
             this.btnTongquan.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            //
+            // 
             // guna2PictureBox1
-            //
+            // 
             this.guna2PictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(101)))), ((int)(((byte)(192)))));
             this.guna2PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.guna2PictureBox1.FillColor = System.Drawing.Color.RosyBrown;
@@ -982,9 +1016,9 @@ namespace QLDSV.GUI
             this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox1.TabIndex = 1;
             this.guna2PictureBox1.TabStop = false;
-            //
+            // 
             // btnMon
-            //
+            // 
             this.btnMon.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnMon.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnMon.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -999,9 +1033,9 @@ namespace QLDSV.GUI
             this.btnMon.TabIndex = 5;
             this.btnMon.Text = "Môn học";
             this.btnMon.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            //
+            // 
             // btnLophp
-            //
+            // 
             this.btnLophp.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnLophp.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnLophp.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -1016,9 +1050,9 @@ namespace QLDSV.GUI
             this.btnLophp.TabIndex = 7;
             this.btnLophp.Text = "Lớp học phần";
             this.btnLophp.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            //
+            // 
             // btnDangky
-            //
+            // 
             this.btnDangky.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnDangky.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnDangky.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -1033,9 +1067,9 @@ namespace QLDSV.GUI
             this.btnDangky.TabIndex = 8;
             this.btnDangky.Text = "Đăng ký lớp";
             this.btnDangky.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            //
+            // 
             // btnDiem
-            //
+            // 
             this.btnDiem.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnDiem.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnDiem.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -1050,9 +1084,9 @@ namespace QLDSV.GUI
             this.btnDiem.TabIndex = 9;
             this.btnDiem.Text = "Nhập điểm";
             this.btnDiem.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            //
+            // 
             // btnKetqua
-            //
+            // 
             this.btnKetqua.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnKetqua.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnKetqua.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -1067,9 +1101,9 @@ namespace QLDSV.GUI
             this.btnKetqua.TabIndex = 10;
             this.btnKetqua.Text = "Kết quả học tập";
             this.btnKetqua.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            //
+            // 
             // btnCanhbao
-            //
+            // 
             this.btnCanhbao.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnCanhbao.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnCanhbao.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -1084,9 +1118,9 @@ namespace QLDSV.GUI
             this.btnCanhbao.TabIndex = 11;
             this.btnCanhbao.Text = "Cảnh báo học vụ";
             this.btnCanhbao.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            //
+            // 
             // btnPhuckhao
-            //
+            // 
             this.btnPhuckhao.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnPhuckhao.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnPhuckhao.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -1101,9 +1135,9 @@ namespace QLDSV.GUI
             this.btnPhuckhao.TabIndex = 12;
             this.btnPhuckhao.Text = "Phúc khảo";
             this.btnPhuckhao.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            //
+            // 
             // btnBaocao
-            //
+            // 
             this.btnBaocao.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnBaocao.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnBaocao.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -1118,9 +1152,9 @@ namespace QLDSV.GUI
             this.btnBaocao.TabIndex = 13;
             this.btnBaocao.Text = "Báo cáo";
             this.btnBaocao.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            //
+            // 
             // btnLopnc
-            //
+            // 
             this.btnLopnc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(101)))), ((int)(((byte)(192)))));
             this.btnLopnc.BorderRadius = 5;
             this.btnLopnc.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -1137,9 +1171,9 @@ namespace QLDSV.GUI
             this.btnLopnc.TabIndex = 6;
             this.btnLopnc.Text = "Lớp niên chế";
             this.btnLopnc.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            //
+            // 
             // label1
-            //
+            // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
@@ -1148,9 +1182,9 @@ namespace QLDSV.GUI
             this.label1.Size = new System.Drawing.Size(138, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "QUẢN LÝ ĐÀO TẠO";
-            //
+            // 
             // label2
-            //
+            // 
             this.label2.AutoSize = true;
             this.label2.Enabled = false;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1159,9 +1193,9 @@ namespace QLDSV.GUI
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 17);
             this.label2.TabIndex = 1;
-            //
+            // 
             // btnSignout
-            //
+            // 
             this.btnSignout.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnSignout.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnSignout.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -1176,9 +1210,9 @@ namespace QLDSV.GUI
             this.btnSignout.TabIndex = 18;
             this.btnSignout.Text = "Đăng xuất";
             this.btnSignout.TextOffset = new System.Drawing.Point(5, 0);
-            //
+            // 
             // pnlSidebar
-            //
+            // 
             this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(101)))), ((int)(((byte)(192)))));
             this.pnlSidebar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pnlSidebar.BorderRadius = 5;
@@ -1192,9 +1226,9 @@ namespace QLDSV.GUI
             this.pnlSidebar.Name = "pnlSidebar";
             this.pnlSidebar.Size = new System.Drawing.Size(196, 743);
             this.pnlSidebar.TabIndex = 60;
-            //
+            // 
             // guna2HtmlLabel2
-            //
+            // 
             this.guna2HtmlLabel2.AutoSize = false;
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel2.Location = new System.Drawing.Point(9, 33);
@@ -1203,9 +1237,9 @@ namespace QLDSV.GUI
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(175, 17);
             this.guna2HtmlLabel2.TabIndex = 14;
             this.guna2HtmlLabel2.Text = "---------------------------------------------------------------";
-            //
+            // 
             // guna2HtmlLabel3
-            //
+            // 
             this.guna2HtmlLabel3.AutoSize = false;
             this.guna2HtmlLabel3.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel3.Location = new System.Drawing.Point(13, 702);
@@ -1214,36 +1248,9 @@ namespace QLDSV.GUI
             this.guna2HtmlLabel3.Size = new System.Drawing.Size(175, 17);
             this.guna2HtmlLabel3.TabIndex = 19;
             this.guna2HtmlLabel3.Text = "---------------------------------------------------------------";
-            //
-            // pnlThongKeGV - dùng Panel thường, bỏ hết BorderColor, BorderRadius, BorderThickness, FillColor
-            this.pnlThongKeGV.BackColor = System.Drawing.Color.White;
-            this.pnlThongKeGV.Location = new System.Drawing.Point(1390, 8);
-            this.pnlThongKeGV.Name = "pnlThongKeGV";
-            this.pnlThongKeGV.Size = new System.Drawing.Size(160, 75);
-            this.pnlThongKeGV.TabIndex = 34;
-            this.pnlThongKeGV.Controls.Add(this.lblTitle);
-            this.pnlThongKeGV.Controls.Add(this.lblSumGV);
-            // lblTitle
-            this.lblTitle.AutoSize = false;
-            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Regular);
-            this.lblTitle.ForeColor = System.Drawing.Color.Gray;
-            this.lblTitle.Location = new System.Drawing.Point(0, 12);
-            this.lblTitle.Size = new System.Drawing.Size(160, 18);
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblTitle.Text = "Tổng số giảng viên";
-
-            // lblSumGV
-            this.lblSumGV.AutoSize = false;
-            this.lblSumGV.BackColor = System.Drawing.Color.Transparent;
-            this.lblSumGV.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
-            this.lblSumGV.ForeColor = System.Drawing.Color.FromArgb(100, 88, 255);
-            this.lblSumGV.Location = new System.Drawing.Point(0, 30);
-            this.lblSumGV.Size = new System.Drawing.Size(160, 38);
-            this.lblSumGV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblSumGV.Text = "0";
+            // 
             // frmGiangvien
-            //
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1772, 743);
@@ -1258,6 +1265,7 @@ namespace QLDSV.GUI
             this.groupBox1.PerformLayout();
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
+            this.pnlThongKeGV.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewGV)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox12)).EndInit();
@@ -1274,8 +1282,6 @@ namespace QLDSV.GUI
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.pnlSidebar.ResumeLayout(false);
             this.pnlSidebar.PerformLayout();
-            this.pnlThongKeGV.ResumeLayout(false);
-            this.pnlThongKeGV.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

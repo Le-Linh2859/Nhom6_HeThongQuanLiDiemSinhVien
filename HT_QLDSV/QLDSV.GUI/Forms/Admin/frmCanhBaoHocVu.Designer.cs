@@ -227,10 +227,10 @@ namespace QLDSV.GUI
             this.btnXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXuat.ForeColor = System.Drawing.Color.White;
-            this.btnXuat.Location = new System.Drawing.Point(1113, 495);
+            this.btnXuat.Location = new System.Drawing.Point(1103, 495);
             this.btnXuat.Margin = new System.Windows.Forms.Padding(4);
             this.btnXuat.Name = "btnXuat";
-            this.btnXuat.Size = new System.Drawing.Size(102, 33);
+            this.btnXuat.Size = new System.Drawing.Size(112, 41);
             this.btnXuat.TabIndex = 62;
             this.btnXuat.Text = "Xuất Excel";
             this.btnXuat.UseVisualStyleBackColor = false;

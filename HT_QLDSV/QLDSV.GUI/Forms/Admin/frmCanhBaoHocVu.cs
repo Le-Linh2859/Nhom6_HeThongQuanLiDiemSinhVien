@@ -60,11 +60,6 @@ private void frmCanhBaoHocVu_Load(object sender, EventArgs e)
                     MessageBoxIcon.Information);
             }
         }
-
-        // =====================================================
-        // LOAD DATA
-        // =====================================================
-
         private void LoadData()
         {
             try
@@ -103,11 +98,7 @@ private void frmCanhBaoHocVu_Load(object sender, EventArgs e)
                     "Lỗi tải dữ liệu: " + ex.Message);
             }
         }
-
-        // =====================================================
         // LOAD FILTERS
-        // =====================================================
-
         private void LoadComboboxFilters()
         {
             try
@@ -183,11 +174,7 @@ private void frmCanhBaoHocVu_Load(object sender, EventArgs e)
                 MessageBox.Show(ex.Message);
             }
         }
-
-        // =====================================================
         // FILTER
-        // =====================================================
-
         private void ApplyFilter()
         {
             if (dtCanhBao == null)
@@ -237,11 +224,7 @@ private void frmCanhBaoHocVu_Load(object sender, EventArgs e)
 
             dtCanhBao.DefaultView.RowFilter = filter;
         }
-
-        // =====================================================
         // EVENTS
-        // =====================================================
-
         private void WireEvents()
         {
             cboNamHoc.SelectedIndexChanged += cboFilter_SelectedIndexChanged;
@@ -270,11 +253,7 @@ private void frmCanhBaoHocVu_Load(object sender, EventArgs e)
         {
             ApplyFilter();
         }
-
-        // =====================================================
         // RESET
-        // =====================================================
-
         private void btnLammoi_Click(
             object sender,
             EventArgs e)
@@ -294,11 +273,7 @@ private void frmCanhBaoHocVu_Load(object sender, EventArgs e)
 
             LoadData();
         }
-
-        // =====================================================
         // GRID
-        // =====================================================
-
         private void SetupGrid()
         {
             DataGridViewCBHV.AllowUserToAddRows = false;
@@ -323,11 +298,7 @@ DataGridViewCBHV.AutoSizeColumnsMode =
             DataGridViewCBHV.ColumnHeadersDefaultCellStyle.ForeColor =
                 Color.White;
         }
-
-        // =====================================================
         // EXPORT EXCEL
-        // =====================================================
-
         private void btnXuat_Click(
             object sender,
             EventArgs e)
@@ -356,9 +327,7 @@ DataGridViewCBHV.AutoSizeColumnsMode =
                 {
                     var ws = wb.Worksheets.Add("Danh sách");
 
-                    // ------------------------------------------------
                     // HEADER TRƯỜNG (dòng 1-2)
-                    // ------------------------------------------------
                     ws.Cell("A1").Value = "TRƯỜNG ĐẠI HỌC ABC";
                     ws.Cell("A1").Style.Font.Bold = true;
                     ws.Cell("A1").Style.Font.FontSize = 11;
@@ -370,7 +339,7 @@ DataGridViewCBHV.AutoSizeColumnsMode =
                         ClosedXML.Excel.XLAlignmentHorizontalValues.Center;
                     ws.Range("F1:H1").Merge();
 
-                    ws.Cell("A2").Value = "KHOA / PHÒNG ĐÀO TẠO";
+                    ws.Cell("A2").Value = "PHÒNG ĐÀO TẠO";
                     ws.Cell("A2").Style.Font.Bold = true;
 
                     ws.Cell("F2").Value = "Độc lập - Tự do - Hạnh phúc";
@@ -379,9 +348,7 @@ DataGridViewCBHV.AutoSizeColumnsMode =
                         ClosedXML.Excel.XLAlignmentHorizontalValues.Center;
                     ws.Range("F2:H2").Merge();
 
-                    // ------------------------------------------------
                     // TIÊU ĐỀ CHÍNH (dòng 4)
-                    // ------------------------------------------------
                     ws.Cell("A4").Value = tieuDe;
                     ws.Cell("A4").Style.Font.Bold = true;
                     ws.Cell("A4").Style.Font.FontSize = 14;
@@ -397,9 +364,7 @@ DataGridViewCBHV.AutoSizeColumnsMode =
                         ClosedXML.Excel.XLAlignmentHorizontalValues.Center;
                     ws.Range("A5:H5").Merge();
 
-                    // ------------------------------------------------
                     // HEADER BẢNG (dòng 7)
-                    // ------------------------------------------------
                     int headerRow = 7;
                     string[] headers = {
                 "STT", "Mã SV", "Họ tên",
@@ -423,13 +388,7 @@ DataGridViewCBHV.AutoSizeColumnsMode =
                             ClosedXML.Excel.XLBorderStyleValues.Thin;
                     }
 
-                    // ------------------------------------------------
                     // DỮ LIỆU
-                    // ------------------------------------------------
-                    // Map tên cột grid → cột Excel
-                    // Grid có: MaCanhBao, MaSV, HoTen, MaLopNienChe,
-                    //          TenLoaiHK, TenNamHoc, Noidung, LoaiCanhBao,
-                    //          ThoiDiem, LanThu
                     int dataRow = headerRow + 1;
                     int stt = 1;
 
@@ -440,9 +399,6 @@ DataGridViewCBHV.AutoSizeColumnsMode =
                         string maLop = row.Cells["MaLopNienChe"].Value?.ToString() ?? "";
                         string noiDung = row.Cells["Noidung"].Value?.ToString() ?? "";
                         string lanThu = row.Cells["LanThu"].Value?.ToString() ?? "";
-
-                        // Khoa: chưa có trong grid → để trống,
-                        // bạn có thể bổ sung cột TenKhoa vào query DAL sau
                         string tenKhoa = row.Cells["TenKhoa"].Value?.ToString() ?? "";
 
                         ws.Cell(dataRow, 1).Value = stt++;
@@ -452,7 +408,7 @@ DataGridViewCBHV.AutoSizeColumnsMode =
                         ws.Cell(dataRow, 5).Value = maLop;
                         ws.Cell(dataRow, 6).Value = lanThu;
                         ws.Cell(dataRow, 7).Value = noiDung;
-                        ws.Cell(dataRow, 8).Value = "";  // Ghi chú
+                        ws.Cell(dataRow, 8).Value = ""; 
 
                         // Viền từng dòng
                         var rowRange = ws.Range(dataRow, 1, dataRow, 8);
@@ -461,17 +417,13 @@ DataGridViewCBHV.AutoSizeColumnsMode =
                         rowRange.Style.Border.InsideBorder =
                             ClosedXML.Excel.XLBorderStyleValues.Thin;
 
-                        // Nền xen kẽ cho dễ đọc
                         if (stt % 2 == 0)
                             rowRange.Style.Fill.BackgroundColor =
                                 ClosedXML.Excel.XLColor.FromArgb(242, 242, 242);
 
                         dataRow++;
                     }
-
-                    // ------------------------------------------------
                     // DÒNG TỔNG KẾT
-                    // ------------------------------------------------
                     int totalRow = dataRow + 1;
                     ws.Cell(totalRow, 1).Value =
                         $"Danh sách gồm {DataGridViewCBHV.Rows.Count} sinh viên";
@@ -497,10 +449,7 @@ DataGridViewCBHV.AutoSizeColumnsMode =
                     ws.Cell(totalRow + 2, 6).Style.Alignment.Horizontal =
                         ClosedXML.Excel.XLAlignmentHorizontalValues.Center;
                     ws.Range(totalRow + 2, 6, totalRow + 2, 8).Merge();
-
-                    // ------------------------------------------------
                     // ĐỘ RỘNG CỘT
-                    // ------------------------------------------------
                     ws.Column(1).Width = 6;   // STT
                     ws.Column(2).Width = 12;  // Mã SV
                     ws.Column(3).Width = 25;  // Họ tên
