@@ -157,7 +157,7 @@ namespace QLDSV.BLL
                 (decimal)kt1 * LayTyLe("KT1") +
                 (decimal)kt2 * LayTyLe("KT2") +
                 (decimal)ck * LayTyLe("CK");
-            return Math.Round((double)tong, 2);
+            return Math.Round((double)tong, 1);
         }
 
         
@@ -304,7 +304,7 @@ namespace QLDSV.BLL
 
             ketQua.CoDuLieu = true;
             ketQua.TinChiTichLuy = tinChi;
-            ketQua.DiemHe10 = Math.Round(sumWeighted10 / tinChi, 2);
+            ketQua.DiemHe10 = Math.Round(sumWeighted10 / tinChi, 1);
             ketQua.DiemHe4 = Math.Round(sumWeighted4 / tinChi, 2);
             ketQua.XepLoai = XepLoaiHocLuc(ketQua.DiemHe4);
             return ketQua;

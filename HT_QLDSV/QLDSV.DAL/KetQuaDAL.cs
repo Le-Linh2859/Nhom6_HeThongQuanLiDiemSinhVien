@@ -311,7 +311,7 @@ namespace QLDSV.DAL
                 "SELECT sv.MaSV, sv.HoTen, lnc.TenLop, " +
                 "  ROUND( " +
                 "    SUM(dm.DiemTK * dm.SoTC) / NULLIF(SUM(dm.SoTC), 0) " +
-                "  , 2) AS DTB10, " +
+                "  , 1) AS DTB10, " +
                 "  ROUND( " +
                 "    SUM( " +
                 "      (CASE " +

@@ -202,8 +202,10 @@ namespace QLDSV.GUI.Forms.Admin
                         ? Convert.ToDouble(row["GPA4"])
                         : 0;
 
+                    // Làm tròn 1 chữ số thập phân, bỏ số 0 thừa
+                    row["DTB10"] = Math.Round(dtb, 1);
                     row["DiemChu"] = KetQuaBLL.QuyDoiDiemChu(dtb);
-                    row["GPA4"] = gpa4;
+                    row["GPA4"] = Math.Round(gpa4, 2);
                     row["XepLoai"] = KetQuaBLL.XepLoaiHocLuc(gpa4);
                 }
 
@@ -251,6 +253,10 @@ namespace QLDSV.GUI.Forms.Admin
                 col.Visible = true;
                 col.DisplayIndex = i;
                 col.HeaderText = headers[i];
+
+                // Bỏ số 0 thừa ở cột điểm số
+                if (colNames[i] == "DTB10" || colNames[i] == "GPA4")
+                    col.DefaultCellStyle.Format = "G";
             }
         }
 
