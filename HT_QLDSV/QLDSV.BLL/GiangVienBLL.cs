@@ -18,7 +18,10 @@ namespace QLDSV.BLL
         {
             return dal.LoadGiangVien();
         }
-
+        public int GetTongSoGiangVien()
+        {
+            return dal.LoadGiangVien().Rows.Count;
+        }
         // 2. Lấy danh sách khoa
         public DataTable GetKhoa()
         {
@@ -27,44 +30,44 @@ namespace QLDSV.BLL
 
         // 3. Thêm giảng viên
         public void InsertGiangVien(
-            string soDT,
-            string hoTen,
-            bool gioiTinh,
-            string diaChi,
-            string maGV,
-            string email,
-            string maKhoa,
-            string maTaiKhoan)
+        string soDT,
+        string hoTen,
+        bool gioiTinh,
+        string diaChi,
+        string maGV,
+        string email,
+        string maKhoa,
+        string maTaiKhoan)
         {
             dal.InsertGiangVien(
-                soDT,
-                hoTen,
-                gioiTinh,
-                diaChi,
-                maGV,
-                email,
-                maKhoa,
-                maTaiKhoan);
+            soDT,
+            hoTen,
+            gioiTinh,
+            diaChi,
+            maGV,
+            email,
+            maKhoa,
+            maTaiKhoan);
         }
 
         // 4. Cập nhật giảng viên
         public void UpdateGiangVien(
-            string soDT,
-            string hoTen,
-            bool gioiTinh,
-            string diaChi,
-            string maGV,
-            string email,
-            string maKhoa)
+        string soDT,
+        string hoTen,
+        bool gioiTinh,
+        string diaChi,
+        string maGV,
+        string email,
+        string maKhoa)
         {
             dal.UpdateGiangVien(
-                soDT,
-                hoTen,
-                gioiTinh,
-                diaChi,
-                maGV,
-                email,
-                maKhoa);
+            soDT,
+            hoTen,
+            gioiTinh,
+            diaChi,
+            maGV,
+            email,
+            maKhoa);
         }
 
         // 5. Xóa giảng viên
@@ -75,18 +78,18 @@ namespace QLDSV.BLL
 
         // 6. Thêm tài khoản
         public void InsertTaiKhoan(
-            string maTaiKhoan,
-            string maVaiTro,
-            string tenDangNhap,
-            string matKhau,
-            int trangThai)
+        string maTaiKhoan,
+        string maVaiTro,
+        string tenDangNhap,
+        string matKhau,
+        int trangThai)
         {
             dal.InsertTaiKhoan(
-                maTaiKhoan,
-                maVaiTro,
-                tenDangNhap,
-                matKhau,
-                trangThai);
+            maTaiKhoan,
+            maVaiTro,
+            tenDangNhap,
+            matKhau,
+            trangThai);
         }
 
         // 7. Tạo mã tài khoản mới
@@ -101,10 +104,10 @@ namespace QLDSV.BLL
             return dal.CheckKey(maGV);
         }
         public string ValidateGiangVien(
-    string maGV,
-    string hoTen,
-    string email,
-    string soDT)
+        string maGV,
+        string hoTen,
+        string email,
+        string soDT)
         {
             if (string.IsNullOrWhiteSpace(maGV))
                 return "Mã giảng viên không được để trống.";
@@ -113,8 +116,8 @@ namespace QLDSV.BLL
                 return "Họ tên không được để trống.";
 
             if (!Regex.IsMatch(
-                email,
-                @"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"))
+            email,
+            @"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"))
             {
                 return "Email không hợp lệ.";
             }
@@ -134,8 +137,8 @@ namespace QLDSV.BLL
             }
 
             if (!Regex.IsMatch(
-                matKhau,
-                @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$"))
+            matKhau,
+            @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$"))
             {
                 return "Mật khẩu phải có chữ hoa, chữ thường và số.";
             }
@@ -159,7 +162,6 @@ namespace QLDSV.BLL
         // ========================================
         // Validate thông tin chung
         // ========================================
-        
 
         // ========================================
         // Validate mật khẩu
@@ -170,18 +172,18 @@ namespace QLDSV.BLL
         // Validate khi THÊM
         // ========================================
         public string ValidateThemGiangVien(
-            string maGV,
-            string hoTen,
-            string email,
-            string soDT,
-            string matKhau,
-            string nhapLaiMK)
+        string maGV,
+        string hoTen,
+        string email,
+        string soDT,
+        string matKhau,
+        string nhapLaiMK)
         {
             string loi = ValidateGiangVien(
-                maGV,
-                hoTen,
-                email,
-                soDT);
+            maGV,
+            hoTen,
+            email,
+            soDT);
 
             if (!string.IsNullOrEmpty(loi))
                 return loi;
@@ -210,16 +212,16 @@ namespace QLDSV.BLL
         // Validate khi SỬA
         // ========================================
         public string ValidateCapNhatGiangVien(
-            string maGV,
-            string hoTen,
-            string email,
-            string soDT)
+        string maGV,
+        string hoTen,
+        string email,
+        string soDT)
         {
             string loi = ValidateGiangVien(
-                maGV,
-                hoTen,
-                email,
-                soDT);
+            maGV,
+            hoTen,
+            email,
+            soDT);
 
             if (!string.IsNullOrEmpty(loi))
                 return loi;

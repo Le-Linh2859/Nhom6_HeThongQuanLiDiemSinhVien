@@ -31,9 +31,7 @@ namespace QLDSV.GUI.Forms.GiangVien
             LoadThongTinGiangVien();
             txtMatk.Enabled = false;
             txtMagv.Enabled = false;
-            txtGioitinh.Enabled = false;
             txtTenkhoa.Enabled = false;
-            txtMatk.Enabled = false;
 
         }
         private void LoadThongTinGiangVien()
@@ -44,14 +42,14 @@ namespace QLDSV.GUI.Forms.GiangVien
                 maTaiKhoan = SessionHelper.MaTaiKhoan;
 
                 DataRow row = dt.AsEnumerable()
-                    .FirstOrDefault(r => r["MaTaiKhoan"].ToString() == maTaiKhoan);
+                .FirstOrDefault(r => r["MaTaiKhoan"].ToString() == maTaiKhoan);
                 if (row == null)
                 {
                     MessageBox.Show(
-                        "Không tìm thấy thông tin giảng viên!",
-                        "Thông báo",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
+                    "Không tìm thấy thông tin giảng viên!",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
 
                     Close();
                     return;
@@ -61,25 +59,26 @@ namespace QLDSV.GUI.Forms.GiangVien
                 txtTengv.Text = row["HoTen"].ToString();
                 bool gioiTinh = Convert.ToBoolean(row["GioiTinh"]);
 
-                txtGioitinh.Text = gioiTinh ? "Nam" : "Nữ";
+                txtMagv.Text = row["MaGV"].ToString();
+                txtTengv.Text = row["HoTen"].ToString();
                 txtTenkhoa.Text = row["TenKhoa"].ToString();
                 txtMatk.Text = row["MaTaiKhoan"].ToString();
                 txtSdt.Text = row["SoDT"].ToString();
                 txtEmail.Text = row["Email"].ToString();
                 txtDiachi.Text = row["DiaChi"].ToString();
 
-                txtMagv.ReadOnly = true;
-                txtTenkhoa.ReadOnly = true;
-                txtMatk.ReadOnly = true;
-                txtGioitinh.ReadOnly = true;
+                // Giới tính dùng RadioButton
+                bool gioitinh = Convert.ToBoolean(row["GioiTinh"]);
+                rdoNam.Checked = gioiTinh;
+                rdoNu.Checked = !gioiTinh;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    ex.Message,
-                    "Lỗi",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                ex.Message,
+                "Lỗi",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
             }
         }
 
@@ -108,31 +107,33 @@ namespace QLDSV.GUI.Forms.GiangVien
                     return;
                 }
 
+                bool gioiTinhMoi = rdoNam.Checked; // ← lấy từ RadioButton
+
                 bll.UpdateGiangVien(
-                    txtSdt.Text.Trim(),
-                    txtTengv.Text.Trim(),
-                    true, 
-                    txtDiachi.Text.Trim(),
-                    txtMagv.Text.Trim(),
-                    txtEmail.Text.Trim(),
-                    LayMaKhoa(txtTenkhoa.Text.Trim())
+                txtSdt.Text.Trim(),
+                txtTengv.Text.Trim(),
+                gioiTinhMoi,
+                txtDiachi.Text.Trim(),
+                txtMagv.Text.Trim(),
+                txtEmail.Text.Trim(),
+                LayMaKhoa(txtTenkhoa.Text.Trim())
                 );
 
                 MessageBox.Show(
-                    "Cập nhật thông tin thành công!",
-                    "Thông báo",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                "Cập nhật thông tin thành công!",
+                "Thông báo",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
 
                 LoadThongTinGiangVien();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    ex.Message,
-                    "Lỗi",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
+                ex.Message,
+                "Lỗi",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
             }
         }
         private string LayMaKhoa(string tenKhoa)
