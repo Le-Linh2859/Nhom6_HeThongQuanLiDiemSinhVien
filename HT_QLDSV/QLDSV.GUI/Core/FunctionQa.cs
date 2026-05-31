@@ -21,7 +21,7 @@ namespace QLDSV.GUI
                 return;
 
             connstring = ConfigurationManager.ConnectionStrings["QLDSV"]?.ConnectionString
-                ?? @"Data Source=DESKTOP-1MI6150;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+                ?? @"Data Source=DESKTOP-58Q7HI9\SQLEXPRESS01;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
 
             conn = new SqlConnection(connstring);
             conn.Open();

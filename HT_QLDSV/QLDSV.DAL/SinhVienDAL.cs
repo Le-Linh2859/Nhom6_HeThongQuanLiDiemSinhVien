@@ -154,11 +154,11 @@ namespace QLDSV.DAL
         /// </summary>
         public bool ThemSinhVien(string maSV, string hoTen, DateTime? ngaySinh, bool gioiTinh, string diaChi, string email, string soDT, string maLopNienChe, string nienKhoa)
         {
-            string gioiTinhStr = gioiTinh ? "Nam" : "Nữ";
+            string gioiTinhVal = gioiTinh ? "1" : "0";
             string ngaySinhStr = ngaySinh.HasValue ? $"'{ngaySinh.Value.ToString("yyyy-MM-dd")}'" : "NULL";
 
             string sql = $"INSERT INTO SinhVien (MaSV, HoTen, NgaySinh, GioiTinh, DiaChi, Email, SoDT, MaLopNienChe, NienKhoa, MaTaiKhoan) " +
-                         $"VALUES ('{maSV}', N'{hoTen}', {ngaySinhStr}, N'{gioiTinhStr}', N'{diaChi}', N'{email}', N'{soDT}', '{maLopNienChe}', N'{nienKhoa}', NULL)";
+                         $"VALUES ('{maSV}', N'{hoTen}', {ngaySinhStr}, {gioiTinhVal}, N'{diaChi}', N'{email}', N'{soDT}', '{maLopNienChe}', N'{nienKhoa}', NULL)";
 
             try
             {
@@ -176,13 +176,13 @@ namespace QLDSV.DAL
         /// </summary>
         public bool SuaSinhVien(string maSV, string hoTen, DateTime? ngaySinh, bool gioiTinh, string diaChi, string email, string soDT, string maLopNienChe, string nienKhoa)
         {
-            string gioiTinhStr = gioiTinh ? "Nam" : "Nữ";
+            string gioiTinhVal = gioiTinh ? "1" : "0";
             string ngaySinhStr = ngaySinh.HasValue ? $"'{ngaySinh.Value.ToString("yyyy-MM-dd")}'" : "NULL";
 
             string sql = $"UPDATE SinhVien SET " +
                          $"HoTen = N'{hoTen}', " +
                          $"NgaySinh = {ngaySinhStr}, " +
-                         $"GioiTinh = N'{gioiTinhStr}', " +
+                         $"GioiTinh = {gioiTinhVal}, " +
                          $"DiaChi = N'{diaChi}', " +
                          $"Email = N'{email}', " +
                          $"SoDT = N'{soDT}', " +
