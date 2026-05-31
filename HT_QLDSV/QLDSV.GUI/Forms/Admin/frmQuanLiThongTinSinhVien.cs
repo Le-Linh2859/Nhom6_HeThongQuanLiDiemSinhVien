@@ -112,7 +112,7 @@ namespace QLDSV.GUI
             btnHuy.Click += btnHuy_Click;    // Wire nút Hủy
             btnThem.Click += btnThem_Click;  // Wire nút Thêm
             btnXoa.Text = "Xóa";            // Sửa text sai trong Designer
-
+            btnNhapExcel.Visible=false;
         }
 
         // =====================================================================
