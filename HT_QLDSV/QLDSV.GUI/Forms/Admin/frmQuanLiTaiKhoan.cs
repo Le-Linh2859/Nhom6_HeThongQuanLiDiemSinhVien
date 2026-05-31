@@ -326,7 +326,8 @@ namespace QLDSV.GUI
 
                 if (dataGridView1.Columns.Contains("Mã tài khoản")) dataGridView1.Columns["Mã tài khoản"].Width = 90;
                 if (dataGridView1.Columns.Contains("Tên đăng nhập")) dataGridView1.Columns["Tên đăng nhập"].Width = 110;
-                if (dataGridView1.Columns.Contains("Mật khẩu")) dataGridView1.Columns["Mật khẩu"].Width = 90;
+                //if (dataGridView1.Columns.Contains("Mật khẩu")) dataGridView1.Columns["Mật khẩu"].Width = 90;
+                if (dataGridView1.Columns.Contains("Mật khẩu")) dataGridView1.Columns["Mật khẩu"].Visible = false;
                 if (dataGridView1.Columns.Contains("Trạng thái")) dataGridView1.Columns["Trạng thái"].Width = 90;
                 if (dataGridView1.Columns.Contains("Quyền hạn")) dataGridView1.Columns["Quyền hạn"].Width = 100;
                 if (dataGridView1.Columns.Contains("Họ và tên")) dataGridView1.Columns["Họ và tên"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -372,8 +373,8 @@ namespace QLDSV.GUI
             textBox1.Text = row.Cells["Mã tài khoản"].Value?.ToString();
             textBox2.Text = row.Cells["Tên đăng nhập"].Value?.ToString();
             textBox3.Text = row.Cells["Họ và tên"].Value?.ToString();
-            textBox4.Text = row.Cells["Mật khẩu"].Value?.ToString();
-            textBox5.Text = row.Cells["Mật khẩu"].Value?.ToString();
+            //textBox4.Text = row.Cells["Mật khẩu"].Value?.ToString();
+            //textBox5.Text = row.Cells["Mật khẩu"].Value?.ToString();
 
             string roleText = row.Cells["Quyền hạn"].Value?.ToString();
             comboBox1.SelectedItem = roleText;
