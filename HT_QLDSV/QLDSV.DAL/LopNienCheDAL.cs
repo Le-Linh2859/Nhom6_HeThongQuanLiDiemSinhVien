@@ -67,16 +67,11 @@ namespace QLDSV.DAL
             return CheckKey(sql);
         }
 
-        public bool ExistsKhoa(string maKhoa)
+        public int CountSinhVien(string maLop)
         {
-            string sql = $"SELECT MaKhoa FROM Khoa WHERE MaKhoa = '{maKhoa}'";
-            return CheckKey(sql);
-        }
-
-        public bool ExistsGiangVien(string maGV)
-        {
-            string sql = $"SELECT MaGV FROM GiangVien WHERE MaGV = '{maGV}'";
-            return CheckKey(sql);
+            object result = Connection.ExecuteScalar(
+                $"SELECT COUNT(*) FROM SinhVien WHERE MaLopNienChe = '{maLop}'");
+            return result == null || result == DBNull.Value ? 0 : Convert.ToInt32(result);
         }
 
         //Kiểm tra sự tồn tại của khóa chính hoặc bản ghi theo điều kiện

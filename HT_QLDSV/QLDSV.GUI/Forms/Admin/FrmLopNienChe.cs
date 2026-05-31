@@ -17,6 +17,7 @@ namespace QLDSV.GUI
         private LopNienCheBLL bll = new LopNienCheBLL();
         private bool isAdding = false;
         private bool isEditing = false;
+        private string maLopDangSua = "";
         private DataTable dtLop;
 
         public FrmLopNienChe()
@@ -178,6 +179,7 @@ namespace QLDSV.GUI
         {
             isAdding = false;
             isEditing = false;
+            maLopDangSua = "";
 
             
             cboMaLopNC.Enabled = false; 
@@ -278,6 +280,7 @@ namespace QLDSV.GUI
             isAdding = false;
             isEditing = true;
 
+            maLopDangSua = DataGridViewLop.SelectedRows[0].Cells["MaLopNienChe"].Value?.ToString().Trim() ?? "";
             
             cboMaLopNC.Enabled = false;
             cboTenlop.Enabled = true;
@@ -297,7 +300,6 @@ namespace QLDSV.GUI
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            string maLop = cboMaLopNC.Text.Trim();
             string tenLop = cboTenlop.Text.Trim();
             string nienKhoa = cboNienkhoa.Text.Trim();
             string maKhoa = cboKhoa2.SelectedValue?.ToString() ?? "";
@@ -308,9 +310,14 @@ namespace QLDSV.GUI
                 (bool success, string message) result;
 
                 if (isAdding)
+                {
+                    string maLop = cboMaLopNC.Text.Trim();
                     result = bll.InsertLop(maLop, tenLop, nienKhoa, maKhoa, maGV);
+                }
                 else if (isEditing)
-                    result = bll.UpdateLop(maLop, tenLop, nienKhoa, maKhoa, maGV);
+                {
+                    result = bll.UpdateLop(maLopDangSua, tenLop, nienKhoa, maKhoa, maGV);
+                }
                 else
                     return;
 
@@ -322,12 +329,14 @@ namespace QLDSV.GUI
 
                 MessageBox.Show(result.message, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                string maLopHienTai = isAdding ? cboMaLopNC.Text.Trim() : maLopDangSua;
+
                 LoadData();
                 ResetFormState();
 
                 foreach (DataGridViewRow row in DataGridViewLop.Rows)
                 {
-                    if (row.Cells["MaLopNienChe"].Value?.ToString().Trim() == maLop)
+                    if (row.Cells["MaLopNienChe"].Value?.ToString().Trim() == maLopHienTai)
                     {
                         row.Selected = true;
                         DataGridViewLop_CellClick(null, null);

@@ -21,25 +21,42 @@ namespace QLDSV.BLL
             return dal.ExistsByMaLop(maLop.Trim());
         }
 
-        public string ValidateLopNienChe(
-            string maLop, string tenLop, string nienKhoa, string maKhoa, string maGV, bool isUpdate)
+        /// <summary>Validate khi thêm mới — gồm cả mã lớp (người dùng nhập).</summary>
+        public string ValidateForInsert(string maLop, string tenLop, string nienKhoa)
         {
             maLop = maLop?.Trim() ?? "";
-            tenLop = tenLop?.Trim() ?? "";
-            nienKhoa = nienKhoa?.Trim() ?? "";
-            maKhoa = maKhoa?.Trim() ?? "";
-            maGV = maGV?.Trim() ?? "";
+
+            string common = ValidateThongTinChung(tenLop, nienKhoa);
+            if (!string.IsNullOrEmpty(common))
+                return common;
 
             if (string.IsNullOrEmpty(maLop))
                 return "Mã lớp niên chế không được để trống.";
 
-            if (maLop.Length > 10)
+            if (maLop.Length > 20)
                 return "Mã lớp niên chế không được vượt quá 20 ký tự.";
+
+            if (dal.ExistsByMaLop(maLop))
+                return $"Mã lớp niên chế '{maLop}' đã tồn tại trong hệ thống.";
+
+            return "";
+        }
+
+        /// <summary>Validate khi sửa — mã lớp không đổi, không kiểm tra mã.</summary>
+        public string ValidateForUpdate(string tenLop, string nienKhoa)
+        {
+            return ValidateThongTinChung(tenLop, nienKhoa);
+        }
+
+        private static string ValidateThongTinChung(string tenLop, string nienKhoa)
+        {
+            tenLop = tenLop?.Trim() ?? "";
+            nienKhoa = nienKhoa?.Trim() ?? "";
 
             if (string.IsNullOrEmpty(tenLop))
                 return "Tên lớp niên chế không được để trống.";
 
-            if (tenLop.Length > 50)
+            if (tenLop.Length > 100)
                 return "Tên lớp niên chế không được vượt quá 100 ký tự.";
 
             if (string.IsNullOrEmpty(nienKhoa))
@@ -55,35 +72,13 @@ namespace QLDSV.BLL
                 return "Năm bắt đầu niên khóa phải nhỏ hơn năm kết thúc.";
             }
 
-            if (string.IsNullOrEmpty(maKhoa))
-                return "Vui lòng chọn khoa quản lý của lớp.";
-
-            if (!dal.ExistsKhoa(maKhoa))
-                return "Khoa được chọn không tồn tại trong hệ thống.";
-
-            if (string.IsNullOrEmpty(maGV))
-                return "Vui lòng chọn giảng viên cố vấn học tập.";
-
-            if (!dal.ExistsGiangVien(maGV))
-                return "Giảng viên cố vấn được chọn không tồn tại trong hệ thống.";
-
-            if (isUpdate)
-            {
-                if (!dal.ExistsByMaLop(maLop))
-                    return "Mã lớp niên chế không tồn tại, không thể cập nhật.";
-            }
-            else if (dal.ExistsByMaLop(maLop))
-            {
-                return $"Mã lớp niên chế '{maLop}' đã tồn tại trong hệ thống.";
-            }
-
             return "";
         }
 
         public (bool success, string message) InsertLop(
             string maLop, string tenLop, string nienKhoa, string maKhoa, string maGV)
         {
-            string error = ValidateLopNienChe(maLop, tenLop, nienKhoa, maKhoa, maGV, isUpdate: false);
+            string error = ValidateForInsert(maLop, tenLop, nienKhoa);
             if (!string.IsNullOrEmpty(error))
                 return (false, error);
 
@@ -99,10 +94,14 @@ namespace QLDSV.BLL
             }
         }
 
+        
         public (bool success, string message) UpdateLop(
             string maLop, string tenLop, string nienKhoa, string maKhoa, string maGV)
         {
-            string error = ValidateLopNienChe(maLop, tenLop, nienKhoa, maKhoa, maGV, isUpdate: true);
+            if (string.IsNullOrWhiteSpace(maLop))
+                return (false, "Không xác định được lớp cần cập nhật.");
+
+            string error = ValidateForUpdate(tenLop, nienKhoa);
             if (!string.IsNullOrEmpty(error))
                 return (false, error);
 
@@ -117,6 +116,5 @@ namespace QLDSV.BLL
                 return (false, "Lỗi cập nhật lớp niên chế: " + ex.Message);
             }
         }
-
     }
 }
