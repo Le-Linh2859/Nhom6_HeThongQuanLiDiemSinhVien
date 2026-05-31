@@ -102,17 +102,6 @@ namespace QLDSV.GUI.Forms.SinhVien
                 MessageBox.Show(ex.Message);
             }
         }
-
-        // =====================================================
-        // HIỂN THỊ TRẠNG THÁI CẢNH BÁO
-        // =====================================================
-
-       
-
-        // =====================================================
-        // GRID
-        // =====================================================
-
         private void SetupGrid()
         {
             dgvCanhBao.AllowUserToAddRows =
@@ -136,11 +125,6 @@ namespace QLDSV.GUI.Forms.SinhVien
             dgvCanhBao.ColumnHeadersDefaultCellStyle.ForeColor =
                 Color.White;
         }
-
-        // =====================================================
-        // XEM CHI TIẾT CẢNH BÁO
-        // =====================================================
-
         private void dgvCanhBao_CellClick(
             object sender,
             DataGridViewCellEventArgs e)
