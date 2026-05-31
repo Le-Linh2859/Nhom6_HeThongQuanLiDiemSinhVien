@@ -30,7 +30,7 @@ namespace QLDSV.GUI
             // Wire up toolbar events
             this.btnThem.Click += btnThem_Click;
             this.btnSua.Click += btnSua_Click;
-            this.btnLamMoi.Click += btnXoa_Click;
+            this.btnLamMoi.Click += btnLamMoi_Click;
             this.btnXoa.Click += btnLamMoi_Click;
             this.btnTim.Click += btnTim_Click;
             this.cboFilterKhoa.SelectedIndexChanged += cboFilterKhoa_SelectedIndexChanged;
