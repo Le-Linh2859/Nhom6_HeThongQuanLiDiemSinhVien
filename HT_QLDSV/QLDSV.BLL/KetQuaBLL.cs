@@ -11,27 +11,27 @@ namespace QLDSV.BLL
         private static Dictionary<string, decimal> _tyLePhanTram;
         private static readonly object _tyLeLock = new object();
 
-        // ─── Danh mục ─────────────────────────────────────────────────────────────
+        // Danh mục 
         public DataTable GetNamHoc()       => _dal.GetNamHoc();
         public DataTable GetLoaiHocKy()    => _dal.GetLoaiHocKy();
 
-        // ─── Lớp học phần ─────────────────────────────────────────────────────────
+        // Lớp học phần
         public DataTable GetLopHocPhan(string maNamHoc, string maLoaiHK, string maGV)
             => _dal.GetLopHocPhanByGiangVien(maNamHoc, maLoaiHK, maGV);
 
-        // ─── Sinh viên ────────────────────────────────────────────────────────────
+        // Sinh viên 
         public DataTable GetSinhVien(string maLHP)
             => _dal.GetSinhVienByLopHocPhan(maLHP);
 
-        // ─── Bảng điểm tổng hợp ──────────────────────────────────────────────────
+        // Bảng điểm tổng hợp 
         public DataTable GetBangDiem(string maLHP)
             => _dal.GetDiemByLopHocPhan(maLHP);
 
-        // ─── Điểm của một sinh viên ───────────────────────────────────────────────
+        // Điểm của một sinh viên 
         public DataTable GetDiemSinhVien(string maSV, string maLHP)
             => _dal.GetDiemSinhVien(maSV, maLHP);
 
-        // ─── Lấy mã giảng viên ────────────────────────────────────────────────────
+        //  Lấy mã giảng viên
         public string GetMaGV(string maTaiKhoan, string tenDangNhap)
         {
             string maGV = _dal.GetMaGVByTaiKhoan(maTaiKhoan);
@@ -40,33 +40,24 @@ namespace QLDSV.BLL
             return maGV;
         }
 
-        // ═══════════════════════════════════════════════════════════════════════════
-        // SINH VIÊN – Kết quả học tập
-        // ═══════════════════════════════════════════════════════════════════════════
-
-        /// <summary>Lấy MaSV và HoTen từ MaTaiKhoan của sinh viên đang đăng nhập.</summary>
         public DataTable GetThongTinSinhVien(string maTaiKhoan)
             => _dal.GetThongTinSinhVienByTaiKhoan(maTaiKhoan);
 
-        /// <summary>Thông tin đầy đủ sinh viên (xuất bảng điểm).</summary>
+        //Thông tin đầy đủ sinh viên (xuất bảng điểm)
         public DataTable GetThongTinSinhVienDayDu(string maSV)
             => _dal.GetThongTinSinhVienDayDu(maSV);
 
-        /// <summary>Lấy danh sách năm học mà sinh viên có đăng ký lớp học phần.</summary>
+        //Lấy danh sách năm học mà sinh viên có đăng ký lớp học phần
         public DataTable GetNamHocBySinhVien(string maSV)
             => _dal.GetNamHocBySinhVien(maSV);
 
         public DataTable GetNamHocByGiangVien(string maGV)
             => _dal.GetNamHocByGiangVien(maGV);
 
-        /// <summary>
-        /// Lấy bảng điểm thô (CC, KT1, KT2, CK) của sinh viên theo năm học + học kỳ.
-        /// Trả về: MaMon, TenMon, SoTC, DiemCC, DiemKT1, DiemKT2, DiemThi.
-        /// </summary>
         public DataTable GetBangDiemSinhVien(string maSV, string maNamHoc, string maLoaiHK)
             => _dal.GetBangDiemSinhVien(maSV, maNamHoc, maLoaiHK);
 
-        // ─── Lưu điểm (thêm mới hoặc cập nhật) ───────────────────────────────────
+        // Lưu điểm (thêm mới hoặc cập nhật) 
         public void LuuDiem(string maSV, string maLHP, string maLoaiDiem, decimal diem)
             => _dal.LuuHoacCapNhatDiem(maSV, maLHP, maLoaiDiem, diem);
 
@@ -181,7 +172,7 @@ namespace QLDSV.BLL
         }
 
         
-        /// Gom các dòng theo MaMon (bỏ qua MaLHP). Mỗi mã môn chỉ giữ một SoTC.
+        /// Gom các dòng theo MaMon 
         
         private static Dictionary<string, (double? diemTk, int soTC, DataRow row)> GomDiemTheoMaMon(
             DataTable dt,
