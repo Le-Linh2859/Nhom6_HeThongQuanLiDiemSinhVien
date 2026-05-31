@@ -30,9 +30,9 @@ namespace QLDSV.GUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGiangvien));
             this.btnHuy = new Guna.UI2.WinForms.Guna2Button();
             this.lblTenlop = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -62,13 +62,14 @@ namespace QLDSV.GUI
             this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2HtmlLabel15 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.DataGridViewGV = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pnlThongKeGV = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblSumGV = new System.Windows.Forms.Label();
-            this.DataGridViewGV = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.btnLammoi = new Guna.UI2.WinForms.Guna2Button();
             this.cboKhoa = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.btnLammoi = new Guna.UI2.WinForms.Guna2Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnSinhvien = new Guna.UI2.WinForms.Guna2Button();
             this.guna2PictureBox12 = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -102,8 +103,9 @@ namespace QLDSV.GUI
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.groupBox1.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
-            this.pnlThongKeGV.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewGV)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.pnlThongKeGV.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox11)).BeginInit();
@@ -260,6 +262,7 @@ namespace QLDSV.GUI
             this.groupBox1.Controls.Add(this.lblCovan);
             this.groupBox1.Controls.Add(this.btnThem);
             this.groupBox1.Controls.Add(this.cboKhoa2);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 13F, System.Drawing.FontStyle.Bold);
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.groupBox1.Location = new System.Drawing.Point(200, 397);
@@ -269,7 +272,6 @@ namespace QLDSV.GUI
             this.groupBox1.Size = new System.Drawing.Size(1560, 346);
             this.groupBox1.TabIndex = 63;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "  THÔNG TIN GIẢNG VIÊN";
             // 
             // cboMatKhau1
             // 
@@ -566,12 +568,12 @@ namespace QLDSV.GUI
             this.txtTimKiem.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtTimKiem.IconRightOffset = new System.Drawing.Point(5, 0);
             this.txtTimKiem.IconRightSize = new System.Drawing.Size(13, 13);
-            this.txtTimKiem.Location = new System.Drawing.Point(23, 34);
+            this.txtTimKiem.Location = new System.Drawing.Point(26, 30);
             this.txtTimKiem.Margin = new System.Windows.Forms.Padding(4);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.PlaceholderText = "";
             this.txtTimKiem.SelectedText = "";
-            this.txtTimKiem.Size = new System.Drawing.Size(659, 39);
+            this.txtTimKiem.Size = new System.Drawing.Size(350, 39);
             this.txtTimKiem.TabIndex = 1;
             // 
             // guna2HtmlLabel15
@@ -593,81 +595,44 @@ namespace QLDSV.GUI
             this.guna2Panel1.BorderColor = System.Drawing.Color.LightGray;
             this.guna2Panel1.BorderRadius = 12;
             this.guna2Panel1.BorderThickness = 1;
-            this.guna2Panel1.Controls.Add(this.pnlThongKeGV);
             this.guna2Panel1.Controls.Add(this.DataGridViewGV);
-            this.guna2Panel1.Controls.Add(this.btnLammoi);
-            this.guna2Panel1.Controls.Add(this.cboKhoa);
-            this.guna2Panel1.Controls.Add(this.guna2HtmlLabel4);
-            this.guna2Panel1.Controls.Add(this.txtTimKiem);
+            this.guna2Panel1.Controls.Add(this.groupBox2);
             this.guna2Panel1.CustomBorderColor = System.Drawing.Color.White;
             this.guna2Panel1.FillColor = System.Drawing.Color.White;
             this.guna2Panel1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.guna2Panel1.Location = new System.Drawing.Point(200, 0);
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(1);
+            this.guna2Panel1.MinimumSize = new System.Drawing.Size(1100, 394);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(1567, 394);
             this.guna2Panel1.TabIndex = 62;
             // 
-            // pnlThongKeGV
-            // 
-            this.pnlThongKeGV.BackColor = System.Drawing.Color.White;
-            this.pnlThongKeGV.Controls.Add(this.lblTitle);
-            this.pnlThongKeGV.Controls.Add(this.lblSumGV);
-            this.pnlThongKeGV.Location = new System.Drawing.Point(1390, 8);
-            this.pnlThongKeGV.Name = "pnlThongKeGV";
-            this.pnlThongKeGV.Size = new System.Drawing.Size(160, 75);
-            this.pnlThongKeGV.TabIndex = 34;
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.lblTitle.ForeColor = System.Drawing.Color.Gray;
-            this.lblTitle.Location = new System.Drawing.Point(0, 12);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(160, 18);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Tổng số giảng viên";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblSumGV
-            // 
-            this.lblSumGV.BackColor = System.Drawing.Color.Transparent;
-            this.lblSumGV.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
-            this.lblSumGV.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.lblSumGV.Location = new System.Drawing.Point(0, 30);
-            this.lblSumGV.Name = "lblSumGV";
-            this.lblSumGV.Size = new System.Drawing.Size(160, 38);
-            this.lblSumGV.TabIndex = 1;
-            this.lblSumGV.Text = "0";
-            this.lblSumGV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // DataGridViewGV
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.DataGridViewGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.DataGridViewGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.DataGridViewGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.DataGridViewGV.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGridViewGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGridViewGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.DataGridViewGV.ColumnHeadersHeight = 4;
             this.DataGridViewGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(216)))), ((int)(((byte)(230)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DataGridViewGV.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(216)))), ((int)(((byte)(230)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGridViewGV.DefaultCellStyle = dataGridViewCellStyle6;
             this.DataGridViewGV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DataGridViewGV.Location = new System.Drawing.Point(23, 96);
             this.DataGridViewGV.Margin = new System.Windows.Forms.Padding(1);
@@ -700,6 +665,88 @@ namespace QLDSV.GUI
             this.DataGridViewGV.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.DataGridViewGV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewGV_CellClick);
             // 
+            // guna2HtmlLabel4
+            // 
+            this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.White;
+            this.guna2HtmlLabel4.Location = new System.Drawing.Point(436, 19);
+            this.guna2HtmlLabel4.Margin = new System.Windows.Forms.Padding(1);
+            this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(105, 22);
+            this.guna2HtmlLabel4.TabIndex = 27;
+            this.guna2HtmlLabel4.Text = "Lọc theo khoa:";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.AutoSize = true;
+            this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.groupBox2.BackColor = System.Drawing.Color.White;
+            this.groupBox2.Controls.Add(this.pnlThongKeGV);
+            this.groupBox2.Controls.Add(this.guna2HtmlLabel4);
+            this.groupBox2.Controls.Add(this.txtTimKiem);
+            this.groupBox2.Controls.Add(this.cboKhoa);
+            this.groupBox2.Controls.Add(this.btnLammoi);
+            this.groupBox2.Location = new System.Drawing.Point(22, 4);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(1526, 102);
+            this.groupBox2.TabIndex = 35;
+            this.groupBox2.TabStop = false;
+            // 
+            // pnlThongKeGV
+            // 
+            this.pnlThongKeGV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlThongKeGV.BackColor = System.Drawing.Color.White;
+            this.pnlThongKeGV.Controls.Add(this.lblTitle);
+            this.pnlThongKeGV.Controls.Add(this.lblSumGV);
+            this.pnlThongKeGV.Location = new System.Drawing.Point(1077, 13);
+            this.pnlThongKeGV.Name = "pnlThongKeGV";
+            this.pnlThongKeGV.Size = new System.Drawing.Size(180, 68);
+            this.pnlThongKeGV.TabIndex = 34;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI Semilight", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.Silver;
+            this.lblTitle.Location = new System.Drawing.Point(16, 2);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(120, 20);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Tổng số GV";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSumGV
+            // 
+            this.lblSumGV.BackColor = System.Drawing.Color.Transparent;
+            this.lblSumGV.Font = new System.Drawing.Font("Segoe UI Semibold", 22F, System.Drawing.FontStyle.Bold);
+            this.lblSumGV.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.lblSumGV.Location = new System.Drawing.Point(3, 22);
+            this.lblSumGV.Name = "lblSumGV";
+            this.lblSumGV.Size = new System.Drawing.Size(173, 40);
+            this.lblSumGV.TabIndex = 1;
+            this.lblSumGV.Text = "0";
+            this.lblSumGV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cboKhoa
+            // 
+            this.cboKhoa.BackColor = System.Drawing.Color.Transparent;
+            this.cboKhoa.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboKhoa.DropDownHeight = 50;
+            this.cboKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboKhoa.DropDownWidth = 350;
+            this.cboKhoa.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboKhoa.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboKhoa.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboKhoa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.cboKhoa.IntegralHeight = false;
+            this.cboKhoa.ItemHeight = 19;
+            this.cboKhoa.Location = new System.Drawing.Point(436, 44);
+            this.cboKhoa.Margin = new System.Windows.Forms.Padding(1);
+            this.cboKhoa.MaxDropDownItems = 10;
+            this.cboKhoa.Name = "cboKhoa";
+            this.cboKhoa.Size = new System.Drawing.Size(475, 25);
+            this.cboKhoa.TabIndex = 30;
+            // 
             // btnLammoi
             // 
             this.btnLammoi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -715,7 +762,7 @@ namespace QLDSV.GUI
             this.btnLammoi.ForeColor = System.Drawing.Color.White;
             this.btnLammoi.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(13)))), ((int)(((byte)(148)))), ((int)(((byte)(136)))));
             this.btnLammoi.ImageSize = new System.Drawing.Size(18, 18);
-            this.btnLammoi.Location = new System.Drawing.Point(1202, 40);
+            this.btnLammoi.Location = new System.Drawing.Point(935, 34);
             this.btnLammoi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLammoi.Name = "btnLammoi";
             this.btnLammoi.Size = new System.Drawing.Size(120, 36);
@@ -723,38 +770,6 @@ namespace QLDSV.GUI
             this.btnLammoi.Text = "Làm mới";
             this.btnLammoi.TextOffset = new System.Drawing.Point(1, 0);
             this.btnLammoi.Click += new System.EventHandler(this.btnLammoi_Click);
-            // 
-            // cboKhoa
-            // 
-            this.cboKhoa.BackColor = System.Drawing.Color.Transparent;
-            this.cboKhoa.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboKhoa.DropDownHeight = 50;
-            this.cboKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboKhoa.DropDownWidth = 150;
-            this.cboKhoa.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboKhoa.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cboKhoa.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cboKhoa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.cboKhoa.IntegralHeight = false;
-            this.cboKhoa.ItemHeight = 19;
-            this.cboKhoa.Location = new System.Drawing.Point(687, 48);
-            this.cboKhoa.Margin = new System.Windows.Forms.Padding(1);
-            this.cboKhoa.MaxDropDownItems = 10;
-            this.cboKhoa.Name = "cboKhoa";
-            this.cboKhoa.Size = new System.Drawing.Size(511, 25);
-            this.cboKhoa.TabIndex = 30;
-            // 
-            // guna2HtmlLabel4
-            // 
-            this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.White;
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(687, 19);
-            this.guna2HtmlLabel4.Margin = new System.Windows.Forms.Padding(1);
-            this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(105, 22);
-            this.guna2HtmlLabel4.TabIndex = 27;
-            this.guna2HtmlLabel4.Text = "Lọc theo khoa:";
             // 
             // tableLayoutPanel1
             // 
@@ -1258,6 +1273,7 @@ namespace QLDSV.GUI
             this.Controls.Add(this.guna2HtmlLabel15);
             this.Controls.Add(this.pnlSidebar);
             this.Controls.Add(this.guna2Panel1);
+            this.MinimumSize = new System.Drawing.Size(1300, 650);
             this.Name = "frmGiangvien";
             this.Text = "Quản lý giảng viên";
             this.Load += new System.EventHandler(this.frmGiangvien_Load);
@@ -1265,8 +1281,10 @@ namespace QLDSV.GUI
             this.groupBox1.PerformLayout();
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
-            this.pnlThongKeGV.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewGV)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.pnlThongKeGV.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox11)).EndInit();
@@ -1355,5 +1373,6 @@ namespace QLDSV.GUI
         private Panel pnlThongKeGV;
         private Label lblSumGV;
         private Label lblTitle;
+        private GroupBox groupBox2;
     }
 }

@@ -202,7 +202,7 @@ namespace QLDSV.GUI
 
         private void CapNhatSoLuong(int soLuong)
         {
-            lblTitle.Text = "Tổng số giảng viên";
+            lblTitle.Text = "Tổng số";
             lblSumGV.Text = soLuong.ToString();
         }
         // 2. Nạp dữ liệu các bộ lọc Khoa
