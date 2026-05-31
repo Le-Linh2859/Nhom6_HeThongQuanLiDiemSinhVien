@@ -328,7 +328,7 @@ AND sv.MaSV NOT IN
         INNER JOIN NamHoc nh
             ON nh.MaNamHoc = hknh.MaNamHoc
 
-        WHERE tbc.TBCHocKy < 1.5
+        WHERE tbc.TBCHocKy < 3.5
 
         AND CAST(LEFT(sv.NienKhoa,4) AS INT)
             <= CAST(SUBSTRING(nh.TenNamHoc,9,4) AS INT)

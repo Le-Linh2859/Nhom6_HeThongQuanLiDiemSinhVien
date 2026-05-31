@@ -22,7 +22,7 @@ namespace QLDSV.DAL
 
             // Đọc từ App.config, fallback về hardcode localhost\SQL2022DEV
             connstring = ConfigurationManager.ConnectionStrings["QLDSV"]?.ConnectionString
-                ?? @"Data Source=localhost\SQL2022DEV;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
+                ?? @"Data Source=admin-pc\quynhanh;Initial Catalog=DB_QLDiemSinhVien;Integrated Security=True;Encrypt=False";
 
             conn = new SqlConnection(connstring);
             conn.Open();
